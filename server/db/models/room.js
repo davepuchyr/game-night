@@ -10,3 +10,5 @@ const Room = db.define('room', {
         type: Sequelize.STRING
     }
 })
+
+module.exports = Room
