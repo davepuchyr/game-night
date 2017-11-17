@@ -15,8 +15,7 @@ router.get('/', (req, res, next) => {
 
 //type , name
 router.post('/', (req, res, next) => {
-  const addRoom = req.body;
-  Room.create({addRoom})
+  Room.create(req.body)
     .then(addedRoom => res.json(addedRoom))
     .catch(next)
 })

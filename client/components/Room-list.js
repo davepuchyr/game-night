@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {rooms} from '../store'
+import { fetchRoomList, createRoom } from '../store'
 
 /**
  * COMPONENT
@@ -9,16 +9,38 @@ import {rooms} from '../store'
 class RoomList extends Component {
   constructor(props) {
     super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount () {
+    this.props.getRooms()
     
   }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    console.log(event.target.name.value, event.target.game.value)
+    this.props.addRoom(event.target.name.value, event.target.game.value)
+  }
+
+
 
   render () {
     return (
       <div>
-        <h3>Welcome, {this.props.user.nickname}</h3>
+        <div>
+          {this.props.allRooms.map((room, idx) => {
+            return (<div key={idx}>{`${room.name} - ${room.game}`}</div>)
+          })}
+        </div>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" name="name" placeholder="Enter Room Name" />
+          <br/>
+          <input type="text" name="game" placeholder="Enter Game Name" />
+          <br/>
+          <input type="submit" value="Create Room" />
+        </form>
       </div>
     )
   }
@@ -34,11 +56,22 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState)(RoomList)
+const mapDispatch = (dispatch) => {
+  return {
+    getRooms() {
+      dispatch(fetchRoomList())
+    },
+    addRoom(name, game) {
+      dispatch(createRoom(name, game))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(RoomList)
 
 /**
  * PROP TYPES
  */
 RoomList.propTypes = {
-  allRooms: PropTypes.string
+  allRooms: PropTypes.array
 }

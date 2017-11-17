@@ -1,34 +1,43 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+
+import RoomList from './Room-list'
 
 /**
  * COMPONENT
  */
-export const UserHome = (props) => {
-  const {email} = props
+ class Lobby extends Component {
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
-}
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+
+    return (
+      <div>
+        <h3>Welcome, {this.props.user.nickname}</h3>
+        <RoomList />
+      </div>
+    )
+  }
+ }
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
   return {
-    email: state.user.email
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(Lobby)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+// UserHome.propTypes = {
+//   email: PropTypes.string
+// }
