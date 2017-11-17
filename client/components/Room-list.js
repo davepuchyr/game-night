@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {rooms} from '../store'
@@ -6,14 +6,18 @@ import {rooms} from '../store'
 /**
  * COMPONENT
  */
-export const RoomList = (props) => {
-  const {email} = props
+class RoomList extends Component {
+  constructor(props) {
+    super(props)
+  }
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+  render () {
+    return (
+      <div>
+        <h3>Welcome, {this.props.user.nickname}</h3>
+      </div>
+    )
+  }
 }
 
 /**
@@ -21,7 +25,8 @@ export const RoomList = (props) => {
  */
 const mapState = (state) => {
   return {
-    allRooms: state.rooms
+    allRooms: state.rooms,
+    user: state.user
   }
 }
 

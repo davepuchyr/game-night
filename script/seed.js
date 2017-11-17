@@ -10,7 +10,8 @@
  * Now that you've got the main idea, check it out in practice below!
  */
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const { User } = require('../server/db/models')
+const { Room } = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
@@ -19,14 +20,23 @@ async function seed () {
   // executed until that promise resolves!
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'cody@email.com', nickname: 'cody', password: '123'}),
+    User.create({email: 'murphy@email.com', nickname: 'murphy', password: '123'}),
+    User.create({email: 'josh@josh.com', nickname: 'retrofuturejosh', password: '123'}),
+    User.create({email: 'matt@matt.com', nickname: 'MattyAmazing', password: '123'}),
+  ])
+  const rooms = await Promise.all([
+    Room.create({name: 'fun timez', game: 'DnD', adminId: '1'}),
+    Room.create({name: 'more fun timez', game: 'Sorry', adminId: '2'}),
+    Room.create({name: 'Matt is kool', game: 'Pictionary', adminId: '3'})
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }
+
+
 
 // Execute the `seed` function
 // `Async` functions always return a promise, so we can use `catch` to handle any errors
