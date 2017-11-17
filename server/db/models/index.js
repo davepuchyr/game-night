@@ -7,6 +7,9 @@ const User = require('./user')
  *    BlogPost.belongsTo(User)
  */
 
+Room.belongsTo(User, { as: 'admin' })
+Room.belongsToMany(User, { as: 'players', through: 'room_players' })
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
