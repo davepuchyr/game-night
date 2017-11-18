@@ -22,7 +22,6 @@ class RoomList extends Component {
     event.preventDefault()
     console.log('PROPS IN THUNK ARE ', this.props)
     this.props.addRoom(event.target.name.value, event.target.game.value, this.props.user.id)
-    history.push('/')
   }
 
 

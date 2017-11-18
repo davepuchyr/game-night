@@ -25,7 +25,7 @@ export const fetchRoomList = () =>
   dispatch =>
     axios.get('/api/rooms')
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(getAllRooms(res.data))
       })
       .catch(error =>
@@ -36,7 +36,7 @@ export const createRoom = (newName, newGame, user) =>
   dispatch => 
     axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
       .then(res => {
-        console.log('########', res.data)
+        history.push(`/room/${res.data.id}`)
         dispatch(addRoom(res.data))
       })
       .catch(error => 
