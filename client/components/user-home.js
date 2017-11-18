@@ -1,38 +1,46 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import RoomList from './Room-list'
+// establishes socket connection
+import '../socket'
+
 /**
  * COMPONENT
  */
-export const UserHome = (props) => {
-  const {email} = props
+ class Lobby extends Component {
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-      <Link to="/lobby">
-        <h2>Go to Lobby!</h2>
-      </Link>
-    </div>
-  )
-}
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    
+    return (
+      <div>
+        <h3>Welcome, {this.props.user.nickname}</h3>
+        <RoomList />
+      </div>
+    )
+  }
+ }
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
   return {
-    email: state.user.email
+    user: state.user
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(Lobby)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+// UserHome.propTypes = {
+//   email: PropTypes.string
+// }

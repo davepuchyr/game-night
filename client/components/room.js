@@ -14,7 +14,10 @@ class Room extends Component {
     render () {
         return (
             <div>
+                this is a room!
             </div>
         )
     }
 }
+
+export default Room
