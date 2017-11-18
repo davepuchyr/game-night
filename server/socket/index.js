@@ -9,9 +9,16 @@ module.exports = (io) => {
 
   socket.on('userConnect', (newUserId) => {
     console.log('PAYLOAD SERVER SIDE IS ', newUserId)
-    if (!onlineUsers.includes(newUserId)) {
-      onlineUsers.push(newUserId)
-      socket.emit('updateOnlineUsers', onlineUsers)
+    let currentUsersOnlineArr = onlineUsers.map(user => {
+      return Object.values(user)[0]
+    })
+    let userIdArr
+    if (!currentUsersOnlineArr.includes(newUserId)) {
+      onlineUsers.push({[socket.id]: newUserId})
+      userIdArr = onlineUsers.map(user => {
+        return Object.values(user)[0]
+      })
+      socket.emit('updateOnlineUsers', userIdArr)
     }
     console.log('ONLINE USERS ARE ', onlineUsers)
   })
