@@ -32,9 +32,9 @@ export const fetchRoomList = () =>
         console.error(error))
 
         
-export const createRoom = (newName, newGame) => 
+export const createRoom = (newName, newGame, user) => 
   dispatch => 
-    axios.post('/api/rooms', {name: newName, game: newGame})
+    axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
       .then(res => {
         console.log('########', res.data)
         dispatch(addRoom(res.data))

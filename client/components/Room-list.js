@@ -20,8 +20,9 @@ class RoomList extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log(event.target.name.value, event.target.game.value)
-    this.props.addRoom(event.target.name.value, event.target.game.value)
+    console.log('PROPS IN THUNK ARE ', this.props)
+    this.props.addRoom(event.target.name.value, event.target.game.value, this.props.user.id)
+    history.push('/')
   }
 
 
@@ -61,8 +62,8 @@ const mapDispatch = (dispatch) => {
     getRooms() {
       dispatch(fetchRoomList())
     },
-    addRoom(name, game) {
-      dispatch(createRoom(name, game))
+    addRoom(name, game, admin) {
+      dispatch(createRoom(name, game, admin))
     }
   }
 }

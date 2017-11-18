@@ -15,9 +15,14 @@ router.get('/', (req, res, next) => {
 
 //type , name
 router.post('/', (req, res, next) => {
+  let userId = req.body.adminId
+  console.log(req.body)
   Room.create(req.body)
-    .then(addedRoom => res.json(addedRoom))
-    .catch(next)
+    .then(addedRoom => {
+      addedRoom.addPlayers(userId)
+      res.json(addedRoom)
+    })
+    .catch(error => console.log(error))
 })
 
 router.use((req, res, next) => {
