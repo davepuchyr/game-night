@@ -1,6 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 
+import socket from '../socket'
+
 /**
  * ACTION TYPES
  */
@@ -24,14 +26,16 @@ const removeUser = () => ({type: REMOVE_USER})
 export const me = () =>
   dispatch =>
     axios.get('/auth/me')
-      .then(res =>
-        dispatch(getUser(res.data || defaultUser)))
+      .then(res => {
+        socket.emit('userConnect', res.data.id)
+        dispatch(getUser(res.data || defaultUser))})
       .catch(err => console.log(err))
 
 export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
+        socket.emit('userConnect', res.data.id)
         dispatch(getUser(res.data))
         history.push('/home')
       })

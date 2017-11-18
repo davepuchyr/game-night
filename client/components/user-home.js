@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 import RoomList from './Room-list'
+// establishes socket connection
+import '../socket'
 
 /**
  * COMPONENT
@@ -14,7 +16,7 @@ import RoomList from './Room-list'
   }
 
   render() {
-
+    
     return (
       <div>
         <h3>Welcome, {this.props.user.nickname}</h3>
