@@ -31,7 +31,8 @@ import '../socket'
  */
 const mapState = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    onlineUsers: state.onlineUsers
   }
 }
 

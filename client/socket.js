@@ -6,10 +6,12 @@ const socket = io(window.location.origin)
 
 socket.on('connect', () => {
   console.log('Connected!')
+
+  socket.on('updateOnlineUsers', onlineUsers => {
+    console.log('I HEAR SOMEONE')
+    store.dispatch(getOnlineUsers(onlineUsers))
+  })
 })
 
-socket.on('updateOnlineUsers', onlineUsers => {
-  store.dispatch(getOnlineUsers(onlineUsers))
-})
 
 export default socket
