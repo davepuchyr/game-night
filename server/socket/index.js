@@ -19,6 +19,8 @@ module.exports = (io) => {
         return Object.values(user)[0]
       })
       socket.emit('updateOnlineUsers', userIdArr)
+    } else {
+      socket.emit('updateOnlineUsers', currentUsersOnlineArr)      
     }
     console.log('ONLINE USERS ARE ', onlineUsers)
   })
