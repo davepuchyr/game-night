@@ -1,5 +1,4 @@
 
-
 const onlineUsers = {}
 
 
@@ -17,6 +16,11 @@ module.exports = (io) => {
     
       socket.emit('updateOnlineUsers', userIdArr)
       socket.broadcast.emit('updateOnlineUsers', userIdArr)
+    })
+
+    socket.on('new_message', (message) => {
+      socket.emit('received_new_message', message)
+      socket.broadcast.emit('received_new_message', message)
     })
 
     socket.on('disconnect', () => {

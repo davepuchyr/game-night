@@ -1,4 +1,5 @@
 import axios from 'axios'
+import socket from '../socket'
 /**
  * ACTION TYPES
  */
@@ -36,7 +37,7 @@ export const postMessage = (info) => {
       .then(res => res.data)
       .then(message => {
         dispatch(newMessage(message))
-        //socket goes here
+        socket.emit('new_message', message)
       })
   )
 }

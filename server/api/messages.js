@@ -1,10 +1,13 @@
 const router = require('express').Router()
-const { Message } = require('../db/models')
+const { Message, User } = require('../db/models')
 module.exports = router
 
 //get all the messages
 router.get('/', (req, res, next) => {
-  Message.findAll()
+  Message.findAll({include: [{
+    model: User,
+    attributes: ['nickname']
+  }]})
     .then(messages => res.json(messages))
     .catch(next)
 })

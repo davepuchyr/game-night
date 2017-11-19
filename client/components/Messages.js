@@ -9,32 +9,37 @@ import { fetchMessages, postMessage } from '../store'
 export class Messages extends React.Component {
   constructor(props){
       super(props)
+      this.state = { messageInput: '' }
   }
 
-  componentDidMount(){
+  componentWillMount(){
       this.props.getMessages()
   }
 
   render(){
     const { user, messages, newMessage } = this.props
+    console.log(messages)
     return (
         <div>
             {
             messages.length &&
                 messages.map(message => 
                     <div key={message.id}>
-                      <h2>{user.nickname||'Unknown'}</h2>
-                      <p>{message.content}</p>
+                      <h2>{message.user.nickname}</h2>
+                      <p>{message.content || 'No messages right now'}</p>
                     </div>
                 )
             }
             <form onSubmit={(e) => {
                 e.preventDefault()
+                this.setState({ messageInput: '' })
                 newMessage(user.id, e.target.message.value)
             }}>
                <input
                type="text"
                name="message"
+               value={this.state.messageInput}
+               onChange={(e) => this.setState({ messageInput: e.target.value })}
                placeholder="Write message" 
                />
                <button type="submit">Post</button>
