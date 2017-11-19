@@ -27,7 +27,10 @@ export const me = () =>
   dispatch =>
     axios.get('/auth/me')
       .then(res => {
-        if (res.data) socket.emit('userConnect', res.data.id)
+        if (res.data) {
+          let simpleUser = Object.assign({}, {id: res.data.id, nickname: res.data.nickname})
+          socket.emit('userConnect', simpleUser)
+        }
         dispatch(getUser(res.data || defaultUser))})
       .catch(err => console.log(err))
 

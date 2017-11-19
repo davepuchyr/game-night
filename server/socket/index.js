@@ -9,14 +9,14 @@ module.exports = (io) => {
     console.log(`A socket connection to the server has been made: ${socketId}`)
 
   
-  socket.on('userConnect', (newUserId) => {
+  socket.on('userConnect', (newUser) => {
 
-    onlineUsers[socketId] = newUserId
+    onlineUsers[socketId] = newUser
     
-    const userIdArr = Object.values(onlineUsers)
+    const simpleUserArr = Object.values(onlineUsers)
     
-    socket.emit('updateOnlineUsers', userIdArr)
-    socket.broadcast.emit('updateOnlineUsers', userIdArr)
+    socket.emit('updateOnlineUsers', simpleUserArr)
+    socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
   })
 
     socket.on('disconnect', () => {
@@ -24,10 +24,10 @@ module.exports = (io) => {
 
       delete onlineUsers[socketId]
 
-      const userIdArr = Object.values(onlineUsers)
+      const simpleUserArr = Object.values(onlineUsers)
 
-      socket.emit('updateOnlineUsers', userIdArr)
-      socket.broadcast.emit('updateOnlineUsers', userIdArr)
+      socket.emit('updateOnlineUsers', simpleUserArr)
+      socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
     })
   })
 }

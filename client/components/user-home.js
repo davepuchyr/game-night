@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 import RoomList from './Room-list'
+import OnlineUsers from './onlineUsers.js'
 // establishes socket connection
 import '../socket'
 
@@ -21,6 +22,7 @@ import '../socket'
       <div>
         <h3>Welcome, {this.props.user.nickname}</h3>
         <RoomList />
+        <OnlineUsers />
       </div>
     )
   }
