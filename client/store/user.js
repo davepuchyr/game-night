@@ -40,7 +40,7 @@ export const auth = (email, password, method) =>
       .then(res => {
         socket.emit('userConnect', res.data.id)
         dispatch(getUser(res.data))
-        history.push('/home')
+        history.push('/lobby')
       })
       .catch(error =>
         dispatch(getUser({error})))

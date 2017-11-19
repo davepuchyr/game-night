@@ -3,11 +3,10 @@ import {connect} from 'react-redux'
 
 const OnlineUsers = (props) => {
   const {users} = props
-  console.log(users)
   return (
     <div>
       <div>
-        <h4>Users Online: </h4>
+        <h2>Users Online: </h2>
         {
           users && users.map((user, idx) => {
             return (

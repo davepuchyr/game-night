@@ -20,7 +20,6 @@ class RoomList extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('PROPS IN THUNK ARE ', this.props)
     this.props.addRoom(event.target.name.value, event.target.game.value, this.props.user.id)
   }
 
@@ -29,6 +28,7 @@ class RoomList extends Component {
   render () {
     return (
       <div>
+        <h2>Room List</h2>
         <div>
           {this.props.allRooms.map((room, idx) => {
             return (<div key={idx}>{`${room.name} - ${room.game}`}</div>)

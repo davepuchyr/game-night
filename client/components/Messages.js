@@ -18,15 +18,15 @@ export class Messages extends React.Component {
 
   render(){
     const { user, messages, newMessage } = this.props
-    console.log(messages)
     return (
         <div>
+            <h2>All Chat</h2>
             {
             messages.length?
                 messages.map(message =>
                   <div key={message.id}>
-                    <h2>{message.user.nickname || 'Unknown'}</h2>
-                    <p>{message.content}</p>
+                    <h3>{message.user.nickname || 'Unknown'}</h3>
+                    <h4>{message.content}</h4>
                   </div>
                 )
                 :
