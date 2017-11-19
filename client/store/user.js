@@ -27,7 +27,7 @@ export const me = () =>
   dispatch =>
     axios.get('/auth/me')
       .then(res => {
-        socket.emit('userConnect', res.data.id)
+        if (res.data) socket.emit('userConnect', res.data.id)
         dispatch(getUser(res.data || defaultUser))})
       .catch(err => console.log(err))
 
