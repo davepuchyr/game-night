@@ -9,15 +9,15 @@ module.exports = (io) => {
     console.log(`A socket connection to the server has been made: ${socketId}`)
 
   
-  socket.on('userConnect', (newUser) => {
+    socket.on('userConnect', (newUserId) => {
 
-    onlineUsers[socketId] = newUser
+      onlineUsers[socketId] = newUserId
     
-    const simpleUserArr = Object.values(onlineUsers)
+      const userIdArr = Object.values(onlineUsers)
     
-    socket.emit('updateOnlineUsers', simpleUserArr)
-    socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
-  })
+      socket.emit('updateOnlineUsers', userIdArr)
+      socket.broadcast.emit('updateOnlineUsers', userIdArr)
+    })
 
     socket.on('disconnect', () => {
       console.log(`Connection ${socket.id} has left the building`)
