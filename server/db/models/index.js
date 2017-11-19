@@ -1,5 +1,6 @@
 const User = require('./user')
 const Room = require('./room')
+const Message = require('./message')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -8,8 +9,13 @@ const Room = require('./room')
  *    BlogPost.belongsTo(User)
  */
 
+//Room Associations
 Room.belongsTo(User, { as: 'admin' })
 Room.belongsToMany(User, { as: 'players', through: 'room_players' })
+
+//Message Associations
+User.hasMany(Message) //message has the userId
+Message.belongsTo(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -19,5 +25,6 @@ Room.belongsToMany(User, { as: 'players', through: 'room_players' })
  */
 module.exports = {
   User,
-  Room
+  Room,
+  Message
 }

@@ -5,8 +5,9 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import user from './user'
 import rooms from './rooms'
 import onlineUsers from './onlineUsers'
+import messages from './messages'
 
-const reducer = combineReducers({user,rooms,onlineUsers})
+const reducer = combineReducers({user, rooms, onlineUsers, messages})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -17,3 +18,4 @@ export default store
 export * from './user'
 export * from './rooms'
 export * from './onlineUsers'
+export * from './messages'
