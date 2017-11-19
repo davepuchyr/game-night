@@ -14,7 +14,7 @@ socket.on('connect', () => {
   socket.on('received_new_message', message => {
     store.dispatch(newMessage(message))
   })
-  
+
 })
 
 

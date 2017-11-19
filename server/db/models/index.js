@@ -15,7 +15,7 @@ Room.belongsToMany(User, { as: 'players', through: 'room_players' })
 
 //Message Associations
 User.hasMany(Message) //message has the userId
-Message.belongsTo(User)
+Message.belongsTo(User,{individualHooks:true})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

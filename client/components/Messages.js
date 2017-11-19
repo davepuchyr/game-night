@@ -22,13 +22,15 @@ export class Messages extends React.Component {
     return (
         <div>
             {
-            messages.length &&
-                messages.map(message => 
-                    <div key={message.id}>
-                      <h2>{message.user.nickname}</h2>
-                      <p>{message.content || 'No messages right now'}</p>
-                    </div>
+            messages.length?
+                messages.map(message =>
+                  <div key={message.id}>
+                    <h2>{message.user.nickname || 'Unknown'}</h2>
+                    <p>{message.content}</p>
+                  </div>
                 )
+                :
+                <div> No messages right now </div>
             }
             <form onSubmit={(e) => {
                 e.preventDefault()
@@ -40,12 +42,12 @@ export class Messages extends React.Component {
                name="message"
                value={this.state.messageInput}
                onChange={(e) => this.setState({ messageInput: e.target.value })}
-               placeholder="Write message" 
+               placeholder="Write message"
                />
                <button type="submit">Post</button>
             </form>
         </div>
-    )  
+    )
   }
 }
 
