@@ -18,7 +18,6 @@ export const Lobby = (props) => {
     <div>
       <div>
         <h1>Welcome to the Lobby!</h1>
-        <a href="#" onClick={handleClick}>Logout</a>
       </div>
       {/* <Link to='/messages'>
         <h2>Take me to Messages</h2>
@@ -40,15 +39,7 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    handleClick () {
-      dispatch(logout())
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(Lobby)
+export default connect(mapState)(Lobby)
 
 /**
  * PROP TYPES

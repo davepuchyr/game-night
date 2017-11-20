@@ -21,8 +21,7 @@ const Main = (props) => {
         {
           isLoggedIn
             ? <div>
-              logout
-            </div>
+              <a href="#" onClick={handleClick}>Logout</a>            </div>
             : 
             <div>
               <h1>Game Night!</h1> 
