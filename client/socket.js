@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-import store, { getOnlineUsers, newMessage } from './store'
+import store, { getOnlineUsers, newMessage, getDraws } from './store'
 
 const socket = io(window.location.origin)
 
@@ -15,7 +15,9 @@ socket.on('connect', () => {
     store.dispatch(newMessage(message))
   })
 
+  socket.on('addDraw', draws => {
+    store.dispatch(getDraws(draws))
+  })
 })
-
 
 export default socket

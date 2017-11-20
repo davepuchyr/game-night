@@ -1,6 +1,8 @@
 
 const onlineUsers = {}
 
+const draws = []
+
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
@@ -24,6 +26,15 @@ module.exports = (io) => {
     socket.on('new_message', (message) => {
       socket.broadcast.emit('received_new_message', message)
     })
+    /*
+    * DRAWS
+    */
+    socket.on('draw', (start, end) => {
+      draws.push({start, end})
+      socket.broadcast.emit('addDraw', draws)
+      // socket.emit('addDraw', draws)
+    })
+
     /*
     * LOGOUT
     */

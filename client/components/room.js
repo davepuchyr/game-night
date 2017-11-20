@@ -2,7 +2,7 @@ import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 
-
+import Video from './video'
 import whiteboard, { draw } from '../whiteboard'
 
 
@@ -14,6 +14,7 @@ class Room extends Component {
     render () {
         return (
             <div id="room-container">
+                <Video/>
                 <div id="hex-container">
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
                 </div>

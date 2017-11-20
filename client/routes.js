@@ -4,7 +4,7 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Room, Lobby, Messages, Whiteboard } from './components'
+import {Main, Login, Signup, UserHome, Room, Lobby, Messages, Whiteboard, Whiteboard2 } from './components'
 import {me} from './store'
 
 /**
@@ -30,7 +30,7 @@ class Routes extends Component {
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route path="/room/:roomid" component={Room} />
-                  <Route path="/whiteboard" component={Whiteboard} />
+                  <Route path="/whiteboard" component={Whiteboard2} />
                   <Route path="*" component={Lobby} />
                 </Switch>
             }

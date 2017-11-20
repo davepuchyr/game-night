@@ -1,7 +1,7 @@
 import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-
+import ReactDOM from 'react-dom'
 
 import whiteboard, { draw } from '../whiteboard'
 
@@ -11,8 +11,6 @@ class Whiteboard extends Component {
         super(props)
         this.state = {
             color: 'black',
-            mousePositionX: 0,
-            mousePositionY: 0,
             startDraw: [],
             drawing: false,
             ctx: {}
@@ -24,12 +22,13 @@ class Whiteboard extends Component {
     }
 
     handleMouseMove(e) {
-        // this.setState({mousePositionX: e.screenX, mousePositionY: e.screenY})
         const currentPosition = this.state.startDraw
+        const nextPosition = [e.screenX, e.screenY]
 
         if(this.state.drawing){
-            this.draw(currentPosition, [e.screenX, e.screenY])
+            this.draw(currentPosition, nextPosition)
         }
+        this.setState({startDraw: nextPosition})
     }
 
     handleMouseDown(e) {
@@ -41,35 +40,34 @@ class Whiteboard extends Component {
     }
 
     draw(start, end) {
-
-        console.log(start, end)
-        const ctx = this.state.ctx
-
-        //line styling
-        ctx.strokeStyle = this.state.color
-        ctx.lineWidth = 5
-        ctx.lineJoin = 'round'
-        ctx.lineCap = 'round'
+        const ctx = this.state.ctx 
+        // const canvas = ReactDOM.findDOMNode(this.refs.canvas)
+        // const ctx = canvas.getContext('2d')
+        // console.log(ctx, start, end)
 
         //drawing
         ctx.beginPath()
+        ctx.strokeStyle = this.state.color
         ctx.moveTo(...start)
         ctx.lineTo(...end)
         ctx.closePath()
         ctx.stroke()
     }
-
+ 
     componentDidMount(){
-        const canvas = document.getElementById('canvas-container')
+        const canvas = ReactDOM.findDOMNode(this.refs.canvas)
         const canvasCTX = canvas.getContext('2d')
+        canvasCTX.lineWidth = 5
+        canvasCTX.lineJoin = 'round'
+        canvasCTX.lineCap = 'round'
         this.setState({ ctx: canvasCTX })
     }
 
     render () {
-        // if (this.state.drawing) this.draw(this.state.startDraw, [this.state.mousePositionX, this.state.mousePositionY])
         return (
             <canvas
             id="canvas-container"
+            ref="canvas"
             onMouseMove={this.handleMouseMove}
             onMouseDown={this.handleMouseDown}
             onMouseUp={this.handleMouseUp}
