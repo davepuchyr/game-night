@@ -161,4 +161,4 @@ function pos(e) {
     ]
 }
 
-document.addEventListener('DOMContentLoaded', setup)
+// document.addEventListener('DOMContentLoaded', setup)

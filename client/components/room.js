@@ -13,8 +13,10 @@ class Room extends Component {
 
     render () {
         return (
-            <div>
-                this is a room!
+            <div id="room-container">
+                <div id="hex-container">
+                <img src="http://i.imgur.com/uhhfaMZ.png" />
+                </div>
             </div>
         )
     }
