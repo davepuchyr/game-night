@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 const OnlineUsers = (props) => {
   const {users} = props
   return (
-    <div>
-      <div>
+    <div className="item-lobby-onlineUsers">
         <h2>Users Online: </h2>
         {
           users && users.map((user, idx) => {
@@ -14,7 +13,6 @@ const OnlineUsers = (props) => {
             )
           })
         }
-      </div>
     </div>
 
   )

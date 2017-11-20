@@ -19,14 +19,13 @@ export class Messages extends React.Component {
   render(){
     const { user, messages, newMessage } = this.props
     return (
-        <div>
+        <div className="item-lobby-messages">
             <h2>All Chat</h2>
             {
             messages.length?
                 messages.map(message =>
                   <div key={message.id}>
-                    <h3>{message.user.nickname || 'Unknown'}</h3>
-                    <h4>{message.content}</h4>
+                    <h4>{message.user.nickname || 'Unknown'} : {message.content}</h4>
                   </div>
                 )
                 :

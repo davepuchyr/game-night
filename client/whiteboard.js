@@ -68,7 +68,7 @@ const colors = [
 ]
 
 function setup() {
-    document.body.appendChild(canvas)
+    // document.body.appendChild(canvas)
 
     setupColorPicker()
     setupCanvas()
