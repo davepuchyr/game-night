@@ -5,7 +5,7 @@ const OnlineUsers = (props) => {
   const {users} = props
   return (
     <div className="item-lobby-onlineUsers">
-        <h2>Users Online: </h2>
+        <h3>Players Online</h3>
         {
           users && users.map((user, idx) => {
             return (

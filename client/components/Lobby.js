@@ -16,9 +16,9 @@ export const Lobby = (props) => {
 
   return (
     <div className="container-lobby">
-        <OnlineUsers />
-        <Messages />
         <RoomList />
+        <Messages />
+        <OnlineUsers />
     </div>
   )
 }

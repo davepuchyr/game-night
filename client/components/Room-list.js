@@ -28,7 +28,7 @@ class RoomList extends Component {
   render () {
     return (
       <div className="item-lobby-rooms">
-        <h2>Room List</h2>
+        <h3>Room List</h3>
         <div>
           {this.props.allRooms.map((room, idx) => {
             return (<div key={idx}>{`${room.name} - ${room.game}`}</div>)
