@@ -24,7 +24,12 @@ class RoomMessages extends Component {
 
     componentDidMount () {
         const room = this.props.match.path
-        socket.emit('joinroom', room)
+        socket.emit('joinroom', room, this.props.user.nickname)
+    }
+
+    componentWillUnmount () {
+        const room = this.props.match.path
+        socket.emit('leaveroom', room, this.props.user.nickname)
     }
 
     render () {

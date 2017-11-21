@@ -36,14 +36,16 @@ module.exports = (io) => {
       // socket.emit('addDraw', draws)
     })
 
-        /*
+    /*
     * JOINROOM
     */
-    socket.on('joinroom', (room) => {
+    socket.on('joinroom', (room, nickname) => {
       socket.join(room)
+      io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
       // console.log('someone joined a room ', socket, room)
     })
-        /*
+
+    /*
     * GET ROOM MESSAGE
     */
     socket.on('postRoomMessage', (message, room) => {
@@ -51,6 +53,14 @@ module.exports = (io) => {
       console.log('someone posted a message', message, room)
     })
 
+   /*
+    * LEAVE ROOM
+    */
+    socket.on('leaveroom', (room, nickname) => {
+      console.log('someone left a room', room)
+      io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
+      socket.leave(room)
+    })
 
     /*
     * LOGOUT
