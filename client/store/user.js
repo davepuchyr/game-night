@@ -38,7 +38,8 @@ export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password })
       .then(res => {
-        socket.emit('userConnect', res.data.id)
+        let simpleUser = Object.assign({}, {id: res.data.id, nickname: res.data.nickname})
+        socket.emit('userConnect', simpleUser)
         dispatch(getUser(res.data))
         history.push('/lobby')
       })
@@ -50,6 +51,7 @@ export const logout = () =>
     axios.post('/auth/logout')
       .then(_ => {
         dispatch(removeUser())
+        socket.disconnect()
         history.push('/login')
       })
       .catch(err => console.log(err))

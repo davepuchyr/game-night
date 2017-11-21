@@ -16,9 +16,10 @@ module.exports = (io) => {
       onlineUsers[socketId] = newUserId
 
       const userIdArr = Object.values(onlineUsers)
+      console.log('added User, users online are ', onlineUsers)
 
-      socket.emit('updateOnlineUsers', userIdArr)
-      socket.broadcast.emit('updateOnlineUsers', userIdArr)
+      io.sockets.emit('updateOnlineUsers', userIdArr)
+      // socket.broadcast.emit('updateOnlineUsers', userIdArr)
     })
     /*
     * NEW MESSAGES
@@ -49,8 +50,8 @@ module.exports = (io) => {
 
       const simpleUserArr = Object.values(onlineUsers)
 
-      socket.emit('updateOnlineUsers', simpleUserArr)
-      socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
+      io.sockets.emit('updateOnlineUsers', simpleUserArr)
+      // socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
     })
   })
 }
