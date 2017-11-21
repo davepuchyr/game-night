@@ -34,7 +34,7 @@ class RoomMessages extends Component {
 
     render () {
         return (
-            <div>
+            <div id="room-message-component">
                 RoomMessages
                 <br />
                 {

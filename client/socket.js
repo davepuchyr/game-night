@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-import store, { getOnlineUsers, newMessage, getDraws, addMessage } from './store'
+import store, { getOnlineUsers, newMessage, getDraws, addMessage, moveTokens } from './store'
 
 const socket = io(window.location.origin)
 
@@ -22,6 +22,11 @@ socket.on('connect', () => {
 
   socket.on('addMessage', message => {
     store.dispatch(addMessage(message))
+  })
+
+  socket.on('player1_moved', newCoords => {
+    store.dispatch(moveTokens(newCoords))
+
   })
 })
 
