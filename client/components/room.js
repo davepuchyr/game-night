@@ -13,8 +13,8 @@ class ResizeRect extends React.Component {
 
         // to() is a method of `Konva.Node` instances
         rect.to({
-            scaleX: 3,
-            scaleY: 3,
+            scaleX: 1.5,
+            scaleY: 1.5,
             duration: 0.2
         });
     }
