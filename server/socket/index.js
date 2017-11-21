@@ -35,6 +35,10 @@ module.exports = (io) => {
       // socket.emit('addDraw', draws)
     })
 
+    socket.on('move_player1', (newCoords) => {
+      socket.broadcast.emit('player1_moved', newCoords)
+    })
+
     /*
     * LOGOUT
     */

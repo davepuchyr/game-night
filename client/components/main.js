@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link, Switch, Route} from 'react-router-dom'
 import {logout} from '../store'
 import Lobby from './Lobby'
-import Room from './Room'
+import Room from './room'
 
 /**
  * COMPONENT
