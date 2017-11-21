@@ -17,26 +17,27 @@ class RoomMessages extends Component {
         const content = e.target.content.value
         const message = {[sender]: content}
         this.props.postMessage(message)
-        console.log(this.props.match.path)
-        socket.emit('postRoomMessage', message, this.props.match.path)
+        // console.log(this.props.match.path)
+        socket.emit('postRoomMessage', message, this.props.roomPath)
         e.target.content.value = ''
     }
 
     componentDidMount () {
-        const room = this.props.match.path
+        const room = this.props.roomPath
         socket.emit('joinroom', room, this.props.user.nickname)
     }
 
     componentWillUnmount () {
-        const room = this.props.match.path
+        const room = this.props.roomPath
         socket.emit('leaveroom', room, this.props.user.nickname)
     }
 
     render () {
         return (
             <div id="room-message-component">
-                RoomMessages
+                <h3> Messages </h3>
                 <br />
+                <div id="message-view">
                 {
                     this.props.roomMessages.map((message, idx) => {
                         return (
@@ -47,10 +48,11 @@ class RoomMessages extends Component {
                         )
                     })
                 }
+                </div>
                 <br/>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" name="content"/>
-                    <button type="submit"/>
+                    <button type="submit"> Enter </button>
                 </form>
             </div>
         )
