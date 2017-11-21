@@ -15,16 +15,10 @@ export const Lobby = (props) => {
   const {handleClick, isLoggedIn} = props
 
   return (
-    <div>
-      <div>
-        <h1>Welcome to the Lobby!</h1>
-      </div>
-      {/* <Link to='/messages'>
-        <h2>Take me to Messages</h2>
-      </Link> */}
-        <OnlineUsers />
-        <Messages />
+    <div className="container-lobby">
         <RoomList />
+        <Messages />
+        <OnlineUsers />
     </div>
   )
 }

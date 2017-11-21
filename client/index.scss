@@ -2,18 +2,29 @@ body {
   font-family: sans-serif;
   display: flex;
   justify-content: center;
+  width: 100%;
 
   a {
     text-decoration: none;
   }
 
+  div {
+  }
+
   h1 {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 2em;
   }
 
   label {
     display: block;
+  }
+
+  nav {
+    border: 1px solid black;
+    margin: 1em;
   }
 
   nav a {
@@ -21,10 +32,84 @@ body {
     margin: 1em;
   }
 
-  form div {
-    margin: 1em;
+  nav #logout {
     display: inline-block;
+    font-size: .65em;
+    margin-right: 2em;
   }
+
+  // form div {
+  //   margin: 1em;
+  //   display: inline-block;
+  // }
+
+  input[type=text] {
+    width: 100%;
+  }
+}
+// 
+
+#app {
+  width: 100%;
+}
+
+.container {
+  width: 100%
+}
+
+.container-nav {
+  display: -webkit-flex;
+  display: flex;
+
+}
+
+.container-lobby {
+  padding: .5em;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0em 1em 0em 1em;
+}
+
+.item-lobby-onlineUsers {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-grow: 1;
+}
+
+.item-lobby-rooms {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: center;
+  flex-grow: 1;
+}
+
+.item-lobby-messages {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+.item-lobby-messages-line {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  width: 100%;
+}
+
+.message-line {
+  font-size: 1rem;
 }
 
 #main, #app {

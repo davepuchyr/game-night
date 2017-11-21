@@ -19,14 +19,14 @@ export class Messages extends React.Component {
   render(){
     const { user, messages, newMessage } = this.props
     return (
-        <div>
-            <h2>All Chat</h2>
+        <div className="item-lobby-messages">
+            <h3>All Chat</h3>
+            <div className="item-lobby-messages-items">
             {
             messages.length?
                 messages.map(message =>
                   <div key={message.id}>
-                    <h3>{message.user.nickname || 'Unknown'}</h3>
-                    <h4>{message.content}</h4>
+                    <p className="message-line"><strong>{message.user.nickname || 'Unknown'}</strong> : {message.content}</p>
                   </div>
                 )
                 :
@@ -46,6 +46,7 @@ export class Messages extends React.Component {
                />
                <button type="submit">Post</button>
             </form>
+            </div>
         </div>
     )
   }
