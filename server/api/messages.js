@@ -20,7 +20,10 @@ router.post('/', (req, res, next) => {
           where: {id:posted.id},
           include: [{model: User, attributes: ['nickname']}]
         })
-        .then(message => res.json(message))
+        .then(message => {
+          res.status(201)
+          res.json(message)
+        })
     })
     .catch(next)
 })

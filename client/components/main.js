@@ -16,8 +16,13 @@ const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
 
   return (
+<<<<<<< HEAD
     <div className="container">
       <nav classname="container-nav">
+=======
+    <div id="main">
+      <nav>
+>>>>>>> staging
         {
           isLoggedIn ? 
             <div>
