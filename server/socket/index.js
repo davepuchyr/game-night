@@ -36,6 +36,22 @@ module.exports = (io) => {
       // socket.emit('addDraw', draws)
     })
 
+        /*
+    * JOINROOM
+    */
+    socket.on('joinroom', (room) => {
+      socket.join(room)
+      // console.log('someone joined a room ', socket, room)
+    })
+        /*
+    * GET ROOM MESSAGE
+    */
+    socket.on('postRoomMessage', (message, room) => {
+      socket.broadcast.to(room).emit('addMessage', message)
+      console.log('someone posted a message', message, room)
+    })
+
+
     /*
     * LOGOUT
     */

@@ -1,6 +1,6 @@
 import io from 'socket.io-client'
 
-import store, { getOnlineUsers, newMessage, getDraws } from './store'
+import store, { getOnlineUsers, newMessage, getDraws, addMessage } from './store'
 
 const socket = io(window.location.origin)
 
@@ -18,6 +18,10 @@ socket.on('connect', () => {
 
   socket.on('addDraw', draws => {
     store.dispatch(getDraws(draws))
+  })
+
+  socket.on('addMessage', message => {
+    store.dispatch(addMessage(message))
   })
 })
 

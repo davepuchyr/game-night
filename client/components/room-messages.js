@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
+import socket from '../socket'
 import { addMessage } from '../store'
 
 class RoomMessages extends Component {
@@ -16,7 +17,14 @@ class RoomMessages extends Component {
         const content = e.target.content.value
         const message = {[sender]: content}
         this.props.postMessage(message)
+        console.log(this.props.match.path)
+        socket.emit('postRoomMessage', message, this.props.match.path)
         e.target.content.value = ''
+    }
+
+    componentDidMount () {
+        const room = this.props.match.path
+        socket.emit('joinroom', room)
     }
 
     render () {
