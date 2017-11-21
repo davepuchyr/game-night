@@ -68,12 +68,7 @@ const colors = [
 ]
 
 function setup() {
-<<<<<<< HEAD
     // document.body.appendChild(canvas)
-=======
-    const container = document.getElementById('canvas-container')
-    document.body.appendChild(canvas)
->>>>>>> staging
 
     setupColorPicker()
     setupCanvas()
