@@ -36,8 +36,24 @@ module.exports = (io) => {
       // socket.emit('addDraw', draws)
     })
 
-    socket.on('move_player1', (newCoords) => {
-      socket.broadcast.emit('player1_moved', newCoords)
+    /*
+    * MOVING TOKENS
+    */
+    socket.on('move_token', (newCoords, color) => {
+      switch(color){
+        case 'black':
+          socket.broadcast.emit('black_moved', newCoords)
+          break
+        case 'red':
+          socket.broadcast.emit('red_moved', newCoords)
+          break
+        case 'green':
+          socket.broadcast.emit('green_moved', newCoords)
+          break
+        case 'blue':
+          socket.broadcast.emit('blue_moved', newCoords)
+          break;
+      }
     })
 
     /*
