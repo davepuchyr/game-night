@@ -21,6 +21,7 @@ router.post('/', (req, res, next) => {
   Room.create(req.body)
     .then(addedRoom => {
       addedRoom.addPlayers(userId)
+      res.status(201)
       res.json(addedRoom)
     })
     .catch(error => console.log(error))
