@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 
 const OnlineUsers = (props) => {
   const {users} = props
+  console.log('users in the onlineUsers component are ', users)
   return (
     <div className="item-lobby-onlineUsers">
         <h3>Players Online</h3>

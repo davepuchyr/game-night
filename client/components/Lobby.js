@@ -13,7 +13,7 @@ import Messages from './Messages'
  */
 export const Lobby = (props) => {
   const {handleClick, isLoggedIn} = props
-
+  console.log(props)
   return (
     <div className="container-lobby">
         <RoomList />
@@ -29,7 +29,8 @@ export const Lobby = (props) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    users: state.onlineUsers
   }
 }
 
