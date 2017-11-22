@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Image } from 'react-konva'
 
 class MyImage extends Component {
- constructor() {
-   super()
+ constructor(props) {
+   super(props)
    this.state = {
      image: null
    }
@@ -13,7 +13,7 @@ class MyImage extends Component {
 
   componentDidMount() {
     const image = new window.Image()
-    image.src = 'https://i.imgur.com/FktQTMl.png'
+    image.src = this.props.imageUrl
     image.onload = () => {
       this.setState({
         image: image
@@ -27,8 +27,6 @@ class MyImage extends Component {
         image={this.state.image}
         x={300}
         y={400}
-        width={400}
-        height={550}
         draggable={true}
       />
     )

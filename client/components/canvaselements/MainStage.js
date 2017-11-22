@@ -12,7 +12,8 @@ class MainStage extends React.Component {
 
   render() {
     const { black, red, green, blue } = this.props.tokens
-
+    const { images } = this.props
+    console.log(this.props)
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer width={window.innerWidth} height={window.innerHeight}>
@@ -20,7 +21,11 @@ class MainStage extends React.Component {
           <HexPiece fill={'red'} x={red[0]} y={red[1]}/>
           <HexPiece fill={'green'} x={green[0]} y={green[1]}/>
           <HexPiece fill={'blue'} x={blue[0]} y={blue[1]}/>
-          <MyImage />
+          {
+            images && images.map((url, idx) => {
+              return <MyImage imageUrl={url} key={idx} />
+            })
+          }
         </Layer>
       </Stage>
     );
@@ -29,7 +34,8 @@ class MainStage extends React.Component {
 
 const mapState = (state) => {
   return {
-    tokens: state.tokens
+    tokens: state.tokens,
+    images: state.images
   }
 }
 
