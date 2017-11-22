@@ -56,7 +56,6 @@ module.exports = (io) => {
     * JOINROOM
     */
     socket.on('joinroom', (room, nickname) => {
-      console.log('3) CURRENT BACK END SOCKET - ', room, " ",token_positions[room.slice(6)])
       socket.join(room)
       io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
       io.sockets.to(room).emit('current_tokens', token_positions[room.slice(6)])
