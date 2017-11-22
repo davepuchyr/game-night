@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Layer, Stage } from 'react-konva'
 import HexPiece from './hex-piece'
+import MyImage from './Image'
+
 
 class PlayerPieces extends React.Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class PlayerPieces extends React.Component {
           <HexPiece fill={'red'} x={red[0]} y={red[1]}/>
           <HexPiece fill={'green'} x={green[0]} y={green[1]}/>
           <HexPiece fill={'blue'} x={blue[0]} y={blue[1]}/>
+          <MyImage />
         </Layer>
       </Stage>
     );

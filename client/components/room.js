@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import Video from './video'
 import RoomMessages from './room-messages'
 import whiteboard, { draw } from '../whiteboard'
-import { Layer, Rect, Stage, Group, Circle, Star } from 'react-konva'
+import { Layer, Rect, Stage, Group, Circle, Star, Image} from 'react-konva'
 import ReactDOM from 'react-dom'
 import PlayerPieces from './canvaselements/player-pieces'
 
@@ -19,7 +19,7 @@ class Room extends Component {
             <div id="room-container">
                 <RoomMessages roomPath={path}/>
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
-                <Video/>
+                {/* <Video/> */}
                 <PlayerPieces />
             </div>
         )
