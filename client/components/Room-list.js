@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { fetchRoomList, createRoom } from '../store'
+import { Link } from 'react-router-dom'
 
 /**
  * COMPONENT
@@ -30,9 +31,11 @@ class RoomList extends Component {
       <div className="item-lobby-rooms">
         <h3>Room List</h3>
         <div>
-          {this.props.allRooms.map((room, idx) => {
-            return (<div key={idx}>{`${room.name} - ${room.game}`}</div>)
-          })}
+          {
+            this.props.allRooms.map((room, idx) => (
+              <Link to={`/room/${room.id}`} key={idx}><div>{`${room.name} - ${room.game}`}</div></Link>
+            ))
+          }
         </div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="name" placeholder="Enter Room Name" />

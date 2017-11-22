@@ -25,6 +25,7 @@ class RoomMessages extends Component {
     componentDidMount () {
         const room = this.props.roomPath
         socket.emit('joinroom', room, this.props.user.nickname)
+        socket.emit('current_token_positions', room)
     }
 
     componentWillUnmount () {

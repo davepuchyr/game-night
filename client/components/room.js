@@ -19,8 +19,8 @@ class Room extends Component {
             <div id="room-container">
                 <RoomMessages roomPath={path}/>
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
-                <Video/>
-                <PlayerPieces />
+                {/* <Video/> */}
+                <PlayerPieces rId={this.props.match.params.roomid} />
             </div>
         )
     }

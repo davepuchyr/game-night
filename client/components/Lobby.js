@@ -13,7 +13,6 @@ import Messages from './Messages'
  */
 export const Lobby = (props) => {
   const {handleClick, isLoggedIn} = props
-  console.log(props)
   return (
     <div className="container-lobby">
         <RoomList />

@@ -10,14 +10,15 @@ class PlayerPieces extends React.Component {
 
   render() {
     const { black, red, green, blue } = this.props.tokens
+    const { rId } = this.props
 
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer width={window.innerWidth} height={window.innerHeight}>
-          <HexPiece fill={'black'} x={black[0]} y={black[1]}/>
-          <HexPiece fill={'red'} x={red[0]} y={red[1]}/>
-          <HexPiece fill={'green'} x={green[0]} y={green[1]}/>
-          <HexPiece fill={'blue'} x={blue[0]} y={blue[1]}/>
+          <HexPiece fill={'black'} x={black[0]} y={black[1]} id={rId}/>
+          <HexPiece fill={'red'} x={red[0]} y={red[1]} id={rId}/>
+          <HexPiece fill={'green'} x={green[0]} y={green[1]} id={rId}/>
+          <HexPiece fill={'blue'} x={blue[0]} y={blue[1]} id={rId}/>
         </Layer>
       </Stage>
     );

@@ -1,13 +1,12 @@
 
 const onlineUsers = {}
-
-const draws = []
+const token_positions = {}
+// const draws = []
 
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
     let socketId = socket.id
-    console.log(`A socket connection to the server has been made: ${socketId}`)
     /*
     * NEW USERS
     */
@@ -16,10 +15,8 @@ module.exports = (io) => {
       onlineUsers[socketId] = newUserId
 
       const userIdArr = Object.values(onlineUsers)
-      console.log('added User, users online are ', onlineUsers)
 
       io.sockets.emit('updateOnlineUsers', userIdArr)
-      // socket.broadcast.emit('updateOnlineUsers', userIdArr)
     })
     /*
     * NEW MESSAGES
@@ -35,25 +32,25 @@ module.exports = (io) => {
       socket.broadcast.emit('addDraw', draws)
       // socket.emit('addDraw', draws)
     })
-
+    /*
+    * INITIALLIZE TOKEN POSITIONS IN NEWLY CREATED ROOM
+    */
+    socket.on('created_room', (roomId) => {
+      token_positions[roomId] = {
+        'black': [500, 500],
+        'red': [550, 550],
+        'green': [600, 600],
+        'blue': [650, 650]
+      }
+      console.log(token_positions)
+      socket.emit('inital_token_positions', token_positions[roomId])
+    })
     /*
     * MOVING TOKENS
     */
-    socket.on('move_token', (newCoords, color) => {
-      switch(color){
-        case 'black':
-          socket.broadcast.emit('black_moved', newCoords)
-          break
-        case 'red':
-          socket.broadcast.emit('red_moved', newCoords)
-          break
-        case 'green':
-          socket.broadcast.emit('green_moved', newCoords)
-          break
-        case 'blue':
-          socket.broadcast.emit('blue_moved', newCoords)
-          break;
-      }
+    socket.on('move_token', (newCoords, color, roomId) => {
+      token_positions[roomId][color] = newCoords
+      socket.broadcast.emit('moved', newCoords, color)
     })
 
     /*
@@ -62,9 +59,12 @@ module.exports = (io) => {
     socket.on('joinroom', (room, nickname) => {
       socket.join(room)
       io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
-      // console.log('someone joined a room ', socket, room)
     })
 
+    socket.on('current_token_positions', (room) => {
+      socket.join(room)
+      io.sockets.to(room).emit('current_tokens', token_positions[Number(room.slice(6))])
+    })
     /*
     * GET ROOM MESSAGE
     */

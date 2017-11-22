@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import socket from '../socket'
 
 /**
  * ACTION TYPES
@@ -36,6 +37,7 @@ export const createRoom = (newName, newGame, user) =>
   dispatch => 
     axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
       .then(res => {
+        socket.emit('created_room', Number(res.data.id))
         history.push(`/room/${res.data.id}`)
         dispatch(addRoom(res.data))
       })

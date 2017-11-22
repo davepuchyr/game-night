@@ -2,13 +2,12 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Star } from 'react-konva'
 import socket from '../../socket'
-import { moveBlack, moveRed, moveGreen, moveBlue } from '../../store' 
+import { move_black, move_red, move_green, move_blue } from '../../store' 
 
 
 class HexPiece extends Component {
     constructor(props){
       super(props)
-
       this.drag = this.drag.bind(this)
     }
 
@@ -17,7 +16,7 @@ class HexPiece extends Component {
       const color = e.target.attrs.fill
 
       this.props.move_token(newCoords, color)
-      socket.emit('move_token', newCoords, color)
+      socket.emit('move_token', newCoords, color, this.props.id)
     }
 
       render(){
@@ -49,16 +48,16 @@ const mapDispatch = (dispatch) => {
     move_token(newCoords, color) {
       switch(color){
         case 'black':
-          dispatch(moveBlack(newCoords))
+          dispatch(move_black(newCoords))
           break
         case 'red':
-          dispatch(moveRed(newCoords))
+          dispatch(move_red(newCoords))
           break
         case 'green':
-          dispatch(moveGreen(newCoords))
+          dispatch(move_green(newCoords))
           break
         case 'blue':
-          dispatch(moveBlue(newCoords))
+          dispatch(move_blue(newCoords))
           break;
       }
     }
