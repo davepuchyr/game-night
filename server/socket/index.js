@@ -42,29 +42,26 @@ module.exports = (io) => {
         'green': [600, 600],
         'blue': [650, 650]
       }
-      console.log(token_positions)
-      socket.emit('inital_token_positions', token_positions[roomId])
+      socket.emit('initial_token_positions', token_positions[roomId])
     })
     /*
     * MOVING TOKENS
     */
     socket.on('move_token', (newCoords, color, roomId) => {
       token_positions[roomId][color] = newCoords
-      socket.broadcast.emit('moved', newCoords, color)
+      io.sockets.to('/room/'+roomId).emit('moved', newCoords, color)
     })
 
     /*
     * JOINROOM
     */
     socket.on('joinroom', (room, nickname) => {
+      console.log('3) CURRENT BACK END SOCKET - ', room, " ",token_positions[room.slice(6)])
       socket.join(room)
       io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
+      io.sockets.to(room).emit('current_tokens', token_positions[room.slice(6)])
     })
 
-    socket.on('current_token_positions', (room) => {
-      socket.join(room)
-      io.sockets.to(room).emit('current_tokens', token_positions[Number(room.slice(6))])
-    })
     /*
     * GET ROOM MESSAGE
     */

@@ -1,14 +1,14 @@
 import io from 'socket.io-client'
 
-import store, { 
+import store, {
   getOnlineUsers,
    newMessage,
    getDraws,
-   addMessage, 
-   move_black, 
-   move_red, 
-   move_green, 
-   move_blue 
+   addMessage,
+   move_black,
+   move_red,
+   move_green,
+   move_blue
   } from './store'
 
 const socket = io(window.location.origin)
@@ -16,16 +16,16 @@ const socket = io(window.location.origin)
 //color dispatcher
 function colorDispatcher(coords, color){
   switch(color){
-    case 'black': 
+    case 'black':
       store.dispatch(move_black(coords))
       break
-    case 'red': 
+    case 'red':
       store.dispatch(move_red(coords))
       break
-    case 'green': 
+    case 'green':
       store.dispatch(move_green(coords))
       break
-    case 'blue': 
+    case 'blue':
       store.dispatch(move_blue(coords))
       break
   }

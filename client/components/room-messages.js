@@ -17,7 +17,6 @@ class RoomMessages extends Component {
         const content = e.target.content.value
         const message = {[sender]: content}
         this.props.postMessage(message)
-        // console.log(this.props.match.path)
         socket.emit('postRoomMessage', message, this.props.roomPath)
         e.target.content.value = ''
     }
