@@ -54,7 +54,7 @@ socket.on('connect', () => {
   })
 
   //initial token position update
-  socket.on('initial_token_positions', postions => {
+  socket.on('initial_token_positions', positions => {
     for(let color in positions){
       colorDispatcher(positions[color], color)
     }

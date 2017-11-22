@@ -32,7 +32,7 @@ class Routes extends Component {
                   <Route path="/room/:roomid" component={Room} />
                   <Route path="/whiteboard" component={Whiteboard2} />
                   <Route path="/roommessages" component={RoomMessages} />
-                  <Route path="*" component={Lobby} />
+                  <Route component={Lobby} />
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}
