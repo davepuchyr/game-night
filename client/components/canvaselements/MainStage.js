@@ -5,7 +5,7 @@ import HexPiece from './hex-piece'
 import MyImage from './Image'
 
 
-class PlayerPieces extends React.Component {
+class MainStage extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -33,4 +33,4 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState)(PlayerPieces)
+export default connect(mapState)(MainStage)

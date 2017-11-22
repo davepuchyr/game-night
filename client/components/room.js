@@ -1,12 +1,8 @@
 import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import Video from './video'
-import RoomMessages from './room-messages'
-import whiteboard, { draw } from '../whiteboard'
-import { Layer, Rect, Stage, Group, Circle, Star, Image} from 'react-konva'
+import { Video, RoomMessages, MainStage, Drop }from './index'
 import ReactDOM from 'react-dom'
-import PlayerPieces from './canvaselements/player-pieces'
 
 class Room extends Component {
     constructor(props) {
@@ -18,9 +14,10 @@ class Room extends Component {
         return (
             <div id="room-container">
                 <RoomMessages roomPath={path}/>
+                <Drop />
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
-                <PlayerPieces />
+                <MainStage />
             </div>
         )
     }
