@@ -2,6 +2,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Image, Group, Circle } from 'react-konva'
+import { updateImage } from '../../store'
 
 class MyImage extends Component {
  constructor(props) {
@@ -13,6 +14,7 @@ class MyImage extends Component {
    this.handleMouseOver = this.handleMouseOver.bind(this)
    this.handleMouseOut = this.handleMouseOut.bind(this)
    this.handleDrag = this.handleDrag.bind(this)
+   this.handleMouseUp = this.handleMouseUp.bind(this)
   }
 
   componentDidMount() {
@@ -80,11 +82,26 @@ class MyImage extends Component {
     document.body.style.cursor = 'default'
   }
 
+  handleMouseUp () {
+    let x = this.refs.image.attrs.x
+    let y = this.refs.image.attrs.y
+    let url = this.refs.image.attrs.image.src
+    let height = this.refs.image.attrs.image.height
+    let width = this.refs.image.attrs.image.width
+
+    let image = {
+      x, y, url, width, height
+    }
+    this.props.sendNewImage(image)
+  }
+
+
   render() {
     return (
       <Group
         draggable={true}
         ref='group'
+        onMouseUp={this.handleMouseUp}
       >
         <Image
           ref="image"
@@ -98,9 +115,7 @@ class MyImage extends Component {
           name="top_left"
           x={this.props.x}
           y={this.props.y}
-          stroke={'#666'}
-          fill={'#ddd'}
-          strokeWidth={2}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -113,9 +128,7 @@ class MyImage extends Component {
           name="top_right"
           x={this.props.x + this.props.width}
           y={this.props.y}
-          stroke={'#666'}
-          fill={'#ddd'}
-          strokeWidth={2}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -128,9 +141,7 @@ class MyImage extends Component {
           name="bottom_left"
           x={this.props.x}
           y={this.props.y + this.props.height}
-          stroke={'#666'}
-          fill={'#ddd'}
-          strokeWidth={2}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -143,9 +154,7 @@ class MyImage extends Component {
           name="bottom_right"
           x={this.props.x + this.props.width}
           y={this.props.y + this.props.height}
-          stroke={'#666'}
-          fill={'#ddd'}
-          strokeWidth={2}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -158,4 +167,12 @@ class MyImage extends Component {
   }
 }
 
-export default MyImage
+const mapDispatch = dispatch => {
+  return {
+    sendNewImage: (image) => {
+      dispatch(updateImage(image))
+    }
+  }
+}
+
+export default connect(null, mapDispatch)(MyImage)
