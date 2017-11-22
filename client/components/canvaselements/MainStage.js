@@ -21,8 +21,14 @@ class MainStage extends React.Component {
           <HexPiece fill={'green'} x={green[0]} y={green[1]}/>
           <HexPiece fill={'blue'} x={blue[0]} y={blue[1]}/>
           {
-            images && images.map((url, idx) => {
-              return <MyImage imageUrl={url} key={idx} />
+            images && images.map((imgObj, idx) => {
+              return <MyImage
+              x={imgObj.x}
+              y={imgObj.y}
+              width={imgObj.width}
+              height={imgObj.height}
+              imageUrl={imgObj.url}
+              key={idx} />
             })
           }
         </Layer>

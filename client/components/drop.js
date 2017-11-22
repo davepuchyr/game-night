@@ -39,7 +39,7 @@ class Drop extends Component {
             // this.setState({
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
-            this.props.newImage(response.body.secure_url)
+            this.props.newImage({x: 300, y: 400, url: response.body.secure_url, width: response.body.width, height: response.body.height})
           }
         });
       }
