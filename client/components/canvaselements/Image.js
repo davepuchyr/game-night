@@ -85,16 +85,8 @@ class MyImage extends Component {
   handleMouseUp () {
     console.log('IMAGE BEFORE', this.refs.image)
     console.log('GROUP BEFORE', this.refs.group)
-    let x, y
-    if (this.refs.group.x) {
-      console.log('hit if statement')
-      x = 300 + this.refs.group.attrs.x
-      y = 400 + this.refs.group.attrs.y
-
-    } else {
-      x = this.props.x
-      y = this.props.y
-    }
+    let x = this.refs.top_left.getX()
+    let y = this.refs.top_left.getY()
     let url = this.refs.image.attrs.image.src
     let height = this.refs.image.attrs.height || this.refs.image.attrs.image.height
     let width = this.refs.image.attrs.width || this.refs.image.attrs.image.width
