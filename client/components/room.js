@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { Video, RoomMessages, MainStage, Drop }from './index'
 import ReactDOM from 'react-dom'
 
-import PlayerPieces from './canvaselements/player-pieces'
+// import PlayerPieces from './canvaselements/player-pieces'
 import socket from '../socket'
 
 class Room extends Component {
@@ -20,8 +20,8 @@ class Room extends Component {
                 <Drop />
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
-                <MainStage />
-                <PlayerPieces rId={this.props.match.params.roomid} />
+                <MainStage rId={this.props.match.params.roomid}/>
+                {/* <PlayerPieces  /> */}
             </div>
         )
     }
