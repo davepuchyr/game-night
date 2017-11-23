@@ -1,25 +1,44 @@
 import io from 'socket.io-client'
 
-import store, { 
+import store, {
   getOnlineUsers,
    newMessage,
    getDraws,
-   addMessage, 
-   moveBlack, 
-   moveRed, 
-   moveGreen, 
-   moveBlue 
+   addMessage,
+   move_black,
+   move_red,
+   move_green,
+   move_blue
   } from './store'
 
 const socket = io(window.location.origin)
 
+//color dispatcher
+function colorDispatcher(coords, color){
+  switch(color){
+    case 'black':
+      store.dispatch(move_black(coords))
+      break
+    case 'red':
+      store.dispatch(move_red(coords))
+      break
+    case 'green':
+      store.dispatch(move_green(coords))
+      break
+    case 'blue':
+      store.dispatch(move_blue(coords))
+      break
+  }
+}
+
 socket.on('connect', () => {
   console.log('Connected!')
 
+  //updateOnlineUsers
   socket.on('updateOnlineUsers', onlineUsers => {
     store.dispatch(getOnlineUsers(onlineUsers))
   })
-
+  //received message
   socket.on('received_new_message', message => {
     store.dispatch(newMessage(message))
   })
@@ -28,26 +47,28 @@ socket.on('connect', () => {
     store.dispatch(getDraws(draws))
   })
 
+  //adding messages
   socket.on('addMessage', message => {
     store.dispatch(addMessage(message))
   })
 
-
-  //tokens movement
-  socket.on('black_moved', newCoords => {
-    store.dispatch(moveBlack(newCoords))
+  //initial token position update
+  socket.on('initial_token_positions', positions => {
+    for(let color in positions){
+      colorDispatcher(positions[color], color)
+    }
   })
 
-  socket.on('red_moved', newCoords => {
-    store.dispatch(moveRed(newCoords))
+  //current token positions
+  socket.on('current_tokens', positions => {
+    for(let color in positions){
+      colorDispatcher(positions[color], color)
+    }
   })
 
-  socket.on('green_moved', newCoords => {
-    store.dispatch(moveGreen(newCoords))
-  })
-
-  socket.on('blue_moved', newCoords => {
-    store.dispatch(moveBlue(newCoords))
+  //moving tokens within the room
+  socket.on('moved', (newCoords, color) => {
+    colorDispatcher(newCoords, color)
   })
 })
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import socket from '../socket'
 
 /**
  * ACTION TYPES
@@ -16,7 +17,7 @@ const rooms = []
  * ACTION CREATORS
  */
 const getAllRooms = allRooms => ({type: GET_ALL_ROOMS, allRooms})
-const addRoom = room => ({type: ADD_ROOM, room}) 
+const addRoom = room => ({type: ADD_ROOM, room})
 
 /**
  * THUNK CREATORS
@@ -25,21 +26,21 @@ export const fetchRoomList = () =>
   dispatch =>
     axios.get('/api/rooms')
       .then(res => {
-        // console.log(res.data);
         dispatch(getAllRooms(res.data))
       })
       .catch(error =>
         console.error(error))
 
-        
-export const createRoom = (newName, newGame, user) => 
-  dispatch => 
+
+export const createRoom = (newName, newGame, user) =>
+  dispatch =>
     axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
       .then(res => {
+        socket.emit('created_room', String(res.data.id))
         history.push(`/room/${res.data.id}`)
         dispatch(addRoom(res.data))
       })
-      .catch(error => 
+      .catch(error =>
         console.error(error))
 
 
