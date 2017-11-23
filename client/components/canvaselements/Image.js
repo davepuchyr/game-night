@@ -83,11 +83,21 @@ class MyImage extends Component {
   }
 
   handleMouseUp () {
-    let x = this.refs.image.attrs.x
-    let y = this.refs.image.attrs.y
+    console.log('IMAGE BEFORE', this.refs.image)
+    console.log('GROUP BEFORE', this.refs.group)
+    let x, y
+    if (this.refs.group.x) {
+      console.log('hit if statement')
+      x = 300 + this.refs.group.attrs.x
+      y = 400 + this.refs.group.attrs.y
+
+    } else {
+      x = this.props.x
+      y = this.props.y
+    }
     let url = this.refs.image.attrs.image.src
-    let height = this.refs.image.attrs.image.height
-    let width = this.refs.image.attrs.image.width
+    let height = this.refs.image.attrs.height || this.refs.image.attrs.image.height
+    let width = this.refs.image.attrs.width || this.refs.image.attrs.image.width
 
     let image = {
       x, y, url, width, height
@@ -101,7 +111,7 @@ class MyImage extends Component {
       <Group
         draggable={true}
         ref='group'
-        onMouseUp={this.handleMouseUp}
+        onDragEnd={this.handleMouseUp}
       >
         <Image
           ref="image"
@@ -115,7 +125,8 @@ class MyImage extends Component {
           name="top_left"
           x={this.props.x}
           y={this.props.y}
-          opacity={0}
+          opacity={100}
+          fill={'black'}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -128,7 +139,8 @@ class MyImage extends Component {
           name="top_right"
           x={this.props.x + this.props.width}
           y={this.props.y}
-          opacity={0}
+          opacity={100}
+          fill={'black'}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -141,7 +153,8 @@ class MyImage extends Component {
           name="bottom_left"
           x={this.props.x}
           y={this.props.y + this.props.height}
-          opacity={0}
+          opacity={100}
+          fill={'black'}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -154,7 +167,8 @@ class MyImage extends Component {
           name="bottom_right"
           x={this.props.x + this.props.width}
           y={this.props.y + this.props.height}
-          opacity={0}
+          opacity={100}
+          fill={'black'}
           radius={8}
           draggable={true}
           dragOnTop={false}
