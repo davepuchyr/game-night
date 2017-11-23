@@ -83,8 +83,6 @@ class MyImage extends Component {
   }
 
   handleMouseUp () {
-    console.log('IMAGE BEFORE', this.refs.image)
-    console.log('GROUP BEFORE', this.refs.group)
     let x = this.refs.top_left.getX()
     let y = this.refs.top_left.getY()
     let url = this.refs.image.attrs.image.src
@@ -117,8 +115,7 @@ class MyImage extends Component {
           name="top_left"
           x={this.props.x}
           y={this.props.y}
-          opacity={100}
-          fill={'black'}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -131,8 +128,7 @@ class MyImage extends Component {
           name="top_right"
           x={this.props.x + this.props.width}
           y={this.props.y}
-          opacity={100}
-          fill={'black'}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -145,8 +141,7 @@ class MyImage extends Component {
           name="bottom_left"
           x={this.props.x}
           y={this.props.y + this.props.height}
-          opacity={100}
-          fill={'black'}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
@@ -159,8 +154,7 @@ class MyImage extends Component {
           name="bottom_right"
           x={this.props.x + this.props.width}
           y={this.props.y + this.props.height}
-          opacity={100}
-          fill={'black'}
+          opacity={0}
           radius={8}
           draggable={true}
           dragOnTop={false}
