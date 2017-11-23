@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom'
 import { Video, RoomMessages, MainStage, Drop }from './index'
 import ReactDOM from 'react-dom'
 
+
 class Room extends Component {
     constructor(props) {
         super(props)
@@ -13,6 +14,7 @@ class Room extends Component {
         const path = this.props.match.url
         return (
             <div id="room-container">
+                <img id="trash-can" src="/trash.png" />
                 <RoomMessages roomPath={path}/>
                 <Drop />
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
