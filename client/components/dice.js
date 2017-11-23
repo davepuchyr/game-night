@@ -1,12 +1,10 @@
 import React, { Component }from 'react'
-const htmlContent = require('../../public/3d-die-roller/dice/hello.html')
+const htmlContent = require('../../public/hello.html')
 
 class dice extends Component {
     render () {
         return (
-            <div id='dice'>
-                <div dangerouslySetInnerHTML={ {__html: htmlContent} } />
-            </div>
+                <div id='svg' dangerouslySetInnerHTML={ {__html: htmlContent} } />
         )
     }
 }
