@@ -187,6 +187,16 @@ canvas {
   padding: 1em;
 }
 
+#room-container {
+  position: relative;
+}
+
+#room-container div {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #room-message-component input {
   width: 85%;
   height: 2em;
@@ -217,4 +227,14 @@ canvas {
   width: 5em;
   position: absolute;
   right: 5px;
+  z-index: 150;
+}
+
+#trash-can-hover {
+  background: red;
+  border-radius: 10px
+}
+
+.FileUpload {
+  z-index: 50;
 }

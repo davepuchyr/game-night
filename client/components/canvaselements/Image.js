@@ -2,19 +2,21 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Image, Group, Circle } from 'react-konva'
-import { updateImage } from '../../store'
+import { updateImage, startDragging, stopDragging } from '../../store'
 
 class MyImage extends Component {
  constructor(props) {
    super(props)
    this.state = {
-     image: null
+     image: null,
+     dragging: false
    }
    this.handleDrag = this.handleDrag.bind(this)
    this.handleMouseOver = this.handleMouseOver.bind(this)
    this.handleMouseOut = this.handleMouseOut.bind(this)
    this.handleDrag = this.handleDrag.bind(this)
    this.handleMouseUp = this.handleMouseUp.bind(this)
+   this.handleDragStart = this.handleDragStart.bind(this)
   }
 
   componentDidMount() {
@@ -83,6 +85,8 @@ class MyImage extends Component {
   }
 
   handleMouseUp () {
+    this.props.stopDrag()
+    this.setState({dragging: false})
     let x = this.refs.top_left.getX()
     let y = this.refs.top_left.getY()
     let url = this.refs.image.attrs.image.src
@@ -95,12 +99,19 @@ class MyImage extends Component {
     this.props.sendNewImage(image)
   }
 
+  handleDragStart () {
+    const url = this.props.imageUrl
+    this.setState({dragging: true})
+    if (this.state.dragging) this.props.startDrag(url)
+  }
+
 
   render() {
     return (
       <Group
         draggable={true}
         ref='group'
+        onMouseDown={this.handleDragStart}
         onDragEnd={this.handleMouseUp}
       >
         <Image
@@ -167,12 +178,19 @@ class MyImage extends Component {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     sendNewImage: (image) => {
       dispatch(updateImage(image))
+    },
+    startDrag: (url) => {
+      dispatch(startDragging(url))
+    },
+    stopDrag: () => {
+      dispatch(stopDragging())
     }
   }
 }
+
 
 export default connect(null, mapDispatch)(MyImage)

@@ -29,7 +29,8 @@ class MainStage extends React.Component {
               width={imgObj.width}
               height={imgObj.height}
               imageUrl={imgObj.url}
-              key={idx} />
+              key={idx}
+              />
             })
           }
         </Layer>
