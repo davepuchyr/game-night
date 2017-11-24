@@ -17,7 +17,7 @@ function diceInitialize(container, w, h) {
     var infoDiv = $t.id('info_div');
     onSetChange();
 
-    console.log('Hi')
+    console.log('Hi coming from main.js!!!')
 
     $t.bind(set, 'keyup', onSetChange);
     $t.bind(set, 'mousedown', function(ev) { ev.stopPropagation(); });
