@@ -11,6 +11,7 @@ class Room extends Component {
     constructor(props) {
         super(props)
     }
+
     render () {
         const path = this.props.match.url
         return (
@@ -18,10 +19,9 @@ class Room extends Component {
                 <img id="trash-can" src="/trash.png" />
                 <RoomMessages roomPath={path}/>
                 <Drop />
-                <img src="http://i.imgur.com/uhhfaMZ.png" />
+                <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
                 <MainStage rId={this.props.match.params.roomid}/>
-                {/* <PlayerPieces  /> */}
             </div>
         )
     }

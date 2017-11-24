@@ -10,7 +10,9 @@ class MainStage extends React.Component {
     super(props)
   }
 
+
   render() {
+    console.log(this.props)
     const { black, red, green, blue } = this.props.tokens
     const { images } = this.props
     const { rId } = this.props    

@@ -1,7 +1,6 @@
 
 const onlineUsers = {}
 const token_positions = {}
-// const draws = []
 
 
 module.exports = (io) => {
@@ -35,15 +34,15 @@ module.exports = (io) => {
     /*
     * INITIALLIZE TOKEN POSITIONS IN NEWLY CREATED ROOM
     */
-    socket.on('created_room', (roomId) => {
-      token_positions[roomId] = {
-        'black': [500, 500],
-        'red': [550, 550],
-        'green': [600, 600],
-        'blue': [650, 650]
-      }
-      socket.emit('initial_token_positions', token_positions[roomId])
-    })
+    // socket.on('created_room', (roomId) => {
+    //   token_positions[roomId] = {
+    //     'black': [500, 500],
+    //     'red': [550, 550],
+    //     'green': [600, 600],
+    //     'blue': [650, 650]
+    //   }
+    //   socket.emit('initial_token_positions', token_positions[roomId])
+    // })
     /*
     * MOVING TOKENS
     */
@@ -56,9 +55,18 @@ module.exports = (io) => {
     * JOINROOM
     */
     socket.on('joinroom', (room, nickname) => {
+      const roomId = room.slice(6);
+      if (!token_positions[roomId]) {
+        token_positions[roomId] = {
+          'black': [500, 500],
+          'red': [550, 550],
+          'green': [600, 600],
+          'blue': [650, 650]
+        }
+      }
       socket.join(room)
       io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
-      io.sockets.to(room).emit('current_tokens', token_positions[room.slice(6)])
+      io.sockets.to(room).emit('current_tokens', token_positions[roomId])
     })
 
     /*
