@@ -1,14 +1,17 @@
 import React, { Component }from 'react'
-const htmlContent = require('../../public/hello.html')
 
 class dice extends Component {
+
     render () {
         return (
-            <div id='something'>
-                <div id='svg' dangerouslySetInnerHTML={ {__html: htmlContent} }></div>
-            </div>
+          <div id='something'>
+            {
+              diceInitialize(document.getElementById('trying'), 1010, 1010)
+            }
+          </div>
         )
     }
 }
 
 export default dice
+

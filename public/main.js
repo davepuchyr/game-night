@@ -2,9 +2,6 @@
 
 "use strict";
 function diceInitialize(container, w, h) {
-    function onSetChange(ev) {
-        set.style.width = set.value.length + 3 + 'ex';
-    }
 
     $t.remove($t.id('loading_text'));
 
@@ -18,6 +15,9 @@ function diceInitialize(container, w, h) {
     onSetChange();
 
     console.log('Hi coming from main.js!!!')
+    function onSetChange(ev) {
+        // set.style.width = set.value.length + 3 + 'ex';
+    }
 
     $t.bind(set, 'keyup', onSetChange);
     $t.bind(set, 'mousedown', function(ev) { ev.stopPropagation(); });
