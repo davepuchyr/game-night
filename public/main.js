@@ -1,9 +1,8 @@
 /*global $t */
 
 "use strict";
-
 function diceInitialize(container, w, h) {
-    function onSetChange(/*ev*/) {
+    function onSetChange(ev) {
         set.style.width = set.value.length + 3 + 'ex';
     }
 
@@ -17,6 +16,8 @@ function diceInitialize(container, w, h) {
     var selectorDiv = $t.id('selector_div');
     var infoDiv = $t.id('info_div');
     onSetChange();
+
+    console.log('Hi')
 
     $t.bind(set, 'keyup', onSetChange);
     $t.bind(set, 'mousedown', function(ev) { ev.stopPropagation(); });

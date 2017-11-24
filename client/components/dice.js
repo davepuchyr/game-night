@@ -4,7 +4,9 @@ const htmlContent = require('../../public/hello.html')
 class dice extends Component {
     render () {
         return (
-                <div id='svg' dangerouslySetInnerHTML={ {__html: htmlContent} } />
+            <div id='something'>
+                <div id='svg' dangerouslySetInnerHTML={ {__html: htmlContent} }></div>
+            </div>
         )
     }
 }

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, Room, Lobby, Messages, Whiteboard, Whiteboard2, RoomMessages } from './components'
 import {me} from './store'
-import dice from './components/dice'
+import dice from './components/Dice'
 
 /**
  * COMPONENT
