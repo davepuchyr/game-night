@@ -36,7 +36,6 @@ socket.on('connect', () => {
 
   //updateOnlineUsers
   socket.on('updateOnlineUsers', onlineUsers => {
-    console.log('I heard a socket, and it gave me online users. they are ', onlineUsers)
     store.dispatch(getOnlineUsers(onlineUsers))
   })
   //received message
