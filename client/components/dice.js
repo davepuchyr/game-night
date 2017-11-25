@@ -4,9 +4,9 @@ class dice extends Component {
 
     render () {
         return (
-          <div id='something'>
+          <div id='dice-roller'>
             {
-              diceInitialize(document.getElementById('trying'), 1010, 1010)
+              diceInitialize(document.getElementById('dice'), 1010, 1010)
             }
           </div>
         )

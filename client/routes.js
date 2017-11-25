@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, Room, Lobby, Messages, Whiteboard, Whiteboard2, RoomMessages } from './components'
 import {me} from './store'
-import dice from './components/Dice'
 
 /**
  * COMPONENT
@@ -33,7 +32,6 @@ class Routes extends Component {
                   <Route path="/room/:roomid" component={Room} />
                   <Route path="/whiteboard" component={Whiteboard2} />
                   <Route path="/roommessages" component={RoomMessages} />
-                  <Route path='/dice' component={dice} />
                   <Route component={Lobby} />
                 </Switch>
             }

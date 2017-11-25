@@ -7,6 +7,7 @@ import whiteboard, { draw } from '../whiteboard'
 import { Layer, Rect, Stage, Group, Circle, Star } from 'react-konva'
 import ReactDOM from 'react-dom'
 import PlayerPieces from './canvaselements/player-pieces'
+import Dice from './Dice'
 import socket from '../socket'
 
 class Room extends Component {

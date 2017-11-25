@@ -217,10 +217,7 @@ canvas {
   height: 1000em;
 }
 
-#dice {
-  height: 100%;
-}
-
-#canvas {
-  height: 100%;
+#dice-container {
+  position: absolute;
+  z-index: 2;
 }
