@@ -19,7 +19,7 @@ class Room extends Component {
                 <img id="trash-can" src="/trash.png" />
                 <RoomMessages roomPath={path}/>
                 <Drop />
-                <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" />
+                {/* <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" /> */}
                 {/* <Video/> */}
                 <MainStage rId={this.props.match.params.roomid}/>
             </div>
