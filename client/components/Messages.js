@@ -18,6 +18,7 @@ export class Messages extends React.Component {
 
   render(){
     const { user, messages, newMessage } = this.props
+
     return (
         <div className="item-lobby-messages">
             <h3>All Chat</h3>

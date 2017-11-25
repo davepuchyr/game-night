@@ -12,10 +12,10 @@ class MainStage extends React.Component {
 
 
   render() {
-    console.log(this.props)
     const { black, red, green, blue } = this.props.tokens
     const { images } = this.props
     const { rId } = this.props    
+
     return (
       <Stage width={window.innerWidth} height={window.innerHeight}>
         <Layer width={window.innerWidth} height={window.innerHeight}>
