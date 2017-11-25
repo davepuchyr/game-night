@@ -11,26 +11,31 @@ class MainStage extends React.Component {
 
     this.state = {
       imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
-      backGroundImage: ''
+      backgroundImage: null
     }
 
-    // this.moveStageOnHover = this.moveStageOnHover.bind(this)
+    this.moveStageOnHover = this.moveStageOnHover.bind(this)
+    this.handleMouseOut = this.handleMouseOut.bind(this)
   }
   
-  // componentDidMount() {
-  //   const image = new window.Image()
-  //   image.src = this.state.imageUrl
-  //   image.onload = () => {
-  //     this.setState({
-  //       backgroundImage: image
-  //     })
-  //   }
-  // }
+  componentDidMount() {
+    const image = new window.Image()
+    image.src = this.state.imageUrl
+    image.onload = () => {
+      this.setState({
+        backgroundImage: image
+      })
+    }
+  }
 
-  // moveStageOnHover(e) {
-  //   if (e.target.attrs.name === 'mainstage') document.body.style.cursor = 'move'
-  //   console.log(e.target)
-  // }
+  moveStageOnHover(e) {
+    document.body.style.cursor = 'move'
+
+  }
+  
+  handleMouseOut () {
+    document.body.style.cursor = 'default'
+  }
 
 
   render() {
@@ -42,12 +47,18 @@ class MainStage extends React.Component {
         name="mainstage" 
         width={window.innerWidth} 
         height={window.innerHeight}
-        draggable={true} 
+        draggable={true}
         >
         <Layer 
           width={window.innerWidth} 
           height={window.innerHeight}
           >
+          <Image 
+            className="dragImg" name="background" 
+            image={this.state.backgroundImage} 
+            onMouseOver={this.moveStageOnHover}
+            onMouseOut={this.handleMouseOut}
+            />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>
           <HexPiece id={rId} fill={'red'} x={red[0]} y={red[1]}/>
           <HexPiece id={rId} fill={'green'} x={green[0]} y={green[1]}/>

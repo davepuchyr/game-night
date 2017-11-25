@@ -78,6 +78,10 @@ body {
   flex-grow: 1;
 }
 
+.dragImg {
+  z-index: -10;
+}
+
 .item-lobby-rooms {
   display: -webkit-flex;
   display: flex;
