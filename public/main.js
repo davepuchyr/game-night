@@ -14,9 +14,8 @@ function diceInitialize(container, w, h) {
     var infoDiv = $t.id('info_div');
     onSetChange();
 
-    console.log('Hi coming from main.js!!!')
     function onSetChange(ev) {
-        // set.style.width = set.value.length + 3 + 'ex';
+        set.style.width = set.value.length + 3 + 'ex';
     }
 
     $t.bind(set, 'keyup', onSetChange);
