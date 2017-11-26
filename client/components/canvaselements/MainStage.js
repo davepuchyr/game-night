@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Layer, Stage, Image } from 'react-konva'
 import HexPiece from './hex-piece'
+import MapHexTexture from './MapHexTexture.js'
 import MyImage from './Image'
 
 
