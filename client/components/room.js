@@ -57,22 +57,6 @@ class Room extends Component {
                     className="group-dropzone"
                     rId={this.props.match.params.roomid}
                 />
-                <DropGroup
-                    className="group-dropzone"
-                    rId={this.props.match.params.roomid}
-                />
-                <DropGroup
-                    className="group-dropzone"
-                    rId={this.props.match.params.roomid}
-                />
-                <DropGroup
-                    className="group-dropzone"
-                    rId={this.props.match.params.roomid}
-                />
-                <DropGroup
-                    className="group-dropzone"
-                    rId={this.props.match.params.roomid}
-                />
                 </div>
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
