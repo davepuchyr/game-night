@@ -153,18 +153,16 @@ else {
 
 teal.rpc = function(params, resp) {
     var ajax = new XMLHttpRequest(), ret;
-    ajax.open("post", 'f', resp ? true : false);
+    ajax.open('post', 'f', resp ? true : false);
     ajax.onreadystatechange = function() {
         if (ajax.readyState === 4) {
             if (resp) {
                 resp(JSON.parse(ajax.responseText));
-            } else {
-                ret = JSON.parse(ajax.responseText);
             }
         }
     };
     ajax.send(JSON.stringify(params));
-    return ret;
+    // return ret;
 };
 
 teal.uuid = function() {

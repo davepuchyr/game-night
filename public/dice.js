@@ -76,16 +76,17 @@
             if (text === undefined) {
                 return null;
             }
-            var canvas = document.createElement("canvas");
-            var context = canvas.getContext("2d");
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
             var size = scale / 2;
+
             canvas.width = size + margin;
             canvas.height = size + margin;
-            context.font = size + "pt Arial";
+            context.font = size + 'pt Arial';
             context.fillStyle = dieColor;
             context.fillRect(0, 0, canvas.width, canvas.height);
-            context.textAlign = "center";
-            context.textBaseline = "middle";
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
             context.fillStyle = labelColor;
             context.fillText(text, canvas.width / 2, canvas.height / 2);
             if (text === '6' || text === '9') {
@@ -111,15 +112,16 @@
 
     function createD4Materials(size, margin, labelColor, dieColor) {
         function createD4Text(text, labelColor, dieColor) {
-            var canvas = document.createElement("canvas");
-            var context = canvas.getContext("2d");
+            var canvas = document.createElement('canvas');
+            var context = canvas.getContext('2d');
+            
             canvas.width = size + margin;
             canvas.height = size + margin;
-            context.font = size + "pt Arial";
+            context.font = size + 'pt Arial';
             context.fillStyle = dieColor;
             context.fillRect(0, 0, canvas.width, canvas.height);
-            context.textAlign = "center";
-            context.textBaseline = "middle";
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
             context.fillStyle = labelColor;
             context.translate(0, size / 10);
             for (var i in text) {
@@ -677,7 +679,7 @@
     this.dieBox.prototype.rnd = function() {
         if (!randomStorage.length && useRandomStorage) {
             try {
-                var randomResponse = $t.rpc({ method: "random", n: 512 });
+                var randomResponse = $t.rpc({ method: 'random', n: 512 });
                 if (!randomResponse.error) {
                     randomStorage = randomResponse.result.random.data;
                 }

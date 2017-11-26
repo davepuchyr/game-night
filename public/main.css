@@ -1,8 +1,4 @@
-#svg *, .svg * {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -o-user-select: none;
+.svg *, .noselect * {
     user-select: none;
 }
 

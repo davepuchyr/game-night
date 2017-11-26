@@ -20,7 +20,7 @@ class Room extends Component {
                 {/* <button onClick={this.rollDiceClick.bind(this)}>Roll Dice!</button> */}
                 <RoomMessages roomPath={path}/>
                 {
-                    diceInitialize(document.getElementById('dice-container'), 200, 200)
+                    diceInitialize(document.getElementById('dice-container'), 400, 400)
                 }
                 <Drop />
                 <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" />
