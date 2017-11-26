@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Image, Group, Circle } from 'react-konva'
 import { updateImage, startDragging, stopDragging } from '../../store'
+import socket from '../../socket'
 
 class MyImage extends Component {
  constructor(props) {
@@ -94,7 +95,7 @@ class MyImage extends Component {
     let width = this.refs.image.attrs.width || this.refs.image.attrs.image.width
 
     let image = {
-      x, y, url, width, height
+      x, y, url, width, height, personal: this.props.personal
     }
     this.props.sendNewImage(image)
   }

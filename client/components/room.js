@@ -1,7 +1,7 @@
 import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { Video, RoomMessages, MainStage, Drop }from './index'
+import { Video, RoomMessages, MainStage, Drop, DropGroup }from './index'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { deleteImage } from '../store'
@@ -52,6 +52,7 @@ class Room extends Component {
                 />
                 <RoomMessages roomPath={path}/>
                 <Drop />
+                <DropGroup rId={this.props.match.params.roomid}/>
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
                 <MainStage rId={this.props.match.params.roomid}/>

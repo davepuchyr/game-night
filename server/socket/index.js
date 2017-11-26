@@ -56,9 +56,18 @@ module.exports = (io) => {
     * JOINROOM
     */
     socket.on('joinroom', (room, nickname) => {
+      const roomId = room.slice(6);
+      if (!token_positions[roomId]) {
+        token_positions[roomId] = {
+          'black': [500, 500],
+          'red': [550, 550],
+          'green': [600, 600],
+          'blue': [650, 650]
+        }
+      }
       socket.join(room)
       io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
-      io.sockets.to(room).emit('current_tokens', token_positions[room.slice(6)])
+      io.sockets.to(room).emit('current_tokens', token_positions[roomId])
     })
 
     /*
@@ -77,6 +86,13 @@ module.exports = (io) => {
       io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
       socket.leave(room)
     })
+
+    /*
+    * ADDING GROUP PICS
+    */
+  socket.on('new_group_image', (image, rId, userId) => {
+    console.log('!!!!!!!!!!!!!!!', image, rId, userId)
+  })
 
     /*
     * LOGOUT

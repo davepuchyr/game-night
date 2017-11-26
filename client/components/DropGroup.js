@@ -4,11 +4,12 @@ import { withRouter, Link } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import request from 'superagent';
 import { addImage } from '../store'
+import socket from '../socket'
 
 const CLOUDINARY_UPLOAD_PRESET = 'gamenight';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload';
 
-class Drop extends Component {
+class DropGroup extends Component {
     constructor (props){
         super(props)
         // this.state = {
@@ -39,7 +40,9 @@ class Drop extends Component {
             // this.setState({
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
-            this.props.newImage({x: 300, y: 400, personal: true, url: response.body.secure_url, width: response.body.width, height: response.body.height})
+            const image = {x: 300, y: 400, personal: false, url: response.body.secure_url, width: response.body.width, height: response.body.height}
+            socket.emit('new_group_image', image, this.props.rId, this.props.user.id)
+            this.props.newImage(image, this.props.rId, this.props.user.id)
           }
         });
       }
@@ -52,7 +55,7 @@ class Drop extends Component {
                         multiple={false}
                         accept="image/*"
                         onDrop={this.onImageDrop}>
-                        <p>Add image to your gameboard</p>
+                        <p>Add image to universal gameboard</p>
                     </Dropzone>
                 </div>
         )
@@ -65,10 +68,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => {
     return {
-        newImage: (image) => {
+        newImage: (image, rId, userId) => {
             dispatch(addImage(image))
         }
     }
 }
 
-export default connect(mapState, mapDispatch)(Drop)
+export default connect(mapState, mapDispatch)(DropGroup)
