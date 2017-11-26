@@ -97,7 +97,10 @@ class MyImage extends Component {
     let image = {
       x, y, url, width, height, personal: this.props.personal
     }
-    console.log(image)
+    if (this.props.user) {
+      image.user = this.props.user
+      image.entry = false
+    }
     this.props.sendNewImage(image)
   }
 

@@ -73,11 +73,13 @@ socket.on('connect', () => {
   })
 
   socket.on('add_group_image', image => {
+    image.entry = true
     store.dispatch(addImage(image))
   })
 
   socket.on('get_group_pics', imgArr => {
     imgArr.forEach(image => {
+      image.entry = true
       store.dispatch(addImage(image))
     })
   })

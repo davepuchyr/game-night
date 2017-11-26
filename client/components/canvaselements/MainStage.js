@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Layer, Stage } from 'react-konva'
 import HexPiece from './hex-piece'
-import MyImage from './Image'
+import { MyImage, GroupImage } from '../index'
 
 
 class MainStage extends React.Component {
@@ -34,14 +34,18 @@ class MainStage extends React.Component {
                 key={idx}
                 personal={true}
                 />
-              } else return <MyImage
+              } else return <GroupImage
                 x={imgObj.x}
                 y={imgObj.y}
                 width={imgObj.width}
                 height={imgObj.height}
+                originalWidth={imgObj.originalWidth}
+                originalHeight={imgObj.originalHeight}                
                 imageUrl={imgObj.url}
                 key={idx}
                 personal={false}
+                user={imgObj.user}
+                entry={imgObj.entry}
               />
             })
           }
