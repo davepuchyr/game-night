@@ -58,14 +58,18 @@ class DropGroup extends Component {
       }
 
     render () {
+        const dropStyle = {
+            width: '10%'
+        }
         return (
                 <div className="FileUpload">
                     <Dropzone
                         name="personal"
                         multiple={false}
                         accept="image/*"
+                        style={dropStyle}
                         onDrop={this.onImageDrop}>
-                        <p>Add image to universal gameboard</p>
+                        <p>+</p>
                     </Dropzone>
                 </div>
         )

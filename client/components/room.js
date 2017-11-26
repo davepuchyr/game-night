@@ -52,7 +52,28 @@ class Room extends Component {
                 />
                 <RoomMessages roomPath={path}/>
                 <Drop />
-                <DropGroup rId={this.props.match.params.roomid}/>
+                <div className="drop-group-container">
+                <DropGroup
+                    className="group-dropzone"
+                    rId={this.props.match.params.roomid}
+                />
+                <DropGroup
+                    className="group-dropzone"
+                    rId={this.props.match.params.roomid}
+                />
+                <DropGroup
+                    className="group-dropzone"
+                    rId={this.props.match.params.roomid}
+                />
+                <DropGroup
+                    className="group-dropzone"
+                    rId={this.props.match.params.roomid}
+                />
+                <DropGroup
+                    className="group-dropzone"
+                    rId={this.props.match.params.roomid}
+                />
+                </div>
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
                 <MainStage rId={this.props.match.params.roomid}/>

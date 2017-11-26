@@ -231,4 +231,13 @@ canvas {
 
 .FileUpload {
   z-index: 50;
+  margin: 15px;
+}
+
+.drop-group-container {
+  display: flex
+}
+
+.group-dropzone {
+  margin: 10px;
 }
