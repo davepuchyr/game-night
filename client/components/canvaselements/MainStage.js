@@ -34,8 +34,15 @@ class MainStage extends React.Component {
                 key={idx}
                 personal={true}
                 />
-              }
-              else return null
+              } else return <MyImage
+                x={imgObj.x}
+                y={imgObj.y}
+                width={imgObj.width}
+                height={imgObj.height}
+                imageUrl={imgObj.url}
+                key={idx}
+                personal={false}
+              />
             })
           }
         </Layer>

@@ -97,6 +97,7 @@ class MyImage extends Component {
     let image = {
       x, y, url, width, height, personal: this.props.personal
     }
+    console.log(image)
     this.props.sendNewImage(image)
   }
 
@@ -128,7 +129,7 @@ class MyImage extends Component {
           x={this.props.x}
           y={this.props.y}
           opacity={0}
-          radius={8}
+          radius={0}
           draggable={true}
           dragOnTop={false}
           onMouseOver={this.handleMouseOver}
@@ -141,7 +142,7 @@ class MyImage extends Component {
           x={this.props.x + this.props.width}
           y={this.props.y}
           opacity={0}
-          radius={8}
+          radius={0}
           draggable={true}
           dragOnTop={false}
           onMouseOver={this.handleMouseOver}
@@ -154,7 +155,7 @@ class MyImage extends Component {
           x={this.props.x}
           y={this.props.y + this.props.height}
           opacity={0}
-          radius={8}
+          radius={0}
           draggable={true}
           dragOnTop={false}
           onMouseOver={this.handleMouseOver}

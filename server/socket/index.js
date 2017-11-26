@@ -1,6 +1,7 @@
 
 const onlineUsers = {}
 const token_positions = {}
+const group_pictures = {}
 // const draws = []
 
 
@@ -66,6 +67,9 @@ module.exports = (io) => {
         }
       }
       socket.join(room)
+      if (group_pictures[roomId]) {
+        io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
+      }
       io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
       io.sockets.to(room).emit('current_tokens', token_positions[roomId])
     })
@@ -75,14 +79,12 @@ module.exports = (io) => {
     */
     socket.on('postRoomMessage', (message, room) => {
       socket.broadcast.to(room).emit('addMessage', message)
-      console.log('someone posted a message', message, room)
     })
 
    /*
     * LEAVE ROOM
     */
     socket.on('leaveroom', (room, nickname) => {
-      console.log('someone left a room', room)
       io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
       socket.leave(room)
     })
@@ -90,8 +92,12 @@ module.exports = (io) => {
     /*
     * ADDING GROUP PICS
     */
-  socket.on('new_group_image', (image, rId, userId) => {
-    console.log('!!!!!!!!!!!!!!!', image, rId, userId)
+  socket.on('new_group_image', (image) => {
+    const { room } = image
+    group_pictures[room] ?
+      group_pictures[room].push(image) :
+      group_pictures[room] = [image]
+    io.sockets.to(`/room/${room}`).emit('add_group_image', image)
   })
 
     /*

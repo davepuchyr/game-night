@@ -8,7 +8,8 @@ import store, {
    move_black,
    move_red,
    move_green,
-   move_blue
+   move_blue,
+   addImage
   } from './store'
 
 const socket = io(window.location.origin)
@@ -69,6 +70,16 @@ socket.on('connect', () => {
   //moving tokens within the room
   socket.on('moved', (newCoords, color) => {
     colorDispatcher(newCoords, color)
+  })
+
+  socket.on('add_group_image', image => {
+    store.dispatch(addImage(image))
+  })
+
+  socket.on('get_group_pics', imgArr => {
+    imgArr.forEach(image => {
+      store.dispatch(addImage(image))
+    })
   })
 })
 

@@ -40,9 +40,19 @@ class DropGroup extends Component {
             // this.setState({
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
-            const image = {x: 300, y: 400, personal: false, url: response.body.secure_url, width: response.body.width, height: response.body.height}
-            socket.emit('new_group_image', image, this.props.rId, this.props.user.id)
-            this.props.newImage(image, this.props.rId, this.props.user.id)
+            const image = {
+                x: 300,
+                y: 400,
+                personal: false,
+                url: response.body.secure_url,
+                width: 15,
+                height: 15,
+                originalWidth: response.body.width,
+                originalHeight: response.body.height,
+                room: this.props.rId,
+                user: this.props.user.nickname
+            }
+            socket.emit('new_group_image', image)
           }
         });
       }
