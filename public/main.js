@@ -2,7 +2,7 @@
 
 "use strict";
 function diceInitialize(container, w, h) {
-
+    
     $t.remove($t.id('loading_text'));
 
     var canvas = $t.id('canvas');
@@ -17,16 +17,15 @@ function diceInitialize(container, w, h) {
     function onSetChange(ev) {
         set.style.width = set.value.length + 3 + 'ex';
     }
-
     $t.bind(set, 'keyup', onSetChange);
     $t.bind(set, 'mousedown', function(ev) { ev.stopPropagation(); });
     $t.bind(set, 'mouseup', function(ev) { ev.stopPropagation(); });
     $t.bind(set, 'focus', function() { $t.set(container, { class: '' }); });
     $t.bind(set, 'blur', function() { $t.set(container, { class: 'svg' }); });
-
     $t.bind($t.id('clear'), ['mouseup', 'touchend', 'touchcancel'], function(ev) {
         ev.stopPropagation();
         set.value = '0';
+        set.dataset.fullDieProps = '{"set":[], "constant":0}';
         onSetChange();
     });
 

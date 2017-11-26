@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { Video, RoomMessages, MainStage, Drop }from './index'
 import ReactDOM from 'react-dom'
-// import Dice from './Dice'
 // import PlayerPieces from './canvaselements/player-pieces'
 import socket from '../socket'
 
@@ -20,7 +19,7 @@ class Room extends Component {
                 {/* <button onClick={this.rollDiceClick.bind(this)}>Roll Dice!</button> */}
                 <RoomMessages roomPath={path}/>
                 {
-                    diceInitialize(document.getElementById('dice-container'), 400, 400)
+                  diceInitialize(document.getElementById('dice-container'), window.innerWidth - 1, window.innerHeight - 1)
                 }
                 <Drop />
                 <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" />

@@ -43,6 +43,18 @@ body {
   input[type=text] .msg-input {
     width: 100%;
   }
+
+  #dice-container {
+    position: absolute;
+    z-index: 101;
+
+    .center_field{
+      z-index: 102;
+    }
+    #canvas {
+      z-index: 101;
+    }
+  }
 }
 // 
 
@@ -212,12 +224,6 @@ canvas {
 
 .container-main {
   height: 1000em;
-}
-
-#dice-container {
-  position: absolute;
-  z-index: 101;
-  right: 10px;
 }
 
 #trash-can {
