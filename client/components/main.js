@@ -13,17 +13,23 @@ import Room from './room'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+  const {children, handleClick, isLoggedIn,notification} = props
 
   return (
     <div id="main" className="container">
       <nav className="container-nav">
         {
-          isLoggedIn ? 
+          isLoggedIn ?
             <div>
-              <h1>GAMENIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1> 
+              <h1>GAMENIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1>
+              {
+                // notification.invitation?
+                // notification.invitation.map(invite =>
+                //   <Link to=`/${invite}`>You're invited to: {invite}</Link>
+                // )
+              }
             </div>
-            : 
+            :
             <div>
               {/* The navbar will show these links before you log in */}
               <Link to="/login">Login</Link>
@@ -45,6 +51,7 @@ const Main = (props) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id
+    // notification: state.user
   }
 }
 

@@ -69,6 +69,14 @@ module.exports = (io) => {
       console.log('someone posted a message', message, room)
     })
 
+    /*
+    * INVITE
+    */
+    // socket.on('invite', (nickName, room) => {
+    //   socket.broadcast.to(nickName).emit('here is an invitation to ', room)
+    //   console.log("you're invited", nickname+" to this room# "+room)
+    // })
+
    /*
     * LEAVE ROOM
     */

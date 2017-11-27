@@ -47,7 +47,7 @@ body {
     width: 100%;
   }
 }
-// 
+//
 
 #app {
   width: 100%;
@@ -104,7 +104,7 @@ body {
   display: -webkit-flex;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; 
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -185,6 +185,62 @@ canvas {
   z-index: 100;
   border-style: solid;
   padding: 1em;
+
+    &-option {
+      display: -webkit-flex;
+      display:flex;
+
+    }
+}
+
+.invitation-form-background {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 50px
+}
+
+.invitation-form-background-box{
+      border: 6px solid black;
+      border-radius: 5px;
+      background: #fff;
+      max-width: 500px;
+      min-height: 300px;
+      width: 400px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin: 0px auto;
+      padding: 2em;
+      text-align: center;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+}
+
+#inviteFormSubmitBtn {
+    width: 12%;
+    display: inline-block;
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    border: none;
+    height: 2.5em;
+}
+
+
+#invitationlist {
+    display: flex;
+    justify-content: space-between;
+
+    &-nicknamelist{
+      flex-direction: column;
+    }
+    &-invitedlist{
+      flex-direction: column;
+    }
 }
 
 #room-message-component input {
@@ -194,9 +250,13 @@ canvas {
 }
 
 #room-message-component button {
-  height: 3em;
-  width: 12%;
-  margin-left: 1em;
+    width: 12%;
+    display: inline-block;
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    border: none;
+    height: 2.5em;
 }
 
 #room-message-component h3 {
@@ -206,7 +266,7 @@ canvas {
 #message-view {
   height: 65%;
   overflow-y: auto;
-  overflow: scroll;
+  overflow-x: auto;
 }
 
 #room-message-component form {
