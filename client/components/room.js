@@ -53,17 +53,13 @@ class Room extends Component {
                 />
                 <RoomMessages roomPath={path}/>
                 <Drop />
-<<<<<<< HEAD
                 <div className="drop-group-container">
                 <DropGroup
                     className="group-dropzone"
                     rId={this.props.match.params.roomid}
                 />
                 </div>
-                <img src="http://i.imgur.com/uhhfaMZ.png" />
-=======
-                {/* <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" /> */}
->>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
+                {/* <img src="http://i.imgur.com/uhhfaMZ.png" /> */}
                 {/* <Video/> */}
                 <MainStage rId={this.props.match.params.roomid}/>
             </div>
