@@ -10,10 +10,12 @@ class GroupImage extends Component {
    super(props)
    this.state = {
      image: null,
-     showBig: false
+     showBig: false,
+     dragging: false
    }
    this.handleClick = this.handleClick.bind(this)
    this.handleDragEnd = this.handleDragEnd.bind(this)
+   this.handleDragStart = this.handleDragStart.bind(this)
   }
 
   componentDidMount() {
@@ -53,6 +55,14 @@ class GroupImage extends Component {
       personal: false
     }
     this.props.moveImage(image)
+    this.props.stopDrag()
+    this.setState({dragging: false})
+  }
+
+  handleDragStart () {
+    const url = this.props.imageUrl
+    this.setState({dragging: true})
+    if (this.state.dragging) this.props.startDrag(url)
   }
 
 
@@ -68,6 +78,7 @@ class GroupImage extends Component {
           draggable={true}
           onClick={this.handleClick}
           onDragEnd={this.handleDragEnd}
+          onDragStart={this.handleDragStart}
         />
         {
           this.state.showBig ? 
@@ -94,6 +105,12 @@ const mapDispatch = (dispatch) => {
   return {
     moveImage: (image) => {
       dispatch(updateImage(image))
+    },
+    startDrag: (url) => {
+      dispatch(startDragging(url))
+    },
+    stopDrag: () => {
+      dispatch(stopDragging())
     }
   }
 }
