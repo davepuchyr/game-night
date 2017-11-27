@@ -12,7 +12,7 @@ const dragging = {bool: false, url: ''}
 /**
  * ACTION CREATORS
  */
-export const startDragging = (url) => ({type: START_DRAGGING, dragging: {bool: true, url}})
+export const startDragging = (url, personal) => ({type: START_DRAGGING, dragging: {bool: true, url, personal}})
 export const stopDragging = () => ({type: STOP_DRAGGING, dragging: {bool: false, url: ''}})
 
 

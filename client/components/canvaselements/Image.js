@@ -194,7 +194,7 @@ const mapDispatch = (dispatch) => {
       dispatch(updateImage(image))
     },
     startDrag: (url) => {
-      dispatch(startDragging(url))
+      dispatch(startDragging(url, true))
     },
     stopDrag: () => {
       dispatch(stopDragging())

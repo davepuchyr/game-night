@@ -99,6 +99,17 @@ module.exports = (io) => {
       group_pictures[room] = [image]
     io.sockets.to(`/room/${room}`).emit('add_group_image', image)
   })
+    /*
+    * LOGOUT
+    */
+    socket.on('delete_group_image', (imageUrl, roomId) => {
+      let updatePictureArr = group_pictures[roomId].filter(image => {
+        if (image.url === imageUrl) return false
+        return true
+      })
+      group_pictures[roomId] = updatePictureArr
+      console.log(group_pictures)
+    })
 
     /*
     * LOGOUT

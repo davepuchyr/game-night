@@ -15,7 +15,8 @@ class Room extends Component {
         this.state = {
             trashFloat: false,
             delete: false,
-            toDelete: ''
+            toDelete: '',
+            group: false
         }
         this.handleMouseOver = this.handleMouseOver.bind(this)
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
@@ -24,15 +25,15 @@ class Room extends Component {
 
     handleMouseOver() {
         this.setState({trashFloat: true})
-        if (this.props.dragging.bool) this.setState({delete: true, toDelete: this.props.dragging.url})
+        if (this.props.dragging.bool) this.setState({delete: true, toDelete: this.props.dragging.url, group: !this.props.dragging.personal})
     }
     
     handleMouseLeave() {
-        this.setState({trashFloat: false, delete: false, toDelete: ''})
+        this.setState({trashFloat: false, delete: false, toDelete: '', group: false})
     }
 
     handleMouseUp() {
-        this.props.delete(this.state.toDelete)
+        this.props.delete(this.state.toDelete, this.state.group, this.props.match.params.roomid)
     }
 
     render () {
@@ -75,7 +76,10 @@ const mapState = (state) => {
 
 const mapDispatch = dispatch => {
     return {
-        delete: (imageUrl) => {
+        delete: (imageUrl, group, rId) => {
+            if (group) {
+                socket.emit('delete_group_image', imageUrl, rId)
+            }
             dispatch(deleteImage(imageUrl))
         }
     }
