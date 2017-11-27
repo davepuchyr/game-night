@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Layer, Stage, Image } from 'react-konva'
 import HexPiece from './hex-piece'
 import MyImage from './Image'
+import GroupImage from './GroupImage'
 
 
 class MainStage extends React.Component {
@@ -66,14 +67,32 @@ class MainStage extends React.Component {
           <HexPiece id={rId} fill={'blue'} x={blue[0]} y={blue[1]}/>
           {
             images && images.map((imgObj, idx) => {
-              return <MyImage
+              if (imgObj.personal){
+                
+                return <MyImage
+                x={imgObj.x}
+                y={imgObj.y}
+                width={imgObj.width}
+                height={imgObj.height}
+                imageUrl={imgObj.url}
+                key={idx}
+                personal={true}
+                />
+              }
+              else return <GroupImage
               x={imgObj.x}
               y={imgObj.y}
               width={imgObj.width}
               height={imgObj.height}
+              originalWidth={imgObj.originalWidth}
+              originalHeight={imgObj.originalHeight}                
               imageUrl={imgObj.url}
-              key={idx} />
-            })
+              key={idx}
+              personal={false}
+              user={imgObj.user}
+              entry={imgObj.entry}
+            />
+          })
           }
         </Layer>
       </Stage>

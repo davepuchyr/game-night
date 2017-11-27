@@ -2,19 +2,22 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Image, Group, Circle } from 'react-konva'
-import { updateImage } from '../../store'
+import { updateImage, startDragging, stopDragging } from '../../store'
+import socket from '../../socket'
 
 class MyImage extends Component {
  constructor(props) {
    super(props)
    this.state = {
-     image: null
+     image: null,
+     dragging: false
    }
    this.handleDrag = this.handleDrag.bind(this)
    this.handleMouseOver = this.handleMouseOver.bind(this)
    this.handleMouseOut = this.handleMouseOut.bind(this)
    this.handleDrag = this.handleDrag.bind(this)
    this.handleMouseUp = this.handleMouseUp.bind(this)
+   this.handleDragStart = this.handleDragStart.bind(this)
   }
 
   componentDidMount() {
@@ -83,6 +86,8 @@ class MyImage extends Component {
   }
 
   handleMouseUp () {
+    this.props.stopDrag()
+    this.setState({dragging: false})
     let x = this.refs.top_left.getX()
     let y = this.refs.top_left.getY()
     let url = this.refs.image.attrs.image.src
@@ -90,9 +95,24 @@ class MyImage extends Component {
     let width = this.refs.image.attrs.width || this.refs.image.attrs.image.width
 
     let image = {
-      x, y, url, width, height
+      x,
+      y,
+      url,
+      width,
+      height,
+      personal: this.props.personal
+    }
+    if (this.props.user) {
+      image.user = this.props.user
+      image.entry = false
     }
     this.props.sendNewImage(image)
+  }
+
+  handleDragStart () {
+    const url = this.props.imageUrl
+    this.setState({dragging: true})
+    if (this.state.dragging) this.props.startDrag(url)
   }
 
 
@@ -101,6 +121,7 @@ class MyImage extends Component {
       <Group
         draggable={true}
         ref='group'
+        onMouseDown={this.handleDragStart}
         onDragEnd={this.handleMouseUp}
       >
         <Image
@@ -116,7 +137,7 @@ class MyImage extends Component {
           x={this.props.x}
           y={this.props.y}
           opacity={0}
-          radius={8}
+          radius={0}
           draggable={true}
           dragOnTop={false}
           onMouseOver={this.handleMouseOver}
@@ -129,7 +150,7 @@ class MyImage extends Component {
           x={this.props.x + this.props.width}
           y={this.props.y}
           opacity={0}
-          radius={8}
+          radius={0}
           draggable={true}
           dragOnTop={false}
           onMouseOver={this.handleMouseOver}
@@ -142,7 +163,7 @@ class MyImage extends Component {
           x={this.props.x}
           y={this.props.y + this.props.height}
           opacity={0}
-          radius={8}
+          radius={0}
           draggable={true}
           dragOnTop={false}
           onMouseOver={this.handleMouseOver}
@@ -167,12 +188,19 @@ class MyImage extends Component {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     sendNewImage: (image) => {
       dispatch(updateImage(image))
+    },
+    startDrag: (url) => {
+      dispatch(startDragging(url, true))
+    },
+    stopDrag: () => {
+      dispatch(stopDragging())
     }
   }
 }
+
 
 export default connect(null, mapDispatch)(MyImage)
