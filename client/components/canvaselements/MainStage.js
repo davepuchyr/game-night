@@ -43,6 +43,7 @@ class MainStage extends React.Component {
     const { black, red, green, blue } = this.props.tokens
     const { images } = this.props
     const { rId } = this.props    
+
     return (
       <Stage 
         name="mainstage" 

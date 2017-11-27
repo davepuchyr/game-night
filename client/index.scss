@@ -51,63 +51,69 @@ body {
 }
 
 .container {
-  width: 100%
-}
-
-.container-nav {
-  display: -webkit-flex;
-  display: flex;
-
-}
-
-.container-lobby {
-  padding: .5em;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0em 1em 0em 1em;
-}
-
-.item-lobby-onlineUsers {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-grow: 1;
-}
+  width: 100%;
 
 .dragImg {
   z-index: -10;
 }
 
-.item-lobby-rooms {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: flex-start;
-  align-content: center;
-  flex-grow: 1;
+
+.item {
+  
+  &-lobby {
+
+    &-onlineUsers {
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex-grow: 1;
+    }
+
+    &-rooms {
+      display: -webkit-flex;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      align-content: center;
+      flex-grow: 1;
+
+        &-nav {
+          display: -webkit-flex;
+          display: flex;
+        }
+
+        &-lobby {
+          padding: .5em;
+          display: -webkit-flex;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin: 0em 1em 0em 1em;
+          }
+    }
+
+    &-messages {
+      display: -webkit-flex;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      flex-grow: 2;
+
+      &-line {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; 
+        width: 100%;
+      }
+    }
+  }
 }
 
-.item-lobby-messages {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  flex-grow: 2;
-}
-
-.item-lobby-messages-line {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; 
-  width: 100%;
-}
 
 .message-line {
   font-size: 1rem;
