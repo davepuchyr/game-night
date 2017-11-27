@@ -1,12 +1,12 @@
 
-const onlineUsers = {}
+const onlineUsers = {} // SOCKETID : USERID
 const token_positions = {}
 
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
     let socketId = socket.id
-    
+
     /*
     * NEW USERS
     */
@@ -69,12 +69,14 @@ module.exports = (io) => {
     })
 
     /*
-    * INVITE
+    * INVITATION RECEIVED AND NOW SEND TO EACH USER
     */
-    // socket.on('invite', (nickName, room) => {
-    //   socket.broadcast.to(nickName).emit('here is an invitation to ', room)
-    //   console.log("you're invited", nickname+" to this room# "+room)
-    // })
+    socket.on('invite', (listOfUsers, room) => {
+      const invite = listOfUsers.map(userId => Object.keys(onlineUsers).find(key => onlineUsers[key].id === userId))
+      invite.forEach(friend => {
+        io.sockets.to(friend).emit('invite', room)
+      })
+    })
 
    /*
     * LEAVE ROOM

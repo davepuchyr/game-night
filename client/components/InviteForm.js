@@ -8,7 +8,7 @@ class InviteForm extends Component {
 
   render() {
     // Render nothing if the "show" prop is false
-    const {children, onClose, invited, names, editInvites} = this.props
+    const {children, onClose, invited, names, editInvites, sendInvites} = this.props
     if(!this.props.show) {
       return null;
     }
@@ -40,9 +40,8 @@ class InviteForm extends Component {
               invited.length?
                 invited.map((user,ind) => {
                   return (
-                          <div
-                            key={user.id}
-                            onClick={e => editInvites(e,user,ind,'delete')}>
+                          <div key={user.id}>
+                            <button onClick={e => editInvites(e,user,ind,'delete')}>X</button>
                             {user.nickname}
                           </div>
                   )
@@ -54,6 +53,7 @@ class InviteForm extends Component {
           </div>
           <div className="inviteForm-background-box-footer">
             <button onClick={onClose}>Close</button>
+            <button onClick={sendInvites}>Send</button>
           </div>
         </div>
       </div>

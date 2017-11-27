@@ -13,7 +13,9 @@ import Room from './room'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn,notification} = props
+  const {children, handleClick, isLoggedIn,invite} = props
+  console.log('LINE 17 - invite? ', typeof invite)
+  console.log('LINE 18 - invite? ', invite)
 
   return (
     <div id="main" className="container">
@@ -23,10 +25,11 @@ const Main = (props) => {
             <div>
               <h1>GAMENIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1>
               {
-                // notification.invitation?
-                // notification.invitation.map(invite =>
-                //   <Link to=`/${invite}`>You're invited to: {invite}</Link>
-                // )
+                invite?(
+                  <Link to={`${invite}`}>You're invited to room # : {invite.slice(6)}</Link>
+                )
+                :
+                <h1> No invites </h1>
               }
             </div>
             :
@@ -50,8 +53,8 @@ const Main = (props) => {
  */
 const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
-    // notification: state.user
+    isLoggedIn: !!state.user.id,
+    invite: state.invitation
   }
 }
 

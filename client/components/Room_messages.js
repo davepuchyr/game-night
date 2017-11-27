@@ -46,7 +46,6 @@ class RoomMessages extends Component {
     */
     editInvites(e,nickname,index,action) {
       const {invited} = this.state
-      console.log('LINE 49 - list of invitations', this.invitations)
 
       switch(action){
         case 'add':
@@ -68,11 +67,13 @@ class RoomMessages extends Component {
       }
     }
     /*
-    * Emitting to the backend socket with a list of user ids for an invite
+    * EMTI TO FRONTEND SOCKET WITH A LIST OF USER IDS
     */
     sendInvites(e) {
-        // e.stopImmediatePropagation()
-        // socket.emit('invite', this.invitations , this.props.roomPath)
+        e.preventDefault()
+        console.log('LINE 75', this.invitations)
+        socket.emit('invite', this.invitations , this.props.roomPath)
+        this.toggleInvite()
     }
 
     componentDidMount () {
@@ -104,7 +105,8 @@ class RoomMessages extends Component {
                         onClose={this.toggleInvite}
                         names={this.names}
                         editInvites={this.editInvites}
-                        invited={invited}>
+                        invited={invited}
+                        sendInvites={this.sendInvites}>
                         <div>
                           <small>Find by nickname</small>
                           <form>

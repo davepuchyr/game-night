@@ -1,14 +1,15 @@
 import io from 'socket.io-client'
 
 import store, {
+  getInvite,
   getOnlineUsers,
-   newMessage,
-   getDraws,
-   addMessage,
-   move_black,
-   move_red,
-   move_green,
-   move_blue
+  newMessage,
+  getDraws,
+  addMessage,
+  move_black,
+  move_red,
+  move_green,
+  move_blue
   } from './store'
 
 const socket = io(window.location.origin)
@@ -70,6 +71,12 @@ socket.on('connect', () => {
   socket.on('moved', (newCoords, color) => {
     colorDispatcher(newCoords, color)
   })
+
+  // user received an invite
+  socket.on('invite', room => {
+    store.dispatch(getInvite(room))
+  })
+
 })
 
 export default socket

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
 //components
-import RoomList from './Room-list'
-import OnlineUsers from './onlineUsers'
+import RoomList from './Room_list'
+import OnlineUsers from './OnlineUsers'
 import Messages from './Messages'
 
 /**
