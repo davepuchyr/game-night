@@ -4,9 +4,10 @@ class Dice extends Component {
 
     render () {
         return (
-          <div id='dice-roller'>
-            {
-            }
+          <div className="dice-board">
+          {
+            diceInitialize(document.getElementById('dice-container'), window.innerWidth - 1, 5 - window.innerHeight - 70)
+          }
           </div>
         )
     }

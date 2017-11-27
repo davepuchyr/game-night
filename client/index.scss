@@ -44,16 +44,28 @@ body {
     width: 100%;
   }
 
-  #dice-container {
+  #dice {
     position: absolute;
+    opacity: 1;
     z-index: 101;
 
-    .center_field{
-      z-index: 102;
+    #dice-container {
+
+      .center_field{
+        z-index: 102;
+      }
+      #canvas {
+        z-index: 101;
+        opacity: 1;
+      }    
+      #canvas.hidden {
+        z-index: 101;
+        opacity: 0;
+      }
     }
-    #canvas {
-      z-index: 101;
-    }
+  }
+  #dice.hidden {
+    opacity: 0;
   }
 }
 // 
