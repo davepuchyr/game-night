@@ -5,45 +5,27 @@ import { Stage, Layer, Rect, Image, Group } from "react-konva";
 class Drawing extends Component {
   state = {
     isDrawing: false,
-    mode: "brush",
+    mode: "brush"
   };
 
-  componentDidMount () {
-    let canvas = document.createElement("canvas");
-    // canvas.width = 300;
-    // canvas.height = 300;
-    // let context = canvas.getContext("2d");
+  componentDidMount() {
+    const canvas = document.createElement("canvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const context = canvas.getContext("2d");
 
-
-
-    this.setState({ canvas });
+    this.setState({ canvas, context });
   }
 
-  componentWillReceiveProps () {
-    // let canvas = this.props.canvas
-    let context = this.props.context
-    console.log('CONTEXT IS ', context)
-    this.setState({ context });
-  }
-
-
-  handleMouseDown = (e) => {
-    console.log("mousedown!!!!!!!!!!!!!!!", e.target);
-    if (this.props.shift){
-        this.setState({ isDrawing: true });
-    }
+  handleMouseDown = () => {
+    if (this.props.shift) this.setState({ isDrawing: true });
 
     // TODO: improve
     const stage = this.image.parent.parent;
-    console.log("FROM e.target ", e.target)
     this.lastPointerPosition = stage.getPointerPosition();
-    console.log("FROM lastPointerPosition ", this.lastPointerPosition)
-    // this.lastPointerPosition.x = this.lastPointerPosition.x - this.props.offSet[0]
-    // this.lastPointerPosition.y = this.lastPointerPosition.y - this.props.offSet[1]
   };
 
   handleMouseUp = () => {
-    console.log("mouseup");
     this.setState({ isDrawing: false });
   };
 
@@ -65,22 +47,19 @@ class Drawing extends Component {
       }
       context.beginPath();
 
+      const stage = this.image.parent.parent;
       var localPos = {
-        x: (this.lastPointerPosition.x - this.image.x()),
-        y: (this.lastPointerPosition.y - this.image.y())
+        x: this.lastPointerPosition.x - stage.x(),
+        y: this.lastPointerPosition.y - stage.y()
       };
-    //   console.log("moveTo", localPos);
       context.moveTo(localPos.x, localPos.y);
 
-      // TODO: improve
-      const stage = this.image.parent.parent;
 
       var pos = stage.getPointerPosition();
       localPos = {
-        x: (pos.x - this.image.x()),
-        y: (pos.y - this.image.y())
+        x: pos.x - stage.x(),
+        y: pos.y - stage.y()
       };
-    //   console.log("lineTo", localPos);
       context.lineTo(localPos.x, localPos.y);
       context.closePath();
       context.stroke();
@@ -91,7 +70,6 @@ class Drawing extends Component {
 
   render() {
     const { canvas } = this.state;
-    console.log("canvas", canvas);
 
     return (
       <Image
@@ -99,7 +77,6 @@ class Drawing extends Component {
         ref={node => (this.image = node)}
         width={window.innerWidth}
         height={window.innerHeight}
-        stroke={'blue'}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onMouseMove={this.handleMouseMove}
