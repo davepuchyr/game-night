@@ -85,8 +85,8 @@ class GroupImage extends Component {
           (
             <Image
               image={this.state.image}
-              x={(Math.floor(window.innerWidth/2)) - (Math.floor(this.props.originalWidth/2))}
-              y={100}
+              x={this.props.x}
+              y={this.props.y}
               width={this.props.originalWidth}
               height={this.props.originalHeight}
               draggable={true}
