@@ -43,7 +43,7 @@ class Room extends Component {
             trashCheck = true
         }
         return (
-            <div id="room-container">
+            <div id="room-container" >
                 <img
                   id="trash-can"
                   src={trashCheck ? "/redtrash.png" : "/trash.png"}

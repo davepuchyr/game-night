@@ -4,6 +4,7 @@ import { Layer, Stage, Image } from 'react-konva'
 import HexPiece from './hex-piece'
 import MyImage from './Image'
 import GroupImage from './GroupImage'
+import Drawing from './Drawing'
 
 
 class MainStage extends React.Component {
@@ -12,11 +13,20 @@ class MainStage extends React.Component {
 
     this.state = {
       imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
-      backgroundImage: null
+      backgroundImage: null,
+      shift: false,
+      dragStart: [],
+      dragOffSet: [0, 0],
+      canvas: null,
+      context: null
     }
 
     this.moveStageOnHover = this.moveStageOnHover.bind(this)
     this.handleMouseOut = this.handleMouseOut.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
+    this.handleKeyUp = this.handleKeyUp.bind(this)
+    this.handleDragEnd = this.handleDragEnd.bind(this)
+    this.handleDragStart = this.handleDragStart.bind(this)
   }
   
   componentDidMount() {
@@ -27,29 +37,57 @@ class MainStage extends React.Component {
         backgroundImage: image
       })
     }
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
+    let canvas = this.refs.mainstage._stage.children[0].canvas._canvas
+    let context = canvas.getContext("2d")
+    this.setState({ canvas, context }, () => console.log("!!!!!!!!!", this.state.canvas))
+  }
+
+  handleKeyDown (e) {
+      if (e.key === 'Shift') this.setState({shift: true})
+  }
+
+  handleKeyUp (e) {
+    if (e.key === 'Shift') this.setState({shift: false})
   }
 
   moveStageOnHover(e) {
     document.body.style.cursor = 'move'
 
   }
-  
+
   handleMouseOut () {
     document.body.style.cursor = 'default'
   }
 
+  handleDragEnd (e) {
+    let newX = this.state.dragStart[0] - e.evt.x
+    let newY = this.state.dragStart[1] - e.evt.y
+    this.setState({dragOffSet: [newX, newY]})
+  }
+
+  handleDragStart (e) {
+    this.setState({dragStart: [e.evt.x, e.evt.y]})
+  }
+
 
   render() {
+    console.log(this.state)
     const { black, red, green, blue } = this.props.tokens
     const { images } = this.props
     const { rId } = this.props    
 
     return (
       <Stage 
-        name="mainstage" 
+        name="mainstage"
+        ref="mainstage"
         width={window.innerWidth} 
         height={window.innerHeight}
-        draggable={true}
+        className="main-canvas"
+        draggable={!this.state.shift}
+        onDragEnd={this.handleDragEnd}
+        onDragStart={this.handleDragStart}
         >
         <Layer 
           width={window.innerWidth} 
@@ -61,6 +99,12 @@ class MainStage extends React.Component {
             onMouseOver={this.moveStageOnHover}
             onMouseOut={this.handleMouseOut}
             />
+          <Drawing
+            shift={this.state.shift}
+            offSet={this.state.dragOffSet}
+            canvas={this.state.canvas}
+            context={this.state.context}
+          />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>
           <HexPiece id={rId} fill={'red'} x={red[0]} y={red[1]}/>
           <HexPiece id={rId} fill={'green'} x={green[0]} y={green[1]}/>
