@@ -95,7 +95,12 @@ class MyImage extends Component {
     let width = this.refs.image.attrs.width || this.refs.image.attrs.image.width
 
     let image = {
-      x, y, url, width, height, personal: this.props.personal
+      x,
+      y,
+      url,
+      width,
+      height,
+      personal: this.props.personal
     }
     if (this.props.user) {
       image.user = this.props.user

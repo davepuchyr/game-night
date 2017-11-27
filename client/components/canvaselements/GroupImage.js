@@ -13,6 +13,7 @@ class GroupImage extends Component {
      showBig: false
    }
    this.handleClick = this.handleClick.bind(this)
+   this.handleDragEnd = this.handleDragEnd.bind(this)
   }
 
   componentDidMount() {
@@ -32,6 +33,28 @@ class GroupImage extends Component {
     this.setState({showBig: true})
   }
 
+  handleDragEnd (e) {
+    let konvaImg = e.target
+    let x = konvaImg.attrs.x
+    let y = konvaImg.attrs.y
+    let url = konvaImg.attrs.image.src
+    let height = konvaImg.attrs.height
+    let width = konvaImg.attrs.width
+    let originalWidth = this.props.originalWidth
+    let originalHeight = this.props.originalHeight
+    let image = {
+      x,
+      y,
+      url,
+      width,
+      height,
+      originalWidth,
+      originalHeight,
+      personal: false
+    }
+    this.props.moveImage(image)
+  }
+
 
   render() {
     return (
@@ -42,8 +65,9 @@ class GroupImage extends Component {
           y={this.props.y}
           width={this.props.width}
           height={this.props.height}
-          draggable={false}
+          draggable={true}
           onClick={this.handleClick}
+          onDragEnd={this.handleDragEnd}
         />
         {
           this.state.showBig ? 
@@ -54,7 +78,8 @@ class GroupImage extends Component {
               y={100}
               width={this.props.originalWidth}
               height={this.props.originalHeight}
-              draggable={false}
+              draggable={true}
+              onClick={this.handleClick}
             />
           )
           :
@@ -65,5 +90,13 @@ class GroupImage extends Component {
   }
 }
 
+const mapDispatch = (dispatch) => {
+  return {
+    moveImage: (image) => {
+      dispatch(updateImage(image))
+    }
+  }
+}
 
-export default GroupImage
+
+export default connect(null, mapDispatch)(GroupImage)
