@@ -32,13 +32,10 @@ class Room extends Component {
         this.setState({trashFloat: false, delete: false, toDelete: '', group: false})
     }
 
-<<<<<<< HEAD
     handleMouseUp() {
         this.props.delete(this.state.toDelete, this.state.group, this.props.match.params.roomid)
     }
 
-=======
->>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
     render () {
         const path = this.props.match.url
         let trashCheck = false
