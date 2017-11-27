@@ -32,10 +32,13 @@ class Room extends Component {
         this.setState({trashFloat: false, delete: false, toDelete: '', group: false})
     }
 
+<<<<<<< HEAD
     handleMouseUp() {
         this.props.delete(this.state.toDelete, this.state.group, this.props.match.params.roomid)
     }
 
+=======
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
     render () {
         const path = this.props.match.url
         let trashCheck = false
@@ -53,6 +56,7 @@ class Room extends Component {
                 />
                 <RoomMessages roomPath={path}/>
                 <Drop />
+<<<<<<< HEAD
                 <div className="drop-group-container">
                 <DropGroup
                     className="group-dropzone"
@@ -60,9 +64,11 @@ class Room extends Component {
                 />
                 </div>
                 <img src="http://i.imgur.com/uhhfaMZ.png" />
+=======
+                {/* <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" /> */}
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
                 {/* <Video/> */}
                 <MainStage rId={this.props.match.params.roomid}/>
-                {/* <PlayerPieces  /> */}
             </div>
         )
     }

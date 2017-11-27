@@ -1,14 +1,21 @@
 
 const onlineUsers = {}
 const token_positions = {}
+<<<<<<< HEAD
 const group_pictures = {}
 // const draws = []
+=======
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
 
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
     let socketId = socket.id
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
     /*
     * NEW USERS
     */
@@ -29,6 +36,7 @@ module.exports = (io) => {
     })
 
     /*
+<<<<<<< HEAD
     * INITIALLIZE TOKEN POSITIONS IN NEWLY CREATED ROOM
     */
     socket.on('created_room', (roomId) => {
@@ -39,6 +47,14 @@ module.exports = (io) => {
         'blue': [650, 650]
       }
       socket.emit('initial_token_positions', token_positions[roomId])
+=======
+    * DRAWS
+    */
+    socket.on('draw', (start, end) => {
+      draws.push({start, end})
+      socket.broadcast.emit('addDraw', draws)
+      // socket.emit('addDraw', draws)
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
     })
 
     /*
@@ -63,6 +79,7 @@ module.exports = (io) => {
         }
       }
       socket.join(room)
+<<<<<<< HEAD
         if (group_pictures[roomId]) {
           io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
         }
@@ -84,6 +101,26 @@ module.exports = (io) => {
         io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
         socket.leave(room)
       })
+=======
+      io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
+      io.sockets.to(room).emit('current_tokens', token_positions[roomId])
+    })
+
+    /*
+    * GET ROOM MESSAGE
+    */
+    socket.on('postRoomMessage', (message, room) => {
+      socket.broadcast.to(room).emit('addMessage', message)
+    })
+
+   /*
+    * LEAVE ROOM
+    */
+    socket.on('leaveroom', (room, nickname) => {
+      io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
+      socket.leave(room)
+    })
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
 
       /*
       * ADDING GROUP PICS
@@ -113,6 +150,7 @@ module.exports = (io) => {
       socket.on('disconnect', () => {
         console.log(`Connection ${socket.id} has left the building`)
 
+<<<<<<< HEAD
         delete onlineUsers[socketId]
 
         const simpleUserArr = Object.values(onlineUsers)
@@ -120,5 +158,9 @@ module.exports = (io) => {
         io.sockets.emit('updateOnlineUsers', simpleUserArr)
         // socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
       })
+=======
+      io.sockets.emit('updateOnlineUsers', simpleUserArr)
+    })
+>>>>>>> 12c990a9fb78652755cb743aece41eec37da60b5
   })
 }
