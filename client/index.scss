@@ -50,12 +50,28 @@ body {
   width: 100%;
 }
 
-.container {
-  width: 100%;
-
 .dragImg {
   z-index: -10;
 }
+
+.container {
+	width: 100%;
+
+	&-nav {
+		display: -webkit-flex;
+		display: flex;
+	}
+
+	&-lobby {
+			padding: .5em;
+			display: -webkit-flex;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin: 0em 1em 0em 1em;
+	}
+}
+
 
 
 .item {
@@ -80,19 +96,7 @@ body {
       align-content: center;
       flex-grow: 1;
 
-        &-nav {
-          display: -webkit-flex;
-          display: flex;
-        }
 
-        &-lobby {
-          padding: .5em;
-          display: -webkit-flex;
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin: 0em 1em 0em 1em;
-          }
     }
 
     &-messages {
