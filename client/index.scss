@@ -8,9 +8,6 @@ body {
     text-decoration: none;
   }
 
-  div {
-  }
-
   h1 {
     display: flex;
     justify-content: space-between;
@@ -43,7 +40,7 @@ body {
   //   display: inline-block;
   // }
 
-  input[type=text] {
+  input[type=text] .msg-input {
     width: 100%;
   }
 }
@@ -54,50 +51,63 @@ body {
 }
 
 .container {
-  width: 100%
+  width: 100%;
+
+  &-nav {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  &-lobby {
+    padding: .5em;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0em 1em 0em 1em;
+    }
 }
 
-.container-nav {
-  display: -webkit-flex;
-  display: flex;
+.item {
 
-}
+  &-lobby {
 
-.container-lobby {
-  padding: .5em;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 0em 1em 0em 1em;
-}
+    &-onlineUsers {
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex-grow: 1;
+    }
 
-.item-lobby-onlineUsers {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  flex-grow: 1;
-}
+    &-rooms {
+      display: -webkit-flex;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      align-content: center;
+      flex-grow: 1;
+    }
 
-.item-lobby-rooms {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: column;
-  align-items: flex-start;
-  align-content: center;
-  flex-grow: 1;
-}
+    &-messages {
+      display: -webkit-flex;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      flex-grow: 2;
 
-.item-lobby-messages {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  flex-grow: 2;
+      &-line {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .item-lobby-messages-line {

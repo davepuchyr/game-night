@@ -135,7 +135,7 @@ class RoomMessages extends Component {
                 </div>
                 <br/>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="content"/>
+                    <input className="msg-input" type="text" name="content"/>
                     <button type="submit"> Enter </button>
                 </form>
             </div>
