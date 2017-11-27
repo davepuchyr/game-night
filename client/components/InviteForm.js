@@ -12,7 +12,6 @@ class InviteForm extends Component {
     if(!this.props.show) {
       return null;
     }
-    console.log('line 15', editInvites)
     return (
       <div className="invitation-form-background">
         <div className="invitation-form-background-box">

@@ -66,14 +66,6 @@ class RoomMessages extends Component {
             }
             break;
       }
-      /*  if(!this.invitations.includes(nickname.id)) {
-          this.invitations.push(nickname.id)
-          invited.push(nickname)
-          this.names = this.names.splice(ind,1)
-          this.setState({invited})
-        } else {
-          this.invitations.splice(ind,1)
-        }*/
     }
     /*
     * Emitting to the backend socket with a list of user ids for an invite
@@ -101,8 +93,6 @@ class RoomMessages extends Component {
         this.names = onlineUsers.filter(nickName => {
             if(nickName.nickname.toLowerCase().includes(this.state.searchNickName)&& nickName.id !== user.id) return nickName
         })
-        console.log('LINE 69', this.names)
-        console.log('LINE 70', invited)
 
         return (
             <div id="room-message-component">
@@ -129,48 +119,6 @@ class RoomMessages extends Component {
                             <button id="inviteFormSubmitBtn"type="submit" onSubmit={this.sendInvites}>Submit</button>
                           </form>
                         </div>
-{/*                        <div id="listOfNames">
-                          {
-                              /*invited.length?
-                              invited.map((nickname,ind) => {
-                                  return (
-                                         <button
-                                              key={ind}
-                                              onDelete={() => invited.splice(ind,1)}
-                                              onClick={() =>{
-                                                  if(!this.invitations.includes(nickname)) {
-                                                      this.invitations.push(nickname.id)
-                                                      invited.push(nickname)
-                                                      // names = names.filter(each => {if(each.id!==nickname.id) return each })
-                                                      // this.setState({invited, names})
-                                                  }
-                                              }}>
-                                              {nickname}
-                                          </button>
-                                         )
-                              })
-                              names.length?
-                              names.map((nickname,ind) => {
-                               return !invited.includes(nickname)? (
-                                      <div
-                                          key={nickname.id}
-                                          onClick={e =>{
-                                            e.preventDefault()
-                                              if(!this.invitations.includes(nickname.id)) {
-                                                  this.invitations.push(nickname.id)
-                                                  invited.push(nickname)
-                                                  names = names.splice(ind,1)
-                                                  this.setState({invited, names})
-                                              }
-                                          }}>
-                                          {nickname.nickname}
-                                      </div>
-                                  ) :'No more users to invite'
-                              })
-                              :
-                              <div> No one is online </div>
-                          }
-                        </div>*/}
                     </InviteForm>
                 </div>
                 <br />
