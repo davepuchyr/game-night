@@ -108,7 +108,6 @@ module.exports = (io) => {
         return true
       })
       group_pictures[roomId] = updatePictureArr
-      console.log(group_pictures)
     })
 
     /*
