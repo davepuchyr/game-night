@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import { Video, RoomMessages, MainStage, Drop }from './index'
 import ReactDOM from 'react-dom'
-import Dice from './Dice'
-// import PlayerPieces from './canvaselements/player-pieces'
 import socket from '../socket'
 
 class Room extends Component {
@@ -16,27 +14,37 @@ class Room extends Component {
     }
 
     handleDieClick(e){
-      ['dice', 'canvas'].forEach(el => {
-        this.state.opacity ? 
-          document.getElementById(el).className+=' hidden' :
-          document.getElementById(el).className=document.getElementById(el).className.replace( /(?:^|\s)hidden(?!\S)/g , '' )
+
+      function classShow(elements, isShow){
+        if(isShow){
+          Array.prototype.forEach.call(elements, el => el.className+=' show')
+        } else {
+          Array.prototype.forEach.call(elements, el => el.className=el.className.replace( /(?:^|\s)show(?!\S)/g , '' ))
+        }
+      }
+
+      ['dice', 'canvas', 'center_field'].forEach(elem => { 
+        let isClass = (elem === 'center_field') ? true : false
+        if(!this.state.opacity){
+          isClass ?
+            classShow(document.getElementsByClassName(elem), true) :
+            document.getElementById(elem).className+=' show'
+        } else {
+          isClass ? 
+            classShow(document.getElementsByClassName(elem), false) :
+            document.getElementById(elem).className=document.getElementById(elem).className.replace( /(?:^|\s)show(?!\S)/g , '' )
+        }
       })
+
       this.setState({ opacity: !this.state.opacity })
     }
 
-    render () {
+    render() {
         const path = this.props.match.url
         return (
             <div id="room-container">
                 <img id="trash-can" src="/trash.png" />
                 <RoomMessages roomPath={path}/>
-                <div className="dice-board" style={{opacity: !!this.state.opacity}}>
-                {
-                  this.state.opacity ?
-                    <Dice/> :
-                    null
-                }
-                </div>
                 <Drop />
                 <button 
                 className="die-button"
@@ -53,3 +61,43 @@ class Room extends Component {
 }
 
 export default Room
+
+
+
+{/* <div id="dice-container" class="svg" style="margin: 0">
+<style type="text/css">@import "/main.css";</style>
+<style type="text/css">@import "/dice.css";</style>   
+<div id="info_div" style="display: none">
+  <div class="center_field">
+    <span id="label"></span>
+  </div>
+  <div class="center_field">
+    <div class="bottom_field">
+      <span id="labelhelp">click to continue or tap and drag again</span>
+    </div>
+  </div>
+</div>
+<div id="selector_div" style="display: none">
+  <div class="center_field">
+    <div id="sethelp">
+    </div>
+  </div>
+  <div class="center_field">
+    <input type="text" id="set" value="1d6"/><br/>
+    <button id="clear">clear</button>
+    <button style="margin-left: 0.6em" id="throw">throw</button>
+  </div>
+</div>
+<div id="canvas" style="width: 200px; height: 200px;"></div>
+</div> */}
+
+
+
+// if(!!this.state.numClicks && !this.state.opacity){
+//     console.log('Here')
+//     const newCanvas = document.createElement('div')
+//     newCanvas.id = 'canvas'
+//     newCanvas.style.width = `${window.innerWidth - 1}px`
+//     newCanvas.style.height = '200px'
+//     document.getElementById('dice-container').appendChild(newCanvas)
+// }

@@ -2,8 +2,6 @@
 
 "use strict";
 function diceInitialize(container, w, h) {
-    
-    $t.remove($t.id('loading_text'));
 
     var canvas = $t.id('canvas');
     canvas.style.width = w + 'px';

@@ -6,7 +6,7 @@ class Dice extends Component {
         return (
           <div className="dice-board">
           {
-            diceInitialize(document.getElementById('dice-container'), window.innerWidth - 1, 5 - window.innerHeight - 70)
+              diceInitialize(document.getElementById('dice-container'), window.innerWidth - 1, 5 - window.innerHeight - 70)
           }
           </div>
         )
