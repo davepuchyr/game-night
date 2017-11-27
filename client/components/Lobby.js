@@ -1,25 +1,37 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {logout} from '../store'
+import {logout, getInvitations} from '../store'
+import socket from '../socket'
 //components
-import RoomList from './Room_list'
-import OnlineUsers from './OnlineUsers'
-import Messages from './Messages'
+import {RoomList,OnlineUsers, Messages, Invitations} from './index'
 
 /**
  * COMPONENT
  */
-export const Lobby = (props) => {
-  const {handleClick, isLoggedIn} = props
-  return (
-    <div className="container-lobby">
-        <RoomList />
-        <Messages />
-        <OnlineUsers />
-    </div>
-  )
+class Lobby extends Component {
+
+  componentDidMount(){
+    socket.emit('retreiveInvites')
+  }
+
+  render(){
+    const {handleClick, isLoggedIn, invitations, user} = this.props
+    const listOfRoomInvites = Object.keys(invitations).filter(id => user.id === (+id)? id: null).map(each => invitations[each])
+    return (
+      <div className="container-lobby">
+          {
+            listOfRoomInvites.length? <Invitations roomInvites={listOfRoomInvites} userId={user.id}/> : null
+          }
+          <div className="container-lobby-bottom" >
+            <RoomList />
+            <Messages />
+            <OnlineUsers />
+          </div>
+      </div>
+    )
+  }
 }
 
 /**
@@ -29,15 +41,15 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    users: state.onlineUsers
+    invitations: state.invitation
   }
 }
-
 export default connect(mapState)(Lobby)
 
 /**
  * PROP TYPES
  */
 Lobby.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  user: PropTypes.object
 }

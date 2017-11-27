@@ -1,6 +1,7 @@
 
 const onlineUsers = {} // SOCKETID : USERID
 const token_positions = {}
+const invitations = {} // USERID : ROOM
 
 
 module.exports = (io) => {
@@ -72,10 +73,33 @@ module.exports = (io) => {
     * INVITATION RECEIVED AND NOW SEND TO EACH USER
     */
     socket.on('invite', (listOfUsers, room) => {
-      const invite = listOfUsers.map(userId => Object.keys(onlineUsers).find(key => onlineUsers[key].id === userId))
+      const invite = listOfUsers.map(userId => {
+        invitations[userId] = room
+        return Object.keys(onlineUsers).find(key => onlineUsers[key].id === userId)
+      })
       invite.forEach(friend => {
         io.sockets.to(friend).emit('invite', room)
       })
+      socket.broadcast.emit('storeInvitations', invitations)
+    })
+
+    /*
+    * REMOVE INVITE
+    */
+    socket.on('removeInvite', (userId, room) => {
+      for(let id in invitations){
+        if((+id) === userId && invitations[id] === room){
+          delete invitations[id]
+        }
+      }
+      socket.broadcast.emit('storeInvitations', invitations)
+    })
+
+    /*
+    * SEND EVERY INVITES AVAIALABLE
+    */
+    socket.on('retreiveInvites', () => {
+      io.sockets.emit('storeInvitations', invitations)
     })
 
    /*

@@ -71,7 +71,6 @@ class RoomMessages extends Component {
     */
     sendInvites(e) {
         e.preventDefault()
-        console.log('LINE 75', this.invitations)
         socket.emit('invite', this.invitations , this.props.roomPath)
         this.toggleInvite()
     }
@@ -89,10 +88,10 @@ class RoomMessages extends Component {
 
     render () {
         const {user, roomMessages, onlineUsers} = this.props
-        const {isOpen , invited} = this.state
-
+        const {isOpen , invited, searchNickName} = this.state
+        const inTheRoom = roomMessages.map(getName => Object.keys(getName)[0])
         this.names = onlineUsers.filter(nickName => {
-            if(nickName.nickname.toLowerCase().includes(this.state.searchNickName)&& nickName.id !== user.id) return nickName
+            if(nickName.nickname.toLowerCase().includes(searchNickName) && nickName.id !== user.id ) return nickName
         })
 
         return (
@@ -103,6 +102,7 @@ class RoomMessages extends Component {
                     <InviteForm
                         show={isOpen}
                         onClose={this.toggleInvite}
+                        inTheRoom={inTheRoom}
                         names={this.names}
                         editInvites={this.editInvites}
                         invited={invited}

@@ -5,6 +5,8 @@ import {withRouter, Link, Switch, Route} from 'react-router-dom'
 import {logout} from '../store'
 import Lobby from './Lobby'
 import Room from './room'
+import socket from '../socket'
+import io from '../../server/socket'
 
 /**
  * COMPONENT
@@ -13,10 +15,7 @@ import Room from './room'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn,invite} = props
-  console.log('LINE 17 - invite? ', typeof invite)
-  console.log('LINE 18 - invite? ', invite)
-
+  const {children, handleClick, isLoggedIn} = props
   return (
     <div id="main" className="container">
       <nav className="container-nav">
@@ -24,13 +23,6 @@ const Main = (props) => {
           isLoggedIn ?
             <div>
               <h1>GAMENIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1>
-              {
-                invite?(
-                  <Link to={`${invite}`}>You're invited to room # : {invite.slice(6)}</Link>
-                )
-                :
-                <h1> No invites </h1>
-              }
             </div>
             :
             <div>
@@ -54,7 +46,6 @@ const Main = (props) => {
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
-    invite: state.invitation
   }
 }
 

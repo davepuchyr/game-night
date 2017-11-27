@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 /*
-* All thanks goes to "ceddia" for the dialog example :
+* All thanks goes to "dceddia" for the dialog example :
 * https://github.com/dceddia/modal-in-react/blob/master/src/App.js
 */
-class InviteForm extends Component {
+const InviteForm = (props) =>{
 
-  render() {
     // Render nothing if the "show" prop is false
-    const {children, onClose, invited, names, editInvites, sendInvites} = this.props
-    if(!this.props.show) {
+    const {children, onClose, invited, names, editInvites, sendInvites, inTheRoom} = props
+    if(!props.show) {
       return null;
     }
     return (
@@ -18,36 +17,35 @@ class InviteForm extends Component {
           {children}
           <div id="invitationlist">
             <div id="invitationlist-nicknameList">
-            ONLINE USERS :
+            <h3>ONLINE USERS</h3>
             {
                 names.length?
                   names.map((nickname,ind) => {
-                   return !invited.includes(nickname)? (
-                          <div
-                              key={nickname.id}
+                   return !invited.includes(nickname) && !inTheRoom.includes(nickname.nickname)? (
+                          <h5 key={nickname.id}
                               onClick={e => editInvites(e,nickname,ind,'add')}>
                               {nickname.nickname}
-                          </div>
-                      ) :' Empty'
+                          </h5>
+                      ) : <h5 key={ind}> Unavailable </h5>
                   })
                   :
-                  <div> Unavailable </div>
+                  <h5> Unavailable </h5>
             }
             </div>
             <div id="invitationlist-invitedList">
-            INVITE :
+            <h3>INVITE</h3>
             {
               invited.length?
                 invited.map((user,ind) => {
                   return (
-                          <div key={user.id}>
-                            <button onClick={e => editInvites(e,user,ind,'delete')}>X</button>
+                          <h5 key={user.id}>
+                            <button onClick={e => editInvites(e,user,ind,'delete')}>&times; </button>
                             {user.nickname}
-                          </div>
+                          </h5>
                   )
                 })
                 :
-                <div>Invited no one</div>
+                <h5>Invited no one</h5>
             }
             </div>
           </div>
@@ -57,8 +55,7 @@ class InviteForm extends Component {
           </div>
         </div>
       </div>
-    );
-  }
+    )
 }
 
 InviteForm.propTypes = {
@@ -67,4 +64,4 @@ InviteForm.propTypes = {
   children: PropTypes.node
 };
 
-export default InviteForm;
+export default InviteForm

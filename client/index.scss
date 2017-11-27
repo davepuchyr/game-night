@@ -61,10 +61,19 @@ body {
   &-lobby {
     padding: .5em;
     display: -webkit-flex;
-    display: flex;
+    display: block;
     justify-content: space-between;
     align-items: flex-start;
     margin: 0em 1em 0em 1em;
+
+      &-bottom{
+        padding: .5em;
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 0em 1em 0em 1em;
+      }
     }
 }
 
@@ -106,6 +115,20 @@ body {
         justify-content: flex-start;
         width: 100%;
       }
+    }
+    &-invitations {
+      display: -webkit-flex;
+      display: block;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      flex-grow: 1;
+        h3 {
+          text-align: center;
+        }
+        a {
+          text-align: center;
+        }
     }
   }
 }

@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 
 import store, {
+  getInvitations,
   getInvite,
   getOnlineUsers,
   newMessage,
@@ -75,6 +76,10 @@ socket.on('connect', () => {
   // user received an invite
   socket.on('invite', room => {
     store.dispatch(getInvite(room))
+  })
+  // user received an invite
+  socket.on('storeInvitations', invites => {
+    store.dispatch(getInvitations(invites))
   })
 
 })
