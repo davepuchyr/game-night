@@ -10,10 +10,10 @@ const MOVE_BLUE = 'MOVE_BLUE'
  * INITIAL STATE
  */
 const token_positions = {
-    'black': [],
-    'red': [],
-    'green': [],
-    'blue': [],
+  'black': [500, 500],
+  'red': [550, 550],
+  'green': [600, 600],
+  'blue': [650, 650]
 }
 
 /**

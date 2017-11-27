@@ -11,6 +11,12 @@ class RoomMessages extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    componentDidMount () {
+      const room = this.props.roomPath
+      socket.emit('joinroom', room, this.props.user.nickname)
+      socket.emit('current_token_positions', room)
+  }
+
     handleSubmit (e) {
         e.preventDefault()
         const sender = this.props.user.nickname
@@ -21,11 +27,6 @@ class RoomMessages extends Component {
         e.target.content.value = ''
     }
 
-    componentDidMount () {
-        const room = this.props.roomPath
-        socket.emit('joinroom', room, this.props.user.nickname)
-        socket.emit('current_token_positions', room)
-    }
 
     componentWillUnmount () {
         const room = this.props.roomPath
@@ -51,7 +52,7 @@ class RoomMessages extends Component {
                 </div>
                 <br/>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" name="content"/>
+                    <input className="msg-input" type="text" name="content"/>
                     <button type="submit"> Enter </button>
                 </form>
             </div>

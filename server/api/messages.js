@@ -16,14 +16,14 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     Message.create(req.body)
     .then(posted => {
-        Message.findOne({
+        return Message.findOne({
           where: {id:posted.id},
           include: [{model: User, attributes: ['nickname']}]
         })
-        .then(message => {
-          res.status(201)
-          res.json(message)
-        })
+    })
+    .then(message => {
+      res.status(201)
+      res.json(message)
     })
     .catch(next)
 })
