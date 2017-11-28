@@ -4,9 +4,6 @@ import {connect} from 'react-redux'
 import { fetchRoomList, createRoom } from '../store'
 import { Link } from 'react-router-dom'
 
-/**
- * COMPONENT
- */
 class RoomList extends Component {
   constructor(props) {
     super(props)
@@ -23,17 +20,17 @@ class RoomList extends Component {
   }
 
 
-
   render () {
     return (
       <div className="item-lobby-rooms">
         <h3>Room List</h3>
         <div>
-          {
-            this.props.allRooms.map((room, idx) => (
-              <Link to={`/room/${room.id}`} key={idx}><div>{`${room.name} - ${room.game}`}</div></Link>
-            ))
-          }
+        {
+          this.props.allRooms.map((room, idx) => 
+          (
+            <Link to={`/room/${room.id}`} key={idx}><div>{`${room.name} - ${room.game}`}</div></Link>
+          ))
+        }
         </div>
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="name" placeholder="Enter Room Name" />
@@ -47,9 +44,7 @@ class RoomList extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
+
 const mapState = (state) => {
   return {
     allRooms: state.rooms,
@@ -70,9 +65,6 @@ const mapDispatch = (dispatch) => {
 
 export default connect(mapState, mapDispatch)(RoomList)
 
-/**
- * PROP TYPES
- */
 RoomList.propTypes = {
   allRooms: PropTypes.array
 }

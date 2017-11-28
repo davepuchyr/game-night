@@ -35,7 +35,6 @@ function colorDispatcher(coords, color){
 }
 
 socket.on('connect', () => {
-  console.log('Connected!')
 
   //updateOnlineUsers
   socket.on('updateOnlineUsers', onlineUsers => {

@@ -20,10 +20,10 @@ export const addMessage = message => ({type: NEW_MESSAGE, message})
  * REDUCER
  */
 export default function (state = allMessages, action) {
-    switch (action.type) {
-      case NEW_MESSAGE:
-        return [...state, action.message]
-      default:
-        return state
-    }
+  switch (action.type) {
+    case NEW_MESSAGE:
+      return [...state, action.message]
+    default:
+      return state
   }
+}

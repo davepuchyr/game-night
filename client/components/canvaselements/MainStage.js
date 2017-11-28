@@ -21,7 +21,7 @@ class MainStage extends React.Component {
       canvas: null,
       context: null,
       isDrawing: false,
-      mode: "brush",
+      mode: 'brush',
     }
 
     this.moveStageOnHover = this.moveStageOnHover.bind(this)
@@ -39,8 +39,8 @@ class MainStage extends React.Component {
         backgroundImage: image
       })
     }
-    document.addEventListener("keydown", this.handleKeyDown);
-    document.addEventListener("keyup", this.handleKeyUp);
+    document.addEventListener('keydown', this.handleKeyDown);
+    document.addEventListener('keyup', this.handleKeyUp);
   }
 
   handleKeyDown (e) {
@@ -66,11 +66,10 @@ class MainStage extends React.Component {
   handleDragEnd (e) {
     let newX = 0 - e.evt.x
     let newY = 0 - e.evt.y
-    console.log('OUR OFFSET NUMBERS ARE ', newX, newY)
     this.setState({dragOffSet: [newX, newY]})
   }
 
-
+  
   render() {
     const { canvas } = this.state;
     const { black, red, green, blue } = this.props.tokens
@@ -157,6 +156,7 @@ class MainStage extends React.Component {
     );
   }
 }
+
 
 const mapState = (state) => {
   return {

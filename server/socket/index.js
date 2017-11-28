@@ -111,7 +111,7 @@ module.exports = (io) => {
     /*
     * SEND EVERY INVITES AVAIALABLE
     */
-    socket.on('retreiveInvites', () => {
+    socket.on('retrieveInvites', () => {
       io.sockets.emit('storeInvitations', invitations)
     })
 
