@@ -49,7 +49,7 @@ class Room extends Component {
   }
 
   handleMouseUp() {
-    this.props.delete(this.state.toDelete, this.state.group, this.props.match.params.roomid)
+    this.props.delete(this.state.toDelete, this.state.group, this.props.routeProps.match.params.roomid)
   }
 
   handleDieClick(e){
