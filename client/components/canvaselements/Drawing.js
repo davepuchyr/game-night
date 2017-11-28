@@ -75,7 +75,7 @@ class Drawing extends Component {
   draw (stroke) {
     let { context, mode } = this.state;
     const {firstPos, secondPos } = stroke
-    context.strokeStyle = "#df4b26";
+    context.strokeStyle = "black";
     context.lineJoin = "round";
     context.lineWidth = 5;
     context.beginPath();

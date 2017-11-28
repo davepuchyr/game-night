@@ -67,6 +67,9 @@ module.exports = (io) => {
         }
         io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
         io.sockets.to(room).emit('current_tokens', token_positions[roomId])
+        if (draws[roomId]) {
+          socket.emit('initial_draws', draws[roomId])
+        }
       })
 
       /*

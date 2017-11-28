@@ -87,6 +87,12 @@ socket.on('connect', () => {
   socket.on('add_draw', stroke => {
     store.dispatch(addDraws(stroke))
   })
+
+  socket.on('initial_draws', draws => {
+    draws.forEach(stroke => {
+      store.dispatch(addDraws(stroke))
+    })
+  })
 })
 
 export default socket
