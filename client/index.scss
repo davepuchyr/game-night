@@ -43,11 +43,40 @@ body {
   input[type=text] .msg-input {
     width: 100%;
   }
+
+  #dice {
+    position: absolute;
+    opacity: 0;
+
+    #dice-container {
+
+      .center_field {
+        z-index: 102;
+        opacity: 0;
+      }
+      .center_field.show {
+        z-index: 102;
+        opacity: 1;
+      }
+      #canvas {
+        opacity: 0;
+      }    
+      #canvas.show {
+        z-index: 101;
+        opacity: 1;
+      }
+    }
+  }
+  #dice.show {
+    z-index: 101;
+    opacity: 1;
+  }
 }
 // 
 
 #app {
   width: 100%;
+  z-index: 1;
 }
 
 .dragImg {
@@ -226,6 +255,10 @@ canvas {
 
 #room-message-component form {
   display: flex;
+}
+
+.container-main {
+  height: 1000em;
 }
 
 #trash-can {

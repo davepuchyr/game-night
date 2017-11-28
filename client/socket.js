@@ -50,6 +50,7 @@ socket.on('connect', () => {
 
   //adding messages
   socket.on('addMessage', message => {
+    console.log(message)
     store.dispatch(addMessage(message))
   })
 
