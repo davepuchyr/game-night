@@ -1,6 +1,8 @@
 import io from 'socket.io-client'
 
 import store, {
+  getInvitations,
+  getInvite,
   getOnlineUsers,
    newMessage,
    addMessage,
@@ -70,6 +72,15 @@ socket.on('connect', () => {
   //moving tokens within the room
   socket.on('moved', (newCoords, color) => {
     colorDispatcher(newCoords, color)
+  })
+
+  // user received an invite
+  socket.on('invite', room => {
+    store.dispatch(getInvite(room))
+  })
+  // user received an invite
+  socket.on('storeInvitations', invites => {
+    store.dispatch(getInvitations(invites))
   })
 
   socket.on('add_group_image', image => {

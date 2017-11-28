@@ -12,24 +12,26 @@ export class Messages extends React.Component {
       this.state = { messageInput: '' }
   }
 
-  componentWillMount(){
+  componentDidMount(){
       this.props.getMessages()
   }
 
   render(){
     const { user, messages, newMessage } = this.props
-
+    console.log('LINE21', messages)
     return (
         <div className="item-lobby-messages">
             <h3>All Chat</h3>
             <div className="item-lobby-messages-items">
             {
             messages.length?
-                messages.map(message =>
-                  <div key={message.id}>
-                    <p className="message-line"><strong>{message.user.nickname || 'Unknown'}</strong> : {message.content}</p>
-                  </div>
-                )
+                messages.map(message => {
+                    return message.hasOwnProperty('user') ?
+                        (<div key={message.id}>
+                         <p className="message-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
+                        </div>) :
+                        null
+                    })
                 :
                 <div> No messages right now </div>
             }

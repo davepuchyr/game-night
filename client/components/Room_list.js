@@ -10,13 +10,11 @@ import { Link } from 'react-router-dom'
 class RoomList extends Component {
   constructor(props) {
     super(props)
-
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount () {
     this.props.getRooms()
-    
   }
 
   handleSubmit(event) {

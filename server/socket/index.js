@@ -1,13 +1,18 @@
 
-const onlineUsers = {}
+const onlineUsers = {} // SOCKETID : USERID
 const token_positions = {}
+const invitations = {} // USERID : ROOM
 const group_pictures = {}
+<<<<<<< HEAD
 const draws = {}
+=======
+>>>>>>> 40d52903afc8c30cad874465b292d31c3864cc24
 
 
 module.exports = (io) => {
   io.on('connection', (socket) => {
     let socketId = socket.id
+
     /*
     * NEW USERS
     */
@@ -24,7 +29,8 @@ module.exports = (io) => {
     * NEW MESSAGES
     */
     socket.on('new_message', (message) => {
-      socket.broadcast.emit('received_new_message', message)
+      // socket.broadcast.emit('received_new_message', message)
+      io.sockets.to('/lobby').emit('received_new_message', message)
     })
 
     /*
@@ -61,6 +67,7 @@ module.exports = (io) => {
           'blue': [650, 650]
         }
       }
+<<<<<<< HEAD
       socket.join(room)
         if (group_pictures[roomId]) {
           io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
@@ -71,43 +78,55 @@ module.exports = (io) => {
           socket.emit('initial_draws', draws[roomId])
         }
       })
+=======
+    socket.join(room)
+      if (group_pictures[roomId]) {
+        io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
+      }
+      io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
+      io.sockets.to(room).emit('current_tokens', token_positions[roomId])
+    })
+>>>>>>> 40d52903afc8c30cad874465b292d31c3864cc24
 
-      /*
-      * GET ROOM MESSAGE
-      */
-      socket.on('postRoomMessage', (message, room) => {
-        socket.broadcast.to(room).emit('addMessage', message)
-      })
+    /*
+    * GET ROOM MESSAGE
+    */
+    socket.on('postRoomMessage', (message, room, nickname) => {
+      socket.broadcast.to(room).emit('addMessage', message)
+    })
 
-      /*
-      * LEAVE ROOM
-      */
-      socket.on('leaveroom', (room, nickname) => {
-        io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
-        socket.leave(room)
+    /*
+    * INVITATION RECEIVED AND NOW SEND TO EACH USER
+    */
+    socket.on('invite', (listOfUsers, room) => {
+      const invite = listOfUsers.map(userId => {
+        invitations[userId] = room
+        return Object.keys(onlineUsers).find(key => onlineUsers[key].id === userId)
       })
+      invite.forEach(friend => {
+        io.sockets.to(friend).emit('invite', room)
+      })
+      socket.broadcast.emit('storeInvitations', invitations)
+    })
 
-      /*
-      * ADDING GROUP PICS
-      */
-      socket.on('new_group_image', (image) => {
-        const { room } = image
-        group_pictures[room] ?
-          group_pictures[room].push(image) :
-          group_pictures[room] = [image]
-        io.sockets.to(`/room/${room}`).emit('add_group_image', image)
-      })
+    /*
+    * REMOVE INVITE
+    */
+    socket.on('removeInvite', (userId, room) => {
+      for(let id in invitations){
+        if((+id) === userId && invitations[id] === room){
+          delete invitations[id]
+        }
+      }
+      socket.broadcast.emit('storeInvitations', invitations)
+    })
 
-      /*
-      * DELETING GROUP PICS
-      */
-      socket.on('delete_group_image', (imageUrl, roomId) => {
-        let updatePictureArr = group_pictures[roomId].filter(image => {
-          if (image.url === imageUrl) return false
-          return true
-        })
-        group_pictures[roomId] = updatePictureArr
-      })
+    /*
+    * SEND EVERY INVITES AVAIALABLE
+    */
+    socket.on('retreiveInvites', () => {
+      io.sockets.emit('storeInvitations', invitations)
+    })
 
       /*
       * ADDING DRAW
@@ -122,18 +141,60 @@ module.exports = (io) => {
         socket.broadcast.to(`/room/${stroke.room}`).emit('add_draw', stroke)
       })
 
-      /*
-      * LOGOUT
-      */
-      socket.on('disconnect', () => {
-        console.log(`Connection ${socket.id} has left the building`)
+   /*
+    * LEAVE ROOM
+    */
+    socket.on('leaveroom', (room, nickname) => {
+      io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
+      socket.leave(room)
+    })
+    
+    /*
+    * DICE RESULT
+    */
+    socket.on('die_result', (result, dieType, room, user) => {
+      let splitted = result.split(' ')
+      let rolledResult = splitted[splitted.length-1]
 
-        delete onlineUsers[socketId]
+      let message = `[${user}] has rolled (${dieType}) and got ${rolledResult}!!!`
 
-        const simpleUserArr = Object.values(onlineUsers)
+      io.sockets.to(room).emit('addMessage', {['Die Master']: message})
+    })
 
-        io.sockets.emit('updateOnlineUsers', simpleUserArr)
-        // socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
+    /*
+    * ADDING GROUP PICS
+    */
+    socket.on('new_group_image', (image) => {
+      const { room } = image
+      group_pictures[room] ?
+        group_pictures[room].push(image) :
+        group_pictures[room] = [image]
+      io.sockets.to(`/room/${room}`).emit('add_group_image', image)
+    })
+
+    /*
+    * DELETING GROUP PICS
+    */
+    socket.on('delete_group_image', (imageUrl, roomId) => {
+      let updatePictureArr = group_pictures[roomId].filter(image => {
+        if (image.url === imageUrl) return false
+        return true
       })
+      group_pictures[roomId] = updatePictureArr
+    })
+
+    /*
+    * LOGOUT
+    */
+    socket.on('disconnect', () => {
+      console.log(`Connection ${socket.id} has left the building`)
+
+      delete onlineUsers[socketId]
+
+      const simpleUserArr = Object.values(onlineUsers)
+
+      io.sockets.emit('updateOnlineUsers', simpleUserArr)
+      // socket.broadcast.emit('updateOnlineUsers', simpleUserArr)
+    })
   })
 }

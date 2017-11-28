@@ -43,11 +43,40 @@ body {
   input[type=text] .msg-input {
     width: 100%;
   }
+
+  #dice {
+    position: absolute;
+    opacity: 0;
+
+    #dice-container {
+
+      .center_field {
+        z-index: 102;
+        opacity: 0;
+      }
+      .center_field.show {
+        z-index: 102;
+        opacity: 1;
+      }
+      #canvas {
+        opacity: 0;
+      }    
+      #canvas.show {
+        z-index: 101;
+        opacity: 1;
+      }
+    }
+  }
+  #dice.show {
+    z-index: 101;
+    opacity: 1;
+  }
 }
-// 
+//
 
 #app {
   width: 100%;
+  z-index: 1;
 }
 
 .dragImg {
@@ -65,17 +94,24 @@ body {
 	&-lobby {
 			padding: .5em;
 			display: -webkit-flex;
-			display: flex;
+			display: block;
 			justify-content: space-between;
 			align-items: flex-start;
 			margin: 0em 1em 0em 1em;
-	}
+
+    &-bottom{
+      padding: .5em;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 0em 1em 0em 1em;
+    }
+  }
 }
 
-
-
 .item {
-  
+
   &-lobby {
 
     &-onlineUsers {
@@ -111,13 +147,34 @@ body {
         display: -webkit-flex;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start; 
+        justify-content: flex-start;
         width: 100%;
       }
+    }
+    &-invitations {
+      display: -webkit-flex;
+      display: block;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: column;
+      flex-grow: 1;
+        h3 {
+          text-align: center;
+        }
+        a {
+          text-align: center;
+        }
     }
   }
 }
 
+.item-lobby-messages-line {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
 
 .message-line {
   font-size: 1rem;
@@ -196,6 +253,62 @@ canvas {
   z-index: 100;
   border-style: solid;
   padding: 1em;
+
+    &-option {
+      display: -webkit-flex;
+      display:flex;
+
+    }
+}
+
+.invitation-form-background {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 50px
+}
+
+.invitation-form-background-box{
+      border: 6px solid black;
+      border-radius: 5px;
+      background: #fff;
+      max-width: 500px;
+      min-height: 300px;
+      width: 400px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin: 0px auto;
+      padding: 2em;
+      text-align: center;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+}
+
+#inviteFormSubmitBtn {
+    width: 12%;
+    display: inline-block;
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    border: none;
+    height: 2.5em;
+}
+
+
+#invitationlist {
+    display: flex;
+    justify-content: space-between;
+
+    &-nicknamelist{
+      flex-direction: column;
+    }
+    &-invitedlist{
+      flex-direction: column;
+    }
 }
 
 #room-container {
@@ -209,9 +322,13 @@ canvas {
 }
 
 #room-message-component button {
-  height: 3em;
-  width: 12%;
-  margin-left: 1em;
+    width: 12%;
+    display: inline-block;
+    background: teal;
+    color: #fff;
+    font-weight: 100;
+    border: none;
+    height: 2.5em;
 }
 
 #room-message-component h3 {
@@ -221,11 +338,15 @@ canvas {
 #message-view {
   height: 65%;
   overflow-y: auto;
-  overflow: scroll;
+  overflow-x: auto;
 }
 
 #room-message-component form {
   display: flex;
+}
+
+.container-main {
+  height: 1000em;
 }
 
 #trash-can {
