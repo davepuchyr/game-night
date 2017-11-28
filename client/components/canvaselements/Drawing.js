@@ -10,7 +10,8 @@ class Drawing extends Component {
     this.state = {
       isDrawing: false,
       mode: "brush",
-      newDraw: []
+      newDraw: [],
+      drawsReceived: []
     }
     this.draw = this.draw.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
@@ -25,12 +26,8 @@ class Drawing extends Component {
     this.setState({ canvas, context });
   }
 
-  componentDidUpdate () {
-    console.log("I RECEIVED PROPS IN COMPONENT WILL RECEIVE PROPS")
-    this.props.draws.forEach(stroke => {
-      console.log('I RECEIVED PROPS ', stroke)
-      this.draw(stroke, false)
-    })
+  componentWillReceiveProps () {
+    if (this.props.draws.length) this.draw(this.props.draws[this.props.draws.length-1])
   }
 
   handleMouseDown = () => {
@@ -42,7 +39,7 @@ class Drawing extends Component {
   };
 
   handleMouseUp = () => {
-    socket.emit('new_draw', this.state.newDraw)
+    // socket.emit('new_draw', this.state.newDraw)
     this.setState({ isDrawing: false });
   };
 
@@ -70,7 +67,8 @@ class Drawing extends Component {
         y: pos.y - stage.y()
       };
       this.draw({firstPos, secondPos}, true)
-      this.setState({newDraw: [...this.state.newDraw, {firstPos, secondPos, room: this.props.roomId}]})
+      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId})
+      // this.setState({newDraw: [...this.state.newDraw, {firstPos, secondPos, room: this.props.roomId}]})
     }
   }
 

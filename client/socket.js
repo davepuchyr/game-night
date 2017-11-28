@@ -9,7 +9,7 @@ import store, {
    move_green,
    move_blue,
    addImage,
-   addDraw,
+   addDraws,
   } from './store'
 
 const socket = io(window.location.origin)
@@ -85,7 +85,7 @@ socket.on('connect', () => {
   })
 
   socket.on('add_draw', stroke => {
-    store.dispatch(addDraw(stroke))
+    store.dispatch(addDraws(stroke))
   })
 })
 

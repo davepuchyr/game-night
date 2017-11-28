@@ -109,12 +109,12 @@ module.exports = (io) => {
       /*
       * ADDING DRAW
       */
-      socket.on('new_draw', (strokeArr) => {
-        draws[strokeArr[0].room] ? [...draws[strokeArr[0].room], ...strokeArr]
+      socket.on('new_draw', (stroke) => {
+        console.log(stroke)
+        draws[stroke.room] ? draws[stroke.room].push(stroke)
         :
-        draws[strokeArr[0].room] = strokeArr
-        console.log('DRAWS IN THE SERVER ARE ', draws)
-        socket.broadcast.to(`/room/${strokeArr[0].room}`).emit('add_draw', strokeArr)
+        draws[stroke.room] = [stroke]
+        socket.broadcast.to(`/room/${stroke.room}`).emit('add_draw', stroke)
       })
 
       /*
