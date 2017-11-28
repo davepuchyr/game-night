@@ -72,6 +72,7 @@ const mapDispatch = (dispatch) => {
       },
       newMessage: (userId, content) => {
           let info = { userId, content }
+          console.log('1) MESSAGE COMPONENT - post message')
           dispatch(postMessage(info))
       }
     }
