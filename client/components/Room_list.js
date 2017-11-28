@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -22,11 +23,11 @@ class RoomList extends Component {
 
   render () {
     return (
-      <div className="item-lobby-rooms">
+      <div className="container-lobby-bottom-rooms">
         <h3>Room List</h3>
         <div>
         {
-          this.props.allRooms.map((room, idx) => 
+          this.props.allRooms.map((room, idx) =>
           (
             <Link to={`/room/${room.id}`} key={idx}><div>{`${room.name} - ${room.game}`}</div></Link>
           ))

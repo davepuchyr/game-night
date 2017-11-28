@@ -1,0 +1,61 @@
+@mixin lobby-config($flex, $direction, $grow, $content, $align, $font, $width){
+  display: -webkit-flex;
+  display: $flex;
+  flex-direction: $direction;
+  flex-grow: $grow;
+  justify-content: $content;
+  align-items: $align;
+  font-size: $font;
+  width: $width;
+}
+
+@mixin form () {
+  padding: 10px;
+  margin: 5px;
+  border-color: #99AAB5;
+  border-style: groove;
+}
+
+.container {
+  width: 100%;
+
+  &-nav {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  &-lobby {
+    @include lobby-config(block,inherit,0,space-between,flex-start,inherit,auto);
+    padding: .5em;
+    margin: 0em 1em 0em 1em;
+
+    &-bottom {
+      @include lobby-config(flex,inherit,0,space-between,flex-start,inherit,auto);
+      padding: .5em;
+      margin: 0em 1em 0em 1em;
+
+      &-invitations {
+        text-align: center;
+      }
+
+      &-rooms {
+        @include lobby-config(flex,column,1,inherit,center,inherit,100%);
+        form { @include form() }
+      }
+
+      &-messages {
+        h3 {
+          text-align: center;
+        }
+        @include lobby-config(flex,column,3,flex-start,inherit,inherit,100%);
+         form { @include form() }
+      }
+
+      &-onlineUsers {
+        @include lobby-config(flex,column,1,inherit,center,inherit,100%);
+      }
+
+    }
+  }
+}
+

@@ -1,3 +1,5 @@
+@import 'lobby';
+
 body {
   font-family: sans-serif;
   display: flex;
@@ -60,7 +62,7 @@ body {
       }
       #canvas {
         opacity: 0;
-      }    
+      }
       #canvas.show {
         z-index: 101;
         opacity: 1;
@@ -72,7 +74,6 @@ body {
     opacity: 1;
   }
 }
-//
 
 #app {
   width: 100%;
@@ -83,102 +84,6 @@ body {
   z-index: -10;
 }
 
-.container {
-	width: 100%;
-
-	&-nav {
-		display: -webkit-flex;
-		display: flex;
-	}
-
-	&-lobby {
-			padding: .5em;
-			display: -webkit-flex;
-			display: block;
-			justify-content: space-between;
-			align-items: flex-start;
-			margin: 0em 1em 0em 1em;
-
-    &-bottom{
-      padding: .5em;
-      display: -webkit-flex;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin: 0em 1em 0em 1em;
-    }
-  }
-}
-
-.item {
-
-  &-lobby {
-
-    &-onlineUsers {
-      display: -webkit-flex;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
-      flex-grow: 1;
-    }
-
-    &-rooms {
-      display: -webkit-flex;
-      display: flex;
-      justify-content: flex-start;
-      flex-direction: column;
-      align-items: flex-start;
-      align-content: center;
-      flex-grow: 1;
-
-
-    }
-
-    &-messages {
-      display: -webkit-flex;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      flex-grow: 2;
-
-      &-line {
-        display: -webkit-flex;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        width: 100%;
-      }
-    }
-    &-invitations {
-      display: -webkit-flex;
-      display: block;
-      justify-content: flex-start;
-      align-items: center;
-      flex-direction: column;
-      flex-grow: 1;
-        h3 {
-          text-align: center;
-        }
-        a {
-          text-align: center;
-        }
-    }
-  }
-}
-
-.item-lobby-messages-line {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-.message-line {
-  font-size: 1rem;
-}
 
 #main, #app {
   width: 100%;

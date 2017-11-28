@@ -17,16 +17,16 @@ export class Messages extends React.Component {
   render(){
     const { user, messages, newMessage } = this.props
     return (
-      <div className="item-lobby-messages">
+      <div className="container-lobby-bottom-messages">
         <h3>All Chat</h3>
-        <div className="item-lobby-messages-items">
+        <div className="container-lobby-bottom-messages-items">
         {
           messages.length ?
             messages.map(message => {
               return message.hasOwnProperty('user') ?
                 (
                 <div key={message.id}>
-                  <p className="message-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
+                  <p className="container-lobby-bottom-messages-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
                 </div>
                 ) :
                 null
