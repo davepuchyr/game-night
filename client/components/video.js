@@ -4,7 +4,7 @@ import history from '../history'
 
 class Video extends Component {
 
- constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
         users: {},
@@ -12,10 +12,9 @@ class Video extends Component {
     }
     this.addVideo = this.addVideo.bind(this)
     this.removeVideo = this.removeVideo.bind(this)
- }
+  }
 
- addVideo (video, peer) {
-    console.log('video added', peer);
+  addVideo (video, peer) {
     //copy current users object
     let currentUsersObj = Object.assign({}, this.state.users)    
     let userLocalIdx
@@ -37,23 +36,22 @@ class Video extends Component {
     currentUsersObj[peer.id] = userLocalIdx
     this.setState({users: currentUsersObj})
 
-    console.log('current user object is ', currentUsersObj)
     //create video element
-    var remotes = document.getElementById('remotes');
+    var remotes = document.getElementById('remotes')
     if (remotes) {
-        var container = document.createElement('div');
-        container.className = 'videoContainer';
-        container.id = 'container_' + userLocalIdx;
-        container.appendChild(video);
+      var container = document.createElement('div')
+      container.className = 'videoContainer'
+      container.id = 'container_' + userLocalIdx
+      container.appendChild(video)
 
-        // suppress contextmenu
-        video.oncontextmenu = function () { return false; };
+      // suppress contextmenu
+      video.oncontextmenu = function () { return false; }
 
-        remotes.appendChild(container);
+      remotes.appendChild(container)
     }
-}
+  }
 
-removeVideo(video, peer) {
+  removeVideo(video, peer) {
     //get the user's position
     const userLocalIdx = this.state.users[peer.id]
 
@@ -66,42 +64,40 @@ removeVideo(video, peer) {
     newOpenSpaces.sort()
     this.setState({users: currentUsersObj, openVideoSpace: newOpenSpaces})
 
-
-    console.log('video removed ', peer);
-    console.log('current user object is ', currentUsersObj)
-    var remotes = document.getElementById('remotes');
-    var el = document.getElementById(peer ? 'container_' + userLocalIdx : 'localScreenContainer');
+    var remotes = document.getElementById('remotes')
+    var el = document.getElementById(peer ? 'container_' + userLocalIdx : 'localScreenContainer')
     if (remotes && el) {
-        remotes.removeChild(el);
+      remotes.removeChild(el)
     }
-}
+  }
 
- render(props) {
-    //instantiate webrtc
+
+  render(props) {
+  //instantiate webrtc
     const webrtc = new simplewebrtc({
-        localVideoEl: 'localVideo',
-        remoteVideosEl: '',
-        autoRequestMedia: true,
-    });
+      localVideoEl: 'localVideo',
+      remoteVideosEl: '',
+      autoRequestMedia: true,
+    })
 
     //join room
     webrtc.on('readyToCall', () => {
-        webrtc.joinRoom(history.location.pathname)
-    });
+      webrtc.joinRoom(history.location.pathname)
+    })
 
     //addvideo
-    webrtc.on('videoAdded', (video, peer) => this.addVideo(video, peer));
+    webrtc.on('videoAdded', (video, peer) => this.addVideo(video, peer))
 
     //remove video
     webrtc.on('videoRemoved', (video, peer) => this.removeVideo(video, peer))
 
-     return (
-         <div id="remotes">
-            <video id="localVideo">
-            </video>
-        </div>
-     )
- };
+    return (
+      <div id="remotes">
+        <video id="localVideo">
+        </video>
+      </div>
+    )
+  };
 }
 
 export default Video

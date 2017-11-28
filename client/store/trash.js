@@ -21,12 +21,12 @@ export const stopDragging = () => ({type: STOP_DRAGGING, dragging: {bool: false,
  */
 
 export default function (state = dragging, action) {
-    switch (action.type) {
-      case START_DRAGGING:
-        return action.dragging
-      case STOP_DRAGGING:
-        return action.dragging
-      default:
-        return state
-    }
+  switch (action.type) {
+    case START_DRAGGING:
+      return action.dragging
+    case STOP_DRAGGING:
+      return action.dragging
+    default:
+      return state
   }
+}

@@ -22,6 +22,7 @@ export const deleteImage = imageUrl => ({type: DELETE_IMAGE, imageUrl})
  * REDUCER
  */
 export default function (state = images, action) {
+<<<<<<< HEAD
     switch (action.type) {
       case ADD_IMAGE:
         return [...state, action.image]
@@ -33,3 +34,28 @@ export default function (state = images, action) {
         return state
     }
   }
+=======
+  switch (action.type) {
+    case ADD_IMAGE:
+      return [...state, action.image]
+    case UPDATE_IMAGE:
+      let stateCopy = state.filter(image => {
+        if (image.url === action.updatedImage.url){
+          return false
+        }
+        return true
+      })
+      return [...stateCopy, action.updatedImage]
+    case DELETE_IMAGE: 
+      let stateCopy2 = state.filter(image => {
+        if (image.url === action.imageUrl){
+          return false
+        }
+        return true
+      })
+      return [...stateCopy2]
+    default:
+      return state
+  }
+}
+>>>>>>> staging

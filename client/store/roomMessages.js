@@ -1,6 +1,3 @@
-import axios from 'axios'
-import socket from '../socket'
-
 /**
  * ACTION TYPES
  */
@@ -20,10 +17,10 @@ export const addMessage = message => ({type: ADD_MESSAGE, message})
  * REDUCER
  */
 export default function (state = allMessages, action) {
-    switch (action.type) {
-      case ADD_MESSAGE:
-        return [...state, action.message]
-      default:
-        return state
-    }
+  switch (action.type) {
+    case ADD_MESSAGE:
+      return [...state, action.message]
+    default:
+      return state
   }
+}

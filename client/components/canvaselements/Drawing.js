@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { render } from "react-dom";
-import { connect } from "react-redux"
-import { Stage, Layer, Rect, Image, Group } from "react-konva";
+import { render } from 'react-dom'
+import { connect } from 'react-redux'
+import { Stage, Layer, Rect, Image, Group } from 'react-konva';
 import socket from '../../socket'
 
 class Drawing extends Component {
@@ -9,7 +9,7 @@ class Drawing extends Component {
     super(props)
     this.state = {
       isDrawing: false,
-      mode: "brush",
+      mode: 'brush',
       newDraw: [],
       drawsReceived: []
     }
@@ -18,13 +18,13 @@ class Drawing extends Component {
   }
 
   componentDidMount() {
-    const canvas = document.createElement("canvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const context = canvas.getContext("2d");
-    document.addEventListener("keydown", this.handleKeyDown);
-    document.addEventListener("keyup", this.handleKeyUp);
-    this.setState({ canvas, context });
+    const canvas = document.createElement('canvas')
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+    const context = canvas.getContext('2d')
+    document.addEventListener('keydown', this.handleKeyDown)
+    document.addEventListener('keyup', this.handleKeyUp)
+    this.setState({ canvas, context })
   }
 
 
@@ -35,7 +35,7 @@ class Drawing extends Component {
   }
 
   handleMouseDown = () => {
-    if (this.props.shift || this.props.alt) this.setState({ isDrawing: true, newDraw: []});
+    if (this.props.shift || this.props.alt) this.setState({ isDrawing: true, newDraw: []})
 
     // TODO: improve
     const stage = this.image.parent.parent;
@@ -44,12 +44,12 @@ class Drawing extends Component {
 
   handleMouseUp = () => {
     // socket.emit('new_draw', this.state.newDraw)
-    this.setState({ isDrawing: false });
+    this.setState({ isDrawing: false })
   };
 
   handleMouseMove = () => {
     // console.log('mousemove');
-    let { context, isDrawing, mode } = this.state;
+    let { context, isDrawing, mode } = this.state
 
     if (isDrawing) {
 
@@ -59,17 +59,17 @@ class Drawing extends Component {
       // } else if (mode === "eraser") {
       //   context.globalCompositeOperation = "destination-out";
       // }
-      let stage = this.image.parent.parent;
+      let stage = this.image.parent.parent
       let firstPos = {
         x: this.lastPointerPosition.x - stage.x(),
         y: this.lastPointerPosition.y - stage.y()
-      };
-      let pos = stage.getPointerPosition();
-      this.lastPointerPosition = pos;
+      }
+      let pos = stage.getPointerPosition()
+      this.lastPointerPosition = pos
       let secondPos = {
         x: pos.x - stage.x(),
         y: pos.y - stage.y()
-      };
+      }
       let erase = this.props.alt
       this.draw({firstPos, secondPos, erase})
       socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId, erase })
@@ -81,23 +81,23 @@ class Drawing extends Component {
     let { context } = this.state;
     const {firstPos, secondPos, erase } = stroke
     !erase ?
-    context.globalCompositeOperation = "source-over"
+    context.globalCompositeOperation = 'source-over'
   :
-    context.globalCompositeOperation = "destination-out"
+    context.globalCompositeOperation = 'destination-out'
 
-    context.strokeStyle = "black";
-    context.lineJoin = "round";
-    context.lineWidth = erase ? 10 : 5;
-    context.beginPath();
-    context.moveTo(firstPos.x, firstPos.y);
-    context.lineTo(secondPos.x, secondPos.y);
-    context.closePath();
-    context.stroke();
-    this.image.getLayer().draw();
+    context.strokeStyle = 'black'
+    context.lineJoin = 'round'
+    context.lineWidth = erase ? 10 : 5
+    context.beginPath()
+    context.moveTo(firstPos.x, firstPos.y)
+    context.lineTo(secondPos.x, secondPos.y)
+    context.closePath()
+    context.stroke()
+    this.image.getLayer().draw()
   }
 
   render() {
-    const { canvas } = this.state;
+    const { canvas } = this.state
 
     return (
       <Image
