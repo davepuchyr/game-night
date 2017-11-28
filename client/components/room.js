@@ -48,13 +48,6 @@ class Room extends Component {
       this.setState({ dieClicked: !this.state.dieClicked, rollCount: this.state.rollCount+1 })
     }
 
-    // submitResult(e){
-    //   this.state.dieClicked ? 
-    //     socket.emit('die_result', document.getElementById('label').innerHTML, document.getElementById('set').value, `/room/${this.props.routeProps.match.params.roomid}`, this.props.user.nickname, this.state.rollCount) :
-    //     null
-    //   this.setState({ rollCount: 0 })
-    // }
-
     render() {
         const path = this.props.routeProps.match.url
         return (
@@ -62,22 +55,7 @@ class Room extends Component {
                 <img id="trash-can" src="/trash.png" />
                 <RoomMessages roomPath={path}/>
                 <Drop />
-                <button 
-                className="die-button"
-                onClick={this.handleDieClick.bind(this)}>
-                Roll Die
-                </button>
-                {/* {
-                  this.state.dieClicked ? 
-                  (
-                    <button
-                    id="submit"
-                    onClick={this.submitResult.bind(this)}>
-                    Send Die Result
-                    </button>
-                  ) : 
-                  null
-                } */}
+                <button className="die-button" onClick={this.handleDieClick.bind(this)}>Roll Die</button>
                 <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
                 <MainStage rId={this.props.routeProps.match.params.roomid}/>
