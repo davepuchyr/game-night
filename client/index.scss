@@ -50,23 +50,29 @@ body {
   width: 100%;
 }
 
-.container {
-  width: 100%;
-
-  &-nav {
-    display: -webkit-flex;
-    display: flex;
-  }
-
-  &-lobby {
-    padding: .5em;
-    display: -webkit-flex;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 0em 1em 0em 1em;
-    }
+.dragImg {
+  z-index: -10;
 }
+
+.container {
+	width: 100%;
+
+	&-nav {
+		display: -webkit-flex;
+		display: flex;
+	}
+
+	&-lobby {
+			padding: .5em;
+			display: -webkit-flex;
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin: 0em 1em 0em 1em;
+	}
+}
+
+
 
 .item {
   
@@ -89,6 +95,8 @@ body {
       align-items: flex-start;
       align-content: center;
       flex-grow: 1;
+
+
     }
 
     &-messages {
@@ -190,6 +198,10 @@ canvas {
   padding: 1em;
 }
 
+#room-container {
+  position: relative;
+}
+
 #room-message-component input {
   width: 85%;
   height: 2em;
@@ -220,4 +232,23 @@ canvas {
   width: 5em;
   position: absolute;
   right: 5px;
+  z-index: 150;
+}
+
+#trash-can-hover {
+  background: red;
+  border-radius: 10px
+}
+
+.FileUpload {
+  z-index: 50;
+  margin: 15px;
+}
+
+.drop-group-container {
+  display: flex
+}
+
+.group-dropzone {
+  margin: 10px;
 }
