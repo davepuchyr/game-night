@@ -200,66 +200,13 @@ body {
   // position: fixed;
 }
 
-#localVideo {
-  width: 20%;
-  margin-top: 7.1em;
-  position: absolute;
-  left: 0px;
-  top: 0px;
-}
 
-#container_1 {
-  margin-top: 7.1em;
-  width: 20%;
-  position: absolute;
-  left: calc(100% - 20%);
-  top: 0px;
-}
 
-#container_2 {
-  width: 20%;
-  position: absolute;
-  left: 0;
-  top: calc(100% - 22%);
-}
+// #room-container img {
+//   position: absolute;
+// }
 
-#container_3 {
-  width: 20%;
-  position: absolute;
-  left: calc(100% - 10em);
-  top: calc(100% - 22%);
-}
 
-video {
-  width: 100%;
-  z-index: 20;
-}
-
-#room-container img {
-  position: absolute;
-}
-
-canvas {
-  position: fixed;
-}
-
-#room-message-component {
-  width: 30%;
-  height: 15em;
-  margin-left: 30%;
-  position: absolute;
-  background-color: white;
-  border-width: 2px;
-  z-index: 100;
-  border-style: solid;
-  padding: 1em;
-
-    &-option {
-      display: -webkit-flex;
-      display:flex;
-
-    }
-}
 
 .invitation-form-background {
     position: fixed;
@@ -311,8 +258,106 @@ canvas {
     }
 }
 
-#room-container {
-  position: relative;
+
+#message-view {
+  height: 65%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+// .container-main {
+//   height: 1000em;
+// }
+
+
+// #trash-can-hover {
+//   background: red;
+//   border-radius: 10px
+// }
+
+// .FileUpload {
+//   z-index: 50;
+//   margin: 15px;
+// }
+
+// .drop-group-container {
+//   display: flex
+// }
+
+// .group-dropzone {
+//   margin: 10px;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//ROOM
+.main-canvas {
+  position: absolute;
+  top: 0
+}
+
+.room-container-console {
+  display: flex;
+  width: 64%;
+  margin-left: 18%;
+  margin-right: 18%;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0.5em;
+  justify-content: center;
+
+  &-drop {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+  }
+
+  &-center {
+    flex-grow: 5;
+    flex-direction: column-reverse;
+    align-self: flex-end;
+  }
+
+  &-left, &-right {
+    display: flex;
+    flex-grow: 1;
+    align-self: flex-end;
+    justify-content: center;
+  }
+
+  &-right{
+    margin-left: 30px;
+    flex-direction: column;
+    &-trash {
+
+      & img {
+        display: block;
+        width: 4em;
+        height: 5em;
+        z-index: 150;
+        margin: 10px;
+        }
+    }
+      &-die, &-trash {
+        display: flex;
+        justify-content: center;
+      }
+  }
+
+}
+
+.die-button {
+  z-index: 10;
 }
 
 #room-message-component input {
@@ -335,41 +380,72 @@ canvas {
   margin: 0;
 }
 
-#message-view {
-  height: 65%;
-  overflow-y: auto;
-  overflow-x: auto;
-}
-
 #room-message-component form {
   display: flex;
 }
 
-.container-main {
-  height: 1000em;
+
+#room-message-component {
+  width: 100%;
+  height: 15em;
+  // margin-left: 30%;
+  // position: absolute;
+  background-color: white;
+  border-width: 2px;
+  z-index: 100;
+  border-style: solid;
+  padding: 1em;
+
+    &-option {
+      display: -webkit-flex;
+      display:flex;
+
+    }
 }
 
-#trash-can {
-  width: 5em;
+.file-upload div {
+  margin: 0.4em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+canvas {
+  position: fixed;
+}
+
+#localVideo {
+  width: 20%;
+  margin-top: 7.1em;
   position: absolute;
-  right: 5px;
-  z-index: 150;
+  left: 0px;
+  top: 0px;
 }
 
-#trash-can-hover {
-  background: red;
-  border-radius: 10px
+#container_1 {
+  margin-top: 7.1em;
+  width: 20%;
+  position: absolute;
+  left: calc(100% - 20%);
+  top: 0px;
 }
 
-.FileUpload {
-  z-index: 50;
-  margin: 15px;
+#container_2 {
+  width: 20%;
+  position: absolute;
+  left: 0;
+  top: calc(100% - 22%);
 }
 
-.drop-group-container {
-  display: flex
+#container_3 {
+  width: 20%;
+  position: absolute;
+  left: calc(100% - 10em);
+  top: calc(100% - 22%);
 }
 
-.group-dropzone {
-  margin: 10px;
+video {
+  width: 100%;
+  z-index: 20;
 }

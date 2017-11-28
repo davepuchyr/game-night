@@ -77,26 +77,38 @@ class Room extends Component {
         }
         return (
             <div id="room-container" >
-                <img
-                  id="trash-can"
-                  src={trashCheck ? '/redtrash.png' : '/trash.png'}
-                  onMouseOver={this.handleMouseOver}
-                  onMouseLeave={this.handleMouseLeave}
-                  onMouseUp={this.state.delete ? this.handleMouseUp : null}
-                />
-                <RoomMessages roomPath={path}/>
-                <Drop />
-                <div className="drop-group-container">
-                <DropGroup
-                  className="group-dropzone"
-                  rId={this.props.routeProps.match.params.roomid}
-                />
-                </div>
-                {/* <img src="http://i.imgur.com/uhhfaMZ.png" /> */}
-                <button className="die-button" onClick={this.handleDieClick.bind(this)}>Roll Die</button>
-                {/* <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" /> */}
-                {/* <Video/> */}
                 <MainStage rId={this.props.routeProps.match.params.roomid}/>
+                <div className="room-container-console">
+                    <div className="room-container-console-left">
+                        <div className="room-container-console-drop">
+                            <Drop />
+                            <DropGroup
+                            className="group-dropzone"
+                            rId={this.props.routeProps.match.params.roomid}
+                            />
+                        </div>
+                    </div>
+                    <div className="room-container-console-center">
+                        <div className="room-container-console-messages">
+                            <RoomMessages roomPath={path}/>
+                        </div>
+                    </div>
+                    <div className="room-container-console-right">
+                        <div className="room-container-console-right-die">
+                            <button className="die-button" onClick={this.handleDieClick.bind(this)}>Roll Die</button>
+                        </div>
+                        <div className="room-container-console-right-trash">
+                            <img
+                                id="trash-can"
+                                src={trashCheck ? '/redtrash.png' : '/trash.png'}
+                                onMouseOver={this.handleMouseOver}
+                                onMouseLeave={this.handleMouseLeave}
+                                onMouseUp={this.state.delete ? this.handleMouseUp : null}
+                            />
+                        </div>
+                    </div>
+                </div>
+                {/* <Video/> */}
             </div>
         )
     }

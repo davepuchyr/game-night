@@ -58,18 +58,24 @@ class DropGroup extends Component {
       }
 
     render () {
-        // const dropStyle = {
-        //     width: '20%'
-        // }
+        const dropStyle = {
+            "width": '5em',
+            "height": '5em',
+            "border-width": "2px",
+            "border-color": "rgb(102, 102, 102)",
+            "border-style": "dashed",
+            "border-radius": "5px",
+            "background-color": "rgba(255, 255, 255, 0.8)"
+        }
         return (
-                <div className="FileUpload">
+                <div className="file-upload">
                     <Dropzone
                         name="personal"
                         multiple={false}
                         accept="image/*"
-                        // style={dropStyle}
+                        style={dropStyle}
                         onDrop={this.onImageDrop}>
-                        <p>Add to all players' gameboard</p>
+                        Add Room Image
                     </Dropzone>
                 </div>
         )

@@ -45,14 +45,24 @@ class Drop extends Component {
       }
 
     render () {
+        const dropStyle = {
+            "width": '5em',
+            "height": '5em',
+            "border-width": "2px",
+            "border-color": "rgb(102, 102, 102)",
+            "border-style": "dashed",
+            "border-radius": "5px",
+            "background-color": "rgba(255, 255, 255, 0.8)"
+        }
         return (
-                <div className="FileUpload">
+                <div className="file-upload">
                     <Dropzone
                         name="personal"
                         multiple={false}
                         accept="image/*"
+                        style={dropStyle}                        
                         onDrop={this.onImageDrop}>
-                        <p>Add image to your gameboard</p>
+                        Add Personal Image
                     </Dropzone>
                 </div>
         )
