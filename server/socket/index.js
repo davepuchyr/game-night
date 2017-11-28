@@ -77,6 +77,18 @@ module.exports = (io) => {
       console.log('someone posted a message', message, room)
     })
 
+    /*
+    * DICE RESULT
+    */
+    socket.on('die_result', (result, dieType, room, user) => {
+      let splitted = result.split(' ')
+      let rolledResult = splitted[splitted.length-1]
+
+      let message = `[${user}] has rolled (${dieType}) and got ${rolledResult}!!!`
+
+      io.sockets.to(room).emit('addMessage', {['Die Master']: message})
+    })
+
    /*
     * LEAVE ROOM
     */

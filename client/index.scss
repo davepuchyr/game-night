@@ -47,7 +47,6 @@ body {
   #dice {
     position: absolute;
     opacity: 0;
-    z-index: 101;
 
     #dice-container {
 
@@ -56,18 +55,20 @@ body {
         opacity: 0;
       }
       .center_field.show {
+        z-index: 102;
         opacity: 1;
       }
       #canvas {
-        z-index: 101;
         opacity: 0;
       }    
       #canvas.show {
+        z-index: 101;
         opacity: 1;
       }
     }
   }
   #dice.show {
+    z-index: 101;
     opacity: 1;
   }
 }
@@ -75,6 +76,7 @@ body {
 
 #app {
   width: 100%;
+  z-index: 1;
 }
 
 .container {

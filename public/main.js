@@ -1,6 +1,5 @@
 /*global $t */
 
-"use strict";
 function diceInitialize(container, w, h) {
 
     var canvas = $t.id('canvas');

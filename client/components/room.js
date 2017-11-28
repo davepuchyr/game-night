@@ -5,42 +5,58 @@ import { Video, RoomMessages, MainStage, Drop }from './index'
 import ReactDOM from 'react-dom'
 import socket from '../socket'
 
+
 class Room extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            opacity: false
+            dieClicked: false
         }
     }
 
+    componentDidMount(){
+      document.getElementById('throw').addEventListener('click', () => {
+          setTimeout(()=> {
+            socket.emit('die_result', document.getElementById('label').innerHTML, document.getElementById('set').value, `/room/${this.props.routeProps.match.params.roomid}`, this.props.user.nickname)
+          }, 4000)
+      })
+    }
+
+    //helper function
+    classShow(elements, isShow){
+      isShow ? 
+        Array.prototype.forEach.call(elements, el => el.className+=' show') : 
+        Array.prototype.forEach.call(elements, el => el.className=el.className.replace( /(?:^|\s)show(?!\S)/g , '' ))
+    }
+
+    //roll die button clicked
     handleDieClick(e){
-
-      function classShow(elements, isShow){
-        if(isShow){
-          Array.prototype.forEach.call(elements, el => el.className+=' show')
-        } else {
-          Array.prototype.forEach.call(elements, el => el.className=el.className.replace( /(?:^|\s)show(?!\S)/g , '' ))
-        }
-      }
-
+      //toggle show and not show dice module
       ['dice', 'canvas', 'center_field'].forEach(elem => { 
         let isClass = (elem === 'center_field') ? true : false
-        if(!this.state.opacity){
+        if(!this.state.dieClicked){
           isClass ?
-            classShow(document.getElementsByClassName(elem), true) :
+            this.classShow(document.getElementsByClassName(elem), true) :
             document.getElementById(elem).className+=' show'
+
         } else {
           isClass ? 
-            classShow(document.getElementsByClassName(elem), false) :
+            this.classShow(document.getElementsByClassName(elem), false) :
             document.getElementById(elem).className=document.getElementById(elem).className.replace( /(?:^|\s)show(?!\S)/g , '' )
         }
       })
-
-      this.setState({ opacity: !this.state.opacity })
+      this.setState({ dieClicked: !this.state.dieClicked, rollCount: this.state.rollCount+1 })
     }
 
+    // submitResult(e){
+    //   this.state.dieClicked ? 
+    //     socket.emit('die_result', document.getElementById('label').innerHTML, document.getElementById('set').value, `/room/${this.props.routeProps.match.params.roomid}`, this.props.user.nickname, this.state.rollCount) :
+    //     null
+    //   this.setState({ rollCount: 0 })
+    // }
+
     render() {
-        const path = this.props.match.url
+        const path = this.props.routeProps.match.url
         return (
             <div id="room-container">
                 <img id="trash-can" src="/trash.png" />
@@ -48,56 +64,26 @@ class Room extends Component {
                 <Drop />
                 <button 
                 className="die-button"
-                onClick={this.handleDieClick.bind(this)}
-                >
+                onClick={this.handleDieClick.bind(this)}>
                 Roll Die
                 </button>
+                {/* {
+                  this.state.dieClicked ? 
+                  (
+                    <button
+                    id="submit"
+                    onClick={this.submitResult.bind(this)}>
+                    Send Die Result
+                    </button>
+                  ) : 
+                  null
+                } */}
                 <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" />
                 {/* <Video/> */}
-                <MainStage rId={this.props.match.params.roomid}/>
+                <MainStage rId={this.props.routeProps.match.params.roomid}/>
             </div>
         )
     }
 }
 
 export default Room
-
-
-
-{/* <div id="dice-container" class="svg" style="margin: 0">
-<style type="text/css">@import "/main.css";</style>
-<style type="text/css">@import "/dice.css";</style>   
-<div id="info_div" style="display: none">
-  <div class="center_field">
-    <span id="label"></span>
-  </div>
-  <div class="center_field">
-    <div class="bottom_field">
-      <span id="labelhelp">click to continue or tap and drag again</span>
-    </div>
-  </div>
-</div>
-<div id="selector_div" style="display: none">
-  <div class="center_field">
-    <div id="sethelp">
-    </div>
-  </div>
-  <div class="center_field">
-    <input type="text" id="set" value="1d6"/><br/>
-    <button id="clear">clear</button>
-    <button style="margin-left: 0.6em" id="throw">throw</button>
-  </div>
-</div>
-<div id="canvas" style="width: 200px; height: 200px;"></div>
-</div> */}
-
-
-
-// if(!!this.state.numClicks && !this.state.opacity){
-//     console.log('Here')
-//     const newCanvas = document.createElement('div')
-//     newCanvas.id = 'canvas'
-//     newCanvas.style.width = `${window.innerWidth - 1}px`
-//     newCanvas.style.height = '200px'
-//     document.getElementById('dice-container').appendChild(newCanvas)
-// }

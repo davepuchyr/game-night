@@ -49,6 +49,7 @@ socket.on('connect', () => {
 
   //adding messages
   socket.on('addMessage', message => {
+    console.log(message)
     store.dispatch(addMessage(message))
   })
 
@@ -70,6 +71,11 @@ socket.on('connect', () => {
   socket.on('moved', (newCoords, color) => {
     colorDispatcher(newCoords, color)
   })
+
+  //die master message
+  // socket.on('show_die_result', result => {
+  //   store.dispatch()
+  // })
 })
 
 export default socket
