@@ -12,8 +12,7 @@ class MainStage extends React.Component {
     super(props)
 
     this.state = {
-      // imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
-      imageUrl: 'https://www.mapsofindia.com/worldmap/world-map.jpg',
+      imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
       backgroundImage: null,
       shift: false,
       dragStart: [],
