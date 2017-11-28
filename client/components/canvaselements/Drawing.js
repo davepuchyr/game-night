@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
+import { connect } from "react-redux"
 import { Stage, Layer, Rect, Image, Group } from "react-konva";
+import socket from '../../socket'
 
 class Drawing extends Component {
-  state = {
-    isDrawing: false,
-    mode: "brush"
-  };
+  constructor(props){
+    super(props)
+    this.state = {
+      isDrawing: false,
+      mode: "brush",
+      newDraw: []
+    }
+    this.draw = this.draw.bind(this)
+    this.handleMouseUp = this.handleMouseUp.bind(this)
+  }
 
   componentDidMount() {
     const canvas = document.createElement("canvas");
@@ -17,8 +25,16 @@ class Drawing extends Component {
     this.setState({ canvas, context });
   }
 
+  componentDidUpdate () {
+    console.log("I RECEIVED PROPS IN COMPONENT WILL RECEIVE PROPS")
+    this.props.draws.forEach(stroke => {
+      console.log('I RECEIVED PROPS ', stroke)
+      this.draw(stroke, false)
+    })
+  }
+
   handleMouseDown = () => {
-    if (this.props.shift) this.setState({ isDrawing: true });
+    if (this.props.shift) this.setState({ isDrawing: true, newDraw: []});
 
     // TODO: improve
     const stage = this.image.parent.parent;
@@ -26,47 +42,51 @@ class Drawing extends Component {
   };
 
   handleMouseUp = () => {
+    socket.emit('new_draw', this.state.newDraw)
     this.setState({ isDrawing: false });
   };
 
   handleMouseMove = () => {
     // console.log('mousemove');
-    const { context, isDrawing, mode } = this.state;
+    let { context, isDrawing, mode } = this.state;
 
     if (isDrawing) {
 
       // TODO: Don't always get a new context
-      context.strokeStyle = "#df4b26";
-      context.lineJoin = "round";
-      context.lineWidth = 5;
-
       if (mode === "brush") {
         context.globalCompositeOperation = "source-over";
       } else if (mode === "eraser") {
         context.globalCompositeOperation = "destination-out";
       }
-      context.beginPath();
-
-      const stage = this.image.parent.parent;
-      var localPos = {
+      let stage = this.image.parent.parent;
+      let firstPos = {
         x: this.lastPointerPosition.x - stage.x(),
         y: this.lastPointerPosition.y - stage.y()
       };
-      context.moveTo(localPos.x, localPos.y);
-
-
-      var pos = stage.getPointerPosition();
-      localPos = {
+      let pos = stage.getPointerPosition();
+      this.lastPointerPosition = pos;
+      let secondPos = {
         x: pos.x - stage.x(),
         y: pos.y - stage.y()
       };
-      context.lineTo(localPos.x, localPos.y);
-      context.closePath();
-      context.stroke();
-      this.lastPointerPosition = pos;
-      this.image.getLayer().draw();
+      this.draw({firstPos, secondPos}, true)
+      this.setState({newDraw: [...this.state.newDraw, {firstPos, secondPos, room: this.props.roomId}]})
     }
-  };
+  }
+
+  draw (stroke) {
+    let { context, mode } = this.state;
+    const {firstPos, secondPos } = stroke
+    context.strokeStyle = "#df4b26";
+    context.lineJoin = "round";
+    context.lineWidth = 5;
+    context.beginPath();
+    context.moveTo(firstPos.x, firstPos.y);
+    context.lineTo(secondPos.x, secondPos.y);
+    context.closePath();
+    context.stroke();
+    this.image.getLayer().draw();
+  }
 
   render() {
     const { canvas } = this.state;
@@ -85,4 +105,10 @@ class Drawing extends Component {
   }
 }
 
-export default Drawing
+const mapState = state => {
+  return {
+    draws: state.draws
+  }
+}
+
+export default connect(mapState)(Drawing)

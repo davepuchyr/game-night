@@ -3,7 +3,7 @@ import socket from '../socket'
 /**
  * ACTION TYPES
  */
-const ADD_DRAWS = 'ADD_DRAWS'
+const ADD_DRAW = 'ADD_DRAW'
 
 /**
  * INITIAL STATE
@@ -13,15 +13,15 @@ const draws = []
 /**
  * ACTION CREATORS
  */
-export const getDraws = draws => ({type: ADD_DRAWS, draws})
+export const addDraw = strokeArr => ({type: ADD_DRAW, strokeArr})
 
 /**
  * REDUCER
  */
 export default function (state = draws, action) {
     switch (action.type) {
-      case ADD_DRAWS:
-        return action.draws
+      case ADD_DRAW:
+        return [...state, ...action.strokeArr]
       default:
         return state
     }

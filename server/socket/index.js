@@ -2,7 +2,7 @@
 const onlineUsers = {}
 const token_positions = {}
 const group_pictures = {}
-// const draws = []
+const draws = {}
 
 
 module.exports = (io) => {
@@ -104,6 +104,17 @@ module.exports = (io) => {
           return true
         })
         group_pictures[roomId] = updatePictureArr
+      })
+
+      /*
+      * ADDING DRAW
+      */
+      socket.on('new_draw', (strokeArr) => {
+        draws[strokeArr[0].room] ? [...draws[strokeArr[0].room], ...strokeArr]
+        :
+        draws[strokeArr[0].room] = strokeArr
+        console.log('DRAWS IN THE SERVER ARE ', draws)
+        socket.broadcast.to(`/room/${strokeArr[0].room}`).emit('add_draw', strokeArr)
       })
 
       /*

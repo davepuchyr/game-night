@@ -103,6 +103,7 @@ class MainStage extends React.Component {
             />
           <Drawing
             shift={this.state.shift}
+            roomId={rId}
           />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>
           <HexPiece id={rId} fill={'red'} x={red[0]} y={red[1]}/>

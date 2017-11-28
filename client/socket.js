@@ -3,13 +3,13 @@ import io from 'socket.io-client'
 import store, {
   getOnlineUsers,
    newMessage,
-   getDraws,
    addMessage,
    move_black,
    move_red,
    move_green,
    move_blue,
-   addImage
+   addImage,
+   addDraw,
   } from './store'
 
 const socket = io(window.location.origin)
@@ -82,6 +82,10 @@ socket.on('connect', () => {
       image.entry = true
       store.dispatch(addImage(image))
     })
+  })
+
+  socket.on('add_draw', stroke => {
+    store.dispatch(addDraw(stroke))
   })
 })
 
