@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter, Link, Switch, Route} from 'react-router-dom'
 import {logout} from '../store'
 import Lobby from './Lobby'
-import Room from './room'
+import Room from './Room'
 import socket from '../socket'
 import io from '../../server/socket'
 
@@ -22,7 +22,7 @@ const Main = (props) => {
         {
           isLoggedIn ?
             <div>
-              <h1>GAMENIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1>
+              <h1 id="navbar">GAME NIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1> 
             </div>
             :
             <div>

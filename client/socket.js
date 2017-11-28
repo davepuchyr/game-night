@@ -4,13 +4,14 @@ import store, {
   getInvitations,
   getInvite,
   getOnlineUsers,
-  newMessage,
-  getDraws,
-  addMessage,
-  move_black,
-  move_red,
-  move_green,
-  move_blue
+   newMessage,
+   getDraws,
+   addMessage,
+   move_black,
+   move_red,
+   move_green,
+   move_blue,
+   addImage
   } from './store'
 
 const socket = io(window.location.origin)
@@ -82,6 +83,17 @@ socket.on('connect', () => {
     store.dispatch(getInvitations(invites))
   })
 
+  socket.on('add_group_image', image => {
+    image.entry = true
+    store.dispatch(addImage(image))
+  })
+
+  socket.on('get_group_pics', imgArr => {
+    imgArr.forEach(image => {
+      image.entry = true
+      store.dispatch(addImage(image))
+    })
+  })
 })
 
 export default socket

@@ -2,13 +2,14 @@ import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
-import request from 'superagent'
+import request from 'superagent';
 import { addImage } from '../store'
+import socket from '../socket'
 
 const CLOUDINARY_UPLOAD_PRESET = 'gamenight';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload';
 
-class Drop extends Component {
+class DropGroup extends Component {
     constructor (props){
         super(props)
         // this.state = {
@@ -39,20 +40,36 @@ class Drop extends Component {
             // this.setState({
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
-            this.props.newImage({x: 300, y: 400, personal: true, url: response.body.secure_url, width: response.body.width, height: response.body.height})
+            const image = {
+                x: 300,
+                y: 400,
+                personal: false,
+                url: response.body.secure_url,
+                width: 45,
+                height: 45,
+                originalWidth: response.body.width,
+                originalHeight: response.body.height,
+                room: this.props.rId,
+                user: this.props.user.nickname
+            }
+            socket.emit('new_group_image', image)
           }
         });
       }
 
     render () {
+        // const dropStyle = {
+        //     width: '20%'
+        // }
         return (
                 <div className="FileUpload">
                     <Dropzone
                         name="personal"
                         multiple={false}
                         accept="image/*"
+                        // style={dropStyle}
                         onDrop={this.onImageDrop}>
-                        <p>Add image to your gameboard</p>
+                        <p>Add to all players' gameboard</p>
                     </Dropzone>
                 </div>
         )
@@ -65,10 +82,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => {
     return {
-        newImage: (image) => {
+        newImage: (image, rId, userId) => {
             dispatch(addImage(image))
         }
     }
 }
 
-export default connect(mapState, mapDispatch)(Drop)
+export default connect(mapState, mapDispatch)(DropGroup)

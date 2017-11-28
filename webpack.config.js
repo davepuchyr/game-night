@@ -24,8 +24,18 @@ module.exports = {
         ]
       },
       {
+        test: /\.css$/,
+        use: [
+          'css-loader'
+        ]
+      },
+      {
         test: /\.svg$|\.ttf?|\.woff$|\.woff2|\.eof|\.eot/,
         loader: 'file-loader'
+      },
+      {
+        test: /\.html$/, 
+        loader: 'html-loader'
       }
     ]
   },

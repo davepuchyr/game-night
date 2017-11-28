@@ -6,13 +6,14 @@ import user from './user'
 import rooms from './rooms'
 import onlineUsers from './onlineUsers'
 import messages from './messages'
-import draws from './draws'
 import roomMessages from './roomMessages'
 import tokens from './tokens'
 import images from './images'
 import invitation from './invitation'
+import trash from './trash'
 
-const reducer = combineReducers({user, rooms, onlineUsers, messages, draws, roomMessages, tokens, images, invitation})
+const reducer = combineReducers({user, rooms, onlineUsers, messages, roomMessages, tokens, images, trash, invitation})
+
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
@@ -24,8 +25,7 @@ export * from './user'
 export * from './rooms'
 export * from './onlineUsers'
 export * from './messages'
-export * from './draws'
 export * from './roomMessages'
 export * from './tokens'
-export * from './images'
 export * from './invitation'
+export * from './trash'

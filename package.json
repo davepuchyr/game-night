@@ -16,7 +16,7 @@
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/gamenight' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js --compilers js:babel-register"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/gamenight-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js --compilers js:babel-register"
   },
   "author": "Hyunjoo Josh Matt Tim",
   "license": "ISC",
@@ -70,6 +70,7 @@
     "eslint-config-fullstack": "^3.0.0",
     "eslint-plugin-react": "^7.4.0",
     "file-loader": "^0.11.2",
+    "html-loader": "^0.5.1",
     "mocha": "^3.3.0",
     "node-sass": "^4.5.0",
     "nodemon": "^1.12.1",
