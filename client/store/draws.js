@@ -13,7 +13,7 @@ const draws = []
 /**
  * ACTION CREATORS
  */
-export const getDraws = draws => ({type: ADD_DRAWS, draws})
+export const addDraws = draws => ({type: ADD_DRAWS, draws})
 
 /**
  * REDUCER
@@ -21,7 +21,7 @@ export const getDraws = draws => ({type: ADD_DRAWS, draws})
 export default function (state = draws, action) {
     switch (action.type) {
       case ADD_DRAWS:
-        return action.draws
+        return [...state, action.draws]
       default:
         return state
     }

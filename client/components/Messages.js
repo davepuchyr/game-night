@@ -12,7 +12,7 @@ export class Messages extends React.Component {
       this.state = { messageInput: '' }
   }
 
-  componentWillMount(){
+  componentDidMount(){
       this.props.getMessages()
   }
 
@@ -26,15 +26,12 @@ export class Messages extends React.Component {
             {
             messages.length?
                 messages.map(message => {
-                    if(message.hasOwnProperty(message.user)){
-                      return (
-                              <div key={message.id}>
-                                <p className="message-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
-                              </div>
-                      )
-                    }
-                  }
-                )
+                    return message.hasOwnProperty('user') ?
+                        (<div key={message.id}>
+                         <p className="message-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
+                        </div>) :
+                        null
+                    })
                 :
                 <div> No messages right now </div>
             }
