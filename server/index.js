@@ -4,14 +4,15 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const compression = require('compression')
 const session = require('express-session')
-const passport = require('passport')
+const passport = require('passport'),
+      LocalStrategy = require('passport-local').Strategy
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 1337
 const app = express()
 const socketio = require('socket.io')
-module.exports = app
+module.exports = {app,passport,LocalStrategy}
 
 /**
  * In your development environment, you can keep all of your
@@ -29,6 +30,20 @@ passport.deserializeUser((id, done) =>
   db.models.user.findById(id)
     .then(user => done(null, user))
     .catch(done))
+passport.use('local',new LocalStrategy((email, password, done) => {
+    db.models.user.findOne({ email }, (err, user) => {
+      console.log('LINE 30',email)
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect Email.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 const createApp = () => {
   // logging middleware
