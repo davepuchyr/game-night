@@ -4,7 +4,7 @@ import socket from '../socket'
 /**
  * ACTION TYPES
  */
-const NEW_MESSAGE  ='NEW_MESSAGE'
+const ADD_MESSAGE  ='ADD_MESSAGE'
 
 /**
  * INITIAL STATE
@@ -14,7 +14,7 @@ const allMessages = []
 /**
  * ACTION CREATORS
  */
-export const addMessage = message => ({type: NEW_MESSAGE, message})
+export const addMessage = message => ({type: ADD_MESSAGE, message})
 
 /**
  * REDUCER

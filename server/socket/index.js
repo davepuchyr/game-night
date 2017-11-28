@@ -26,8 +26,8 @@ module.exports = (io) => {
     * NEW MESSAGES
     */
     socket.on('new_message', (message) => {
-      // socket.broadcast.emit('received_new_message', message)
-      io.sockets.to('/lobby').emit('received_new_message', message)
+      socket.broadcast.emit('received_new_message', message)
+      // io.sockets.to('/lobby').emit('received_new_message', message)
     })
 
     /*
@@ -122,7 +122,7 @@ module.exports = (io) => {
         draws[stroke.room] ? draws[stroke.room].push(stroke)
         :
         draws[stroke.room] = [stroke]
-        stroke.erase ? 
+        stroke.erase ?
         io.sockets.to(`/room/${stroke.room}`).emit('add_draw', stroke)
         :
         socket.broadcast.to(`/room/${stroke.room}`).emit('add_draw', stroke)
@@ -135,7 +135,7 @@ module.exports = (io) => {
       io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
       socket.leave(room)
     })
-    
+
     /*
     * DICE RESULT
     */
