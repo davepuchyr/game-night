@@ -3,10 +3,7 @@ const onlineUsers = {} // SOCKETID : USERID
 const token_positions = {}
 const invitations = {} // USERID : ROOM
 const group_pictures = {}
-<<<<<<< HEAD
 const draws = {}
-=======
->>>>>>> 40d52903afc8c30cad874465b292d31c3864cc24
 
 
 module.exports = (io) => {
@@ -67,7 +64,6 @@ module.exports = (io) => {
           'blue': [650, 650]
         }
       }
-<<<<<<< HEAD
       socket.join(room)
         if (group_pictures[roomId]) {
           io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
@@ -78,15 +74,6 @@ module.exports = (io) => {
           socket.emit('initial_draws', draws[roomId])
         }
       })
-=======
-    socket.join(room)
-      if (group_pictures[roomId]) {
-        io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
-      }
-      io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
-      io.sockets.to(room).emit('current_tokens', token_positions[roomId])
-    })
->>>>>>> 40d52903afc8c30cad874465b292d31c3864cc24
 
     /*
     * GET ROOM MESSAGE
