@@ -26,8 +26,6 @@ export default function (state = images, action) {
       case ADD_IMAGE:
         return [...state, action.image]
       case UPDATE_IMAGE:
-        // let stateCopy = state.filter(image => image.url !== action.updatedImage.url) 
-        // return [...stateCopy, action.updatedImage]
         return state.map(img => img.url === action.updatedImage.url ? action.updatedImage : img)
       case DELETE_IMAGE: 
         return  state.filter(image => image.url !== action.imageUrl)
