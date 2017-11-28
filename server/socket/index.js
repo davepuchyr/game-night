@@ -113,10 +113,12 @@ module.exports = (io) => {
       * ADDING DRAW
       */
       socket.on('new_draw', (stroke) => {
-        console.log(stroke)
         draws[stroke.room] ? draws[stroke.room].push(stroke)
         :
         draws[stroke.room] = [stroke]
+        stroke.erase ? 
+        io.sockets.to(`/room/${stroke.room}`).emit('add_draw', stroke)
+        :
         socket.broadcast.to(`/room/${stroke.room}`).emit('add_draw', stroke)
       })
 

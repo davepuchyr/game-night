@@ -15,6 +15,7 @@ class MainStage extends React.Component {
       imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
       backgroundImage: null,
       shift: false,
+      alt: false,
       dragStart: [],
       dragOffSet: [0, 0],
       canvas: null,
@@ -44,10 +45,13 @@ class MainStage extends React.Component {
 
   handleKeyDown (e) {
       if (e.key === 'Shift') this.setState({shift: true})
+      if (e.key === 'Alt') this.setState({alt: true})
+      
   }
 
   handleKeyUp (e) {
     if (e.key === 'Shift') this.setState({shift: false})
+    if (e.key === 'Alt') this.setState({alt: false})    
   }
 
   moveStageOnHover(e) {
@@ -81,7 +85,7 @@ class MainStage extends React.Component {
         width={window.innerWidth + 500} 
         height={window.innerHeight + 500}
         className="main-canvas"
-        draggable={!this.state.shift}
+        draggable={!this.state.shift && !this.state.alt}
         onDragEnd={this.handleDragEnd}
         onDragStart={this.handleDragStart}
         onMouseDown={this.handleMouseDown}
@@ -102,6 +106,7 @@ class MainStage extends React.Component {
             />
           <Drawing
             shift={this.state.shift}
+            alt={this.state.alt}
             roomId={rId}
           />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>

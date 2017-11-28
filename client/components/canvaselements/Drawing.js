@@ -22,16 +22,20 @@ class Drawing extends Component {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const context = canvas.getContext("2d");
-
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
     this.setState({ canvas, context });
   }
 
+
   componentWillReceiveProps () {
-    if (this.props.draws.length) this.draw(this.props.draws[this.props.draws.length-1])
+    if (this.props.draws.length){
+      this.draw(this.props.draws[this.props.draws.length-1])
+    }
   }
 
   handleMouseDown = () => {
-    if (this.props.shift) this.setState({ isDrawing: true, newDraw: []});
+    if (this.props.shift || this.props.alt) this.setState({ isDrawing: true, newDraw: []});
 
     // TODO: improve
     const stage = this.image.parent.parent;
@@ -50,11 +54,11 @@ class Drawing extends Component {
     if (isDrawing) {
 
       // TODO: Don't always get a new context
-      if (mode === "brush") {
-        context.globalCompositeOperation = "source-over";
-      } else if (mode === "eraser") {
-        context.globalCompositeOperation = "destination-out";
-      }
+      // if (mode === "brush") {
+      //   context.globalCompositeOperation = "source-over";
+      // } else if (mode === "eraser") {
+      //   context.globalCompositeOperation = "destination-out";
+      // }
       let stage = this.image.parent.parent;
       let firstPos = {
         x: this.lastPointerPosition.x - stage.x(),
@@ -66,18 +70,24 @@ class Drawing extends Component {
         x: pos.x - stage.x(),
         y: pos.y - stage.y()
       };
-      this.draw({firstPos, secondPos}, true)
-      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId})
+      let erase = this.props.alt
+      this.draw({firstPos, secondPos, erase})
+      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId, erase })
       // this.setState({newDraw: [...this.state.newDraw, {firstPos, secondPos, room: this.props.roomId}]})
     }
   }
 
   draw (stroke) {
-    let { context, mode } = this.state;
-    const {firstPos, secondPos } = stroke
+    let { context } = this.state;
+    const {firstPos, secondPos, erase } = stroke
+    !erase ?
+    context.globalCompositeOperation = "source-over"
+  :
+    context.globalCompositeOperation = "destination-out"
+
     context.strokeStyle = "black";
     context.lineJoin = "round";
-    context.lineWidth = 5;
+    context.lineWidth = erase ? 10 : 5;
     context.beginPath();
     context.moveTo(firstPos.x, firstPos.y);
     context.lineTo(secondPos.x, secondPos.y);
