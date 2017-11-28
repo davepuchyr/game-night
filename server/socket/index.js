@@ -79,7 +79,7 @@ module.exports = (io) => {
     * GET ROOM MESSAGE
     */
     socket.on('postRoomMessage', (message, room, nickname) => {
-      socket.broadcast.to(room).emit('addMessage', message)
+      socket.broadcast.to(room).emit('addMessage', {[nickname]: message})
     })
 
     /*

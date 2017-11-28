@@ -28,7 +28,7 @@ class RoomMessages extends Component {
     const content = e.target.content.value
     const message = {[sender]: content}
     this.props.postMessage(message)
-    socket.emit('postRoomMessage', message, this.props.roomPath)
+    socket.emit('postRoomMessage', message, this.props.roomPath, this.props.user.nickname)
     e.target.content.value = ''
   }
 
@@ -125,21 +125,18 @@ class RoomMessages extends Component {
                 </form>
               </div>
             </InviteForm>
-          </div><br/>
-          <div id="message-view">
-          {
-            roomMessages.map((message, idx) => {
-              return 
-              (
-                <div key={idx}>{Object.keys(message)[0]} - {Object.values(message)[0]}</div>
-              )
-            })
-          }
-          </div><br/>
-          <form onSubmit={this.handleSubmit}>
-            <input className="msg-input" type="text" name="content"/>
-            <button type="submit"> Enter </button>
-          </form>
+        </div><br/>
+        <div id="message-view">
+        {
+          roomMessages.map((message, idx) => 
+            <div key={idx}>{Object.keys(message)[0]} - {Object.values(message)[0]}</div>
+          )
+        }
+        </div><br/>
+        <form onSubmit={this.handleSubmit}>
+          <input className="msg-input" type="text" name="content"/>
+          <button type="submit"> Enter </button>
+        </form>
       </div>
     )
   }
