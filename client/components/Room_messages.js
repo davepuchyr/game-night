@@ -110,8 +110,6 @@ class RoomMessages extends Component {
 
         return (
             <div id="room-message-component">
-                <div id="room-message-component-option">
-                    <h3> Game Log </h3>
                     <InviteForm
                         show={isOpen}
                         onClose={this.toggleInvite}
@@ -135,10 +133,15 @@ class RoomMessages extends Component {
                           </form>
                         </div>
                     </InviteForm>
-                    <button id="invite-button" onClick={this.toggleInvite}>
-                      Invite
-                    </button>
+                <div id="room-message-component-option">
+                    {/* <div className="room-message-component-header"> */}
+                      <h3> Game Log </h3>
+                      <button id="invite-button" onClick={this.toggleInvite}>
+                        Invite
+                      </button>
+                    {/* </div> */}
                 </div>
+                <hr/>
                 <div id="message-view" ref="message">
                 {
                     roomMessages.map((message, idx) => {
