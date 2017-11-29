@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { reactDom } from 'react-dom'
 
 import socket from '../socket'
 import { addMessage } from '../store'
@@ -20,6 +21,7 @@ class RoomMessages extends Component {
         this.toggleInvite = this.toggleInvite.bind(this)
         this.sendInvites = this.sendInvites.bind(this)
         this.editInvites = this.editInvites.bind(this)
+        this.scrollToBottom = this.scrollToBottom.bind(this)
     }
 
     handleSubmit (e) {
@@ -79,12 +81,22 @@ class RoomMessages extends Component {
         const room = this.props.roomPath
         socket.emit('joinroom', room, this.props.user.nickname)
         socket.emit('current_token_positions', room)
+        this.scrollToBottom()
     }
+
+    componentDidUpdate() {
+        this.scrollToBottom()
+   }
 
     componentWillUnmount () {
         const room = this.props.roomPath
         socket.emit('leaveroom', room, this.props.user.nickname)
     }
+
+    scrollToBottom = () => {
+        const messagesContainer = this.refs.message
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
 
     render () {
         const {user, roomMessages, onlineUsers} = this.props
@@ -98,7 +110,6 @@ class RoomMessages extends Component {
             <div id="room-message-component">
                 <div id="room-message-component-option">
                     <h3> Messages </h3>
-                    <button onClick={this.toggleInvite}>Invite</button>
                     <InviteForm
                         show={isOpen}
                         onClose={this.toggleInvite}
@@ -108,7 +119,7 @@ class RoomMessages extends Component {
                         invited={invited}
                         sendInvites={this.sendInvites}>
                         <div>
-                          <small>Find by nickname</small>
+                          <small className="invitation-form-background-title">Find by nickname</small>
                           <form>
                             <input
                                 type="text"
@@ -122,9 +133,9 @@ class RoomMessages extends Component {
                           </form>
                         </div>
                     </InviteForm>
+                    <button onClick={this.toggleInvite}>Invite</button>
                 </div>
-                <br />
-                <div id="message-view">
+                <div id="message-view" ref="message">
                 {
                     roomMessages.map((message, idx) => {
                         return (
@@ -135,7 +146,6 @@ class RoomMessages extends Component {
                     })
                 }
                 </div>
-                <br/>
                 <form onSubmit={this.handleSubmit}>
                     <input className="msg-input" type="text" name="content"/>
                     <button type="submit"> Enter </button>

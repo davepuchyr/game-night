@@ -11,11 +11,13 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload'
 class Drop extends Component {
     constructor (props){
         super(props)
-        // this.state = {
-        //     uploadedFile: ''
-        //   }
+        this.state = {
+            hover: false
+          }
         this.onImageDrop = this.onImageDrop.bind(this)
         this.handleImageUpload = this.handleImageUpload.bind(this)
+        this.handleMouseOver = this.handleMouseOver.bind(this)
+        this.handleMouseLeave = this.handleMouseLeave.bind(this)
     }
 
     onImageDrop(files) {
@@ -44,25 +46,35 @@ class Drop extends Component {
         });
       }
 
+    handleMouseOver () {
+        this.setState({hover: true})
+    }
+
+    handleMouseLeave () {
+        this.setState({hover: false})
+    }
+
     render () {
         const dropStyle = {
-            "width": '5em',
-            "height": '5em',
-            "border-width": "2px",
-            "border-color": "rgb(102, 102, 102)",
-            "border-style": "dashed",
-            "border-radius": "5px",
-            "background-color": "rgba(255, 255, 255, 0.8)"
+            "position": "absolute",
+            "top": "6.3em",
+            "width": "4em",
+            "height": "4em",
+            "z-index": "11",
+            "margin": "0.4em"
         }
         return (
-                <div className="file-upload">
+                <div className="file-upload-personal">
+                    <img src={this.state.hover ? "/assets/image_icon_mix.png" : "/assets/image_icon.png"}/>
                     <Dropzone
                         name="personal"
                         multiple={false}
                         accept="image/*"
                         style={dropStyle}                        
-                        onDrop={this.onImageDrop}>
-                        Add Personal Image
+                        onDrop={this.onImageDrop}
+                        onMouseOver={this.handleMouseOver}
+                        onMouseLeave={this.handleMouseLeave}
+                    >
                     </Dropzone>
                 </div>
         )

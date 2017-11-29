@@ -168,13 +168,6 @@ body {
   }
 }
 
-.item-lobby-messages-line {
-  display: -webkit-flex;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-}
 
 .message-line {
   font-size: 1rem;
@@ -208,62 +201,18 @@ body {
 
 
 
-.invitation-form-background {
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 50px
-}
-
-.invitation-form-background-box{
-      border: 6px solid black;
-      border-radius: 5px;
-      background: #fff;
-      max-width: 500px;
-      min-height: 300px;
-      width: 400px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin: 0px auto;
-      padding: 2em;
-      text-align: center;
-      transform: translate(-50%,-50%);
-      -webkit-transform: translate(-50%,-50%);
-}
-
-#inviteFormSubmitBtn {
-    width: 12%;
-    display: inline-block;
-    background: teal;
-    color: #fff;
-    font-weight: 100;
-    border: none;
-    height: 2.5em;
-}
 
 
-#invitationlist {
-    display: flex;
-    justify-content: space-between;
 
-    &-nicknamelist{
-      flex-direction: column;
-    }
-    &-invitedlist{
-      flex-direction: column;
-    }
-}
-
-
-#message-view {
-  height: 65%;
-  overflow-y: auto;
-  overflow-x: auto;
-}
+// #inviteFormSubmitBtn {
+//     width: 12%;
+//     display: inline-block;
+//     background: teal;
+//     color: #fff;
+//     font-weight: 100;
+//     border: none;
+//     height: 2.5em;
+// }
 
 // .container-main {
 //   height: 1000em;
@@ -308,13 +257,17 @@ body {
 
 .room-container-console {
   display: flex;
-  width: 64%;
-  margin-left: 18%;
-  margin-right: 18%;
+  width: 50%;
+  margin-left: 24%;
+  margin-right: 25%;
   flex-direction: row;
   position: absolute;
   bottom: 0.5em;
   justify-content: center;
+  background: rgba(44, 47, 51, 0.495);
+  border-radius: 20px;
+  border-color: black;
+  border-width: 2px;
 
   &-drop {
     display: flex;
@@ -323,7 +276,7 @@ body {
   }
 
   &-center {
-    flex-grow: 5;
+    flex-grow: 8;
     flex-direction: column-reverse;
     align-self: flex-end;
   }
@@ -336,7 +289,7 @@ body {
   }
 
   &-right{
-    margin-left: 30px;
+    margin-left: 15px;
     flex-direction: column;
     &-trash {
 
@@ -347,6 +300,14 @@ body {
         z-index: 150;
         margin: 10px;
         }
+    }
+
+    &-die img {
+      display: block;
+      width: 4em;
+      height: 4em;
+      margin: 10px;
+      margin-bottom: 8px;
     }
       &-die, &-trash {
         display: flex;
@@ -360,56 +321,171 @@ body {
   z-index: 10;
 }
 
-#room-message-component input {
-  width: 85%;
-  height: 2em;
-  margin-bottom: 1em;
-}
-
-#room-message-component button {
-    width: 12%;
-    display: inline-block;
-    background: teal;
-    color: #fff;
-    font-weight: 100;
-    border: none;
-    height: 2.5em;
-}
-
-#room-message-component h3 {
-  margin: 0;
-}
-
-#room-message-component form {
-  display: flex;
-}
-
 
 #room-message-component {
-  width: 100%;
+  width: 99%;
   height: 15em;
-  // margin-left: 30%;
-  // position: absolute;
-  background-color: white;
+  background-color: rgb(44, 47, 51);
   border-width: 2px;
   z-index: 100;
-  border-style: solid;
+  /* border-style: solid; */
   padding: 1em;
+  border-radius: 25px;
+  border-color: black;
+  color: white;
+  font-weight: lighter;
 
     &-option {
       display: -webkit-flex;
       display:flex;
+      justify-content: space-between;
+    }
 
+    & input {
+        width: 85%;
+        height: 2em;
+        margin-bottom: 1em;
+        margin-top: 1em;
+        margin-right: 1em;
+        border-radius: 10px;
+    }
+
+    & button {
+      width: 12%;
+      display: inline-block;
+      margin-top: 1em;
+      background: #7289DA;
+      color: #fff;
+      font-weight: 100;
+      border: none;
+      border-radius: 10px;
+      height: 2.5em;
+  }
+
+  & form {
+    display: flex;
+  }
+
+  & h3 {
+    margin: 0;
+  }
+}
+
+#message-view {
+  height: 68%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.file-upload {
+  display: flex;
+    & div {
+      margin: 0.4em;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 150;
+    }
+    &-personal img {
+      position: absolute;
+      top: 6.3em;
+      width: 4em;
+      height: 4em;
+      z-index: 10;
+      margin: 4px;
+    }
+    &-group img {
+      bottom: 1em;
+      width: 4em;
+      height: 4em;
+      z-index: 10;
+      margin: 4px;
+      margin-bottom: 6px;
     }
 }
 
-.file-upload div {
-  margin: 0.4em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.invitation-form {
+    &-footer {
+      display: flex;
+      justify-content: space-between;
+
+      & button {
+        width: 25% !important;
+      }
+    }
+
+    &-background {
+    font-weight: lighter;
+
+      &-title {
+        font-weight: lighter;
+        margin-right: 289px;
+
+        & input {
+          margin-top: 5px;
+        }
+      }
+
+      &-box {
+      border-radius: 5px;
+      background: hsla(240, 9%, 63%, 0.969);
+      max-width: 500px;
+      // min-height: 300px;
+      width: 400px;
+      position: fixed;
+      bottom: 6em;
+      left: 50%;
+      margin: 0px auto;
+      padding: 2em;
+      text-align: center;
+      border-radius: 20px;
+      border-width: 0;
+    }
+
+    &-box {
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+    }
+  }
 }
+
+#invitationlist {
+  display: flex;
+  justify-content: space-between;
+
+  &-nicknamelist{
+    flex-direction: column;
+  }
+  &-invitedlist{
+    flex-direction: column;
+  }
+}
+
+#invitationlist {
+  display: flex;
+  justify-content: space-between;
+  height: 15em;
+
+  & h5, & h3 {
+    font-weight: lighter;
+  }
+
+  &-nicknamelist, &-invitedlist{
+    flex-direction: column;
+  }
+}
+
+.item-lobby-messages-line {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+
+
+
 
 canvas {
   position: fixed;

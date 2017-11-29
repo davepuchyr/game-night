@@ -49,7 +49,7 @@ const InviteForm = (props) =>{
             }
             </div>
           </div>
-          <div className="inviteForm-background-box-footer">
+          <div className="invitation-form-footer">
             <button onClick={onClose}>Close</button>
             <button onClick={sendInvites}>Send</button>
           </div>
