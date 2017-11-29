@@ -13,7 +13,8 @@ import store, {
    addImage,
    addDraws,
    deleteImage,
-   updateBackground
+   updateBackground,
+   addRoom
   } from './store'
 
 const socket = io(window.location.origin)
@@ -45,6 +46,11 @@ socket.on('connect', () => {
   //received message
   socket.on('received_new_message', message => {
     store.dispatch(newMessage(message))
+  })
+
+  socket.on('add_new_room', (room) => {
+    console.log('HEARD ABOUT A ROOM')
+    store.dispatch(addRoom(room))
   })
 
   socket.on('addDraw', draws => {
