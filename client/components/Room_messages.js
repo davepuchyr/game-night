@@ -22,7 +22,6 @@ class RoomMessages extends Component {
         this.sendInvites = this.sendInvites.bind(this)
         this.editInvites = this.editInvites.bind(this)
         this.scrollToBottom = this.scrollToBottom.bind(this)
-
   }
 
   handleSubmit (e) {
@@ -100,12 +99,18 @@ class RoomMessages extends Component {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
+    searchFor (e) {
+      e.preventDefault()
+      this.setState({searchNickName: e.target.value.toLowerCase(), isOpen: true})
+    }
+
     render () {
         const {user, roomMessages, onlineUsers} = this.props
         const {isOpen , invited, searchNickName} = this.state
         const inTheRoom = roomMessages.map(getName => Object.keys(getName)[0])
         this.names = onlineUsers.filter(nickName => {
             if(nickName.nickname.toLowerCase().includes(searchNickName) && nickName.id !== user.id ) return nickName
+            else return ["Can't find your friend, sorry!"]
         })
 
         return (
@@ -118,20 +123,17 @@ class RoomMessages extends Component {
                         editInvites={this.editInvites}
                         invited={invited}
                         sendInvites={this.sendInvites}>
-                        <div>
+                        {/* <div>
                           <small className="invitation-form-background-title">Find by nickname</small>
-                          <form>
+                          <form onSubmit={this.sendInvites}>
                             <input
                                 type="text"
                                 placeholder="Search for your friend"
                                 required
-                                onChange={ searchFor => {
-                                    searchFor.preventDefault()
-                                    this.setState({searchNickName: searchFor.target.value.toLowerCase()})
-                                }}/>
-                            <button id="inviteFormSubmitBtn"type="submit" onSubmit={this.sendInvites}>Submit</button>
+                                onChange={this.searchFor}/>
+                            <button id="inviteFormSubmitBtn"type="submit"> Submit </button>
                           </form>
-                        </div>
+                        </div> */}
                     </InviteForm>
                 <div id="room-message-component-option">
                     {/* <div className="room-message-component-header"> */}
