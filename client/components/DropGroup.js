@@ -79,7 +79,7 @@ class DropGroup extends Component {
         return (
                 <div className="file-upload-group">
                     <img
-                        src={this.state.hover ? "/assets/broadcast_image_icon_mix.png" : "/assets/broadcast_image_icon.png"}
+                        src={this.state.hover ? "/assets/broadcast_image_icon_mix2.png" : "/assets/broadcast_image_icon.png"}
                     />
                     <Dropzone
                         name="personal"

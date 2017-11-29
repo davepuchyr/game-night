@@ -135,13 +135,18 @@ class RoomMessages extends Component {
                           </form>
                         </div>
                     </InviteForm>
-                    <button onClick={this.toggleInvite}>Invite</button>
+                    <button id="invite-button" onClick={this.toggleInvite}>
+                      Invite
+                    </button>
                 </div>
                 <div id="message-view" ref="message">
                 {
                     roomMessages.map((message, idx) => {
                         return (
-                            <div key={idx}>
+                            <div 
+                              style={{"word-break": "break-word"}}
+                              key={idx}
+                            >
                                 {Object.keys(message)[0]} - {Object.values(message)[0]}
                             </div>
                         )
@@ -150,7 +155,10 @@ class RoomMessages extends Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <input className="msg-input" type="text" name="content"/>
-                    <button type="submit"> Enter </button>
+                    
+                    <button type="submit">
+                      {/* { (window.innerWidth < 900) ? null : (<p>enter</p>)} */}
+                    </button>
         </form>
       </div>
     )

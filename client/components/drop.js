@@ -65,7 +65,7 @@ class Drop extends Component {
         }
         return (
                 <div className="file-upload-personal">
-                    <img src={this.state.hover ? "/assets/image_icon_mix.png" : "/assets/image_icon.png"}/>
+                    <img src={this.state.hover ? "/assets/image_icon_mix2.png" : "/assets/image_icon.png"}/>
                     <Dropzone
                         name="personal"
                         multiple={false}

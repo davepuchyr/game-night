@@ -102,7 +102,7 @@ class Room extends Component {
                             <img
                             className="die-button"
                             onClick={this.handleDieClick.bind(this)}
-                            src={this.state.dieClicked ? "/assets/dice_icon_blue.png" : "/assets/dice_icon.png"}
+                            src={this.state.dieClicked ? "/assets/dice_icon_blue2.png" : "/assets/dice_icon.png"}
                             />
                         </div>
                         <div className="room-container-console-right-trash">

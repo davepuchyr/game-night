@@ -377,7 +377,7 @@ body {
     }
 
     & button {
-      width: 12%;
+      width: 10%;
       display: inline-block;
       margin-top: 1em;
       background: #7289DA;
@@ -401,6 +401,8 @@ body {
   height: 68%;
   overflow-y: auto;
   overflow-x: auto;
+  width: 100%
+
 }
 
 .file-upload {
@@ -499,6 +501,10 @@ body {
   &-nicknamelist, &-invitedlist{
     flex-direction: column;
   }
+}
+
+#invite-button {
+  width: 25% !important;
 }
 
 .item-lobby-messages-line {
