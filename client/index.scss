@@ -1,3 +1,8 @@
+
+html {
+  overflow: hidden;
+}
+
 body {
   font-family: sans-serif;
   display: flex;
@@ -272,6 +277,7 @@ body {
 }
 
 .room-container-console {
+  overflow: visible;
   display: flex;
   width: 50%;
   margin-left: 24%;
