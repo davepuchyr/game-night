@@ -77,7 +77,7 @@ class AddBackground extends Component {
         return (
                 <div className="file-upload-background">
                     <img
-                        src={this.state.hover ? "/assets/background_icon.png" : "/assets/background_icon.png"}
+                        src={this.state.hover ? "/assets/screen_icon_blue.png" : "/assets/background_icon.png"}
                     />
                     <Dropzone
                         name="background"
