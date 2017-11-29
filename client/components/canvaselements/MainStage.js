@@ -127,6 +127,7 @@ class MainStage extends React.Component {
                 />
               }
               else return <GroupImage
+              trashFloat={this.props.trashFloat}
               x={imgObj.x}
               y={imgObj.y}
               width={imgObj.width}

@@ -12,6 +12,7 @@ import store, {
    move_blue,
    addImage,
    addDraws,
+   deleteImage,
   } from './store'
 
 const socket = io(window.location.origin)
@@ -92,6 +93,10 @@ socket.on('connect', () => {
       image.entry = true
       store.dispatch(addImage(image))
     })
+  })
+
+  socket.on('delete_group_pic', imgUrl => {
+    store.dispatch(deleteImage(imgUrl))
   })
 
   socket.on('add_draw', stroke => {

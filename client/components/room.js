@@ -70,6 +70,7 @@ class Room extends Component {
 
 
     render() {
+        console.log('TO DELETE IS ', this.state.toDelete)
         const path = this.props.routeProps.match.url
         let trashCheck = false
         if (this.state.trashFloat && this.props.dragging.bool) {
@@ -77,7 +78,10 @@ class Room extends Component {
         }
         return (
             <div id="room-container" >
-                <MainStage rId={this.props.routeProps.match.params.roomid}/>
+                <MainStage 
+                    trashFloat={this.state.trashFloat}
+                    rId={this.props.routeProps.match.params.roomid}
+                    />
                 <div className="room-container-console">
                     <div className="room-container-console-left">
                         <div className="room-container-console-drop">
@@ -113,31 +117,6 @@ class Room extends Component {
                     </div>
                 </div>
                 {/* <Video/> */}
-            </div>
-        )
-    }
-    return (
-      <div id="room-container" >
-        <img
-          id="trash-can"
-          src={trashCheck ? '/redtrash.png' : '/trash.png'}
-          onMouseOver={this.handleMouseOver}
-          onMouseLeave={this.handleMouseLeave}
-          onMouseUp={this.state.delete ? this.handleMouseUp : null}
-        />
-        <RoomMessages roomPath={path}/>
-        <Drop />
-        <div className="drop-group-container">
-          <DropGroup
-            className="group-dropzone"
-            rId={this.props.routeProps.match.params.roomid}
-          />
-        </div>
-        {/* <img src="http://i.imgur.com/uhhfaMZ.png" /> */}
-        <button className="die-button" onClick={this.handleDieClick.bind(this)}>Roll Die</button>
-        {/* <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" /> */}
-        {/* <Video/> */}
-        <MainStage rId={this.props.routeProps.match.params.roomid}/>
       </div>
     )
   }

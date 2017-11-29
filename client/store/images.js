@@ -28,7 +28,10 @@ export default function (state = images, action) {
       case UPDATE_IMAGE:
         return state.map(img => img.url === action.updatedImage.url ? action.updatedImage : img)
       case DELETE_IMAGE: 
-        return  state.filter(img => img.url !== action.imageUrl)
+        return  state.filter(img => {
+          if (img.url !== action.imageUrl) return true
+          return false
+        })
       default:
         return state
     }

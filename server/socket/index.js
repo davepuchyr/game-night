@@ -150,7 +150,8 @@ module.exports = (io) => {
     * DELETING GROUP PICS
     */
     socket.on('delete_group_image', (imageUrl, roomId) => {
-      group_pictures[roomId] = group_pictures[roomId].filter(image => image.url !== imageUrl) 
+      group_pictures[roomId] = group_pictures[roomId].filter(image => image.url !== imageUrl)
+      io.sockets.to(`/room/${roomId}`).emit('delete_group_pic', imageUrl)
     })
 
     /*
