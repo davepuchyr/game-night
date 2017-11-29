@@ -291,6 +291,18 @@ body {
   border-color: black;
   border-width: 2px;
 
+  &-toggle {
+    background-color: black;
+    border-width: 0;
+    border-color: black;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding-left: 3.5%;
+    padding-top: 7px;
+    margin-left: 5px;
+  }
+
   &-drop {
     display: flex;
     flex-direction: column;
@@ -337,10 +349,31 @@ body {
       }
   }
 
+  &-hide {
+    top: 95vh;
+  }
+
 }
 
 .die-button {
   z-index: 10;
+}
+
+.room-container-console-hide {
+  overflow: visible;
+  display: flex;
+  width: 50%;
+  margin-left: 24%;
+  margin-right: 25%;
+  flex-direction: row;
+  position: absolute;
+  top: 95vh;
+  // bottom: 0.5em;
+  justify-content: center;
+  background: rgba(44, 47, 51, 0.495);
+  border-radius: 20px;
+  border-color: black;
+  border-width: 2px;
 }
 
 
@@ -397,6 +430,7 @@ body {
   }
 }
 
+
 #message-view {
   height: 68%;
   overflow-y: auto;
@@ -430,6 +464,10 @@ body {
       margin: 4px;
       margin-bottom: 6px;
     }
+}
+
+#inviteFormSubmitBtn {
+  width: 25% !important;
 }
 
 .invitation-form {
@@ -468,6 +506,7 @@ body {
       text-align: center;
       border-radius: 20px;
       border-width: 0;
+      z-index: 100;
     }
 
     &-box {

@@ -16,11 +16,13 @@ class Room extends Component {
       delete: false,
       toDelete: '',
       group: false,
-      dieClicked: false
+      dieClicked: false,
+      toggleConsole: false
     }
     this.handleMouseOver = this.handleMouseOver.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
+    this.toggleConsole = this.toggleConsole.bind(this)
   }
 
   //helper function
@@ -68,9 +70,16 @@ class Room extends Component {
     this.setState({ dieClicked: !this.state.dieClicked })
   }
 
+  toggleConsole(e) {
+      console.log(this.state.toggleConsole)
+      !this.state.toggleConsole ? 
+        this.setState({toggleConsole: true})
+      :
+        this.setState({toggleConsole: false})
+  }
+
 
     render() {
-        console.log('TO DELETE IS ', this.state.toDelete)
         const path = this.props.routeProps.match.url
         let trashCheck = false
         if (this.state.trashFloat && this.props.dragging.bool) {
@@ -82,8 +91,12 @@ class Room extends Component {
                     trashFloat={this.state.trashFloat}
                     rId={this.props.routeProps.match.params.roomid}
                     />
-                <div className="room-container-console">
+                <div className={this.state.toggleConsole ? "room-container-console-hide" : "room-container-console"}>
                     <div className="room-container-console-left">
+                        <button
+                            className="room-container-console-toggle"
+                            onClick={this.toggleConsole}
+                        />
                         <div className="room-container-console-drop">
                             <Drop />
                             <DropGroup
