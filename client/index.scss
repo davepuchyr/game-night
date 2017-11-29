@@ -317,6 +317,15 @@ body {
     display: flex;
     flex-direction: column;
     align-self: flex-end;
+
+    &-background {
+      position: absolute;
+      top: 0.6em;
+      width: 4em;
+      height: 4em;
+      z-index: 11;
+      margin: 0.4em;
+    }
   }
 
   &-center {
@@ -335,8 +344,7 @@ body {
   &-right{
     margin-left: 15px;
     flex-direction: column;
-    &-trash {
-
+    &-trash, &-background-button {
       & img {
         display: block;
         width: 4em;
@@ -353,7 +361,7 @@ body {
       margin: 10px;
       margin-bottom: 8px;
     }
-      &-die, &-trash {
+      &-die, &-trash, &-background {
         display: flex;
         justify-content: center;
       }
@@ -363,6 +371,14 @@ body {
     top: 95vh;
   }
 
+}
+
+.room-container-console-drop-background img {
+  display: block;
+  width: 4em;
+  height: 4em;
+  margin-top: 12px;
+  margin-bottom: 8px;
 }
 
 .die-button {
@@ -447,6 +463,8 @@ body {
 }
 
 
+
+
 #message-view {
   height: 68%;
   overflow-y: auto;
@@ -483,6 +501,17 @@ body {
       z-index: 10;
       margin: 4px;
       margin-bottom: 6px;
+    }
+
+    &-background img {
+      position: absolute;
+      top: 0;
+      width: 4em;
+      height: 4em;
+      z-index: 10;
+      margin: 4px;
+      margin-bottom: 6px;
+      margin-top: 23px;
     }
 }
 

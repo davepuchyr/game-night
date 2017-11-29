@@ -1,7 +1,7 @@
 import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { Video, RoomMessages, MainStage, Drop, DropGroup }from './index'
+import { Video, RoomMessages, MainStage, Drop, DropGroup, AddBackground }from './index'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { deleteImage } from '../store'
@@ -98,11 +98,20 @@ class Room extends Component {
                             onClick={this.toggleConsole}
                         />
                         <div className="room-container-console-drop">
+                            {/* <div className="room-container-console-drop-background">
+                                <img
+                                className="background-button"
+                                // onClick={this.handleDieClick.bind(this)}
+                                src="/assets/background_icon.png"
+                                />
+                            </div> */}
+                            <AddBackground
+                            className="add-background"
+                            rId={this.props.routeProps.match.params.roomid}/>
                             <Drop />
                             <DropGroup
                             className="group-dropzone"
-                            rId={this.props.routeProps.match.params.roomid}
-                            />
+                            rId={this.props.routeProps.match.params.roomid}/>
                         </div>
                     </div>
                     <div className="room-container-console-center">

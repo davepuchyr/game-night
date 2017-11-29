@@ -155,6 +155,13 @@ module.exports = (io) => {
     })
 
     /*
+    * UPDATING BACKGROUND IMAGE
+    */
+    socket.on('new_background_image', (img, roomId) => {
+      io.sockets.to(`/room/${roomId}`).emit('update_background', img, roomId)
+    })
+
+    /*
     * LOGOUT
     */
     socket.on('disconnect', () => {
