@@ -110,7 +110,7 @@ class RoomMessages extends Component {
 
         return (
             <div id="room-message-component">
-                    <InviteForm
+                    {/* <InviteForm
                         show={isOpen}
                         onClose={this.toggleInvite}
                         inTheRoom={inTheRoom}
@@ -132,7 +132,7 @@ class RoomMessages extends Component {
                             <button id="inviteFormSubmitBtn"type="submit" onSubmit={this.sendInvites}>Submit</button>
                           </form>
                         </div>
-                    </InviteForm>
+                    </InviteForm> */}
                 <div id="room-message-component-option">
                     {/* <div className="room-message-component-header"> */}
                       <h3> Game Log </h3>
@@ -148,22 +148,22 @@ class RoomMessages extends Component {
                         return (
                             <div 
                               style={{
-                                "display": "flex",
-                                "flex-direction": "column"
+                                'display': 'flex',
+                                'flexDirection': 'column'
                               }}
                               key={idx}>
                                 <div style={{
-                                  "display": "flex",
-                                  "flex-direction": "row"
+                                  'display': 'flex',
+                                  'flexDirection': 'row'
                                 }}>
                                   <div style={{
-                                    "color": "#7289DA",
-                                    "padding-right": "6px"
+                                    'color': '#7289DA',
+                                    'paddingRight': '6px'
                                   }}>
                                   {Object.keys(message)[0]} - 
                                   </div> 
                                   <div style={{
-                                  "word-break": "break-word",
+                                  'wordBreak': 'break-word',
                                 }}>
                                   {Object.values(message)[0]}
                                   </div>

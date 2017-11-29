@@ -60,7 +60,7 @@ class Drop extends Component {
             "top": "6.3em",
             "width": "4em",
             "height": "4em",
-            "z-index": "11",
+            "zIndex": "11",
             "margin": "0.4em"
         }
         return (
