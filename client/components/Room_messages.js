@@ -109,7 +109,7 @@ class RoomMessages extends Component {
         return (
             <div id="room-message-component">
                 <div id="room-message-component-option">
-                    <h3> Messages </h3>
+                    <h3> Game Log </h3>
                     <InviteForm
                         show={isOpen}
                         onClose={this.toggleInvite}

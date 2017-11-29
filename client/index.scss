@@ -20,8 +20,19 @@ body {
   }
 
   nav {
-    border: 1px solid black;
+    background: rgba(44, 47, 51, 0.84);
     margin: 1em;
+    border-radius: 20px;
+    color: #7289DA;
+
+    & h1 {
+      font-size: xx-large;
+      z-index: 100;
+    }
+
+    & a {
+      color: #7289DA;
+    }
   }
 
   nav a {
@@ -33,6 +44,11 @@ body {
     display: inline-block;
     font-size: .65em;
     margin-right: 2em;
+  }
+
+  .container-nav-div {
+    width: 100%;
+    z-index: 100;
   }
 
   // form div {
@@ -88,7 +104,7 @@ body {
 
 	&-nav {
 		display: -webkit-flex;
-		display: flex;
+    display: flex;
 	}
 
 	&-lobby {
@@ -339,6 +355,10 @@ body {
       display: -webkit-flex;
       display:flex;
       justify-content: space-between;
+
+      & h3 {
+        font-weight: lighter;
+      }
     }
 
     & input {

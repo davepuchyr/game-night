@@ -21,7 +21,7 @@ const Main = (props) => {
       <nav className="container-nav">
         {
           isLoggedIn ?
-            <div>
+            <div className="container-nav-div">
               <h1 id="navbar">GAME NIGHT<a id="logout" href="/login" onClick={handleClick}>Logout</a></h1> 
             </div>
             :
