@@ -12,6 +12,7 @@ import images from './images'
 import invitation from './invitation'
 import trash from './trash'
 import draws from './draws'
+import background from './background'
 
 const reducer = combineReducers({user,
   rooms,
@@ -22,6 +23,7 @@ const reducer = combineReducers({user,
   images,
   trash,
   invitation,
+  background,
   draws})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -40,3 +42,4 @@ export * from './invitation'
 export * from './trash'
 export * from './draws'
 export * from './images'
+export * from './background'

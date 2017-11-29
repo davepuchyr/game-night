@@ -9,7 +9,7 @@ import socket from '../socket'
 const CLOUDINARY_UPLOAD_PRESET = 'gamenight';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload';
 
-class DropGroup extends Component {
+class AddBackground extends Component {
     constructor (props){
         super(props)
         this.state = {
@@ -43,18 +43,15 @@ class DropGroup extends Component {
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
             const image = {
-                x: 300,
-                y: 400,
                 personal: false,
+                background: true,
                 url: response.body.secure_url,
-                width: 90,
-                height: 90,
                 originalWidth: response.body.width,
                 originalHeight: response.body.height,
                 room: this.props.rId,
                 user: this.props.user.nickname
             }
-            socket.emit('new_group_image', image)
+            socket.emit('new_background_image', image, this.props.rId)
           }
         });
       }
@@ -70,19 +67,20 @@ class DropGroup extends Component {
     render () {
         const dropStyle = {
             "position": "absolute",
-            "bottom": "0",
+            "top": "0",
             "width": "4em",
             "height": "4em",
             "z-index": "11",
-            "margin": "0.4em"
+            "margin": "0.4em",
+            "margin-top": "23px"
         }
         return (
-                <div className="file-upload-group">
+                <div className="file-upload-background">
                     <img
-                        src={this.state.hover ? "/assets/broadcast_image_icon_mix2.png" : "/assets/broadcast_image_icon.png"}
+                        src={this.state.hover ? "/assets/screen_icon_blue.png" : "/assets/background_icon.png"}
                     />
                     <Dropzone
-                        name="personal"
+                        name="background"
                         multiple={false}
                         accept="image/*"
                         style={dropStyle}
@@ -108,4 +106,4 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-export default connect(mapState, mapDispatch)(DropGroup)
+export default connect(mapState, mapDispatch)(AddBackground)

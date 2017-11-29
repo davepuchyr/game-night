@@ -22,6 +22,8 @@ class MainStage extends React.Component {
       context: null,
       isDrawing: false,
       mode: 'brush',
+      backgroundHeight: 1911,
+      backgroundWidth: 2196
     }
 
     this.moveStageOnHover = this.moveStageOnHover.bind(this)
@@ -29,11 +31,12 @@ class MainStage extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleDragEnd = this.handleDragEnd.bind(this)
+    this.updateDimensions = this.updateDimensions.bind(this)
   }
   
   componentDidMount() {
     const image = new window.Image()
-    image.src = this.state.imageUrl
+    image.src = this.props.background.url
     image.onload = () => {
       this.setState({
         backgroundImage: image
@@ -41,6 +44,57 @@ class MainStage extends React.Component {
     }
     document.addEventListener('keydown', this.handleKeyDown);
     document.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentDidUpdate() {
+    if (this.props.background.url !== this.state.imageUrl){
+      const image = new window.Image()
+      const originalHeight = this.props.background.originalHeight
+      const originalWidth = this.props.background.originalWidth
+      const newSize = this.aspectRatio(originalHeight, originalWidth)
+      const width = newSize[0]
+      const height = newSize[1]
+      image.src = this.props.background.url
+      image.onload = () => {
+        this.setState({
+          backgroundImage: image,
+          imageUrl: this.props.background.url,
+          backgroundWidth: width,
+          backgroundHeight: height,
+        })
+      }
+    }
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener("resize", this.updateDimensions)
+  }
+
+  updateDimensions () {
+    this.setState({forceUpdate: true})
+  }
+  
+  aspectRatio (originalHeight, originalWidth) {
+    const originalRatio = (originalHeight / originalWidth)
+    const windowWidth = window.innerWidth
+    const windowHeight = window.innerHeight
+    let height
+    let width
+    if (originalHeight >= windowHeight) height = windowHeight
+    else height = originalHeight
+    if (originalWidth >= windowWidth) width = windowWidth
+    else width = originalWidth
+    const heightDifference =  originalHeight - height
+    const widthDifference =  originalWidth - width
+    if (heightDifference > 0 || widthDifference > 0) {
+      if (widthDifference < heightDifference) {
+        height = width * originalRatio
+      } else {
+        width = height / originalRatio
+      }
+    }
+    return [width, height]
   }
 
   handleKeyDown (e) {
@@ -74,15 +128,15 @@ class MainStage extends React.Component {
     const { canvas } = this.state;
     const { black, red, green, blue } = this.props.tokens
     const { images } = this.props
-    const { rId } = this.props    
+    const { rId } = this.props 
 
     return (
       <Stage
         image={canvas}
         name="mainstage"
         ref="mainstage"
-        width={window.innerWidth + 500} 
-        height={window.innerHeight + 500}
+        width={this.state.backgroundWidth} 
+        height={this.state.backgroundHeight}
         className="main-canvas"
         draggable={!this.state.shift && !this.state.alt}
         onDragEnd={this.handleDragEnd}
@@ -90,13 +144,15 @@ class MainStage extends React.Component {
         onMouseDown={this.handleMouseDown}
         >
         <Layer 
-          width={window.innerWidth} 
-          height={window.innerHeight}
+          width={this.state.backgroundWidth} 
+          height={this.state.backgroundHeight}
           >
           <Image 
             ref="image"
             className="dragImg" name="background" 
-            image={this.state.backgroundImage} 
+            image={this.state.backgroundImage}
+            width={this.state.backgroundWidth}
+            height={this.state.backgroundHeight}
             onMouseOver={this.moveStageOnHover}
             onMouseOut={this.handleMouseOut}
             onMouseDown={this.handleMouseDown}
@@ -107,6 +163,8 @@ class MainStage extends React.Component {
             shift={this.state.shift}
             alt={this.state.alt}
             roomId={rId}
+            width={this.state.backgroundWidth}
+            height={this.state.backgroundHeight}
           />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>
           <HexPiece id={rId} fill={'red'} x={red[0]} y={red[1]}/>
@@ -162,7 +220,8 @@ class MainStage extends React.Component {
 const mapState = (state) => {
   return {
     tokens: state.tokens,
-    images: state.images
+    images: state.images,
+    background: state.background
   }
 }
 

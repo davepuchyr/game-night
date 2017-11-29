@@ -14,6 +14,10 @@ class Video extends Component {
     this.removeVideo = this.removeVideo.bind(this)
   }
 
+  shouldComponentUpdate(){
+    return false
+ }
+
   addVideo (video, peer) {
     //copy current users object
     let currentUsersObj = Object.assign({}, this.state.users)    

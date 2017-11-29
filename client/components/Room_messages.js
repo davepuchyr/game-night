@@ -22,16 +22,15 @@ class RoomMessages extends Component {
         this.sendInvites = this.sendInvites.bind(this)
         this.editInvites = this.editInvites.bind(this)
         this.scrollToBottom = this.scrollToBottom.bind(this)
-
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    const sender = this.props.user.nickname
+    const nickname = this.props.user.nickname
     const content = e.target.content.value
-    const message = {[sender]: content}
+    const message = {nickname, content}
     this.props.postMessage(message)
-    socket.emit('postRoomMessage', message, this.props.roomPath, this.props.user.nickname)
+    socket.emit('postRoomMessage', message, this.props.roomPath)
     e.target.content.value = ''
   }
 
@@ -100,12 +99,18 @@ class RoomMessages extends Component {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     };
 
+    searchFor (e) {
+      e.preventDefault()
+      this.setState({searchNickName: e.target.value.toLowerCase(), isOpen: true})
+    }
+
     render () {
         const {user, roomMessages, onlineUsers} = this.props
         const {isOpen , invited, searchNickName} = this.state
         const inTheRoom = roomMessages.map(getName => Object.keys(getName)[0])
         this.names = onlineUsers.filter(nickName => {
             if(nickName.nickname.toLowerCase().includes(searchNickName) && nickName.id !== user.id ) return nickName
+            else return ["Can't find your friend, sorry!"]
         })
 
         return (
@@ -118,20 +123,17 @@ class RoomMessages extends Component {
                         editInvites={this.editInvites}
                         invited={invited}
                         sendInvites={this.sendInvites}>
-                        <div>
+                        {/* <div>
                           <small className="invitation-form-background-title">Find by nickname</small>
-                          <form>
+                          <form onSubmit={this.sendInvites}>
                             <input
                                 type="text"
                                 placeholder="Search for your friend"
                                 required
-                                onChange={ searchFor => {
-                                    searchFor.preventDefault()
-                                    this.setState({searchNickName: searchFor.target.value.toLowerCase()})
-                                }}/>
-                            <button id="inviteFormSubmitBtn"type="submit" onSubmit={this.sendInvites}>Submit</button>
+                                onChange={this.searchFor}/>
+                            <button id="inviteFormSubmitBtn"type="submit"> Submit </button>
                           </form>
-                        </div>
+                        </div> */}
                     </InviteForm>
                 <div id="room-message-component-option">
                     {/* <div className="room-message-component-header"> */}
@@ -148,24 +150,24 @@ class RoomMessages extends Component {
                         return (
                             <div 
                               style={{
-                                "display": "flex",
-                                "flex-direction": "column"
+                                'display': 'flex',
+                                'flexDirection': 'column'
                               }}
                               key={idx}>
                                 <div style={{
-                                  "display": "flex",
-                                  "flex-direction": "row"
+                                  'display': 'flex',
+                                  'flexDirection': 'row'
                                 }}>
                                   <div style={{
-                                    "color": "#7289DA",
-                                    "padding-right": "6px"
+                                    'color': '#7289DA',
+                                    'paddingRight': '6px'
                                   }}>
-                                  {Object.keys(message)[0]} - 
+                                  {message.nickname}:  
                                   </div> 
                                   <div style={{
-                                  "word-break": "break-word",
+                                  'wordBreak': 'break-word',
                                 }}>
-                                  {Object.values(message)[0]}
+                                  {message.content}
                                   </div>
                                 </div>
                                 <hr/>

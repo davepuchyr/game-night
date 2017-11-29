@@ -4,6 +4,7 @@ const token_positions = {}
 const invitations = {} // USERID : ROOM
 const group_pictures = {}
 const draws = {}
+const background_images = {}
 
 
 module.exports = (io) => {
@@ -47,10 +48,13 @@ module.exports = (io) => {
         if (group_pictures[roomId]) {
           io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
         }
-        io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
+        io.sockets.to(room).emit('addMessage', {nickname: 'GM', content: `${nickname} joined the room`})
         io.sockets.to(room).emit('current_tokens', token_positions[roomId])
         if (draws[roomId]) {
           socket.emit('initial_draws', draws[roomId])
+        }
+        if (background_images[roomId]) {
+          socket.emit('update_background', background_images[roomId], roomId)
         }
       })
 
@@ -65,8 +69,8 @@ module.exports = (io) => {
     /*
     * GET ROOM MESSAGE
     */
-    socket.on('postRoomMessage', (message, room, nickname) => {
-      socket.broadcast.to(room).emit('addMessage', {[nickname]: message})
+    socket.on('postRoomMessage', (message, room) => {
+      socket.broadcast.to(room).emit('addMessage', message)
     })
 
     /*
@@ -119,7 +123,7 @@ module.exports = (io) => {
     * LEAVE ROOM
     */
     socket.on('leaveroom', (room, nickname) => {
-      io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
+      io.sockets.to(room).emit('addMessage', {nickname: 'GM', content: `${nickname} left room`})
       socket.leave(room)
     })
 
@@ -132,7 +136,7 @@ module.exports = (io) => {
 
       let message = `[${user}] has rolled (${dieType}) and got ${rolledResult}!!!`
 
-      io.sockets.to(room).emit('addMessage', {['Die Master']: message})
+      io.sockets.to(room).emit('addMessage', {nickname: 'GM', content: message})
     })
 
     /*
@@ -152,6 +156,15 @@ module.exports = (io) => {
     socket.on('delete_group_image', (imageUrl, roomId) => {
       group_pictures[roomId] = group_pictures[roomId].filter(image => image.url !== imageUrl)
       io.sockets.to(`/room/${roomId}`).emit('delete_group_pic', imageUrl)
+    })
+
+    /*
+    * UPDATING BACKGROUND IMAGE
+    */
+    socket.on('new_background_image', (img, roomId) => {
+      background_images[roomId] = img
+      delete draws[roomId]
+      io.sockets.to(`/room/${roomId}`).emit('update_background', img, roomId)
     })
 
     /*

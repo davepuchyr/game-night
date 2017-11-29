@@ -31,7 +31,7 @@ const InviteForm = (props) =>{
                     {nickname.nickname}
                     </h5>
                   ) : 
-                  <h5 key={ind}> Unavailable </h5>
+                  <h5 key={ind}> {nickname.nickname} Invited! </h5>
                 }) :
                 <h5> Unavailable </h5>
             }
@@ -43,7 +43,8 @@ const InviteForm = (props) =>{
                 invited.map((user,ind) => {
                   return (
                     <h5 key={user.id}>
-                      <button onClick={e => editInvites(e,user,ind,'delete')}>&times; </button>
+                      <button
+                        onClick={e => editInvites(e,user,ind,'delete')}>&times; </button>
                       {user.nickname}
                     </h5>
                   )

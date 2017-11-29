@@ -13,6 +13,7 @@ import store, {
    addImage,
    addDraws,
    deleteImage,
+   updateBackground
   } from './store'
 
 const socket = io(window.location.origin)
@@ -107,6 +108,11 @@ socket.on('connect', () => {
     draws.forEach(stroke => {
       store.dispatch(addDraws(stroke))
     })
+  })
+
+  socket.on('update_background', (img, roomId) => {
+    
+    store.dispatch(updateBackground(img))
   })
 })
 
