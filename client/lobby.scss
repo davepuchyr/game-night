@@ -1,0 +1,102 @@
+@mixin lobby-config($flex, $direction, $grow, $content, $align, $font, $width){
+  display: -webkit-flex;
+  display: $flex;
+  flex-direction: $direction;
+  flex: $grow;
+  justify-content: $content;
+  align-items: $align;
+  font-size: $font;
+  width: $width;
+}
+
+@mixin form () {
+  padding: 10px;
+  margin: 5px;
+  border-color: #99AAB5;
+  border-style: groove;
+}
+
+.container {
+  width: 100%;
+  display:block;
+
+  &-main {
+    height: 100%;
+    @import 'splashscreen';
+    @import 'login';
+
+    &-button{
+      display: flex;
+      flex-direction: column;
+
+      button {
+        font-size: 50px;
+        padding: 50px;
+      }
+    }
+  }
+
+  &-nav {
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  &-lobby {
+    @include lobby-config(block,inherit,0,space-between,flex-start,inherit,auto);
+
+    &-bottom {
+      @include lobby-config(flex,inherit,0,space-between,flex-start,inherit,auto);
+
+      &-invitations { text-align: center; }
+
+      &-rooms {
+        @include lobby-config(flex,column,1,inherit,center,inherit,100%);
+        form { @include form() }
+
+        &-list {
+          font-size: small;
+        }
+      }
+
+      &-messages {
+        @include lobby-config(flex,column,8,flex-start,center,inherit,80%);
+
+        h3 {
+          text-align: center;
+          color: white;
+          font-family: sans-serif;
+          font-weight: 700;
+          font-size: 25px;
+          text-transform: uppercase;
+        }
+
+        form {
+          display: flex;
+          width: inherit;
+
+          input {
+            width: inherit;
+          }
+        }
+        background-color: #36393e;
+        padding: 0px 30px 16px;
+
+        &-items {
+          color: white;
+          font-weight: 100;
+          font-family: sans-serif;
+          width: inherit;
+          overflow-wrap: break-word;
+        }
+      }
+
+      &-onlineUsers {
+        @include lobby-config(flex,column,1,inherit,center,inherit,100%);
+        h3 { text-align: center; }
+        margin: 5px;
+      }
+
+    }
+  }
+}
+
