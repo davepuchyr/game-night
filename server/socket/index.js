@@ -4,6 +4,7 @@ const token_positions = {}
 const invitations = {} // USERID : ROOM
 const group_pictures = {}
 const draws = {}
+const background_images = {}
 
 
 module.exports = (io) => {
@@ -51,6 +52,9 @@ module.exports = (io) => {
         io.sockets.to(room).emit('current_tokens', token_positions[roomId])
         if (draws[roomId]) {
           socket.emit('initial_draws', draws[roomId])
+        }
+        if (background_images[roomId]) {
+          socket.emit('update_background', background_images[roomId], roomId)
         }
       })
 
@@ -158,6 +162,7 @@ module.exports = (io) => {
     * UPDATING BACKGROUND IMAGE
     */
     socket.on('new_background_image', (img, roomId) => {
+      background_images[roomId] = img
       io.sockets.to(`/room/${roomId}`).emit('update_background', img, roomId)
     })
 
