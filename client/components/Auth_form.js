@@ -22,8 +22,8 @@ const AuthForm = (props) => {
                 <label htmlFor="nickname"><small>Nickname</small></label>
                 <input name="nickname" type="text" required />
               </div>
-            )
-           : null
+            ) : 
+            null
          }
         <div>
           <label htmlFor="password"><small>Password</small></label>

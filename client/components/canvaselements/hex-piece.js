@@ -19,29 +19,27 @@ class HexPiece extends Component {
       socket.emit('move_token', newCoords, color, this.props.id)
     }
 
-      render(){
-        return (
-          <Star
-          x={this.props.x}
-          y={this.props.y}
-          numPoints={6}
-          innerRadius={43}
-          outerRadius={50}
-          fill={this.props.fill}
-          opacity={0.8}
-          draggable={true}
-          onDragEnd={this.drag}
-          rotation={0}
-          shadowColor={'black'}
-          shadowBlur={10}
-          shadowOpacity={0.6}
-        />)
-      }
+    
+    render(){
+      return (
+        <Star
+        x={this.props.x}
+        y={this.props.y}
+        numPoints={6}
+        innerRadius={43}
+        outerRadius={50}
+        fill={this.props.fill}
+        opacity={0.8}
+        draggable={true}
+        onDragEnd={this.drag}
+        rotation={0}
+        shadowColor={'black'}
+        shadowBlur={10}
+        shadowOpacity={0.6}/>
+      )
+    }
 }
 
-const mapState = (state) => {
-  return {}
-}
 
 const mapDispatch = (dispatch) => {
   return {
@@ -64,4 +62,4 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export default connect(mapState, mapDispatch)(HexPiece)
+export default connect(null, mapDispatch)(HexPiece)

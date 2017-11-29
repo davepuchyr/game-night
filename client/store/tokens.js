@@ -31,16 +31,16 @@ export const move_blue = blue_position => ({type: MOVE_BLUE, blue_position})
  * REDUCER
  */
 export default function (state = token_positions, action) {
-    switch (action.type) {
-      case MOVE_BLACK:
-        return Object.assign({}, state, { 'black': action.black_position })
-      case MOVE_RED:
-        return Object.assign({}, state, { 'red': action.red_position })
-      case MOVE_GREEN:
-        return Object.assign({}, state, { 'green': action.green_position })
-      case MOVE_BLUE:
-        return Object.assign({}, state, { 'blue': action.blue_position })
-      default:
-        return state
-    }
+  switch (action.type) {
+    case MOVE_BLACK:
+      return Object.assign({}, state, { 'black': action.black_position })
+    case MOVE_RED:
+      return Object.assign({}, state, { 'red': action.red_position })
+    case MOVE_GREEN:
+      return Object.assign({}, state, { 'green': action.green_position })
+    case MOVE_BLUE:
+      return Object.assign({}, state, { 'blue': action.blue_position })
+    default:
+      return state
   }
+}

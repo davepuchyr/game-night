@@ -30,8 +30,7 @@ class GroupImage extends Component {
 
   handleClick (e) {
     this.state.showBig ? 
-    this.setState({showBig: false})
-    :
+    this.setState({showBig: false}) :
     this.setState({showBig: true})
   }
 
@@ -92,8 +91,7 @@ class GroupImage extends Component {
               draggable={true}
               onClick={this.handleClick}
             />
-          )
-          :
+          ) :
           null
         }
       </Group>
@@ -114,6 +112,5 @@ const mapDispatch = (dispatch) => {
     }
   }
 }
-
 
 export default connect(null, mapDispatch)(GroupImage)

@@ -22,60 +22,62 @@ class RoomMessages extends Component {
         this.sendInvites = this.sendInvites.bind(this)
         this.editInvites = this.editInvites.bind(this)
         this.scrollToBottom = this.scrollToBottom.bind(this)
-    }
 
-    handleSubmit (e) {
-        e.preventDefault()
-        const sender = this.props.user.nickname
-        const content = e.target.content.value
-        const message = {[sender]: content}
-        this.props.postMessage(message)
-        socket.emit('postRoomMessage', message, this.props.roomPath)
-        e.target.content.value = ''
-    }
+  }
+
+  handleSubmit (e) {
+    e.preventDefault()
+    const sender = this.props.user.nickname
+    const content = e.target.content.value
+    const message = {[sender]: content}
+    this.props.postMessage(message)
+    socket.emit('postRoomMessage', message, this.props.roomPath, this.props.user.nickname)
+    e.target.content.value = ''
+  }
 
     /*
     * Is the invite box is open
     * if it's closed, the invitation names are erased
     */
-    toggleInvite() {
-        this.invitations = []
-        this.state.invited = []
-        this.setState({ isOpen: !this.state.isOpen})
-    }
+  toggleInvite() {
+    this.invitations = []
+    this.state.invited = []
+    this.setState({ isOpen: !this.state.isOpen})
+  }
+
     /*
     * EDIT YOUR INVITATION
     */
-    editInvites(e,nickname,index,action) {
-      const {invited} = this.state
+  editInvites(e,nickname,index,action) {
+    const {invited} = this.state
 
-      switch(action){
-        case 'add':
-            if(!this.invitations.includes(nickname.id)) {
-              this.invitations.push(nickname.id)
-              invited.push(nickname)
-              this.names = this.names.splice(index,1)
-              this.setState({invited})
-            }
-            break;
-        case 'delete':
-            if(this.invitations.includes(nickname.id)) {
-              this.invitations.splice(index,1)
-              invited.splice(index,1)
-              this.names = this.names.splice(index,1)
-              this.setState({invited})
-            }
-            break;
-      }
+    switch(action){
+      case 'add':
+        if(!this.invitations.includes(nickname.id)) {
+          this.invitations.push(nickname.id)
+          invited.push(nickname)
+          this.names = this.names.splice(index,1)
+          this.setState({invited})
+        }
+        break;
+      case 'delete':
+        if(this.invitations.includes(nickname.id)) {
+          this.invitations.splice(index,1)
+          invited.splice(index,1)
+          this.names = this.names.splice(index,1)
+          this.setState({invited})
+        }
+        break;
     }
+  }
     /*
     * EMTI TO FRONTEND SOCKET WITH A LIST OF USER IDS
     */
-    sendInvites(e) {
-        e.preventDefault()
-        socket.emit('invite', this.invitations , this.props.roomPath)
-        this.toggleInvite()
-    }
+  sendInvites(e) {
+    e.preventDefault()
+    socket.emit('invite', this.invitations , this.props.roomPath)
+    this.toggleInvite()
+  }
 
     componentDidMount () {
         const room = this.props.roomPath
@@ -149,26 +151,27 @@ class RoomMessages extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <input className="msg-input" type="text" name="content"/>
                     <button type="submit"> Enter </button>
-                </form>
-            </div>
-        )
-    }
+        </form>
+      </div>
+    )
+  }
 }
 
+
 const mapState = state => {
-    return {
-        user: state.user,
-        onlineUsers: state.onlineUsers,
-        roomMessages: state.roomMessages
-    }
+  return {
+    user: state.user,
+    onlineUsers: state.onlineUsers,
+    roomMessages: state.roomMessages
+  }
 }
 
 const mapDispatch = dispatch => {
-    return {
-        postMessage(message) {
-            dispatch(addMessage(message))
-        }
+  return {
+    postMessage(message) {
+      dispatch(addMessage(message))
     }
+  }
 }
 
 export default connect(mapState, mapDispatch)(RoomMessages)

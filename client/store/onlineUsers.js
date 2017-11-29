@@ -17,11 +17,11 @@ export const getOnlineUsers = userArray => ({type: GET_ONLINE_USERS, onlineUsers
  * REDUCER
  */
 export default function (state = onlineUsers, action) {
-    switch (action.type) {
-      case GET_ONLINE_USERS:
-        return action.onlineUsers
-      default:
-        return state
-    }
+  switch (action.type) {
+    case GET_ONLINE_USERS:
+      return action.onlineUsers
+    default:
+      return state
   }
+}
   

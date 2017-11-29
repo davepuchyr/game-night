@@ -85,7 +85,8 @@ class MyImage extends Component {
     document.body.style.cursor = 'default'
   }
 
-  handleMouseUp () {
+  handleMouseUp (e) {
+    console.log(event.target.children)
     this.props.stopDrag()
     this.setState({dragging: false})
     let x = this.refs.top_left.getX()
@@ -94,6 +95,8 @@ class MyImage extends Component {
     let height = this.refs.image.attrs.height || this.refs.image.attrs.image.height
     let width = this.refs.image.attrs.width || this.refs.image.attrs.image.width
 
+    console.log('########', this.refs.top_left)
+    console.log('EVENT', e.target)
     let image = {
       x,
       y,
