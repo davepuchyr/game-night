@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -22,16 +23,19 @@ class RoomList extends Component {
 
   render () {
     return (
-      <div className="item-lobby-rooms">
-        <h3>Room List</h3>
-        <div>
+      <div className="container-main-lobby-bottom-comps-room-rooms">
+        {/* <div className="container-main-lobby-bottom-comps-room-rooms-list"> */}
         {
-          this.props.allRooms.map((room, idx) => 
+          this.props.allRooms.map((room, idx) =>
           (
-            <Link to={`/room/${room.id}`} key={idx}><div>{`${room.name} - ${room.game}`}</div></Link>
+            <Link to={`/room/${room.id}`} key={idx}>
+              <div>
+                  <h4>{`${room.name} - ${room.game}`}</h4>
+              </div>
+            </Link>
           ))
         }
-        </div>
+        {/* </div> */}
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="name" placeholder="Enter Room Name" />
           <br/>
