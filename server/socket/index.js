@@ -163,6 +163,7 @@ module.exports = (io) => {
     */
     socket.on('new_background_image', (img, roomId) => {
       background_images[roomId] = img
+      delete draws[roomId]
       io.sockets.to(`/room/${roomId}`).emit('update_background', img, roomId)
     })
 
