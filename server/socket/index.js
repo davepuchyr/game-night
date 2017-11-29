@@ -31,27 +31,6 @@ module.exports = (io) => {
     })
 
     /*
-    * INITIALLIZE TOKEN POSITIONS IN NEWLY CREATED ROOM
-    */
-    socket.on('created_room', (roomId) => {
-      token_positions[roomId] = {
-        'black': [500, 500],
-        'red': [550, 550],
-        'green': [600, 600],
-        'blue': [650, 650]
-      }
-      socket.emit('initial_token_positions', token_positions[roomId])
-    })
-
-    /*
-    * MOVING TOKENS
-    */
-    socket.on('move_token', (newCoords, color, roomId) => {
-      token_positions[roomId][color] = newCoords
-      io.sockets.to('/room/'+roomId).emit('moved', newCoords, color)
-    })
-
-    /*
     * JOINROOM
     */
     socket.on('joinroom', (room, nickname) => {
@@ -74,6 +53,14 @@ module.exports = (io) => {
           socket.emit('initial_draws', draws[roomId])
         }
       })
+
+    /*
+    * MOVING TOKENS
+    */
+    socket.on('move_token', (newCoords, color, roomId) => {
+      token_positions[roomId][color] = newCoords
+      io.sockets.to('/room/'+roomId).emit('moved', newCoords, color)
+    })
 
     /*
     * GET ROOM MESSAGE
@@ -163,11 +150,8 @@ module.exports = (io) => {
     * DELETING GROUP PICS
     */
     socket.on('delete_group_image', (imageUrl, roomId) => {
-      let updatePictureArr = group_pictures[roomId].filter(image => {
-        if (image.url === imageUrl) return false
-        return true
-      })
-      group_pictures[roomId] = updatePictureArr
+      group_pictures[roomId] = group_pictures[roomId].filter(image => image.url !== imageUrl)
+      io.sockets.to(`/room/${roomId}`).emit('delete_group_pic', imageUrl)
     })
 
     /*

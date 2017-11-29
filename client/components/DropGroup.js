@@ -12,11 +12,13 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload'
 class DropGroup extends Component {
     constructor (props){
         super(props)
-        // this.state = {
-        //     uploadedFile: ''
-        //   }
+        this.state = {
+            hover: false
+          }
         this.onImageDrop = this.onImageDrop.bind(this)
         this.handleImageUpload = this.handleImageUpload.bind(this)
+        this.handleMouseOver = this.handleMouseOver.bind(this)
+        this.handleMouseLeave = this.handleMouseLeave.bind(this)
     }
 
     onImageDrop(files) {
@@ -56,20 +58,38 @@ class DropGroup extends Component {
           }
         });
       }
+    
+    handleMouseOver () {
+        this.setState({hover: true})
+    }
+
+    handleMouseLeave () {
+        this.setState({hover: false})
+    }
 
     render () {
-        // const dropStyle = {
-        //     width: '20%'
-        // }
+        const dropStyle = {
+            "position": "absolute",
+            "bottom": "0",
+            "width": "4em",
+            "height": "4em",
+            "z-index": "11",
+            "margin": "0.4em"
+        }
         return (
-                <div className="FileUpload">
+                <div className="file-upload-group">
+                    <img
+                        src={this.state.hover ? "/assets/broadcast_image_icon_mix2.png" : "/assets/broadcast_image_icon.png"}
+                    />
                     <Dropzone
                         name="personal"
                         multiple={false}
                         accept="image/*"
-                        // style={dropStyle}
-                        onDrop={this.onImageDrop}>
-                        <p>Add to all players' gameboard</p>
+                        style={dropStyle}
+                        onDrop={this.onImageDrop}
+                        onMouseOver={this.handleMouseOver}
+                        onMouseLeave={this.handleMouseLeave}
+                    >
                     </Dropzone>
                 </div>
         )

@@ -1,25 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { reactDom } from 'react-dom'
 
 import socket from '../socket'
 import { addMessage } from '../store'
 import InviteForm from './InviteForm'
 
 class RoomMessages extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isOpen: false,
-      searchNickName: '',
-      invited:[]
-    }
-    this.names = []
-    this.invitations = []
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.toggleInvite = this.toggleInvite.bind(this)
-    this.sendInvites = this.sendInvites.bind(this)
-    this.editInvites = this.editInvites.bind(this)
+    constructor(props) {
+        super(props)
+        this.state = {
+            isOpen: false,
+            searchNickName: '',
+            invited:[]
+        }
+        this.names = []
+        this.invitations = []
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.toggleInvite = this.toggleInvite.bind(this)
+        this.sendInvites = this.sendInvites.bind(this)
+        this.editInvites = this.editInvites.bind(this)
+        this.scrollToBottom = this.scrollToBottom.bind(this)
+
   }
 
   handleSubmit (e) {
@@ -76,66 +79,107 @@ class RoomMessages extends Component {
     this.toggleInvite()
   }
 
-  componentDidMount () {
-    const room = this.props.roomPath
-    socket.emit('joinroom', room, this.props.user.nickname)
-    socket.emit('current_token_positions', room)
-  }
+    componentDidMount () {
+        const room = this.props.roomPath
+        socket.emit('joinroom', room, this.props.user.nickname)
+        socket.emit('current_token_positions', room)
+        this.scrollToBottom()
+    }
 
-  componentWillUnmount () {
-    const room = this.props.roomPath
-    socket.emit('leaveroom', room, this.props.user.nickname)
-  }
+    componentDidUpdate() {
+        this.scrollToBottom()
+   }
 
-  render () {
-    const {user, roomMessages, onlineUsers} = this.props
-    const {isOpen , invited, searchNickName} = this.state
-    const inTheRoom = roomMessages.map(getName => Object.keys(getName)[0])
-    this.names = onlineUsers.filter(nickName => {
-      if(nickName.nickname.toLowerCase().includes(searchNickName) && nickName.id !== user.id ) return nickName
-    })
+    componentWillUnmount () {
+        const room = this.props.roomPath
+        socket.emit('leaveroom', room, this.props.user.nickname)
+    }
 
-    return (
-      <div id="room-message-component">
-        <div id="room-message-component-option">
-          <h3> Messages </h3>
-            <button onClick={this.toggleInvite}>Invite</button>
-            <InviteForm
-              show={isOpen}
-              onClose={this.toggleInvite}
-              inTheRoom={inTheRoom}
-              names={this.names}
-              editInvites={this.editInvites}
-              invited={invited}
-              sendInvites={this.sendInvites}
-            >
-              <div>
-                <small>Find by nickname</small>
-                <form>
-                  <input
-                    type="text"
-                    placeholder="Search for your friend"
-                    required
-                    onChange={ searchFor => {
-                      searchFor.preventDefault()
-                      this.setState({searchNickName: searchFor.target.value.toLowerCase()})
-                    }}
-                  />
-                  <button id="inviteFormSubmitBtn"type="submit" onSubmit={this.sendInvites}>Submit</button>
-                </form>
-              </div>
-            </InviteForm>
-        </div><br/>
-        <div id="message-view">
-        {
-          roomMessages.map((message, idx) => 
-            <div key={idx}>{Object.keys(message)[0]} - {Object.values(message)[0]}</div>
-          )
-        }
-        </div><br/>
-        <form onSubmit={this.handleSubmit}>
-          <input className="msg-input" type="text" name="content"/>
-          <button type="submit"> Enter </button>
+    scrollToBottom = () => {
+        const messagesContainer = this.refs.message
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    };
+
+    render () {
+        const {user, roomMessages, onlineUsers} = this.props
+        const {isOpen , invited, searchNickName} = this.state
+        const inTheRoom = roomMessages.map(getName => Object.keys(getName)[0])
+        this.names = onlineUsers.filter(nickName => {
+            if(nickName.nickname.toLowerCase().includes(searchNickName) && nickName.id !== user.id ) return nickName
+        })
+
+        return (
+            <div id="room-message-component">
+                    <InviteForm
+                        show={isOpen}
+                        onClose={this.toggleInvite}
+                        inTheRoom={inTheRoom}
+                        names={this.names}
+                        editInvites={this.editInvites}
+                        invited={invited}
+                        sendInvites={this.sendInvites}>
+                        <div>
+                          <small className="invitation-form-background-title">Find by nickname</small>
+                          <form>
+                            <input
+                                type="text"
+                                placeholder="Search for your friend"
+                                required
+                                onChange={ searchFor => {
+                                    searchFor.preventDefault()
+                                    this.setState({searchNickName: searchFor.target.value.toLowerCase()})
+                                }}/>
+                            <button id="inviteFormSubmitBtn"type="submit" onSubmit={this.sendInvites}>Submit</button>
+                          </form>
+                        </div>
+                    </InviteForm>
+                <div id="room-message-component-option">
+                    {/* <div className="room-message-component-header"> */}
+                      <h3> Game Log </h3>
+                      <button id="invite-button" onClick={this.toggleInvite}>
+                        Invite
+                      </button>
+                    {/* </div> */}
+                </div>
+                <hr/>
+                <div id="message-view" ref="message">
+                {
+                    roomMessages.map((message, idx) => {
+                        return (
+                            <div 
+                              style={{
+                                "display": "flex",
+                                "flex-direction": "column"
+                              }}
+                              key={idx}>
+                                <div style={{
+                                  "display": "flex",
+                                  "flex-direction": "row"
+                                }}>
+                                  <div style={{
+                                    "color": "#7289DA",
+                                    "padding-right": "6px"
+                                  }}>
+                                  {Object.keys(message)[0]} - 
+                                  </div> 
+                                  <div style={{
+                                  "word-break": "break-word",
+                                }}>
+                                  {Object.values(message)[0]}
+                                  </div>
+                                </div>
+                                <hr/>
+                            </div>
+                        )
+                    })
+                }
+                </div>
+                <form onSubmit={this.handleSubmit}>
+                    <input className="msg-input" type="text" name="content"/>
+                    
+                    <button type="submit">
+                      {/* { (window.innerWidth < 900) ? null : (<p>enter</p>)} */}
+                    </button>
         </form>
       </div>
     )

@@ -1,5 +1,9 @@
 @import 'lobby';
 
+html {
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   position: fixed;
@@ -11,6 +15,13 @@ body {
 
   a {
     text-decoration: none;
+  }
+
+  hr {
+    width: 100%;
+    background-color: rgba(141, 139, 148, 0.036);
+    border-color: rgba(141, 139, 148, 0.05);
+    margin: 4px;
   }
 
   h1 {
@@ -25,8 +36,19 @@ body {
   }
 
   nav {
-    // border: 1px solid black;
+    background: rgba(44, 47, 51, 0.84);
     margin: 1em;
+    border-radius: 20px;
+    color: #7289DA;
+
+    & h1 {
+      font-size: xx-large;
+      z-index: 100;
+    }
+
+    & a {
+      color: #7289DA;
+    }
   }
 
   nav a {
@@ -40,10 +62,10 @@ body {
     margin-right: 2em;
   }
 
-  // form div {
-  //   margin: 1em;
-  //   display: inline-block;
-  // }
+  .container-nav-div {
+    width: 100%;
+    z-index: 100;
+  }
 
   input[type=text] .msg-input {
     width: 100%;
@@ -107,7 +129,309 @@ body {
   z-index: 20;
   width: 100%;
   height: 100%;
-  // position: fixed;
+}
+
+
+//ROOM
+.main-canvas {
+  position: absolute;
+  top: 0
+}
+
+.room-container-console {
+  overflow: visible;
+  display: flex;
+  width: 50%;
+  margin-left: 24%;
+  margin-right: 25%;
+  flex-direction: row;
+  position: absolute;
+  bottom: 0.5em;
+  justify-content: center;
+  background: rgba(44, 47, 51, 0.495);
+  border-radius: 20px;
+  border-color: black;
+  border-width: 2px;
+  transition: all 1s linear;
+
+  &-toggle {
+    background-color: black;
+    border-width: 0;
+    border-color: black;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding-left: 3.5%;
+    padding-top: 7px;
+    margin-left: 5px;
+  }
+
+  &-drop {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+  }
+
+  &-center {
+    flex-grow: 8;
+    flex-direction: column-reverse;
+    align-self: flex-end;
+  }
+
+  &-left, &-right {
+    display: flex;
+    flex-grow: 1;
+    align-self: flex-end;
+    justify-content: center;
+  }
+
+  &-right{
+    margin-left: 15px;
+    flex-direction: column;
+    &-trash {
+
+      & img {
+        display: block;
+        width: 4em;
+        height: 5em;
+        z-index: 150;
+        margin: 10px;
+        }
+    }
+
+    &-die img {
+      display: block;
+      width: 4em;
+      height: 4em;
+      margin: 10px;
+      margin-bottom: 8px;
+    }
+      &-die, &-trash {
+        display: flex;
+        justify-content: center;
+      }
+  }
+
+  &-hide {
+    top: 95vh;
+  }
+
+}
+
+.die-button {
+  z-index: 10;
+}
+
+.room-container-console-hide {
+  overflow: visible;
+  display: flex;
+  width: 50%;
+  margin-left: 24%;
+  margin-right: 25%;
+  flex-direction: row;
+  position: absolute;
+  top: 95vh;
+  justify-content: center;
+  background: rgba(44, 47, 51, 0.495);
+  border-radius: 20px;
+  border-color: black;
+  border-width: 2px;
+  transition: all 1s linear;
+}
+
+
+#room-message-component {
+  width: 99%;
+  height: 15em;
+  background-color: rgb(44, 47, 51);
+  border-width: 2px;
+  z-index: 100;
+  padding: 1em;
+  border-radius: 25px;
+  border-color: black;
+  color: white;
+  font-weight: lighter;
+
+    &-header {
+      display: flex;
+    }
+
+    &-option {
+      display: -webkit-flex;
+      display:flex;
+      justify-content: space-between;
+
+      & h3 {
+        font-weight: lighter;
+        font-size: 25px;
+      }
+    }
+
+    & input {
+        width: 85%;
+        height: 2em;
+        margin-bottom: 1em;
+        margin-top: 1em;
+        margin-right: 1em;
+        border-radius: 10px;
+    }
+
+    & button {
+      width: 10%;
+      display: inline-block;
+      background: #7289DA;
+      color: #fff;
+      margin-top: 1em;
+      font-weight: 100;
+      border: none;
+      border-radius: 10px;
+      height: 2.5em;
+  }
+
+  & form {
+    display: flex;
+  }
+
+  & h3 {
+    margin: 0;
+  }
+}
+
+
+#message-view {
+  height: 68%;
+  overflow-y: auto;
+  overflow-x: auto;
+  width: 100%
+
+  & button {
+    margin-top: 1em;
+  }
+
+}
+
+.file-upload {
+  display: flex;
+    & div {
+      margin: 0.4em;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 150;
+    }
+    &-personal img {
+      position: absolute;
+      top: 6.3em;
+      width: 4em;
+      height: 4em;
+      z-index: 10;
+      margin: 4px;
+    }
+    &-group img {
+      bottom: 1em;
+      width: 4em;
+      height: 4em;
+      z-index: 10;
+      margin: 4px;
+      margin-bottom: 6px;
+    }
+}
+
+#inviteFormSubmitBtn {
+  width: 25% !important;
+}
+
+.invitation-form {
+    &-footer {
+      display: flex;
+      justify-content: space-between;
+
+      & button {
+        width: 25% !important;
+      }
+    }
+
+    &-background {
+    font-weight: lighter;
+
+      &-title {
+        font-weight: lighter;
+        margin-right: 289px;
+
+        & input {
+          margin-top: 5px;
+        }
+      }
+
+      &-box {
+      border-radius: 5px;
+      background: hsla(240, 9%, 63%, 0.969);
+      max-width: 500px;
+      // min-height: 300px;
+      width: 400px;
+      position: fixed;
+      bottom: 6em;
+      left: 50%;
+      margin: 0px auto;
+      padding: 2em;
+      text-align: center;
+      border-radius: 20px;
+      border-width: 0;
+      z-index: 100;
+    }
+
+    &-box {
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50%,-50%);
+    }
+  }
+}
+
+#invitationlist {
+  display: flex;
+  justify-content: space-between;
+
+  &-nicknamelist{
+    flex-direction: column;
+  }
+  &-invitedlist{
+    flex-direction: column;
+  }
+}
+
+#invitationlist {
+  display: flex;
+  justify-content: space-between;
+  height: 15em;
+
+  & h5, & h3 {
+    font-weight: lighter;
+  }
+
+  &-nicknamelist, &-invitedlist{
+    flex-direction: column;
+  }
+}
+
+#invite-button {
+  width: 25% !important;
+  margin-top: 0 !important;
+}
+
+.item-lobby-messages-line {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+
+
+
+
+canvas {
+  position: fixed;
 }
 
 #localVideo {
@@ -143,139 +467,4 @@ body {
 video {
   width: 100%;
   z-index: 20;
-}
-
-#room-container img {
-  position: absolute;
-}
-
-canvas {
-  position: fixed;
-}
-
-#room-message-component {
-  width: 30%;
-  height: 15em;
-  margin-left: 30%;
-  position: absolute;
-  background-color: white;
-  border-width: 2px;
-  z-index: 100;
-  border-style: solid;
-  padding: 1em;
-
-    &-option {
-      display: -webkit-flex;
-      display:flex;
-
-    }
-}
-
-.invitation-form-background {
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 50px
-}
-
-.invitation-form-background-box{
-      border: 6px solid black;
-      border-radius: 5px;
-      background: #fff;
-      max-width: 500px;
-      min-height: 300px;
-      width: 400px;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      margin: 0px auto;
-      padding: 2em;
-      text-align: center;
-      transform: translate(-50%,-50%);
-      -webkit-transform: translate(-50%,-50%);
-}
-
-#inviteFormSubmitBtn {
-    width: 12%;
-    display: inline-block;
-    background: teal;
-    color: #fff;
-    font-weight: 100;
-    border: none;
-    height: 2.5em;
-}
-
-
-#invitationlist {
-    display: flex;
-    justify-content: space-between;
-
-    &-nicknamelist{
-      flex-direction: column;
-    }
-    &-invitedlist{
-      flex-direction: column;
-    }
-}
-
-#room-container {
-  position: relative;
-}
-
-#room-message-component input {
-  width: 85%;
-  height: 2em;
-  margin-bottom: 1em;
-}
-
-#room-message-component button {
-    width: 12%;
-    display: inline-block;
-    background: teal;
-    color: #fff;
-    font-weight: 100;
-    border: none;
-    height: 2.5em;
-}
-
-#room-message-component h3 {
-  margin: 0;
-}
-
-#message-view {
-  height: 65%;
-  overflow-y: auto;
-  overflow-x: auto;
-}
-
-#room-message-component form {
-  display: flex;
-}
-
-#trash-can {
-  width: 5em;
-  position: absolute;
-  right: 5px;
-  z-index: 150;
-}
-
-#trash-can-hover {
-  background: red;
-  border-radius: 10px
-}
-
-.FileUpload {
-  z-index: 50;
-  margin: 15px;
-}
-
-.drop-group-container {
-  display: flex
-}
-
-.group-dropzone {
-  margin: 10px;
 }
