@@ -20,34 +20,36 @@ export class Messages extends React.Component {
       <div className="container-lobby-bottom-messages">
         <h3>All Chat</h3>
         <div className="container-lobby-bottom-messages-items">
-        {
-          messages.length ?
-            messages.map(message => {
-              return message.hasOwnProperty('user') ?
-                (
-                <div key={message.id}>
-                  <p className="container-lobby-bottom-messages-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
-                </div>
-                ) :
-                null
-            }) :
-            <div> No messages right now </div>
-        }
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          this.setState({ messageInput: '' })
-          newMessage(user.id, e.target.message.value)
-        }}>
-        <input
-          type="text"
-          name="message"
-          value={this.state.messageInput}
-          onChange={(e) => this.setState({ messageInput: e.target.value })}
-          placeholder="Write message"
-        />
-        <button type="submit">Post</button>
-        </form>
-        </div>
+          {/* <div className="container-lobby-bottom-messages-items-list"> */}
+          {
+            messages.length ?
+              messages.map(message => {
+                return message.hasOwnProperty('user') ?
+                  (
+                  <div key={message.id} className="container-lobby-bottom-messages-items-line">
+                   <strong>{message.user.nickname}</strong> : {message.content}
+                  </div>
+                  ) :
+                  null
+              }) :
+              <div> No messages right now </div>
+          }
+          {/* </div> */}
+				</div>
+				<form onSubmit={(e) => {
+					e.preventDefault()
+					this.setState({ messageInput: '' })
+					newMessage(user.id, e.target.message.value)
+				}}>
+				  <input
+					  type="text"
+						name="message"
+						value={this.state.messageInput}
+						onChange={(e) => this.setState({ messageInput: e.target.value })}
+						placeholder="Write message"
+					/>
+					<button type="submit">Post</button>
+				</form>
       </div>
     )
   }

@@ -2,7 +2,7 @@
   display: -webkit-flex;
   display: $flex;
   flex-direction: $direction;
-  flex-grow: $grow;
+  flex: $grow;
   justify-content: $content;
   align-items: $align;
   font-size: $font;
@@ -16,8 +16,14 @@
   border-style: groove;
 }
 
+
 .container {
   width: 100%;
+  display:flex;
+
+  &-main { 
+    height: 100%;
+  }
 
   &-nav {
     display: -webkit-flex;
@@ -26,33 +32,57 @@
 
   &-lobby {
     @include lobby-config(block,inherit,0,space-between,flex-start,inherit,auto);
-    padding: .5em;
-    margin: 0em 1em 0em 1em;
 
     &-bottom {
       @include lobby-config(flex,inherit,0,space-between,flex-start,inherit,auto);
-      padding: .5em;
-      margin: 0em 1em 0em 1em;
 
-      &-invitations {
-        text-align: center;
-      }
+      &-invitations { text-align: center; }
 
       &-rooms {
         @include lobby-config(flex,column,1,inherit,center,inherit,100%);
         form { @include form() }
+
+        &-list {
+          font-size: small;
+        }
       }
 
       &-messages {
-        h3 {
+        @include lobby-config(flex,column,8,flex-start,center,inherit,80%);
+        
+        h3 { 
           text-align: center;
+          color: white;
+          font-family: sans-serif;
+          font-weight: 700;
+          font-size: 25px;
+          text-transform: uppercase;
         }
-        @include lobby-config(flex,column,3,flex-start,inherit,inherit,100%);
-         form { @include form() }
+
+        form { 
+          display: flex;
+          width: inherit;
+
+          input {
+            width: inherit;
+          }
+        }
+        background-color: #36393e;
+        padding: 0px 30px 16px;
+
+        &-items {
+          color: white;
+          font-weight: 100;
+          font-family: sans-serif;
+          width: inherit;
+          overflow-wrap: break-word;
+        }
       }
 
       &-onlineUsers {
         @include lobby-config(flex,column,1,inherit,center,inherit,100%);
+        h3 { text-align: center; }
+        margin: 5px;
       }
 
     }

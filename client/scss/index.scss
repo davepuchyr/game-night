@@ -1,6 +1,8 @@
 @import 'lobby';
 
 body {
+  margin: 0;
+  position: fixed;
   font-family: sans-serif;
   display: flex;
   justify-content: center;
@@ -22,7 +24,7 @@ body {
   }
 
   nav {
-    border: 1px solid black;
+    // border: 1px solid black;
     margin: 1em;
   }
 
@@ -248,10 +250,6 @@ canvas {
 
 #room-message-component form {
   display: flex;
-}
-
-.container-main {
-  height: 1000em;
 }
 
 #trash-can {
