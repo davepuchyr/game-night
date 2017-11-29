@@ -23,9 +23,8 @@ class RoomList extends Component {
 
   render () {
     return (
-      <div className="container-main-lobby-bottom-rooms">
-        <h3>Room List</h3>
-        <div className="container-main-lobby-bottom-rooms-list">
+      <div className="container-main-lobby-bottom-comps-rooms">
+        <div className="container-main-lobby-bottom-comps-rooms-list">
         {
           this.props.allRooms.map((room, idx) =>
           (

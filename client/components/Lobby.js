@@ -25,9 +25,22 @@ class Lobby extends Component {
           listOfRoomInvites.length? <Invitations roomInvites={listOfRoomInvites} userId={user.id}/> : null
         }
         <div className="container-main-lobby-bottom" >
-          <RoomList />
-          <Messages />
-          <OnlineUsers />
+          <div className="container-main-lobby-bottom-names">
+            <div id="room">
+              <h3>Room List</h3>
+            </div>
+            <div id="chat">
+              <h3>All Chat</h3>
+            </div>
+            <div id="players">
+              <h3>Players Online</h3>
+            </div>
+          </div>
+          <div className="container-main-lobby-bottom-comps">
+            <RoomList />
+            <Messages />
+            <OnlineUsers />
+          </div>
         </div>
       </div>
     )
