@@ -81,6 +81,7 @@ class Room extends Component {
 
     render() {
         const path = this.props.routeProps.match.url
+        console.log(path)
         let trashCheck = false
         if (this.state.trashFloat && this.props.dragging.bool) {
             trashCheck = true
@@ -138,7 +139,7 @@ class Room extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <Video/> */}
+                <Video/>
       </div>
     )
   }

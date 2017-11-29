@@ -27,11 +27,11 @@ class RoomMessages extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    const sender = this.props.user.nickname
+    const nickname = this.props.user.nickname
     const content = e.target.content.value
-    const message = {[sender]: content}
+    const message = {nickname, content}
     this.props.postMessage(message)
-    socket.emit('postRoomMessage', message, this.props.roomPath, this.props.user.nickname)
+    socket.emit('postRoomMessage', message, this.props.roomPath)
     e.target.content.value = ''
   }
 
@@ -148,24 +148,24 @@ class RoomMessages extends Component {
                         return (
                             <div 
                               style={{
-                                "display": "flex",
-                                "flex-direction": "column"
+                                'display': 'flex',
+                                'flexDirection': 'column'
                               }}
                               key={idx}>
                                 <div style={{
-                                  "display": "flex",
-                                  "flex-direction": "row"
+                                  'display': 'flex',
+                                  'flexDirection': 'row'
                                 }}>
                                   <div style={{
-                                    "color": "#7289DA",
-                                    "padding-right": "6px"
+                                    'color': '#7289DA',
+                                    'paddingRight': '6px'
                                   }}>
-                                  {Object.keys(message)[0]} - 
+                                  {message.nickname}:  
                                   </div> 
                                   <div style={{
-                                  "word-break": "break-word",
+                                  'wordBreak': 'break-word',
                                 }}>
-                                  {Object.values(message)[0]}
+                                  {message.content}
                                   </div>
                                 </div>
                                 <hr/>

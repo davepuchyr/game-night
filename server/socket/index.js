@@ -48,7 +48,7 @@ module.exports = (io) => {
         if (group_pictures[roomId]) {
           io.sockets.to(room).emit('get_group_pics', group_pictures[roomId])
         }
-        io.sockets.to(room).emit('addMessage', {[nickname]: 'joined room'})
+        io.sockets.to(room).emit('addMessage', {nickname: 'GM', content: `${nickname} joined the room`})
         io.sockets.to(room).emit('current_tokens', token_positions[roomId])
         if (draws[roomId]) {
           socket.emit('initial_draws', draws[roomId])
@@ -69,8 +69,8 @@ module.exports = (io) => {
     /*
     * GET ROOM MESSAGE
     */
-    socket.on('postRoomMessage', (message, room, nickname) => {
-      socket.broadcast.to(room).emit('addMessage', {[nickname]: message})
+    socket.on('postRoomMessage', (message, room) => {
+      socket.broadcast.to(room).emit('addMessage', message)
     })
 
     /*
@@ -123,7 +123,7 @@ module.exports = (io) => {
     * LEAVE ROOM
     */
     socket.on('leaveroom', (room, nickname) => {
-      io.sockets.to(room).emit('addMessage', {[nickname]: 'left room'})
+      io.sockets.to(room).emit('addMessage', {nickname: 'GM', content: `${nickname} left room`})
       socket.leave(room)
     })
 
@@ -136,7 +136,7 @@ module.exports = (io) => {
 
       let message = `[${user}] has rolled (${dieType}) and got ${rolledResult}!!!`
 
-      io.sockets.to(room).emit('addMessage', {['Die Master']: message})
+      io.sockets.to(room).emit('addMessage', {nickname: 'GM', content: message})
     })
 
     /*
