@@ -118,16 +118,15 @@ class MainStage extends React.Component {
     const { canvas } = this.state;
     const { black, red, green, blue } = this.props.tokens
     const { images } = this.props
-    const { rId } = this.props
-    console.log(this.refs.image)    
+    const { rId } = this.props 
 
     return (
       <Stage
         image={canvas}
         name="mainstage"
         ref="mainstage"
-        width={window.innerWidth + 500} 
-        height={window.innerHeight + 500}
+        width={this.state.backgroundWidth} 
+        height={this.state.backgroundHeight}
         className="main-canvas"
         draggable={!this.state.shift && !this.state.alt}
         onDragEnd={this.handleDragEnd}
@@ -135,8 +134,8 @@ class MainStage extends React.Component {
         onMouseDown={this.handleMouseDown}
         >
         <Layer 
-          width={window.innerWidth} 
-          height={window.innerHeight}
+          width={this.state.backgroundWidth} 
+          height={this.state.backgroundHeight}
           >
           <Image 
             ref="image"
@@ -154,6 +153,8 @@ class MainStage extends React.Component {
             shift={this.state.shift}
             alt={this.state.alt}
             roomId={rId}
+            width={this.state.backgroundWidth}
+            height={this.state.backgroundHeight}
           />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>
           <HexPiece id={rId} fill={'red'} x={red[0]} y={red[1]}/>
