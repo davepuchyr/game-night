@@ -36,6 +36,7 @@
 
     &-lobby {
       @include lobby-config(flex,inherit,none,inherit,flex-start,inherit,auto);
+      background-color: #64676b; 
 
       &-bottom {
         display: flex;
