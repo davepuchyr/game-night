@@ -117,6 +117,8 @@ body {
 	&-nav {
 		display: -webkit-flex;
     display: flex;
+    position: absolute;
+    width: calc(100vw - 50px);
 	}
 
 	&-lobby {
