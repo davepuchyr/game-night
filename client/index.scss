@@ -532,7 +532,29 @@ body {
 
   &-nicknamelist, &-invitedlist{
     flex-direction: column;
+    width: 100%;
   }
+}
+
+#invitationlist-invitedList, #invitationlist-nicknameList {
+  flex-direction: column;
+  width: 100%;
+  & h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  & button {
+    margin: 0 !important;
+    height: 15px !important;
+  }
+}
+
+#invitationlist-invitedList {
+  text-align: right;
+}
+
+#invitationlist-nicknameList {
+  text-align: left;
 }
 
 #invite-button {
