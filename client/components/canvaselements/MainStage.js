@@ -31,6 +31,7 @@ class MainStage extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleDragEnd = this.handleDragEnd.bind(this)
+    this.updateDimensions = this.updateDimensions.bind(this)
   }
   
   componentDidMount() {
@@ -43,6 +44,7 @@ class MainStage extends React.Component {
     }
     document.addEventListener('keydown', this.handleKeyDown);
     document.addEventListener('keyup', this.handleKeyUp);
+    window.addEventListener("resize", this.updateDimensions);
   }
 
   componentDidUpdate() {
@@ -59,10 +61,18 @@ class MainStage extends React.Component {
           backgroundImage: image,
           imageUrl: this.props.background.url,
           backgroundWidth: width,
-          backgroundHeight: height
+          backgroundHeight: height,
         })
       }
     }
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener("resize", this.updateDimensions)
+  }
+
+  updateDimensions () {
+    this.setState({forceUpdate: true})
   }
   
   aspectRatio (originalHeight, originalWidth) {
