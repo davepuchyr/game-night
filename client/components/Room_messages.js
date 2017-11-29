@@ -27,11 +27,11 @@ class RoomMessages extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    const sender = this.props.user.nickname
+    const nickname = this.props.user.nickname
     const content = e.target.content.value
-    const message = {[sender]: content}
+    const message = {nickname, content}
     this.props.postMessage(message)
-    socket.emit('postRoomMessage', message, this.props.roomPath, this.props.user.nickname)
+    socket.emit('postRoomMessage', message, this.props.roomPath)
     e.target.content.value = ''
   }
 
@@ -160,12 +160,12 @@ class RoomMessages extends Component {
                                     'color': '#7289DA',
                                     'paddingRight': '6px'
                                   }}>
-                                  name - 
+                                  {message.nickname}:  
                                   </div> 
                                   <div style={{
                                   'wordBreak': 'break-word',
                                 }}>
-                                  message
+                                  {message.content}
                                   </div>
                                 </div>
                                 <hr/>
