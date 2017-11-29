@@ -13,6 +13,13 @@ body {
     text-decoration: none;
   }
 
+  hr {
+    width: 100%;
+    background-color: rgba(141, 139, 148, 0.036);
+    border-color: rgba(141, 139, 148, 0.05);
+    margin: 4px;
+  }
+
   h1 {
     display: flex;
     justify-content: space-between;

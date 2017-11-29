@@ -144,10 +144,28 @@ class RoomMessages extends Component {
                     roomMessages.map((message, idx) => {
                         return (
                             <div 
-                              style={{"word-break": "break-word"}}
-                              key={idx}
-                            >
-                                {Object.keys(message)[0]} - {Object.values(message)[0]}
+                              style={{
+                                "display": "flex",
+                                "flex-direction": "column"
+                              }}
+                              key={idx}>
+                                <div style={{
+                                  "display": "flex",
+                                  "flex-direction": "row"
+                                }}>
+                                  <div style={{
+                                    "color": "#7289DA",
+                                    "padding-right": "6px"
+                                  }}>
+                                  {Object.keys(message)[0]} - 
+                                  </div> 
+                                  <div style={{
+                                  "word-break": "break-word",
+                                }}>
+                                  {Object.values(message)[0]}
+                                  </div>
+                                </div>
+                                <hr/>
                             </div>
                         )
                     })
