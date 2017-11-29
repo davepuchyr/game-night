@@ -17,15 +17,15 @@ export class Messages extends React.Component {
   render(){
     const { user, messages, newMessage } = this.props
     return (
-      <div className="container-main-lobby-bottom-comps-messages">
-        <div className="container-main-lobby-bottom-comps-messages-items">
-          <div className="container-main-lobby-bottom-comps-messages-items-list">
+      <div className="container-main-lobby-bottom-comps-chat-messages">
+        <div className="container-main-lobby-bottom-comps-chat-messages-items">
+          {/* <div className="container-main-lobby-bottom-comps-chat-messages-items-list"> */}
           {
             messages.length ?
               messages.map(message => {
                 return message.hasOwnProperty('user') ?
                   (
-                  <div key={message.id} className="container-main-lobby-bottom-comps-messages-items-line">
+                  <div key={message.id} className="container-main-lobby-bottom-comps-chat-messages-items-list-line">
                    <strong>{message.user.nickname}</strong> : {message.content}
                   </div>
                   ) :
@@ -33,7 +33,7 @@ export class Messages extends React.Component {
               }) :
               <div> No messages right now </div>
           }
-          </div>
+          {/* </div> */}
 				</div>
 				<form onSubmit={(e) => {
 					e.preventDefault()
