@@ -111,7 +111,7 @@ socket.on('connect', () => {
   })
 
   socket.on('update_background', (img, roomId) => {
-    // console.log('NEW BACKGROUND ', img)
+    
     store.dispatch(updateBackground(img))
   })
 })
