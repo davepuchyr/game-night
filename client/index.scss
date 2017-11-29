@@ -614,32 +614,30 @@ canvas {
 
 #localVideo {
   width: 20%;
-  margin-top: 7.1em;
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 1em;
+  top: 1em;
 }
 
 #container_1 {
-  margin-top: 7.1em;
   width: 20%;
   position: absolute;
-  left: calc(100% - 20%);
-  top: 0px;
+  left: calc(80% - 1em);
+  top: 1em;
 }
 
 #container_2 {
   width: 20%;
   position: absolute;
-  left: 0;
-  top: calc(100% - 22%);
+  left: 1em;
+  bottom: 1em;
 }
 
 #container_3 {
   width: 20%;
   position: absolute;
-  left: calc(100% - 10em);
-  top: calc(100% - 22%);
+  left: calc(80% - 1em);
+  bottom: 1em;
 }
 
 video {
