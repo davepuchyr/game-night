@@ -9,7 +9,7 @@ import {auth} from '../store'
 const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error, isLoggedIn} = props
   return (
-    <div>
+    <div className="container-main login">
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email"><small>Email</small></label>
@@ -22,7 +22,7 @@ const AuthForm = (props) => {
                 <label htmlFor="nickname"><small>Nickname</small></label>
                 <input name="nickname" type="text" required />
               </div>
-            ) : 
+            ) :
             null
          }
         <div>

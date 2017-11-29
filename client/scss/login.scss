@@ -1,0 +1,25 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    padding:20em 0 0 0;
+
+    div {
+      padding: 10px;
+      font-size: 40px;
+
+      input {
+        width: 40em;
+        height: 3em;
+        font-size: 40px;
+      }
+
+      button {
+        font-size: 40px;
+        padding: 1em;
+      }
+    }
+  }
+}
