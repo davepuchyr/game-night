@@ -7,6 +7,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 100%;
 
   a {
     text-decoration: none;
@@ -80,6 +81,8 @@ body {
 #app {
   width: 100%;
   z-index: 1;
+  display: flex;
+  flex-direction: row;
 }
 
 .dragImg {
@@ -87,7 +90,7 @@ body {
 }
 
 
-#main, #app {
+#main {
   width: 100%;
   height: 100%;
 }

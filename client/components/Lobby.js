@@ -20,11 +20,11 @@ class Lobby extends Component {
     const {handleClick, isLoggedIn, invitations, user} = this.props
     const listOfRoomInvites = Object.keys(invitations).filter(id => user.id === (+id)? id: null).map(each => invitations[each])
     return (
-      <div className="container-lobby">
+      <div className="container-main-lobby">
         {
           listOfRoomInvites.length? <Invitations roomInvites={listOfRoomInvites} userId={user.id}/> : null
         }
-        <div className="container-lobby-bottom" >
+        <div className="container-main-lobby-bottom" >
           <RoomList />
           <Messages />
           <OnlineUsers />
