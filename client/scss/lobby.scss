@@ -62,6 +62,7 @@
             &-rooms{
               @include component-scheme();
               text-align: left;
+              padding: 1em;
 
               a {
                 color: white;
@@ -74,6 +75,16 @@
                 input {
                   margin: 1em;
                   border-radius: 5px;
+                }
+              }
+
+              &-item {
+                display: flex;
+                flex-direction: column;
+                padding: 4px;
+
+                &-sub {
+                  font-size: 10px;
                 }
               }
             }

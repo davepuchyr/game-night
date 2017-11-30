@@ -27,12 +27,16 @@ class RoomList extends Component {
         {
           this.props.allRooms.map((room, idx) =>
           (
+            <div className="container-main-lobby-bottom-comps-room-rooms-item">
             <Link to={`/room/${room.id}`} key={idx}>
               <div>
-                <div>{room.name}</div>
-                <div>{room.game}}</div>
+              {room.name}
+              </div>
+              <div className="container-main-lobby-bottom-comps-room-rooms-item-sub">
+              {`playing: ${room.game}`}
               </div>
             </Link>
+            </div>
           ))
         }
         <form onSubmit={this.handleSubmit}>
