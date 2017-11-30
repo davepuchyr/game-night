@@ -346,7 +346,7 @@
         this.renderer.setSize(this.cw * 2, this.ch * 2);
         this.renderer.shadowMapEnabled = true;
         this.renderer.shadowMapSoft = true;
-        this.renderer.setClearColor(0xffffff, 1);
+        this.renderer.setClearColor(0xfffff1, 1);
 
         this.dice = [];
         this.scene = new THREE.Scene();

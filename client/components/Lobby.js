@@ -40,7 +40,7 @@ class Lobby extends Component {
             </div>
             <div className="container-main-lobby-bottom-comps-players">
               <div className="container-main-lobby-bottom-comps-players-name">
-                <h3>Players Online</h3>
+                <h3>Online</h3>
               </div>
               <OnlineUsers />
             </div>
