@@ -204,10 +204,10 @@
 
             &-onlineUsers{
               @include component-scheme();
-              text-align: center;
+              text-align: left;
 
               &-users {
-                text-align: center;
+                padding: 0 0 1em 2em;
                 color: #7289DA;
               }
             }
