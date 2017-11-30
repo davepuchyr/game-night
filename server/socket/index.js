@@ -32,6 +32,16 @@ module.exports = (io) => {
     })
 
     /*
+    * NEW ROOM
+    */
+
+    socket.on('created_room', (room) => {
+      socket.broadcast.emit('add_new_room', room)
+    })
+
+
+
+    /*
     * JOINROOM
     */
     socket.on('joinroom', (room, nickname) => {

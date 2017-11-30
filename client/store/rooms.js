@@ -16,8 +16,8 @@ const rooms = []
 /**
  * ACTION CREATORS
  */
-const getAllRooms = allRooms => ({type: GET_ALL_ROOMS, allRooms})
-const addRoom = room => ({type: ADD_ROOM, room})
+export const getAllRooms = allRooms => ({type: GET_ALL_ROOMS, allRooms})
+export const addRoom = room => ({type: ADD_ROOM, room})
 
 /**
  * THUNK CREATORS
@@ -36,7 +36,8 @@ export const createRoom = (newName, newGame, user) =>
   dispatch =>
     axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
       .then(res => {
-        socket.emit('created_room', String(res.data.id))
+        socket.emit('created_room', res.data)
+        console.log(res.data)
         history.push(`/room/${res.data.id}`)
         dispatch(addRoom(res.data))
       })
