@@ -30,8 +30,8 @@ class Room extends Component {
 
   //helper function
   classShow(elements, isShow){
-    isShow ? 
-    Array.prototype.forEach.call(elements, el => el.className+=' show') : 
+    isShow ?
+    Array.prototype.forEach.call(elements, el => el.className+=' show') :
     Array.prototype.forEach.call(elements, el => el.className=el.className.replace( /(?:^|\s)show(?!\S)/g , '' ))
   }
 
@@ -48,7 +48,7 @@ class Room extends Component {
     this.setState({trashFloat: true})
     if (this.props.dragging.bool) this.setState({delete: true, toDelete: this.props.dragging.url, group: !this.props.dragging.personal})
   }
-    
+
   handleMouseLeave() {
     this.setState({trashFloat: false, delete: false, toDelete: '', group: false})
   }
@@ -58,14 +58,14 @@ class Room extends Component {
   }
 
   handleDieClick(e){
-    ['dice', 'canvas', 'center_field'].forEach(elem => { 
+    ['dice', 'canvas', 'center_field'].forEach(elem => {
       let isClass = (elem === 'center_field') ? true : false
       if(!this.state.dieClicked){
         isClass ?
           this.classShow(document.getElementsByClassName(elem), true) :
           document.getElementById(elem).className+=' show'
       } else {
-        isClass ? 
+        isClass ?
           this.classShow(document.getElementsByClassName(elem), false) :
           document.getElementById(elem).className=document.getElementById(elem).className.replace( /(?:^|\s)show(?!\S)/g , '' )
       }
@@ -79,7 +79,7 @@ class Room extends Component {
   }
 
   toggleConsole(e) {
-      !this.state.toggleConsole ? 
+      !this.state.toggleConsole ?
         this.setState({toggleConsole: true})
       :
         this.setState({toggleConsole: false})
@@ -88,14 +88,13 @@ class Room extends Component {
 
     render() {
         const path = this.props.routeProps.match.url
-        console.log(path)
         let trashCheck = false
         if (this.state.trashFloat && this.props.dragging.bool) {
             trashCheck = true
         }
         return (
             <div id="room-container" >
-                <MainStage 
+                <MainStage
                     trashFloat={this.state.trashFloat}
                     rId={this.props.routeProps.match.params.roomid}
                     paintColor={this.state.colorOptions[this.state.colorIndex]}
@@ -164,7 +163,7 @@ class Room extends Component {
 const mapState = (state) => {
   return {
     dragging: state.trash
-  } 
+  }
 }
 
 const mapDispatch = dispatch => {

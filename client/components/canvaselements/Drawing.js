@@ -109,7 +109,6 @@ class Drawing extends Component {
   }
 
   render() {
-    console.log(this.props.paintColor)
     const { canvas } = this.state
     return (
       <Image

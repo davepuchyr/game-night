@@ -7,11 +7,10 @@ import PropTypes from 'prop-types';
 const InviteForm = (props) =>{
 
   // Render nothing if the "show" prop is false
-  const {children, onClose, invited, names, editInvites, sendInvites, inTheRoom} = props
+  const {children, onClose, invited, names, editInvites, sendInvites, inTheRoom, userId} = props
   if(!props.show) {
     return null;
   }
-
   return (
     <div className="invitation-form-background">
       <div className="invitation-form-background-box">
@@ -22,7 +21,7 @@ const InviteForm = (props) =>{
             {
               names.length?
                 names.map((nickname,ind) => {
-                  return !invited.includes(nickname) && !inTheRoom.includes(nickname.nickname) ?
+                  return !invited.includes(nickname.nickname) && !inTheRoom.includes(nickname.nickname) && nickname.id !== userId ?
                   (
                     <h5
                       key={nickname.id}
@@ -30,7 +29,7 @@ const InviteForm = (props) =>{
                     >
                     {nickname.nickname}
                     </h5>
-                  ) : 
+                  ) :
                   <h5 key={ind}> {nickname.nickname} Invited! </h5>
                 }) :
                 <h5> Unavailable </h5>
