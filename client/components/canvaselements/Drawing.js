@@ -83,21 +83,21 @@ class Drawing extends Component {
         y: pos.y - stage.y()
       }
       let erase = this.props.alt
-      this.draw({firstPos, secondPos, erase})
-      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId, erase })
+      this.draw({firstPos, secondPos, erase, paintColor: this.props.paintColor})
+      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId, erase, paintColor: this.props.paintColor })
       // this.setState({newDraw: [...this.state.newDraw, {firstPos, secondPos, room: this.props.roomId}]})
     }
   }
 
   draw (stroke) {
     let { context } = this.state;
-    const {firstPos, secondPos, erase } = stroke
+    const {firstPos, secondPos, erase, paintColor } = stroke
     !erase ?
     context.globalCompositeOperation = 'source-over'
   :
     context.globalCompositeOperation = 'destination-out'
 
-    context.strokeStyle = 'black'
+    context.strokeStyle = paintColor
     context.lineJoin = 'round'
     context.lineWidth = erase ? 25 : 5
     context.beginPath()
@@ -109,6 +109,7 @@ class Drawing extends Component {
   }
 
   render() {
+    console.log(this.props.paintColor)
     const { canvas } = this.state
     return (
       <Image

@@ -232,14 +232,14 @@ body {
         }
     }
 
-    &-die img {
+    &-die img, &-paint img {
       display: block;
       width: 4em;
       height: 4em;
       margin: 10px;
       margin-bottom: 8px;
     }
-      &-die, &-trash, &-background {
+      &-die, &-trash, &-background, &-paint {
         display: flex;
         justify-content: center;
       }
