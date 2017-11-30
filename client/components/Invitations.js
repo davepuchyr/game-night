@@ -9,7 +9,7 @@ const Invitations = (props) => {
   const {roomInvites, userId , remove} = props
 
   return (
-    <div className="item-lobby-invitations">
+    <div className="container-lobby-bottom-invitations">
       <h3>Invitations</h3>
       {roomInvites.map((room,ind) =>  <a key={ind} href={`${room}`} onClick={()=> removeInvitation(userId,room)}>You're invited to room # :{room.slice(6)}</a>)}
     </div>
