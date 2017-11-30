@@ -43,7 +43,7 @@ class DropGroup extends Component {
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
             const image = {
-                x: 300,
+                x: 700,
                 y: 400,
                 personal: false,
                 url: response.body.secure_url,
