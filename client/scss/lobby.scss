@@ -34,16 +34,7 @@
   &-main {
     height: 100%;
     @import 'splashscreen';
-    @import 'login';
 
-    &-button{
-      display: flex;
-      flex-direction: column;
-
-      button  {
-        font-size: 100px;
-      }
-    }
     &-lobby {
       @include lobby-config(flex,inherit,none,inherit,flex-start,inherit,auto);
       background-color: #64676b;

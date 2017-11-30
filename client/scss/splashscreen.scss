@@ -1,34 +1,45 @@
-.splash {
-  position: relative;
-  width: 100%;
-  margin: 0 auto;
-  max-width: fit-content;
+.splashscreen {
+	display:flex;
+	flex-direction:column;
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	max-width: fit-content;
 
-  video {
-    width: 100%;
-  }
+	&-video {
+		height:720px;
+		svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 
-  svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+			text {
+				font-family: 'Montserrat', sans-serif;
+				font-weight: 900;
+				text-transform: uppercase;
+				font-size: 35px;
+			}
 
-    text {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 40px;
-    }
+			> rect {
+				-webkit-mask: url(#mask);
+				mask: url(#mask);
+			}
 
-    > rect {
-      -webkit-mask: url(#mask);
-      mask: url(#mask);
-    }
+			rect {
+				fill: #fff;
+			}
+		}
+	}
 
-    rect {
-      fill: #fff;
-    }
-  }
+	&-login-button {
+		display:grid;
+		flex-direction: column;
+
+		button {
+			padding: 1em;
+			font-size: 40px;
+		}
+	}
 }
