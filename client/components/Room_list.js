@@ -29,7 +29,7 @@ class RoomList extends Component {
           (
             <div className="container-main-lobby-bottom-comps-room-rooms-item">
             <Link to={`/room/${room.id}`} key={idx}>
-              <div>
+              <div className="container-main-lobby-bottom-comps-room-rooms-item-head">
               {room.name}
               </div>
               <div className="container-main-lobby-bottom-comps-room-rooms-item-sub">
