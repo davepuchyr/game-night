@@ -6,6 +6,7 @@ import { reactDom } from 'react-dom'
 import socket from '../socket'
 import { addMessage } from '../store'
 import InviteForm from './InviteForm'
+import history from '../history'
 
 class RoomMessages extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class RoomMessages extends Component {
         this.sendInvites = this.sendInvites.bind(this)
         this.editInvites = this.editInvites.bind(this)
         this.scrollToBottom = this.scrollToBottom.bind(this)
+        this.returnToLobby = this.returnToLobby.bind(this)
   }
 
   handleSubmit (e) {
@@ -104,6 +106,10 @@ class RoomMessages extends Component {
       this.setState({searchNickName: e.target.value.toLowerCase(), isOpen: true})
     }
 
+    returnToLobby(e) {
+      history.push('/lobby')
+    }
+
     render () {
         const {user, roomMessages, onlineUsers} = this.props
         const {isOpen , invited, searchNickName} = this.state
@@ -140,6 +146,9 @@ class RoomMessages extends Component {
                       <h3> Game Log </h3>
                       <button id="invite-button" onClick={this.toggleInvite}>
                         Invite
+                      </button>
+                      <button id="invite-button" onClick={this.returnToLobby}>
+                        Lobby
                       </button>
                     {/* </div> */}
                 </div>
@@ -178,9 +187,8 @@ class RoomMessages extends Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <input className="msg-input" type="text" name="content"/>
-                    <img src="/assets/enter_icon"/>
                     <button type="submit">
-                      <img src="/assets/enter_icon"/>{/* { (window.innerWidth < 900) ? null : (<p>enter</p>)} */}
+                      enter
                     </button>
         </form>
       </div>

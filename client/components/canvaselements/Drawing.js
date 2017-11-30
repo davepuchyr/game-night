@@ -99,7 +99,7 @@ class Drawing extends Component {
 
     context.strokeStyle = 'black'
     context.lineJoin = 'round'
-    context.lineWidth = erase ? 10 : 5
+    context.lineWidth = erase ? 25 : 5
     context.beginPath()
     context.moveTo(firstPos.x, firstPos.y)
     context.lineTo(secondPos.x, secondPos.y)
