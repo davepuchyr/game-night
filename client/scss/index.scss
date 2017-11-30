@@ -85,6 +85,15 @@ body {
       .center_field.show {
         z-index: 102;
         opacity: 1;
+
+        & input {
+          margin-top: 20px;
+          font-weight: bolder;
+          background-color: rgba(0, 0, 0, 0.6);
+          border-radius: 8px;
+          color: white;
+        }
+
       }
       #canvas {
         opacity: 0;
@@ -99,6 +108,21 @@ body {
     z-index: 101;
     opacity: 1;
   }
+}
+
+#label {
+  font-weight: bolder;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  color: white;
+}
+
+#labelhelp {
+  margin-top: 10px;
+  border-radius: 8px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0px
 }
 
 #app {
@@ -516,4 +540,5 @@ canvas {
 video {
   width: 100%;
   z-index: 20;
+  border-radius: 10px;
 }
