@@ -8,7 +8,6 @@
 .center_field * {
     position: relative;
     font-family: Trebuchet MS;
-    background-color: rgba(255, 255, 255, 0.6);
     padding: 5px 15px;
 }
 
@@ -59,6 +58,7 @@
     border: none;
     width: 5em;
     top: 62%;
+    border-radius: 8px;
 }
 
 .dice_place {

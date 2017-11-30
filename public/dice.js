@@ -390,7 +390,7 @@
             this.dieBodyMaterial, this.dieBodyMaterial, 0, 0.5));
 
         this.desk = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 2, this.h * 2, 1, 1), 
-                                   new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.1, transparent: true }));
+                                   new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.0, transparent: true }));
         this.desk.receiveShadow = true;
         this.scene.add(this.desk);
 
@@ -631,12 +631,13 @@
 
     this.dieBox.prototype.searchDieByMouse = function(ev) {
         var intersects = (new THREE.Raycaster(this.camera.position, 
-                                              (new THREE.Vector3((ev.clientX - this.cw) / this.aspect,
-                                                                 (ev.clientY - this.ch) / this.aspect, this.w / 9))
+                                              (new THREE.Vector3((ev.clientX - this.cw) / (this.aspect + 0.1),
+                                                                 ((ev.clientY - this.ch) / this.aspect) -155, this.w / 9 +5))
                                               .sub(this.camera.position).normalize())).intersectObjects(this.dice);
         if (intersects.length) {
             return intersects[0].object.userData;
         }
+        console.log(this.aspect)
     };
 
     this.dieBox.prototype.drawSelector = function() {
