@@ -5,6 +5,7 @@ const db = require('../db')
 const Room = db.define('room', {
     name: {
         type: Sequelize.STRING
+        
     },
     game: {
         type: Sequelize.STRING

@@ -4,12 +4,13 @@ import {connect} from 'react-redux'
 const OnlineUsers = (props) => {
   const {users} = props
   return (
-    <div className="item-lobby-onlineUsers">
-      <h3>Players Online</h3>
+    <div className="container-main-lobby-bottom-comps-players-onlineUsers">
       {
         users && users.map((user, idx) => {
           return (
-            <div key={idx}>{user.nickname}</div>
+            <div className="container-main-lobby-bottom-comps-players-onlineUsers-users" key={idx}>
+              <h3>{user.nickname}</h3>
+            </div>
           )
         })
       }
