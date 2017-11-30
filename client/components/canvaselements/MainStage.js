@@ -79,19 +79,27 @@ class MainStage extends React.Component {
     const originalRatio = (originalHeight / originalWidth)
     const windowWidth = window.innerWidth
     const windowHeight = window.innerHeight
-    let height
-    let width
-    if (originalHeight >= windowHeight) height = windowHeight
-    else height = originalHeight
-    if (originalWidth >= windowWidth) width = windowWidth
-    else width = originalWidth
-    const heightDifference =  originalHeight - height
-    const widthDifference =  originalWidth - width
+    let height = originalHeight
+    let width = originalWidth
+    if (originalHeight <= windowHeight) height = windowHeight
+    if (originalWidth <= windowWidth) width = windowWidth
+    const heightDifference =  height - originalHeight
+    const widthDifference =  width - originalWidth
     if (heightDifference > 0 || widthDifference > 0) {
-      if (widthDifference < heightDifference) {
+      if (widthDifference > heightDifference) {
         height = width * originalRatio
       } else {
         width = height / originalRatio
+      }
+    } else {
+      const heightToWindowDifference = height - windowHeight
+      const widthToWindowDifference = width - windowHeight
+      if (heightToWindowDifference < widthToWindowDifference) {
+        height = windowHeight
+        width = height / originalRatio
+      } else {
+        width = windowWidth
+        height = width * originalRatio
       }
     }
     return [width, height]
