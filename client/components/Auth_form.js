@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {SplashVideo} from './index'
 
 /**
  * COMPONENT
@@ -10,31 +11,31 @@ const AuthForm = (props) => {
   const {name, displayName, handleSubmit, error, isLoggedIn} = props
   return (
     <div className="container-main login">
+      <SplashVideo/>
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email"><small>Email</small></label>
-          <input name="email" type="text" required />
+          <input name="email" type="text" required placeholder="E-mail address"/>
         </div>
         {
           name === 'signup'?
            (
               <div>
                 <label htmlFor="nickname"><small>Nickname</small></label>
-                <input name="nickname" type="text" required />
+                <input name="nickname" type="text" required  placeholder="Create a nickname"/>
               </div>
             ) :
             null
          }
         <div>
           <label htmlFor="password"><small>Password</small></label>
-          <input name="password" type="password" required />
+          <input name="password" type="password" required  placeholder="Password"/>
         </div>
         <div>
           <button type="submit">{displayName}</button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }

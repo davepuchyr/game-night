@@ -19,7 +19,7 @@
   color: #7289DA;
 }
 
-@mixin component-scheme(){
+@mixin component-scheme() {
   width: 100%;
   margin: 1em;
   border-radius: 20px;
@@ -33,7 +33,9 @@
 
   &-main {
     height: 100%;
+    background-color: #23272A;
     @import 'splashscreen';
+    @import 'login';
 
     &-lobby {
       @include lobby-config(flex,inherit,none,inherit,flex-start,inherit,auto);

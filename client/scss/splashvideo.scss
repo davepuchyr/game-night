@@ -1,0 +1,27 @@
+.video {
+ height:720px;
+
+ svg {
+   position: absolute;
+   left: 0;
+   width: 100%;
+   height: inherit;
+
+   text {
+     font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     text-transform: uppercase;
+     font-size: 35px;
+   }
+
+   > rect {
+     -webkit-mask: url(#mask);
+     mask: url(#mask);
+     fill:#fff;
+   }
+
+   rect {
+     fill: #fff;
+   }
+ }
+}
