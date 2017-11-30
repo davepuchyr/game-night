@@ -231,14 +231,14 @@ body {
         }
     }
 
-    &-die img {
+    &-die img, &-paint img {
       display: block;
       width: 4em;
       height: 4em;
       margin: 10px;
       margin-bottom: 8px;
     }
-      &-die, &-trash, &-background {
+      &-die, &-trash, &-background, &-paint {
         display: flex;
         justify-content: center;
       }
@@ -326,6 +326,9 @@ body {
       border: none;
       border-radius: 10px;
       height: 2.5em;
+      @media (max-width: 1100px) {
+        color: rgba(0, 0, 0, 0);
+    }
   }
 
   & form {
@@ -491,6 +494,7 @@ body {
 #invite-button {
   width: 25% !important;
   margin-top: 0 !important;
+  color: white !important;
 }
 
 .item-lobby-messages-line {
@@ -514,6 +518,7 @@ canvas {
   position: absolute;
   left: 1em;
   top: 1em;
+  border-radius: 10px;
 }
 
 #container_1 {
@@ -521,6 +526,7 @@ canvas {
   position: absolute;
   left: calc(80% - 1em);
   top: 1em;
+  border-radius: 10px;
 }
 
 #container_2 {
@@ -528,6 +534,7 @@ canvas {
   position: absolute;
   left: 1em;
   bottom: 1em;
+  border-radius: 10px;
 }
 
 #container_3 {
@@ -535,10 +542,11 @@ canvas {
   position: absolute;
   left: calc(80% - 1em);
   bottom: 1em;
+  border-radius: 10px;
 }
 
 video {
   width: 100%;
   z-index: 20;
-  border-radius: 10px;
+  border-radius: 10px !important;
 }
