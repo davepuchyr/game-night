@@ -178,9 +178,9 @@ class RoomMessages extends Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <input className="msg-input" type="text" name="content"/>
-                    
+                    <img src="/assets/enter_icon"/>
                     <button type="submit">
-                      {/* { (window.innerWidth < 900) ? null : (<p>enter</p>)} */}
+                      <img src="/assets/enter_icon"/>{/* { (window.innerWidth < 900) ? null : (<p>enter</p>)} */}
                     </button>
         </form>
       </div>
