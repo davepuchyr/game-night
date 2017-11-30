@@ -341,12 +341,12 @@
         this.useAdaptiveTimestep = true;
 
         this.renderer = window.WebGLRenderingContext ?
-            new THREE.WebGLRenderer({ antialias: true }) :
-            new THREE.CanvasRenderer({ antialias: true });
+            new THREE.WebGLRenderer({ antialias: true, alpha: true }) :
+            new THREE.CanvasRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(this.cw * 2, this.ch * 2);
         this.renderer.shadowMapEnabled = true;
         this.renderer.shadowMapSoft = true;
-        this.renderer.setClearColor(0xffffff, 1);
+        this.renderer.setClearColor(0x000000, 0);
 
         this.dice = [];
         this.scene = new THREE.Scene();
@@ -363,6 +363,7 @@
         this.camera.position.z = wh;
 
         var ambientLight = new THREE.AmbientLight(0xf0f0f0);
+        this.scene.background = 'skyblue'
         this.scene.add(ambientLight);
         var mw = Math.max(this.w, this.h);
         var light = new THREE.SpotLight(0xf0f0f0);
@@ -389,7 +390,7 @@
             this.dieBodyMaterial, this.dieBodyMaterial, 0, 0.5));
 
         this.desk = new THREE.Mesh(new THREE.PlaneGeometry(this.w * 2, this.h * 2, 1, 1), 
-                                   new THREE.MeshLambertMaterial({ color: 0xffffff }));
+                                   new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.0, transparent: true }));
         this.desk.receiveShadow = true;
         this.scene.add(this.desk);
 
@@ -630,12 +631,13 @@
 
     this.dieBox.prototype.searchDieByMouse = function(ev) {
         var intersects = (new THREE.Raycaster(this.camera.position, 
-                                              (new THREE.Vector3((ev.clientX - this.cw) / this.aspect,
-                                                                 (ev.clientY - this.ch) / this.aspect, this.w / 9))
+                                              (new THREE.Vector3((ev.clientX - this.cw) / (this.aspect + 0.1),
+                                                                 ((ev.clientY - this.ch) / this.aspect) -155, this.w / 9 +5))
                                               .sub(this.camera.position).normalize())).intersectObjects(this.dice);
         if (intersects.length) {
             return intersects[0].object.userData;
         }
+        console.log(this.aspect)
     };
 
     this.dieBox.prototype.drawSelector = function() {
@@ -643,9 +645,9 @@
         var step = this.w / 4.5;
         this.pane = new THREE.Mesh(new THREE.PlaneGeometry(this.cw * 20, this.ch * 20, 1, 1), 
                                    new THREE.MeshPhongMaterial({ color: 0, ambient: 0xfbfbfb, emissive: 0 }));
-        this.pane.receiveShadow = true;
-        this.pane.position.set(0, 0, 1);
-        this.scene.add(this.pane);
+        // this.pane.receiveShadow = true;
+        // this.pane.position.set(0, 0, 1);
+        // this.scene.add(this.pane);
 
         for (var i = 0, pos = -3; i < knownDieTypes.length; ++i, ++pos) {
             var die = createDie(knownDieTypes[i]);

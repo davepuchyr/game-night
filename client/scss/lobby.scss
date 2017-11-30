@@ -7,22 +7,17 @@
   align-items: $align;
   font-size: $font;
   width: $width;
-  border-radius: 20px;
 }
 
 @mixin main-theme(){
   width: 100%;
   text-align: center;
   background: rgba(44, 47, 51, 0.84);
-  margin: 1em;
-  border-radius: 20px;
-  color: #7289DA;
+  color: white;
 }
 
 @mixin component-scheme() {
   width: 100%;
-  margin: 1em;
-  border-radius: 20px;
   height: 100%;
   background: rgba(44, 47, 51, 0.84);
 }
@@ -39,7 +34,7 @@
 
     &-lobby {
       @include lobby-config(flex,inherit,none,inherit,flex-start,inherit,auto);
-      background-color: #64676b;
+      background-color: rgba(8, 8, 8, 0.84);
 
       &-bottom {
         display: flex;
@@ -52,23 +47,54 @@
           height: 100%;
           flex-direction: row;
 
-          &-invitations { text-align: center; }
-
           &-room {
             @include lobby-config(flex,column,0.7,auto,center,inherit,15%);
-            padding: 1em 3em 1em 1em;
 
             &-rooms{
               @include component-scheme();
-              text-align: center;
+              text-align: left;
 
               a {
                 color: white;
+
+                div {
+                  padding: 0 0 0 10px;
+                }
               }
               form {
+
                 input {
+                  margin: 0.5em 0.5em 0.5em 1em;
+                  border-radius: 5px;
+                }
+
+                input[type=text] {
+                  height: 2em;
+                }
+
+                input[type=submit] {
+                  background-color: #7289DA;
+                  border-color: #7289DA;
+                  color: white;
                   margin: 1em;
                   border-radius: 5px;
+                  height: 2.5em;
+                }
+              }
+
+              &-item {
+                display: flex;
+                flex-direction: column;
+                padding: 4px;
+
+                &-head {
+                  font-size: 20px;
+                  font-weight: 540;
+                  color: #7289DA;
+                }
+
+                &-sub {
+                  font-size: 10px;
                 }
               }
             }
@@ -78,17 +104,31 @@
 
               h3 {
                 text-align: center;
+                font-size: xx-large;
+              }
+            }
+
+            &-invitations {
+              text-align: center;
+              padding: 20px 0;
+              width: 100%;
+              background-color: rgba(44, 46, 51, 0.84);
+
+              a {
+                color: white;
+                font-weight: bolder;
               }
             }
           }
 
           &-chat {
             @include lobby-config(flex,column,3.1,auto,center,inherit,70%);
-            padding: 1em 0 1em 0;
+            border-radius: 20px;
 
             &-messages {
               @include component-scheme();
-              padding: 0px 30px;
+              background-color: rgba(73, 76, 80, 0.84);
+              border-radius: 0 0 30px 30px;
 
               form {
                 display: flex;
@@ -102,8 +142,7 @@
               &-items {
                 color: white;
                 width: 100%;
-                height: 89%;
-                padding: 30px 0 15px;
+                height: 93%;
 
                 &-list {
                   overflow-wrap: break-word;
@@ -111,23 +150,58 @@
                   height: 100%;
 
                   &-line {
-                    padding: 8px;
+                    padding: 0.5em 0 0.5em 2em;
                     font-weight: 100;
                     font-family: sans-serif;
                     width: 77%;
+
+                    strong {
+                      color: #7289DA;
+                    }
                   }
                 }
               }
 
               form {
+                
                 input {
-                  margin: 1em;
+                  margin: 1em 0 1em 1em;
                   border-radius: 5px;
+                  height: 2em;
                 }
+
                 button {
                   margin: 1em;
+                  background-color: #7289DA;
+                  border-color: #7289DA;
+                  color: white;
                   border-radius: 5px;
                 }
+              }
+            }
+
+            &-name {
+              @include main-theme();
+              background-color: rgba(73, 76, 80, 0.84);
+              border-radius: 30px 30px 0 0;
+
+              h3 {
+                text-align: center;
+                font-size: xx-large;
+              }
+            }
+          }
+
+          &-players {
+            @include lobby-config(flex,column,0.7,auto,center,inherit,15%);
+
+            &-onlineUsers{
+              @include component-scheme();
+              text-align: left;
+
+              &-users {
+                padding: 0 0 1em 2em;
+                color: #7289DA;
               }
             }
 
@@ -135,31 +209,17 @@
               @include main-theme();
 
               h3 {
-                text-align: center;
+                font-size: xx-large;
               }
             }
-          }
 
-          &-players {
-            @include lobby-config(flex,column,0.7,auto,center,inherit,15%);
-            padding: 1em 1em 1em 3em;
-
-            &-onlineUsers{
-              @include component-scheme();
+            a {
+              padding: 20px 0;
+              width: 100%;
+              color: white;
+              font-weight: bolder;
               text-align: center;
-
-              &-users {
-                padding: 1px;
-
-                h3 {
-                  text-align: center;
-                  color: white;
-                }
-              }
-            }
-
-            &-name {
-              @include main-theme();
+              background-color: rgba(44, 46, 51, 0.84);
             }
           }
         }

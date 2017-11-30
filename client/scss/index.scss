@@ -6,7 +6,6 @@ html {
 
 body {
   margin: 1em;
-  border-radius: 20px;;
   margin: 0;
   position: fixed;
   font-family: sans-serif;
@@ -86,6 +85,15 @@ body {
       .center_field.show {
         z-index: 102;
         opacity: 1;
+
+        & input {
+          margin-top: 20px;
+          font-weight: bolder;
+          background-color: rgba(0, 0, 0, 0.6);
+          border-radius: 8px;
+          color: white;
+        }
+
       }
       #canvas {
         opacity: 0;
@@ -100,6 +108,21 @@ body {
     z-index: 101;
     opacity: 1;
   }
+}
+
+#label {
+  font-weight: bolder;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  color: white;
+}
+
+#labelhelp {
+  margin-top: 10px;
+  border-radius: 8px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0px
 }
 
 #app {
@@ -208,14 +231,14 @@ body {
         }
     }
 
-    &-die img {
+    &-die img, &-paint img {
       display: block;
       width: 4em;
       height: 4em;
       margin: 10px;
       margin-bottom: 8px;
     }
-      &-die, &-trash, &-background {
+      &-die, &-trash, &-background, &-paint {
         display: flex;
         justify-content: center;
       }
@@ -303,6 +326,9 @@ body {
       border: none;
       border-radius: 10px;
       height: 2.5em;
+      @media (max-width: 1100px) {
+        color: rgba(0, 0, 0, 0);
+    }
   }
 
   & form {
@@ -468,6 +494,7 @@ body {
 #invite-button {
   width: 25% !important;
   margin-top: 0 !important;
+  color: white !important;
 }
 
 .item-lobby-messages-line {
@@ -491,6 +518,7 @@ canvas {
   position: absolute;
   left: 1em;
   top: 1em;
+  border-radius: 10px;
 }
 
 #container_1 {
@@ -498,6 +526,7 @@ canvas {
   position: absolute;
   left: calc(80% - 1em);
   top: 1em;
+  border-radius: 10px;
 }
 
 #container_2 {
@@ -505,6 +534,7 @@ canvas {
   position: absolute;
   left: 1em;
   bottom: 1em;
+  border-radius: 10px;
 }
 
 #container_3 {
@@ -512,9 +542,11 @@ canvas {
   position: absolute;
   left: calc(80% - 1em);
   bottom: 1em;
+  border-radius: 10px;
 }
 
 video {
   width: 100%;
   z-index: 20;
+  border-radius: 10px !important;
 }

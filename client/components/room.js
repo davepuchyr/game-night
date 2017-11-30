@@ -17,12 +17,15 @@ class Room extends Component {
       toDelete: '',
       group: false,
       dieClicked: false,
-      toggleConsole: false
+      toggleConsole: false,
+      colorOptions: ['black', 'red', 'blue', 'green'],
+      colorIndex: 0
     }
     this.handleMouseOver = this.handleMouseOver.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
     this.toggleConsole = this.toggleConsole.bind(this)
+    this.handlePaintClick = this.handlePaintClick.bind(this)
   }
 
   //helper function
@@ -70,8 +73,12 @@ class Room extends Component {
     this.setState({ dieClicked: !this.state.dieClicked })
   }
 
+  handlePaintClick (e) {
+    if (this.state.colorIndex === 3) this.setState({colorIndex: 0})
+    else this.setState({colorIndex: this.state.colorIndex + 1})
+  }
+
   toggleConsole(e) {
-      console.log(this.state.toggleConsole)
       !this.state.toggleConsole ? 
         this.setState({toggleConsole: true})
       :
@@ -91,6 +98,7 @@ class Room extends Component {
                 <MainStage 
                     trashFloat={this.state.trashFloat}
                     rId={this.props.routeProps.match.params.roomid}
+                    paintColor={this.state.colorOptions[this.state.colorIndex]}
                     />
                 <div className={this.state.toggleConsole ? "room-container-console-hide" : "room-container-console"}>
                     <div className="room-container-console-left">
@@ -121,6 +129,13 @@ class Room extends Component {
                         </div>
                     </div>
                     <div className="room-container-console-right">
+                      <div className="room-container-console-right-paint">
+                            <img
+                            className="paint-button"
+                            onClick={this.handlePaintClick.bind(this)}
+                            src={`/assets/paint_icon${this.state.colorOptions[this.state.colorIndex]}.png`}
+                            />
+                        </div>
                         <div className="room-container-console-right-die">
                             <img
                             className="die-button"

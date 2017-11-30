@@ -9,7 +9,7 @@ const OnlineUsers = (props) => {
         users && users.map((user, idx) => {
           return (
             <div className="container-main-lobby-bottom-comps-players-onlineUsers-users" key={idx}>
-              <h3>{user.nickname}</h3>
+              <strong>{user.nickname}</strong>
             </div>
           )
         })

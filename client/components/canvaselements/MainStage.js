@@ -165,6 +165,7 @@ class MainStage extends React.Component {
             roomId={rId}
             width={this.state.backgroundWidth}
             height={this.state.backgroundHeight}
+            paintColor={this.props.paintColor}
           />
           <HexPiece id={rId} fill={'black'} x={black[0]} y={black[1]}/>
           <HexPiece id={rId} fill={'red'} x={red[0]} y={red[1]}/>
