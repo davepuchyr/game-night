@@ -31,7 +31,7 @@ class MainStage extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleDragEnd = this.handleDragEnd.bind(this)
-    this.updateDimensions = this.updateDimensions.bind(this)
+    // this.updateDimensions = this.updateDimensions.bind(this)
   }
   
   componentDidMount() {
@@ -44,7 +44,7 @@ class MainStage extends React.Component {
     }
     document.addEventListener('keydown', this.handleKeyDown);
     document.addEventListener('keyup', this.handleKeyUp);
-    window.addEventListener("resize", this.updateDimensions);
+    // window.addEventListener("resize", this.updateDimensions);
   }
 
   componentDidUpdate() {
@@ -68,17 +68,25 @@ class MainStage extends React.Component {
   }
 
   componentWillUnmount () {
-    window.removeEventListener("resize", this.updateDimensions)
+    // window.removeEventListener("resize", this.updateDimensions)
   }
 
-  updateDimensions () {
-    this.setState({forceUpdate: true})
-  }
+  // updateDimensions () {
+  //   const newSize = this.aspectRatio(this.state.backgroundWidth, this.state.backgroundHeight)
+  //   const width = newSize[0]
+  //   const height = newSize[1]
+  //   this.setState({forceUpdate: true,
+  //     backgroundImage: this.state.backgroundImage,
+  //     imageUrl: this.state.imageUrl,
+  //     backgroundWidth: width,
+  //     backgroundHeight: height,
+  //   })
+  // }
   
   aspectRatio (originalHeight, originalWidth) {
     const originalRatio = (originalHeight / originalWidth)
-    const windowWidth = window.innerWidth
-    const windowHeight = window.innerHeight
+    const windowWidth = 1680  
+    const windowHeight = 1050
     let height = originalHeight
     let width = originalWidth
     if (originalHeight <= windowHeight) height = windowHeight
