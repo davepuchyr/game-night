@@ -25,7 +25,7 @@ const InviteForm = (props) =>{
 									(
 										<h5
 											key={user.id}
-											onClick={e => editInvites(e,user.nickname,ind,'add')}
+											onClick={e => editInvites(e,user,ind,'add')}
 										>
 										{user.nickname}
 										</h5>
