@@ -16,7 +16,7 @@ class RoomMessages extends Component {
 						searchNickName: '',
 						invited:[]
 				}
-				this.names = []
+				this.invitedNames = []
 				this.invitations = []
 				this.handleSubmit = this.handleSubmit.bind(this)
 				this.toggleInvite = this.toggleInvite.bind(this)
@@ -46,9 +46,9 @@ class RoomMessages extends Component {
 			this.setState({ isOpen: !this.state.isOpen})
 		}
 
-			/*
-			* EDIT YOUR INVITATION
-			*/
+		/*
+		* EDIT YOUR INVITATION
+		*/
 		editInvites(e,nickname,index,action) {
 			const {invited} = this.state
 
@@ -57,7 +57,7 @@ class RoomMessages extends Component {
 					if(!this.invitations.includes(nickname.id)) {
 						this.invitations.push(nickname.id)
 						invited.push(nickname)
-						this.names = this.names.splice(index,1)
+						this.invitedNames = this.invitedNames.splice(index,1)
 						this.setState({invited})
 					}
 					break;
@@ -65,15 +65,15 @@ class RoomMessages extends Component {
 					if(this.invitations.includes(nickname.id)) {
 						this.invitations.splice(index,1)
 						invited.splice(index,1)
-						this.names = this.names.splice(index,1)
+						this.invitedNames = this.invitedNames.splice(index,1)
 						this.setState({invited})
 					}
 					break;
 			}
 		}
-			/*
-			* EMIT TO FRONTEND SOCKET WITH A LIST OF USER IDS
-			*/
+		/*
+		* EMIT TO FRONTEND SOCKET WITH A LIST OF USER IDS
+		*/
 		sendInvites(e) {
 			e.preventDefault()
 			socket.emit('invite', this.invitations , this.props.roomPath)
@@ -111,34 +111,32 @@ class RoomMessages extends Component {
 		}
 
 		render () {
-				const {user, roomMessages, onlineUsers} = this.props
-				const {isOpen , invited} = this.state
-				const inTheRoom = roomMessages.map(getName => getName[Object.keys(getName)[0]])
-
-				return (
-						<div id="room-message-component">
-										<InviteForm
-												show={isOpen}
-												userId={user.id}
-												onClose={this.toggleInvite}
-												inTheRoom={inTheRoom}
-												names={this.names}
-												editInvites={this.editInvites}
-												invited={invited}
-												sendInvites={this.sendInvites}>
-										</InviteForm>
-								<div id="room-message-component-option">
-											<h3> Game Log </h3>
-											<button id="invite-button" onClick={this.toggleInvite}>
-												Invite
-											</button>
-											<button id="invite-button" onClick={this.returnToLobby}>
-												Lobby
-											</button>
-								</div>
-								<hr/>
-								<div id="message-view" ref="message">
-								{
+			const {user, roomMessages, onlineUsers} = this.props
+			const {isOpen , invited} = this.state
+			return (
+							<div id="room-message-component">
+									<InviteForm
+											show={isOpen}
+											userId={user.id}
+											onClose={this.toggleInvite}
+											onlineUsers={onlineUsers}
+											invitedNames={this.invitedNames}
+											editInvites={this.editInvites}
+											invited={invited}
+											sendInvites={this.sendInvites}>
+									</InviteForm>
+									<div id="room-message-component-option">
+												<h3> Game Log </h3>
+												<button id="invite-button" onClick={this.toggleInvite}>
+													Invite
+												</button>
+												<button id="invite-button" onClick={this.returnToLobby}>
+													Lobby
+												</button>
+									</div>
+									<hr/>
+									<div id="message-view" ref="message">
+									{
 										roomMessages.map((message, idx) => {
 												return (
 														<div
@@ -167,16 +165,16 @@ class RoomMessages extends Component {
 														</div>
 												)
 										})
-								}
-								</div>
-								<form onSubmit={this.handleSubmit}>
+									}
+									</div>
+									<form onSubmit={this.handleSubmit}>
 										<input className="msg-input" type="text" name="content"/>
 										<button type="submit">
 											enter
 										</button>
-				</form>
-			</div>
-		)
+									</form>
+							</div>
+							)
 	}
 }
 
