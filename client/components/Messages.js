@@ -7,19 +7,29 @@ export class Messages extends React.Component {
   constructor(props){
     super(props)
     this.state = { messageInput: '' }
+    this.scrollToBottom = this.scrollToBottom.bind(this)
   }
 
   componentDidMount(){
     this.props.getMessages()
+    this.scrollToBottom()
   }
 
+  componentDidUpdate() {
+      this.scrollToBottom()
+  }
+
+  scrollToBottom = () => {
+    console.log('line 23', this.refs)
+    const messagesContainer = this.refs.message
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  };
 
   render(){
     const { user, messages, newMessage } = this.props
     return (
       <div className="container-main-lobby-bottom-comps-chat-messages">
-        <div className="container-main-lobby-bottom-comps-chat-messages-items">
-          {/* <div className="container-main-lobby-bottom-comps-chat-messages-items-list"> */}
+        <div className="container-main-lobby-bottom-comps-chat-messages-items" ref="message">
           {
             messages.length ?
               messages.map(message => {
@@ -33,7 +43,6 @@ export class Messages extends React.Component {
               }) :
               <div> No messages right now </div>
           }
-          {/* </div> */}
 				</div>
 				<form onSubmit={(e) => {
 					e.preventDefault()
