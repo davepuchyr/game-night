@@ -20,7 +20,6 @@ export class Messages extends React.Component {
   }
 
   scrollToBottom = () => {
-    console.log('line 23', this.refs)
     const messagesContainer = this.refs.message
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   };
