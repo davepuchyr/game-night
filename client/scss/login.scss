@@ -1,0 +1,57 @@
+.props {
+	// height: 50px;
+	width: -webkit-fill-available;
+  font-family: "Open Sans", Trebuchet MS;
+	font-size: xx-large;
+  border-radius: 20px;
+}
+
+.login {
+	display: block;
+	background-color: #23272A;
+	@import 'splashvideo';
+
+	form {
+		display: block;
+		max-width: 1000px;
+		margin: auto;
+
+		div {
+			color:#99AAB5;
+	    font-family: "Open Sans", Trebuchet MS;
+			font-size: -webkit-xxx-large;
+
+			label {
+		    // font-family: "Open Sans", Trebuchet MS;
+			}
+
+			input {
+				@extend .props;
+				padding:10px;
+				&:active {
+					font-family: "Open Sans", sans-serif;
+		      margin: 0;
+		      color: #23272A;
+		    }
+		    &::placeholder {
+		    	font-style: italic;
+		    	font-size:large;
+			  	color: gray;
+				}
+			}
+
+			button {
+				@extend .props;
+				border: 2px solid #a1a1a1;
+				background: #2C2F33;
+				font-weight:bolder;
+				color:#99AAB5;
+				&:focus, &:hover {
+					background-color: #99AAB5;
+        	color: #23272A;
+      	}
+			}
+		}
+	}
+}
+

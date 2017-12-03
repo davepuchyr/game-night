@@ -7,13 +7,13 @@ const removeInvitation = (userId,room) => {
 
 const Invitations = (props) => {
   const {roomInvites, userId , remove} = props
-
+  console.log('line 10  ',roomInvites )
+  console.log('line 11  ',userId )
+  console.log('line 12  ',remove )
   return (
-    <div className="item-lobby-invitations">
-      <h3>Invitations</h3>
-      {roomInvites.map((room,ind) =>  <a key={ind} href={`${room}`} onClick={()=> removeInvitation(userId,room)}>You're invited to room # :{room.slice(6)}</a>)}
+    <div className="container-main-lobby-bottom-comps-room-invitations">
+      {roomInvites.map((room,ind) =>  <a key={ind} href={`${room}`} onClick={()=> removeInvitation(userId,room)}>Invitation to room: {room.slice(6)}</a>)}
     </div>
-
   )
 }
 

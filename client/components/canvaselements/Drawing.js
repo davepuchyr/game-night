@@ -11,7 +11,8 @@ class Drawing extends Component {
       isDrawing: false,
       mode: 'brush',
       newDraw: [],
-      drawsReceived: []
+      drawsReceived: [],
+      width: 0
     }
     this.draw = this.draw.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
@@ -19,12 +20,12 @@ class Drawing extends Component {
 
   componentDidMount() {
     const canvas = document.createElement('canvas')
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    canvas.width = this.props.width || window.innerWidth
+    canvas.height = this.props.height || window.innerHeight
     const context = canvas.getContext('2d')
     document.addEventListener('keydown', this.handleKeyDown)
     document.addEventListener('keyup', this.handleKeyUp)
-    this.setState({ canvas, context })
+    this.setState({ canvas, context, width: this.props.width })
   }
 
 
@@ -32,7 +33,18 @@ class Drawing extends Component {
     if (this.props.draws.length){
       this.draw(this.props.draws[this.props.draws.length-1])
     }
+
+    if (this.props.width !== this.state.width) {
+      const canvas = document.createElement('canvas')
+      canvas.width = this.props.width
+      canvas.height = this.props.height
+      const context = canvas.getContext('2d')
+      document.addEventListener('keydown', this.handleKeyDown)
+      document.addEventListener('keyup', this.handleKeyUp)
+      this.setState({ canvas, context, width: this.props.width })
+    }
   }
+
 
   handleMouseDown = () => {
     if (this.props.shift || this.props.alt) this.setState({ isDrawing: true, newDraw: []})
@@ -71,23 +83,23 @@ class Drawing extends Component {
         y: pos.y - stage.y()
       }
       let erase = this.props.alt
-      this.draw({firstPos, secondPos, erase})
-      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId, erase })
+      this.draw({firstPos, secondPos, erase, paintColor: this.props.paintColor})
+      socket.emit('new_draw', {firstPos, secondPos, room: this.props.roomId, erase, paintColor: this.props.paintColor })
       // this.setState({newDraw: [...this.state.newDraw, {firstPos, secondPos, room: this.props.roomId}]})
     }
   }
 
   draw (stroke) {
     let { context } = this.state;
-    const {firstPos, secondPos, erase } = stroke
+    const {firstPos, secondPos, erase, paintColor } = stroke
     !erase ?
     context.globalCompositeOperation = 'source-over'
   :
     context.globalCompositeOperation = 'destination-out'
 
-    context.strokeStyle = 'black'
+    context.strokeStyle = paintColor
     context.lineJoin = 'round'
-    context.lineWidth = erase ? 10 : 5
+    context.lineWidth = erase ? 25 : 5
     context.beginPath()
     context.moveTo(firstPos.x, firstPos.y)
     context.lineTo(secondPos.x, secondPos.y)
@@ -98,13 +110,12 @@ class Drawing extends Component {
 
   render() {
     const { canvas } = this.state
-
     return (
       <Image
         image={canvas}
         ref={node => (this.image = node)}
-        width={window.innerWidth}
-        height={window.innerHeight}
+        // width={this.props.width}
+        // height={this.props.height}
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
         onMouseMove={this.handleMouseMove}

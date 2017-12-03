@@ -53,7 +53,7 @@ class GroupImage extends Component {
       originalHeight,
       personal: false
     }
-    this.props.moveImage(image)
+    if (!this.props.trashFloat) this.props.moveImage(image)
     this.props.stopDrag()
     this.setState({dragging: false})
   }

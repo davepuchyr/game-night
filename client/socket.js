@@ -12,6 +12,9 @@ import store, {
    move_blue,
    addImage,
    addDraws,
+   deleteImage,
+   updateBackground,
+   addRoom
   } from './store'
 
 const socket = io(window.location.origin)
@@ -43,6 +46,11 @@ socket.on('connect', () => {
   //received message
   socket.on('received_new_message', message => {
     store.dispatch(newMessage(message))
+  })
+
+  socket.on('add_new_room', (room) => {
+    console.log('HEARD ABOUT A ROOM')
+    store.dispatch(addRoom(room))
   })
 
   socket.on('addDraw', draws => {
@@ -94,6 +102,10 @@ socket.on('connect', () => {
     })
   })
 
+  socket.on('delete_group_pic', imgUrl => {
+    store.dispatch(deleteImage(imgUrl))
+  })
+
   socket.on('add_draw', stroke => {
     store.dispatch(addDraws(stroke))
   })
@@ -102,6 +114,11 @@ socket.on('connect', () => {
     draws.forEach(stroke => {
       store.dispatch(addDraws(stroke))
     })
+  })
+
+  socket.on('update_background', (img, roomId) => {
+    
+    store.dispatch(updateBackground(img))
   })
 })
 

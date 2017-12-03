@@ -7,47 +7,56 @@ export class Messages extends React.Component {
   constructor(props){
     super(props)
     this.state = { messageInput: '' }
+    this.scrollToBottom = this.scrollToBottom.bind(this)
   }
 
   componentDidMount(){
     this.props.getMessages()
+    this.scrollToBottom()
   }
 
+  componentDidUpdate() {
+      this.scrollToBottom()
+  }
+
+  scrollToBottom = () => {
+    const messagesContainer = this.refs.message
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  };
 
   render(){
     const { user, messages, newMessage } = this.props
     return (
-      <div className="item-lobby-messages">
-        <h3>All Chat</h3>
-        <div className="item-lobby-messages-items">
-        {
-          messages.length ?
-            messages.map(message => {
-              return message.hasOwnProperty('user') ?
-                (
-                <div key={message.id}>
-                  <p className="message-line"><strong>{message.user.nickname}</strong> : {message.content}</p>
-                </div>
-                ) :
-                null
-            }) :
-            <div> No messages right now </div>
-        }
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          this.setState({ messageInput: '' })
-          newMessage(user.id, e.target.message.value)
-        }}>
-        <input
-          type="text"
-          name="message"
-          value={this.state.messageInput}
-          onChange={(e) => this.setState({ messageInput: e.target.value })}
-          placeholder="Write message"
-        />
-        <button type="submit">Post</button>
-        </form>
-        </div>
+      <div className="container-main-lobby-bottom-comps-chat-messages">
+        <div className="container-main-lobby-bottom-comps-chat-messages-items" ref="message">
+          {
+            messages.length ?
+              messages.map(message => {
+                return message.hasOwnProperty('user') ?
+                  (
+                  <div key={message.id} className="container-main-lobby-bottom-comps-chat-messages-items-list-line">
+                   <strong>{message.user.nickname}</strong> : {message.content}
+                  </div>
+                  ) :
+                  null
+              }) :
+              <div> No messages right now </div>
+          }
+				</div>
+				<form onSubmit={(e) => {
+					e.preventDefault()
+					this.setState({ messageInput: '' })
+					newMessage(user.id, e.target.message.value)
+				}}>
+				  <input
+					  type="text"
+						name="message"
+						value={this.state.messageInput}
+						onChange={(e) => this.setState({ messageInput: e.target.value })}
+						placeholder="Write message"
+					/>
+					<button type="submit">Post</button>
+				</form>
       </div>
     )
   }

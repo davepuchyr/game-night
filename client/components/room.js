@@ -1,7 +1,7 @@
 import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
-import { Video, RoomMessages, MainStage, Drop, DropGroup }from './index'
+import { Video, RoomMessages, MainStage, Drop, DropGroup, AddBackground }from './index'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { deleteImage } from '../store'
@@ -16,17 +16,22 @@ class Room extends Component {
       delete: false,
       toDelete: '',
       group: false,
-      dieClicked: false
+      dieClicked: false,
+      toggleConsole: false,
+      colorOptions: ['black', 'red', 'blue', 'green'],
+      colorIndex: 0
     }
     this.handleMouseOver = this.handleMouseOver.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
+    this.toggleConsole = this.toggleConsole.bind(this)
+    this.handlePaintClick = this.handlePaintClick.bind(this)
   }
 
   //helper function
   classShow(elements, isShow){
-    isShow ? 
-    Array.prototype.forEach.call(elements, el => el.className+=' show') : 
+    isShow ?
+    Array.prototype.forEach.call(elements, el => el.className+=' show') :
     Array.prototype.forEach.call(elements, el => el.className=el.className.replace( /(?:^|\s)show(?!\S)/g , '' ))
   }
 
@@ -43,24 +48,24 @@ class Room extends Component {
     this.setState({trashFloat: true})
     if (this.props.dragging.bool) this.setState({delete: true, toDelete: this.props.dragging.url, group: !this.props.dragging.personal})
   }
-    
+
   handleMouseLeave() {
     this.setState({trashFloat: false, delete: false, toDelete: '', group: false})
   }
 
   handleMouseUp() {
-    this.props.delete(this.state.toDelete, this.state.group, this.props.match.params.roomid)
+    this.props.delete(this.state.toDelete, this.state.group, this.props.routeProps.match.params.roomid)
   }
 
   handleDieClick(e){
-    ['dice', 'canvas', 'center_field'].forEach(elem => { 
+    ['dice', 'canvas', 'center_field'].forEach(elem => {
       let isClass = (elem === 'center_field') ? true : false
       if(!this.state.dieClicked){
         isClass ?
           this.classShow(document.getElementsByClassName(elem), true) :
           document.getElementById(elem).className+=' show'
       } else {
-        isClass ? 
+        isClass ?
           this.classShow(document.getElementsByClassName(elem), false) :
           document.getElementById(elem).className=document.getElementById(elem).className.replace( /(?:^|\s)show(?!\S)/g , '' )
       }
@@ -68,35 +73,87 @@ class Room extends Component {
     this.setState({ dieClicked: !this.state.dieClicked })
   }
 
+  handlePaintClick (e) {
+    if (this.state.colorIndex === 3) this.setState({colorIndex: 0})
+    else this.setState({colorIndex: this.state.colorIndex + 1})
+  }
 
-  render() {
-    const path = this.props.routeProps.match.url
-    let trashCheck = false
-    if (this.state.trashFloat && this.props.dragging.bool) {
-      trashCheck = true
-    }
-    return (
-      <div id="room-container" >
-        <img
-          id="trash-can"
-          src={trashCheck ? '/redtrash.png' : '/trash.png'}
-          onMouseOver={this.handleMouseOver}
-          onMouseLeave={this.handleMouseLeave}
-          onMouseUp={this.state.delete ? this.handleMouseUp : null}
-        />
-        <RoomMessages roomPath={path}/>
-        <Drop />
-        <div className="drop-group-container">
-          <DropGroup
-            className="group-dropzone"
-            rId={this.props.routeProps.match.params.roomid}
-          />
-        </div>
-        {/* <img src="http://i.imgur.com/uhhfaMZ.png" /> */}
-        <button className="die-button" onClick={this.handleDieClick.bind(this)}>Roll Die</button>
-        {/* <img id="background-img" src="http://i.imgur.com/uhhfaMZ.png" /> */}
-        {/* <Video/> */}
-        <MainStage rId={this.props.routeProps.match.params.roomid}/>
+  toggleConsole(e) {
+      !this.state.toggleConsole ?
+        this.setState({toggleConsole: true})
+      :
+        this.setState({toggleConsole: false})
+  }
+
+
+    render() {
+        const path = this.props.routeProps.match.url
+        let trashCheck = false
+        if (this.state.trashFloat && this.props.dragging.bool) {
+            trashCheck = true
+        }
+        return (
+            <div id="room-container" >
+                <MainStage
+                    trashFloat={this.state.trashFloat}
+                    rId={this.props.routeProps.match.params.roomid}
+                    paintColor={this.state.colorOptions[this.state.colorIndex]}
+                    />
+                <div className={this.state.toggleConsole ? "room-container-console-hide" : "room-container-console"}>
+                    <div className="room-container-console-left">
+                        <button
+                            className="room-container-console-toggle"
+                            onClick={this.toggleConsole}
+                        />
+                        <div className="room-container-console-drop">
+                            {/* <div className="room-container-console-drop-background">
+                                <img
+                                className="background-button"
+                                // onClick={this.handleDieClick.bind(this)}
+                                src="/assets/background_icon.png"
+                                />
+                            </div> */}
+                            <AddBackground
+                            className="add-background"
+                            rId={this.props.routeProps.match.params.roomid}/>
+                            <Drop />
+                            <DropGroup
+                            className="group-dropzone"
+                            rId={this.props.routeProps.match.params.roomid}/>
+                        </div>
+                    </div>
+                    <div className="room-container-console-center">
+                        <div className="room-container-console-messages">
+                            <RoomMessages roomPath={path}/>
+                        </div>
+                    </div>
+                    <div className="room-container-console-right">
+                      <div className="room-container-console-right-paint">
+                            <img
+                            className="paint-button"
+                            onClick={this.handlePaintClick.bind(this)}
+                            src={`/assets/paint_icon${this.state.colorOptions[this.state.colorIndex]}.png`}
+                            />
+                        </div>
+                        <div className="room-container-console-right-die">
+                            <img
+                            className="die-button"
+                            onClick={this.handleDieClick.bind(this)}
+                            src={this.state.dieClicked ? "/assets/dice_icon_blue2.png" : "/assets/dice_icon.png"}
+                            />
+                        </div>
+                        <div className="room-container-console-right-trash">
+                            <img
+                                id="trash-can"
+                                src={trashCheck ? '/redtrash.png' : '/trash.png'}
+                                onMouseOver={this.handleMouseOver}
+                                onMouseLeave={this.handleMouseLeave}
+                                onMouseUp={this.state.delete ? this.handleMouseUp : null}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <Video/>
       </div>
     )
   }
@@ -106,7 +163,7 @@ class Room extends Component {
 const mapState = (state) => {
   return {
     dragging: state.trash
-  } 
+  }
 }
 
 const mapDispatch = dispatch => {

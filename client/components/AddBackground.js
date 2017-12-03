@@ -2,13 +2,14 @@ import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
-import request from 'superagent'
+import request from 'superagent';
 import { addImage } from '../store'
+import socket from '../socket'
 
 const CLOUDINARY_UPLOAD_PRESET = 'gamenight';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload';
 
-class Drop extends Component {
+class AddBackground extends Component {
     constructor (props){
         super(props)
         this.state = {
@@ -41,11 +42,20 @@ class Drop extends Component {
             // this.setState({
             //   uploadedFileCloudinaryUrl: response.body.secure_url
             // });
-            this.props.newImage({x: 300, y: 400, personal: true, url: response.body.secure_url, width: response.body.width, height: response.body.height})
+            const image = {
+                personal: false,
+                background: true,
+                url: response.body.secure_url,
+                originalWidth: response.body.width,
+                originalHeight: response.body.height,
+                room: this.props.rId,
+                user: this.props.user.nickname
+            }
+            socket.emit('new_background_image', image, this.props.rId)
           }
         });
       }
-
+    
     handleMouseOver () {
         this.setState({hover: true})
     }
@@ -57,20 +67,23 @@ class Drop extends Component {
     render () {
         const dropStyle = {
             "position": "absolute",
-            "top": "6.3em",
+            "top": "0",
             "width": "4em",
             "height": "4em",
-            "zIndex": "11",
-            "margin": "0.4em"
+            "z-index": "11",
+            "margin": "0.4em",
+            "margin-top": "23px"
         }
         return (
-                <div className="file-upload-personal">
-                    <img src={this.state.hover ? "/assets/image_icon_mix2.png" : "/assets/image_icon.png"}/>
+                <div className="file-upload-background">
+                    <img
+                        src={this.state.hover ? "/assets/screen_icon_blue.png" : "/assets/background_icon.png"}
+                    />
                     <Dropzone
-                        name="personal"
+                        name="background"
                         multiple={false}
                         accept="image/*"
-                        style={dropStyle}                        
+                        style={dropStyle}
                         onDrop={this.onImageDrop}
                         onMouseOver={this.handleMouseOver}
                         onMouseLeave={this.handleMouseLeave}
@@ -87,10 +100,10 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => {
     return {
-        newImage: (image) => {
+        newImage: (image, rId, userId) => {
             dispatch(addImage(image))
         }
     }
 }
 
-export default connect(mapState, mapDispatch)(Drop)
+export default connect(mapState, mapDispatch)(AddBackground)
