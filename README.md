@@ -8,6 +8,8 @@ Platform for users to get real time interaction to create gaming contents with o
 
 ![alt text](https://github.com/yeb9925/game-night/blob/master/IMAGE1.png)
 
+![alt text](https://github.com/yeb9925/game-night/blob/master/IMAGE2.png)
+
 ## Getting Started
 
 ```
