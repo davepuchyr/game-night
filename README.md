@@ -6,7 +6,7 @@ Platform for users to get real time interaction to create gaming contents with o
 * Use the real time utilities like videos, drawing pens, and drop-in images to have fun with your friends and play game of your choice.
 * Invite your remote friends to your game night!!!
 
-![Alt Text](https://raw.github.com/yeb9925/game-night/IMAGE1.png)
+![alt text](https://github.com/yeb9925/game-night/blob/master/IMAGE1.png)
 
 ## Getting Started
 
