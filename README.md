@@ -1,4 +1,4 @@
-# Game Night
+# Game Night!
 
 Platform for users to get real time interaction to create gaming contents with other users.
 
