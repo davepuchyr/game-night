@@ -26,6 +26,7 @@ git clone https://github.com/yeb9925/game-night.git
 * [React-Redux](https://github.com/reactjs/react-redux/) - JavaScript library for front-end state management
 * [React-Konva](https://github.com/lavrton/react-konva/) - JavaScript library for drawing complex canvas graphics using React
 * [WebRTC](https://webrtc.org/) - Real-time video communication
+* [Sass](http://sass-lang.com/) - Front-end styling
 * [Three.js](https://threejs.org/) - JavaScript library used to create and display animated 3D computer graphics in a web browser
 * [Cannon.js](http://www.cannonjs.org/) - A physics engine written in JavaScript
 * [Chai](http://chaijs.com/) - Back-end testing
