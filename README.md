@@ -14,6 +14,8 @@ Platform for users to get real time interaction to create gaming contents with o
 
 ```
 git clone https://github.com/yeb9925/game-night.git
+npm install
+npm run start-dev
 ```
 ## Built With
 
