@@ -30,7 +30,7 @@ class MyImage extends Component {
     }
   }
 
-  handleDrag (e) {
+  handleDrag(e) {
     let activeAnchor = this.refs[e.target.attrs.name]
     let top_left = this.refs.top_left
     let top_right = this.refs.top_right
@@ -71,7 +71,7 @@ class MyImage extends Component {
     }
   }
 
-  handleMouseOver (e) {
+  handleMouseOver(e) {
     if (e.target.attrs.name === 'top_right' || e.target.attrs.name === 'bottom_left'){
       document.body.style.cursor = 'nesw-resize'
     } else if (e.target.attrs.name === 'top_left' || e.target.attrs.name === 'bottom_right'){
@@ -81,11 +81,11 @@ class MyImage extends Component {
     }
   }
 
-  handleMouseOut () {
+  handleMouseOut() {
     document.body.style.cursor = 'default'
   }
 
-  handleMouseUp (e) {
+  handleMouseUp(e) {
     console.log(event.target.children)
     this.props.stopDrag()
     this.setState({dragging: false})
@@ -112,7 +112,7 @@ class MyImage extends Component {
     this.props.sendNewImage(image)
   }
 
-  handleDragStart () {
+  handleDragStart() {
     const url = this.props.imageUrl
     this.setState({dragging: true})
     if (this.state.dragging) this.props.startDrag(url)

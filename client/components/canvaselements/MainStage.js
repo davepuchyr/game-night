@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Layer, Stage, Image } from 'react-konva'
-import {HexPiece, MyImage, GroupImage, Drawing} from '../index.js'
+import { HexPiece, MyImage, GroupImage, Drawing } from '../index.js'
 
 
 class MainStage extends React.Component {
@@ -92,13 +92,13 @@ this.state = {
     return [width, height]
   }
 
-  handleKeyDown (e) {
+  handleKeyDown(e) {
       if (e.key === 'Shift') this.setState({shift: true})
       if (e.key === 'Alt') this.setState({alt: true})
       
   }
 
-  handleKeyUp (e) {
+  handleKeyUp(e) {
     if (e.key === 'Shift') this.setState({shift: false})
     if (e.key === 'Alt') this.setState({alt: false})    
   }
@@ -108,11 +108,11 @@ this.state = {
 
   }
 
-  handleMouseOut () {
+  handleMouseOut() {
     document.body.style.cursor = 'default'
   }
 
-  handleDragEnd (e) {
+  handleDragEnd(e) {
     let newX = 0 - e.evt.x
     let newY = 0 - e.evt.y
     this.setState({dragOffSet: [newX, newY]})

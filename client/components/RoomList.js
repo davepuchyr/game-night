@@ -27,7 +27,7 @@ class RoomList extends Component {
         {
           this.props.allRooms.map((room, idx) =>
           (
-            <div className="container-main-lobby-bottom-comps-room-rooms-item">
+            <div key={idx} className="container-main-lobby-bottom-comps-room-rooms-item">
             <Link to={`/room/${room.id}`} key={idx}>
               <div className="container-main-lobby-bottom-comps-room-rooms-item-head">
               {room.name}

@@ -11,10 +11,11 @@ import history from '../history'
 class RoomMessages extends Component {
 		constructor(props) {
 				super(props)
+
 				this.state = {
 						isOpen: false,
 						searchNickName: '',
-						invited:[]
+						invited: []
 				}
 				this.invitedNames = []
 				this.invitations = []
@@ -81,7 +82,7 @@ class RoomMessages extends Component {
 			this.toggleInvite()
 		}
 
-		componentDidMount () {
+		componentDidMount() {
 				const room = this.props.roomPath
 				socket.emit('joinroom', room, this.props.user.nickname)
 				socket.emit('current_token_positions', room)
@@ -92,20 +93,15 @@ class RoomMessages extends Component {
 				this.scrollToBottom()
 	 }
 
-		componentWillUnmount () {
+		componentWillUnmount() {
 				const room = this.props.roomPath
 				socket.emit('leaveroom', room, this.props.user.nickname)
 		}
 
-		scrollToBottom = () => {
+		scrollToBottom() {
 				const messagesContainer = this.refs.message
 				messagesContainer.scrollTop = messagesContainer.scrollHeight;
 		};
-
-		// searchFor (e) {
-		// 	e.preventDefault()
-		// 	this.setState({searchNickName: e.target.value.toLowerCase(), isOpen: true})
-		// }
 
 		returnToLobby(e) {
 			history.push('/lobby')
@@ -114,6 +110,7 @@ class RoomMessages extends Component {
 		render () {
 			const {user, roomMessages, onlineUsers} = this.props
 			const {isOpen , invited} = this.state
+
 			return (
 							<div id="room-message-component">
 									<InviteForm
@@ -175,12 +172,12 @@ class RoomMessages extends Component {
 										</button>
 									</form>
 							</div>
-							)
+						)
 	}
 }
 
 
-const mapState = state => {
+const mapState = (state) => {
 	return {
 		user: state.user,
 		onlineUsers: state.onlineUsers,
@@ -188,7 +185,7 @@ const mapState = state => {
 	}
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
 	return {
 		postMessage(message) {
 			dispatch(addMessage(message))

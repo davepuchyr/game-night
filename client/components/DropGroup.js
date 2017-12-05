@@ -67,7 +67,7 @@ class DropGroup extends Component {
             "bottom": "0",
             "width": "4em",
             "height": "4em",
-            "z-index": "11",
+            "zIndex": "11",
             "margin": "0.4em"
         }
         return (
