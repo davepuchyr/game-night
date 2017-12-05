@@ -52,7 +52,6 @@ class RoomMessages extends Component {
 		*/
 		editInvites(e,nickname,index,action) {
 			const {invited} = this.state
-			console.log(' nickname *** ', nickname)
 			switch(action){
 				case 'add':
 					if(!this.invitations.includes(nickname.id)) {
@@ -77,7 +76,6 @@ class RoomMessages extends Component {
 		*/
 		sendInvites(e) {
 			e.preventDefault()
-			console.log(' sendINVITES ', this.invitations)
 			socket.emit('invite', this.invitations , this.props.roomPath)
 			this.toggleInvite()
 		}

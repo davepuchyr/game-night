@@ -637,7 +637,6 @@
         if (intersects.length) {
             return intersects[0].object.userData;
         }
-        console.log(this.aspect)
     };
 
     this.dieBox.prototype.drawSelector = function() {

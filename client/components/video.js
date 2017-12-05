@@ -26,9 +26,7 @@ class Video extends Component {
     //check if there's an open space or assign the next space
     if (this.state.openVideoSpace.length) {
         let openVideoSpaceCopy = this.state.openVideoSpace.slice()
-        console.log(openVideoSpaceCopy)
         userLocalIdx = openVideoSpaceCopy.shift()
-        console.log(openVideoSpaceCopy)        
         this.setState({openVideoSpace: openVideoSpaceCopy})
     } else if (currentUsersObj[peer.id]){
         userLocalIdx = currentUsersObj[peer.id]

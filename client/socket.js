@@ -49,7 +49,6 @@ socket.on('connect', () => {
   })
 
   socket.on('add_new_room', (room) => {
-    console.log('HEARD ABOUT A ROOM')
     store.dispatch(addRoom(room))
   })
 

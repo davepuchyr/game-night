@@ -37,7 +37,6 @@ export const createRoom = (newName, newGame, user) =>
     axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
       .then(res => {
         socket.emit('created_room', res.data)
-        console.log(res.data)
         history.push(`/room/${res.data.id}`)
         dispatch(addRoom(res.data))
       })

@@ -55,12 +55,10 @@ class Drawing extends Component {
   };
 
   handleMouseUp = () => {
-    // socket.emit('new_draw', this.state.newDraw)
     this.setState({ isDrawing: false })
   };
 
   handleMouseMove = () => {
-    // console.log('mousemove');
     let { context, isDrawing, mode } = this.state
 
     if (isDrawing) {
