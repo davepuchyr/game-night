@@ -14,7 +14,8 @@ import trash from './trash'
 import draws from './draws'
 import background from './background'
 
-const reducer = combineReducers({user,
+const reducer = combineReducers({
+  user,
   rooms,
   onlineUsers,
   messages,
@@ -24,7 +25,8 @@ const reducer = combineReducers({user,
   trash,
   invitation,
   background,
-  draws})
+  draws
+})
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
