@@ -22,9 +22,6 @@ class AddBackground extends Component {
     }
 
     onImageDrop(files) {
-        // this.setState({
-        //   uploadedFile: files[0]
-        // })
         this.handleImageUpload(files[0]);
     }
     
@@ -39,9 +36,6 @@ class AddBackground extends Component {
           }
     
           if (response.body.secure_url !== '') {
-            // this.setState({
-            //   uploadedFileCloudinaryUrl: response.body.secure_url
-            // });
             const image = {
                 personal: false,
                 background: true,

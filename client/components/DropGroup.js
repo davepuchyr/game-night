@@ -2,7 +2,7 @@ import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Link } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
-import request from 'superagent';
+import request from 'superagent'
 import { addImage } from '../store'
 import socket from '../socket'
 
@@ -22,9 +22,6 @@ class DropGroup extends Component {
     }
 
     onImageDrop(files) {
-        // this.setState({
-        //   uploadedFile: files[0]
-        // })
         this.handleImageUpload(files[0]);
     }
     
@@ -39,9 +36,6 @@ class DropGroup extends Component {
           }
     
           if (response.body.secure_url !== '') {
-            // this.setState({
-            //   uploadedFileCloudinaryUrl: response.body.secure_url
-            // });
             const image = {
                 x: 700,
                 y: 400,
