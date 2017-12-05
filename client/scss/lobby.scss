@@ -126,13 +126,11 @@
             border-radius: 20px;
 
             &-messages {
-              // @include component-scheme();
               width: 100%;
               display: flex;
               flex-direction: column;
-              padding-bottom: 30px;
               background-color: rgba(73, 76, 80, 0.84);
-              // border-radius: 0 0 30px 30px;
+              height: -webkit-fill-available;
 
               form {
                 display: flex;
@@ -149,6 +147,7 @@
                 overflow-y: scroll;
                 color: white;
                 width: 100%;
+                height: -webkit-fill-available;
 
                 &-list {
                   overflow-wrap: break-word;
