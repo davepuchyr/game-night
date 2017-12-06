@@ -1,16 +1,13 @@
 import React from 'react'
-import {createStore} from 'redux'
-import {range, last} from 'lodash'
+import { createStore } from 'redux'
+import { range, last } from 'lodash'
 
-import chai, {expect} from 'chai'
-import {shallow} from 'enzyme'
+import chai, { expect } from 'chai'
+import { shallow, mount, render } from 'enzyme'
 import faker from 'faker'
 
-import Messages from './Messages'
-// import rootReducer from '../../front_end/redux/reducer';
-import store from '../store'
-// import {USERS_RECEIVED, USERS_LOADING, NEW_USER} from '../../front_end/redux/action_types';
-// import {createLoadingAction, createUsersReceivedAction, createNewUserAction} from '../../front_end/redux/actions';
+import { Messages } from '../Messages'
+
 
 const createRandomMessages = amount => {
 return range(0, amount).map(index => {
@@ -27,9 +24,6 @@ const testUtilities = {
 };
 
 describe('Messages Component Testing', () => {
-
-  describe('', () => {
-
     let messageData, messageWrapper
     beforeEach('Create Messages component wrapper', () => {
       
@@ -49,16 +43,16 @@ describe('Messages Component Testing', () => {
           }
         }
       ]
-      messageWrapper = shallow(<Messages messages={messageData} />)
+
+      messageWrapper = shallow(<Messages messages={messageData} getMessages={() => {}}/>)
     })
 
     describe('view check', () => {
       
       it('messages', () => {
-        expect(messageWrapper
-          .find('.container-main-lobby-bottom-comps-chat-messages-items')).to.have
+        expect(messageWrapper)
+          .find('.container-main-lobby-bottom-comps-chat-messages-items').to.have
           .html("<div className='container-main-lobby-bottom-comps-chat-messages-items' ref='message'><div key=1 className='container-main-lobby-bottom-comps-chat-messages-items-list-line'><strong>Timo</strong> : Hello Tim!</div><div key=2 className='container-main-lobby-bottom-comps-chat-messages-items-list-line'><strong>Jonny</strong> : Hello Jimmy</div></div>")
       })
     })
-  })
 })

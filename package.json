@@ -16,7 +16,7 @@
     "start": "node server",
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
-    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/gamenight-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/components/*.spec.js --compilers js:babel-register"
+    "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/gamenight-test' mocha ./server/**/*.spec.js ./server/**/**/*.spec.js ./client/components/tests/*.spec.js --compilers js:babel-register --require setup.js --recursive ./client/components/tests"
   },
   "author": "Hyunjoo Josh Matt Tim",
   "license": "ISC",
@@ -29,6 +29,7 @@
     "express": "^4.14.1",
     "express-session": "^1.15.1",
     "history": "^4.6.3",
+    "jsdom": "^11.5.1",
     "konva": "^1.7.6",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
@@ -65,7 +66,7 @@
     "chai": "^3.5.0",
     "css-loader": "^0.26.1",
     "enzyme": "^3.0.0",
-    "enzyme-adapter-react-16": "^1.0.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "eslint": "^4.10.0",
     "eslint-config-fullstack": "^3.0.0",
     "eslint-plugin-react": "^7.4.0",
