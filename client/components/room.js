@@ -28,14 +28,15 @@ class Room extends Component {
     this.handlePaintClick = this.handlePaintClick.bind(this)
   }
 
-  //helper function
-  classShow(elements, isShow){
+  //helper function for button styles (class visibility)
+
+  classShow(elements, isShow) {
     isShow ?
-    Array.prototype.forEach.call(elements, el => el.className+=' show') :
+    Array.prototype.forEach.call(elements, el => el.className += ' show') :
     Array.prototype.forEach.call(elements, el => el.className=el.className.replace( /(?:^|\s)show(?!\S)/g , '' ))
   }
 
-  componentDidMount(){
+  componentDidMount() {
     document.getElementById('throw').addEventListener('click', () => {
       setTimeout(()=> {
         socket.emit('die_result', document.getElementById('label').innerHTML, document.getElementById('set').value, `/room/${this.props.routeProps.match.params.roomid}`, this.props.user.nickname)
@@ -57,7 +58,7 @@ class Room extends Component {
     this.props.delete(this.state.toDelete, this.state.group, this.props.routeProps.match.params.roomid)
   }
 
-  handleDieClick(e){
+  handleDieClick(e) {
     ['dice', 'canvas', 'center_field'].forEach(elem => {
       let isClass = (elem === 'center_field') ? true : false
       if(!this.state.dieClicked){
@@ -73,7 +74,7 @@ class Room extends Component {
     this.setState({ dieClicked: !this.state.dieClicked })
   }
 
-  handlePaintClick (e) {
+  handlePaintClick(e) {
     if (this.state.colorIndex === 3) this.setState({colorIndex: 0})
     else this.setState({colorIndex: this.state.colorIndex + 1})
   }
@@ -86,78 +87,71 @@ class Room extends Component {
   }
 
 
-    render() {
-        const path = this.props.routeProps.match.url
-        let trashCheck = false
-        if (this.state.trashFloat && this.props.dragging.bool) {
-            trashCheck = true
-        }
-        return (
-            <div id="room-container" >
-                <MainStage
-                    trashFloat={this.state.trashFloat}
-                    rId={this.props.routeProps.match.params.roomid}
-                    paintColor={this.state.colorOptions[this.state.colorIndex]}
+  render() {
+      const path = this.props.routeProps.match.url
+      let trashCheck = false
+      if (this.state.trashFloat && this.props.dragging.bool) {
+          trashCheck = true
+      }
+  return (
+        <div id="room-container" >
+            <MainStage
+                trashFloat={this.state.trashFloat}
+                rId={this.props.routeProps.match.params.roomid}
+                paintColor={this.state.colorOptions[this.state.colorIndex]}
+                />
+            <div className={this.state.toggleConsole ? 'room-container-console-hide' : 'room-container-console'}>
+                <div className="room-container-console-left">
+                    <button
+                        className="room-container-console-toggle"
+                        onClick={this.toggleConsole}
                     />
-                <div className={this.state.toggleConsole ? "room-container-console-hide" : "room-container-console"}>
-                    <div className="room-container-console-left">
-                        <button
-                            className="room-container-console-toggle"
-                            onClick={this.toggleConsole}
-                        />
-                        <div className="room-container-console-drop">
-                            {/* <div className="room-container-console-drop-background">
-                                <img
-                                className="background-button"
-                                // onClick={this.handleDieClick.bind(this)}
-                                src="/assets/background_icon.png"
-                                />
-                            </div> */}
-                            <AddBackground
-                            className="add-background"
-                            rId={this.props.routeProps.match.params.roomid}/>
-                            <Drop />
-                            <DropGroup
-                            className="group-dropzone"
-                            rId={this.props.routeProps.match.params.roomid}/>
-                        </div>
-                    </div>
-                    <div className="room-container-console-center">
-                        <div className="room-container-console-messages">
-                            <RoomMessages roomPath={path}/>
-                        </div>
-                    </div>
-                    <div className="room-container-console-right">
-                      <div className="room-container-console-right-paint">
-                            <img
-                            className="paint-button"
-                            onClick={this.handlePaintClick.bind(this)}
-                            src={`/assets/paint_icon${this.state.colorOptions[this.state.colorIndex]}.png`}
-                            />
-                        </div>
-                        <div className="room-container-console-right-die">
-                            <img
-                            className="die-button"
-                            onClick={this.handleDieClick.bind(this)}
-                            src={this.state.dieClicked ? "/assets/dice_icon_blue2.png" : "/assets/dice_icon.png"}
-                            />
-                        </div>
-                        <div className="room-container-console-right-trash">
-                            <img
-                                id="trash-can"
-                                src={trashCheck ? '/redtrash.png' : '/trash.png'}
-                                onMouseOver={this.handleMouseOver}
-                                onMouseLeave={this.handleMouseLeave}
-                                onMouseUp={this.state.delete ? this.handleMouseUp : null}
-                            />
-                        </div>
+                    <div className="room-container-console-drop">
+                        <AddBackground
+                        className="add-background"
+                        rId={this.props.routeProps.match.params.roomid}/>
+                        <Drop />
+                        <DropGroup
+                        className="group-dropzone"
+                        rId={this.props.routeProps.match.params.roomid}/>
                     </div>
                 </div>
-                <Video/>
+                <div className="room-container-console-center">
+                    <div className="room-container-console-messages">
+                        <RoomMessages roomPath={path}/>
+                    </div>
+                </div>
+                <div className="room-container-console-right">
+                  <div className="room-container-console-right-paint">
+                        <img
+                        className="paint-button"
+                        onClick={this.handlePaintClick.bind(this)}
+                        src={`/assets/paint_icon${this.state.colorOptions[this.state.colorIndex]}.png`}
+                        />
+                    </div>
+                    <div className="room-container-console-right-die">
+                        <img
+                        className="die-button"
+                        onClick={this.handleDieClick.bind(this)}
+                        src={this.state.dieClicked ? '/assets/dice_icon_blue2.png' : '/assets/dice_icon.png'}
+                        />
+                    </div>
+                    <div className="room-container-console-right-trash">
+                        <img
+                            id="trash-can"
+                            src={trashCheck ? '/redtrash.png' : '/trash.png'}
+                            onMouseOver={this.handleMouseOver}
+                            onMouseLeave={this.handleMouseLeave}
+                            onMouseUp={this.state.delete ? this.handleMouseUp : null}
+                        />
+                    </div>
+                </div>
+            </div>
+            <Video/>
       </div>
-    )
+      )
+    }
   }
-}
 
 
 const mapState = (state) => {
@@ -166,7 +160,7 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     delete: (imageUrl, group, rId) => {
       if (group) {

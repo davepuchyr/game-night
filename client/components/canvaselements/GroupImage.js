@@ -28,13 +28,13 @@ class GroupImage extends Component {
     }
   }
 
-  handleClick (e) {
+  handleClick(e) {
     this.state.showBig ? 
     this.setState({showBig: false}) :
     this.setState({showBig: true})
   }
 
-  handleDragEnd (e) {
+  handleDragEnd(e) {
     let konvaImg = e.target
     let x = konvaImg.attrs.x
     let y = konvaImg.attrs.y
@@ -58,7 +58,7 @@ class GroupImage extends Component {
     this.setState({dragging: false})
   }
 
-  handleDragStart () {
+  handleDragStart() {
     const url = this.props.imageUrl
     this.setState({dragging: true})
     if (this.state.dragging) this.props.startDrag(url)

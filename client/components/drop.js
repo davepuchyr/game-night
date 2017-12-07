@@ -20,10 +20,7 @@ class Drop extends Component {
         this.handleMouseLeave = this.handleMouseLeave.bind(this)
     }
 
-    onImageDrop(files) {
-        // this.setState({
-        //   uploadedFile: files[0]
-        // })
+    onImageDrop (files) {
         this.handleImageUpload(files[0]);
     }
     
@@ -38,9 +35,6 @@ class Drop extends Component {
           }
     
           if (response.body.secure_url !== '') {
-            // this.setState({
-            //   uploadedFileCloudinaryUrl: response.body.secure_url
-            // });
             this.props.newImage({x: 300, y: 400, personal: true, url: response.body.secure_url, width: response.body.width, height: response.body.height})
           }
         });

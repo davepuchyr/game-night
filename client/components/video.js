@@ -26,9 +26,7 @@ class Video extends Component {
     //check if there's an open space or assign the next space
     if (this.state.openVideoSpace.length) {
         let openVideoSpaceCopy = this.state.openVideoSpace.slice()
-        console.log(openVideoSpaceCopy)
         userLocalIdx = openVideoSpaceCopy.shift()
-        console.log(openVideoSpaceCopy)        
         this.setState({openVideoSpace: openVideoSpaceCopy})
     } else if (currentUsersObj[peer.id]){
         userLocalIdx = currentUsersObj[peer.id]
@@ -77,22 +75,18 @@ class Video extends Component {
 
 
   render(props) {
-  //instantiate webrtc
     const webrtc = new simplewebrtc({
       localVideoEl: 'localVideo',
       remoteVideosEl: '',
       autoRequestMedia: true,
     })
 
-    //join room
     webrtc.on('readyToCall', () => {
       webrtc.joinRoom(history.location.pathname)
     })
 
-    //addvideo
     webrtc.on('videoAdded', (video, peer) => this.addVideo(video, peer))
 
-    //remove video
     webrtc.on('videoRemoved', (video, peer) => this.removeVideo(video, peer))
 
     return (

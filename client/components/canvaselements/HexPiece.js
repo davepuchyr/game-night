@@ -20,7 +20,7 @@ class HexPiece extends Component {
     }
 
     
-    render(){
+    render() {
       return (
         <Star
         x={this.props.x}

@@ -1,23 +1,23 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {logout, getInvitations} from '../store'
+import { connect } from 'react-redux'
+import { logout, getInvitations } from '../store'
 import socket from '../socket'
-import {RoomList,OnlineUsers, Messages, Invitations} from './index'
+import { RoomList, OnlineUsers, Messages, Invitations } from './index'
 
 /**
  * COMPONENT
  */
+
 class Lobby extends Component {
 
   componentDidMount(){
     socket.emit('retrieveInvites')
   }
 
-  
   render(){
-    const {handleClick, isLoggedIn, invitations, user} = this.props
+    const { handleClick, isLoggedIn, invitations, user } = this.props
     const listOfRoomInvites = Object.keys(invitations).filter(id => user.id === (+id)? id: null).map(each => invitations[each])
     return (
       <div className="container-main-lobby">

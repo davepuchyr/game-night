@@ -1,17 +1,14 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Layer, Stage, Image } from 'react-konva'
-import HexPiece from './hex-piece'
-import MyImage from './Image'
-import GroupImage from './GroupImage'
-import Drawing from './Drawing'
+import { HexPiece, MyImage, GroupImage, Drawing } from '../index.js'
 
 
 class MainStage extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
+this.state = {
       imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
       backgroundImage: null,
       shift: false,
@@ -31,7 +28,6 @@ class MainStage extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.handleDragEnd = this.handleDragEnd.bind(this)
-    // this.updateDimensions = this.updateDimensions.bind(this)
   }
   
   componentDidMount() {
@@ -44,7 +40,6 @@ class MainStage extends React.Component {
     }
     document.addEventListener('keydown', this.handleKeyDown);
     document.addEventListener('keyup', this.handleKeyUp);
-    // window.addEventListener("resize", this.updateDimensions);
   }
 
   componentDidUpdate() {
@@ -67,22 +62,6 @@ class MainStage extends React.Component {
     }
   }
 
-  componentWillUnmount () {
-    // window.removeEventListener("resize", this.updateDimensions)
-  }
-
-  // updateDimensions () {
-  //   const newSize = this.aspectRatio(this.state.backgroundWidth, this.state.backgroundHeight)
-  //   const width = newSize[0]
-  //   const height = newSize[1]
-  //   this.setState({forceUpdate: true,
-  //     backgroundImage: this.state.backgroundImage,
-  //     imageUrl: this.state.imageUrl,
-  //     backgroundWidth: width,
-  //     backgroundHeight: height,
-  //   })
-  // }
-  
   aspectRatio (originalHeight, originalWidth) {
     const originalRatio = (originalHeight / originalWidth)
     const windowWidth = 1680  
@@ -113,13 +92,13 @@ class MainStage extends React.Component {
     return [width, height]
   }
 
-  handleKeyDown (e) {
+  handleKeyDown(e) {
       if (e.key === 'Shift') this.setState({shift: true})
       if (e.key === 'Alt') this.setState({alt: true})
       
   }
 
-  handleKeyUp (e) {
+  handleKeyUp(e) {
     if (e.key === 'Shift') this.setState({shift: false})
     if (e.key === 'Alt') this.setState({alt: false})    
   }
@@ -129,11 +108,11 @@ class MainStage extends React.Component {
 
   }
 
-  handleMouseOut () {
+  handleMouseOut() {
     document.body.style.cursor = 'default'
   }
 
-  handleDragEnd (e) {
+  handleDragEnd(e) {
     let newX = 0 - e.evt.x
     let newY = 0 - e.evt.y
     this.setState({dragOffSet: [newX, newY]})
@@ -217,16 +196,6 @@ class MainStage extends React.Component {
             />
           })
           }
-            {/* <Image
-              image={canvas}
-              ref={node => (this.image = node)}
-              width={window.innerWidth}
-              height={window.innerHeight}
-              stroke={'blue'}
-              onMouseDown={this.handleMouseDown}
-              onMouseUp={this.handleMouseUp}
-              onMouseMove={this.handleMouseMove}
-          /> */}
         </Layer>
       </Stage>
     );

@@ -8,6 +8,7 @@ export class Messages extends React.Component {
     super(props)
     this.state = { messageInput: '' }
     this.scrollToBottom = this.scrollToBottom.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount(){
@@ -20,9 +21,15 @@ export class Messages extends React.Component {
   }
 
   scrollToBottom = () => {
-    const messagesContainer = this.refs.message
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  };
+    const messagesContainer = this.refs.message || undefined
+    messagesContainer ? 
+      (messagesContainer.scrollTop = messagesContainer ? messagesContainer.scrollHeight : undefined) 
+      : undefined
+  }
+
+  handleChange(e){
+    this.setState({ messageInput: e.target.value })
+  }
 
   render(){
     const { user, messages, newMessage } = this.props
@@ -52,7 +59,7 @@ export class Messages extends React.Component {
 					  type="text"
 						name="message"
 						value={this.state.messageInput}
-						onChange={(e) => this.setState({ messageInput: e.target.value })}
+						onChange={this.handleChange}
 						placeholder="Write message"
 					/>
 					<button type="submit">Post</button>
