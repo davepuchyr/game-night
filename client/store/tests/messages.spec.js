@@ -24,10 +24,11 @@ describe('Store: Messages', () => {
     store.clearActions()
   })
 
-  describe('FETCH MESSAGES', () => {
-
+  describe('Thunks', () => {
     const fakeMessages = [{nickname: 'mattyamazin', content: 'yooooo'}, {nickname: 'retrofuturejosh', content: 'hiiiiii'}]
-    it('thunk creator eventually correctly dispatches the GET_MESSAGES action', () => {
+    const fakePostMessage = {nickname: 'hjkim', content: 'nyaaaa'}
+
+    it('fetchMessages thunk eventually correctly dispatches the GET_MESSAGES action', () => {
       mockAxios.onGet('/api/messages').replyOnce(200, fakeMessages)
       return store.dispatch(fetchMessages())
         .then(() => {
@@ -35,6 +36,17 @@ describe('Store: Messages', () => {
           expect(actions[0].type).to.be.equal('GET_MESSAGES')
           expect(actions[0].messages).to.be.deep.equal(fakeMessages)
         })
+    })
+
+    it('postMessage thunk eventually correctly dispatches the POST_MESSAGE action', () => {
+      mockAxios.onPost('/api/messages').replyOnce(204, fakePostMessage)
+      return store.dispatch(postMessage(fakePostMessage))
+        .then(() => {
+          const actions = store.getActions()
+          expect(actions[0].type).to.be.equal('NEW_MESSAGE')
+          expect(actions[0].message).to.be.deep.equal(fakePostMessage)
+        })
+
     })
   })
 })
