@@ -32,7 +32,7 @@ npm run start-dev
 * [Three.js](https://threejs.org/) - JavaScript library used to create and display animated 3D computer graphics in a web browser
 * [Cannon.js](http://www.cannonjs.org/) - A physics engine written in JavaScript
 
-###Tests
+### Tests
 * [Mocha](http://mochajs.org/) - JavaScript test framework
 * [Chai](http://chaijs.com/) - Back-end testing
 * [Enzyme](https://github.com/airbnb/enzyme/) - Front-end testing
