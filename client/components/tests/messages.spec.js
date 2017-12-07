@@ -1,27 +1,11 @@
 import React from 'react'
-import { createStore } from 'redux'
-import { range, last } from 'lodash'
 
 import chai, { expect } from 'chai'
 import { shallow, mount, render } from 'enzyme'
-import faker from 'faker'
+import sinon from 'sinon';
 
 import { Messages } from '../Messages'
 
-
-const createRandomMessages = amount => {
-return range(0, amount).map(index => {
-    return {
-      id: index + 1,
-      content: faker.lorem.sentence()
-    }
-  })
-}
-
-const testUtilities = {
-    createRandomMessages,
-    createOneRandomMessage: () => createRandomMessages(1)[0]
-};
 
 describe('Messages Component Testing', () => {
     let messageData, messageWrapper
@@ -44,15 +28,63 @@ describe('Messages Component Testing', () => {
         }
       ]
 
-      messageWrapper = shallow(<Messages messages={messageData} getMessages={() => {}}/>)
+      messageWrapper = shallow(<Messages messages={messageData} getMessages={()=>{}}/>)
+    })
+
+    describe('lifecycle methods', () => {
+
+      it('calls componentDidMount', () => {
+        sinon.spy(Messages.prototype, 'componentDidMount')
+        const wrapper = mount(<Messages messages={messageData} getMessages={()=>{}}/>)
+        expect(Messages.prototype.componentDidMount.calledOnce).to.equal(true)
+      })
+
+      it('should not call componentDidUpdate yet', () => {
+        sinon.spy(Messages.prototype, 'componentDidUpdate')
+        const wrapper = mount(<Messages messages={messageData} getMessages={()=>{}}/>)
+        expect(Messages.prototype.componentDidUpdate.calledOnce).to.equal(false)
+      })
     })
 
     describe('view check', () => {
       
       it('messages', () => {
-        expect(messageWrapper)
-          .find('.container-main-lobby-bottom-comps-chat-messages-items').to.have
-          .html("<div className='container-main-lobby-bottom-comps-chat-messages-items' ref='message'><div key=1 className='container-main-lobby-bottom-comps-chat-messages-items-list-line'><strong>Timo</strong> : Hello Tim!</div><div key=2 className='container-main-lobby-bottom-comps-chat-messages-items-list-line'><strong>Jonny</strong> : Hello Jimmy</div></div>")
+        expect(messageWrapper.find('div')).to.have.length(4)
+      })
+
+      it('strong text', () => {
+        expect(messageWrapper.find('strong')).to.have.length(2)
+      })
+
+      it('form', () => {
+        expect(messageWrapper.find('form')).to.have.length(1)
+      })
+
+      it('input field', () => {
+        expect(messageWrapper.find('input')).to.have.length(1)
+      })
+
+      it('submit button', () => {
+        expect(messageWrapper.find('button')).to.have.length(1)
+      })
+    })
+
+    describe('form testing', () => {
+      
+      it('input field', () => {
+        const wrapper = mount((
+          <Messages messages={messageData} getMessages={()=>{}}/>
+        ))
+        wrapper.find('input').simulate('change', {target: { value : 'Timmy'}})
+        expect(wrapper.state('messageInput')).to.equal('Timmy')
+      })
+
+      it('submit button', () => {
+        const wrapper = mount((
+          <Messages messages={messageData} getMessages={()=>{}}/>
+        ))
+        wrapper.find('button').simulate('click')
+        expect(wrapper.state('messageInput')).to.equal('')
       })
     })
 })
