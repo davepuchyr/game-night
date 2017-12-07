@@ -83,7 +83,8 @@ describe('Messages Component Testing', () => {
         const wrapper = mount((
           <Messages messages={messageData} getMessages={()=>{}}/>
         ))
-        wrapper.find('button').simulate('click')
+        wrapper.setState({ messageInput: 'Hi' })
+        wrapper.find('button').simulate('submit')
         expect(wrapper.state('messageInput')).to.equal('')
       })
     })

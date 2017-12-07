@@ -52,8 +52,10 @@ export class Messages extends React.Component {
 				</div>
 				<form onSubmit={(e) => {
 					e.preventDefault()
-					this.setState({ messageInput: '' })
-					newMessage(user.id, e.target.message.value)
+          this.setState({ messageInput: '' })
+          user ?
+            newMessage(user.id, e.target.message.value) :
+            null
 				}}>
 				  <input
 					  type="text"
