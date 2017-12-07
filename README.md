@@ -34,7 +34,7 @@ npm run start-dev
 
 ### Tests
 * [Mocha](http://mochajs.org/) - JavaScript test framework
-* [Chai](http://chaijs.com/) - Back-end testing
+* [Chai](http://chaijs.com/) - Assertion used
 * [Enzyme](https://github.com/airbnb/enzyme/) - Front-end testing
 
 ## Authors
