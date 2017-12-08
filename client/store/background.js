@@ -6,6 +6,7 @@ const UPDATE_BACKGROUND  ='UPDATE_BACKGROUND'
 /**
  * INITIAL STATE
  */
+
 const background = {url: 'http://i.imgur.com/uhhfaMZ.png'}
 
 /**

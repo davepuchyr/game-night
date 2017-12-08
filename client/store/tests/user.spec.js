@@ -1,17 +1,15 @@
-/* global describe beforeEach afterEach it */
-
 import {expect} from 'chai'
-import {me, logout} from './user'
+import {me, logout} from '../user'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import history from '../history'
+import history from '../../history'
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
-describe('thunk creators', () => {
+describe('Store: User', () => {
   let store
   let mockAxios
 
@@ -27,9 +25,9 @@ describe('thunk creators', () => {
     store.clearActions()
   })
 
-  describe('me', () => {
-    it('eventually dispatches the GET USER action', () => {
-      const fakeUser = {email: 'Cody'}
+  describe('GET USER / me', () => {
+    it('thunk creator eventually correctly dispatches the GET_USER action', () => {
+      const fakeUser = {email: 'Cody', nickname: 'codyNoScope'}
       mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
       return store.dispatch(me())
         .then(() => {
@@ -40,8 +38,8 @@ describe('thunk creators', () => {
     })
   })
 
-  describe('logout', () => {
-    it('logout: eventually dispatches the REMOVE_USER action', () => {
+  describe('REMOVE USER / logout', () => {
+    it('thunk creator eventually correctly dispatches the REMOVE_USER action', () => {
       mockAxios.onPost('/auth/logout').replyOnce(204)
       return store.dispatch(logout())
         .then(() => {

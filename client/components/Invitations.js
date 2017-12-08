@@ -1,8 +1,8 @@
 import React from 'react'
 import socket from '../socket'
 
-const removeInvitation = (userId,room) => {
-  socket.emit('removeInvite',userId,room)
+const removeInvitation = (userId, room) => {
+  socket.emit('removeInvite', userId, room)
 }
 
 const Invitations = (props) => {
@@ -10,10 +10,10 @@ const Invitations = (props) => {
   return (
     <div className="container-main-lobby-bottom-comps-room-invitations">
       {
-        roomInvites.map((room,ind) => <a 
+        roomInvites.map((room, ind) => <a 
           key={ind}
           href={`${room}`} 
-          onClick={()=>removeInvitation(userId,room)}>
+          onClick={()=>removeInvitation(userId, room)}>
           Invitation to room: {room.slice(6)}
           </a>)
       }

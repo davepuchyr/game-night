@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 * All thanks goes to "dceddia" for the dialog example :
 * https://github.com/dceddia/modal-in-react/blob/master/src/App.js
 */
-const InviteForm = (props) =>{
+const InviteForm = (props) => {
 
 	// Render nothing if the "show" prop is false
 	const {children, onClose, invited, invitedNames, editInvites, sendInvites, onlineUsers, userId} = props
