@@ -27,50 +27,47 @@ describe("Sockets",() => {
 		done()
 	})
 
-	it('Users connect & disconnect', done => {
-		let client2
-		client1.on('connect', () => {
-		  /*
-	    * NEW USERS
-	    */
-			client1.emit('userConnect', user1.id)
-			/*
-			* Since first client is connected,
-			* we connect the second client.
-	    * user2 connects
-	    */
-	    client2 = io.connect(socketURL, options)
-			client2.on('connect', socket => {
-				client2.emit('userConnect', user2.id)
+	describe("User Connect",() => {
+		it('Users should connect & disconnect', done => {
+			let client2
+			client1.on('connect', () => {
+			  /*
+		    * NEW USERS
+		    */
+				client1.emit('userConnect', user1.id)
+				/*
+				* Since first client is connected,
+				* we connect the second client.
+		    * user2 connects
+		    */
+		    client2 = io.connect(socketURL, options)
+				client2.on('connect', socket => {
+					client2.emit('userConnect', user2.id)
+				})
+		    /*
+		    * user2 is added to online list
+		    */
+				client2.on('updateOnlineUsers', onlineUser => {
+					expect(onlineUser).to.deep.equal([1,2])
+					client2.disconnect()
+				})
 			})
-	    /*
-	    * user2 is added to online list
-	    */
-			client2.on('updateOnlineUsers', onlineUser => {
-				expect(onlineUser).to.deep.equal([1,2])
-				client2.disconnect()
-			})
-		})
 
-		client1.on('updateOnlineUsers', onlineUser => {
-			expect(onlineUser).to.deep.equal([1])
-			client1.disconnect()
-			done()
+			client1.on('updateOnlineUsers', onlineUser => {
+				expect(onlineUser).to.deep.equal([1])
+				client1.disconnect()
+				done()
+			})
 		})
 	})
 
 	describe("New Messages",() => {
-		afterEach(done => {
-			done()
-		})
-
 		it('Users should post messages', done => {
 			let client2
 
 			let clientPostMessage = (client,num) => {
 				switch(num){
 					case 1:
-						console.log('HEYY')
 						client.emit('new_message', "hello")
 						break;
 					default:
@@ -90,7 +87,6 @@ describe("Sockets",() => {
 				})
 			})
 			client1.on('received_new_message', message => {
-				console.log('line 93', message)
 				message.should.equal("Hi, I'm KingJoshua")
 				client1.disconnect()
 				done()
@@ -99,21 +95,54 @@ describe("Sockets",() => {
 	})
 
 
+	describe("New Room",() => {
+		it('User should create a room', done => {
+			let client2
+			let createAroom = (client,num) => {
+				switch(num){
+					case 1:
+						client.emit('created_room', {
+							adminId:4,
+							game:"League Of Legends",
+							id:28,
+							name:"LoL",
+							createdAt:"2017-12-08T15:50:07.512Z",
+							updatedAt:"2017-12-08T15:50:07.512Z"
+						})
+						break;
+					default:
+						client.emit('created_room', {
+							adminId:3,
+							game:"Dungeons and Dragons",
+							id:27,
+							name:"DND",
+							createdAt:"2017-12-08T15:47:07.512Z",
+							updatedAt:"2017-12-08T15:47:07.512Z"
+						})
+						break;
+				}
+			}
 
-	// describe("New Room",() => {
+			client1.on('connect', () => {
+				client1.emit('userConnect', user4.id)
+				createAroom(client1,1)
 
-	// 	it('User should create a room', done => {
+				client2 = io.connect(socketURL, options)
+				client2.on('connect', () => {
+					client2.emit('userConnect', user3.id)
+					createAroom(client2)
+				})
+				client2.on('add_new_room', room => {
+					room.id.should.equal(28)
+				})
+			})
 
-	// 		client1.on('connection', () => {
-	// 			client1.emit('created_room', '/room/1')
-	// 		})
-	// 		client1.on('add_new_room', room => {
-	// 			room.should.equal('/room/1')
-	// 		})
-
-	// 		done()
-	// 	})
-	// })
+			client1.on('add_new_room', room => {
+				room.id.should.equal(27)
+				done()
+			})
+		})
+	})
 
 	// describe("Join Room",() => {
 
@@ -135,7 +164,7 @@ describe("Sockets",() => {
 
 	// 	it('When tokens move', done => {
 
-	// 		client1.on('connection', () => {
+	// 		client1.on('connect', () => {
 	// 			client1.join('/room/1')
 	// 			client1.emit('move_token', ([500,500],'blue','/room/1'))
 	// 		})
@@ -152,7 +181,7 @@ describe("Sockets",() => {
 
 	// 		client2 = io.connect(socketURL, options)
 
-	// 		client2.on('connection', () => {
+	// 		client2.on('connect', () => {
 	// 			client2.emit('joinroom',('/room/1',user2.nickname))
 	// 		})
 	// 		client2.on('addMessage', message => {
@@ -170,7 +199,7 @@ describe("Sockets",() => {
 	// 	let client2
 	// 	beforeEach(()=>{
 	// 			client2 = io.connect(socketURL, options)
-	// 			client2.on('connection', () => {
+	// 			client2.on('connect', () => {
 	// 				client2.join('/room/1')
 	// 			})
 	// 		return client2
@@ -179,7 +208,7 @@ describe("Sockets",() => {
 	// 	it('User can write a messages in room', done => {
 
 	// 		console.log('LINE 171', 'lalal')
-	// 		client1.on('connection', (socket) => {
+	// 		client1.on('connect', (socket) => {
 	// 		console.log('LINE 173',socket)
 	// 			socket.join('/room/1')
 	// 			socket.emit('postRoomMessage', ({nickname:'MattyAmazing',content:'Hi Princess Hyunjoo'},'/room/1'))
