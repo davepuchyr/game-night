@@ -10,7 +10,7 @@ import { Messages } from '../Messages'
 describe('Messages Component Testing', () => {
     let messageData, messageWrapper
     beforeEach('Create Messages component wrapper', () => {
-      
+
       messageData = [
         {
           id: 1,
@@ -47,7 +47,7 @@ describe('Messages Component Testing', () => {
     })
 
     describe('view check', () => {
-      
+
       it('messages', () => {
         expect(messageWrapper.find('div')).to.have.length(4)
       })
@@ -70,7 +70,7 @@ describe('Messages Component Testing', () => {
     })
 
     describe('form testing', () => {
-      
+
       it('input field', () => {
         const wrapper = mount((
           <Messages messages={messageData} getMessages={()=>{}}/>
