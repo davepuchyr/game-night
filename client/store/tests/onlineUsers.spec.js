@@ -17,7 +17,6 @@ describe('Store: Online Users', () => {
   })
 
   describe('Reducer:', () => {
-    describe('Reducer', () => {
       let testStore
   
       beforeEach('make mock store', () => {
@@ -28,10 +27,9 @@ describe('Store: Online Users', () => {
         expect(testStore.getState()).to.be.deep.equal(initialState)
       })
   
-      it('properly adds an image to state', () => {
+      it('GET_ONLINE_USERS properly updates the list of users on state', () => {
         testStore.dispatch({type: 'GET_ONLINE_USERS', onlineUsers: mockUsersOnline})
         expect(testStore.getState()).to.be.deep.equal(mockUsersOnline)
       })
     })
-  })
 })
