@@ -16,7 +16,8 @@ describe('Component: RoomList', () => {
     const props = {
         getRooms: sinon.stub(),
         allRooms: rooms}
-    
+    const handleSubmitStub = sinon.stub()
+    RoomList.prototype.handleSubmit = handleSubmitStub
     sinon.spy(RoomList.prototype, 'componentDidMount')
 
     beforeEach('create RoomList component wrapper', () => {
@@ -39,30 +40,24 @@ describe('Component: RoomList', () => {
       it('has a form for creating a new room', () => {
         expect(roomListWrapper.find('form')).to.have.length(1)
       })
+
+      it('has an input field for name', () => {
+        expect(roomListWrapper.find('[name="name"]')).to.have.length(1)
+      })
+
+      it('has an input field for game', () => {
+        expect(roomListWrapper.find('[name="game"]')).to.have.length(1)
+      })
     })
 
     describe('actions and functions', () => {
       it('calls getRoom when component mounts', () => {
         expect(props.getRooms.called).to.equal(true)
       })
+
+      it('calls handleSubmit when form is entered', () => {
+        roomListWrapper.find('form').first().simulate('submit')
+        expect(handleSubmitStub.calledOnce).to.equal(true)
+      })
     })
-
-    // describe('view check', () => {
-    //   it('should render Messages component', () => {
-    //       expect(lobbyShallowWrapper.find('Connect(Messages)')).to.have.length(1)
-    //   })
-    // })
-
-    // describe('functions', () => {
-    //     it('has a logout button', () => {
-    //         const logOutButton = lobbyShallowWrapper.find('a')
-    //         expect(logOutButton).to.have.length(1)
-    //         expect(logOutButton.text()).to.equal('Logout')
-    //     })
-  
-    //     it('handleClick is called when log out button is clicked', () => {
-    //         lobbyShallowWrapper.find('a').simulate('click')
-    //         expect(props.handleClick.calledOnce).to.equal(true)
-    //     })
-    // })
 })
