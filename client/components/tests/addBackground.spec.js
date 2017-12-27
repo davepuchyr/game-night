@@ -10,7 +10,7 @@ import { AddBackground } from '../AddBackground'
 describe('Component: AddBackground', () => {
     let addBackgroundWrapper
 
-    beforeEach('create Lobby component wrappers and spies', () => {
+    beforeEach('create AddBackground component wrapper', () => {
       addBackgroundWrapper = shallow(<AddBackground/>)
     })
 
