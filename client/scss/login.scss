@@ -7,14 +7,20 @@
 }
 
 .login {
-	display: block;
 	background-color: #23272A;
+	min-width: 100%;
+	display: flex;
+
 	@import 'splashvideo';
 
 	form {
-		display: block;
-		max-width: 1000px;
+		max-width: inherit;
 		margin: auto;
+		z-index: 10;
+		position: absolute;
+		left: 34%;
+    top: 25%;
+    width: 35%;
 
 		div {
 			color:#99AAB5;

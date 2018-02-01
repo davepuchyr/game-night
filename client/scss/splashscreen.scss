@@ -1,11 +1,10 @@
 .splashscreen {
-	display:flex;
-	flex-direction:column;
+	display: flex;
+	flex-direction: column;
 	justify-content: space-evenly;
-	position: relative;
 	width: 100%;
-	margin: 0 auto;
 	max-width: fit-content;
+	position: absolute;
 
 	@import 'splashvideo';
 
