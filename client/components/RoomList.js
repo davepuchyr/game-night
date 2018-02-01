@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { fetchRoomList, createRoom } from '../store'
 import { Link } from 'react-router-dom'
 
-class RoomList extends Component {
+export class RoomList extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)

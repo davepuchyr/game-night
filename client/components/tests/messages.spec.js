@@ -7,7 +7,7 @@ import sinon from 'sinon';
 import { Messages } from '../Messages'
 
 
-describe('Messages Component Testing', () => {
+describe('Component: Messages', () => {
     let messageData, messageWrapper
     beforeEach('Create Messages component wrapper', () => {
       

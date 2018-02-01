@@ -10,7 +10,7 @@ import { RoomList, OnlineUsers, Messages, Invitations } from './index'
  * COMPONENT
  */
 
-class Lobby extends Component {
+export class Lobby extends Component {
 
   componentDidMount(){
     socket.emit('retrieveInvites')

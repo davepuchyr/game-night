@@ -8,7 +8,7 @@ import { deleteImage } from '../store'
 import socket from '../socket'
 
 
-class Room extends Component {
+export class Room extends Component {
   constructor(props) {
     super(props)
     this.state = {

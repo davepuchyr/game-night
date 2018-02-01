@@ -9,7 +9,7 @@ import socket from '../socket'
 const CLOUDINARY_UPLOAD_PRESET = 'gamenight';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload';
 
-class AddBackground extends Component {
+export class AddBackground extends Component {
     constructor (props){
         super(props)
         this.state = {

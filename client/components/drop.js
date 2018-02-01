@@ -8,7 +8,7 @@ import { addImage } from '../store'
 const CLOUDINARY_UPLOAD_PRESET = 'gamenight';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/gamenight/upload';
 
-class Drop extends Component {
+export class Drop extends Component {
     constructor (props){
         super(props)
         this.state = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-const OnlineUsers = (props) => {
+export const OnlineUsers = (props) => {
   const { users } = props
   
   return (

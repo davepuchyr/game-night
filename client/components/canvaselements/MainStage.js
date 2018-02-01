@@ -4,7 +4,7 @@ import { Layer, Stage, Image } from 'react-konva'
 import { HexPiece, MyImage, GroupImage, Drawing } from '../index.js'
 
 
-class MainStage extends React.Component {
+export class MainStage extends React.Component {
   constructor(props) {
     super(props)
 
@@ -105,7 +105,6 @@ this.state = {
 
   moveStageOnHover(e) {
     document.body.style.cursor = 'move'
-
   }
 
   handleMouseOut() {

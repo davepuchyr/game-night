@@ -7,7 +7,7 @@ import sinon from 'sinon'
 import Invitations from '../Invitations'
 
 
-describe('Invitations Component Testing', () => {
+describe('Component: Invitations', () => {
     let invites, invitationWrapper
     beforeEach('Create Invitations component wrapper', () => {
 

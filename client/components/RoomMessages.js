@@ -8,7 +8,7 @@ import { addMessage } from '../store'
 import InviteForm from './InviteForm'
 import history from '../history'
 
-class RoomMessages extends Component {
+export class RoomMessages extends Component {
 		constructor(props) {
 				super(props)
 
@@ -126,7 +126,9 @@ class RoomMessages extends Component {
 												<button id="invite-button" onClick={this.toggleInvite}>
 													Invite
 												</button>
-												<button id="invite-button" onClick={this.returnToLobby}>
+												<button id="invite-button" 
+												className="return-lobby-button"
+												onClick={this.returnToLobby}>
 													Lobby
 												</button>
 									</div>
