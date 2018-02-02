@@ -33,7 +33,7 @@ class Routes extends Component {
                 </Switch>
             }
             {/* Displays our Login component as a fallback */}
-            <Route component={SplashScreen} />
+            <Route component={Login} />
           </Switch>
         </Main>
       </Router>
