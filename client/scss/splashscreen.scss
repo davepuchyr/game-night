@@ -19,6 +19,8 @@
 			padding: 20px 50px;
 			background: #2C2F33;
 			border-radius: 20px;
+			position: absolute;
+
 			&:focus, &:hover {
 				background-color: #99AAB5;
       	color: #23272A;
@@ -29,6 +31,14 @@
 				font-size: 100px;
 				color: white;
 			}
+		}
+
+		#loginBtn {
+			top: 25%;
+		}
+
+		#signupBtn {
+			top: 55%;
 		}
 	}
 }
