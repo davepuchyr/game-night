@@ -1,7 +1,7 @@
-import { expect } from 'chai'
-import { createStore } from 'redux'
-import { addDraws } from '../draws.js'
-import { default as drawsReducer } from '../draws.js'
+import { expect } from 'chai';
+import { createStore } from 'redux';
+import { addDraws } from '../draws.js';
+import { default as drawsReducer } from '../draws.js';
 
 const testDraw = {
   erase: false,
@@ -15,32 +15,32 @@ const testDraw = {
     x: 356,
     y: 102
   }
-}
+};
 
 describe('Store: Draws', () => {
   
   describe('Actions', () => {
 
     it('addDraws returns a proper action', () => {
-      expect(addDraws(testDraw)).to.be.deep.equal({type: 'ADD_DRAWS', draws: testDraw})
-    })
-  })
+      expect(addDraws(testDraw)).to.be.deep.equal({type: 'ADD_DRAWS', draws: testDraw});
+    });
+  });
 
   describe('Reducer', () => {
-    let testStore
+    let testStore;
 
     beforeEach('make mock store', () => {
-      testStore = createStore(drawsReducer)
-    })
+      testStore = createStore(drawsReducer);
+    });
 
     it('has proper initial state', () => {
-      expect(testStore.getState()).to.be.deep.equal([])
-    })
+      expect(testStore.getState()).to.be.deep.equal([]);
+    });
 
     it('properly adds action.draws to the state array', () => {
-      testStore.dispatch({type: 'ADD_DRAWS', draws: testDraw})
-      expect(testStore.getState()).to.be.deep.equal([testDraw])
-    })
+      testStore.dispatch({type: 'ADD_DRAWS', draws: testDraw});
+      expect(testStore.getState()).to.be.deep.equal([testDraw]);
+    });
 
-  })
-})
+  });
+});
