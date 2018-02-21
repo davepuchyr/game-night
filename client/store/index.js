@@ -11,8 +11,8 @@ import tokens from './tokens'
 import images from './images'
 import invitation from './invitation'
 import trash from './trash'
-import draws from './draws'
-import background from './background'
+import draws from './draws';
+import background from './background';
 
 const reducer = combineReducers({
   user,
@@ -26,22 +26,22 @@ const reducer = combineReducers({
   invitation,
   background,
   draws
-})
+});
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
-))
-const store = createStore(reducer, middleware)
+));
+const store = createStore(reducer, middleware);
 
-export default store
-export * from './user'
-export * from './rooms'
-export * from './onlineUsers'
-export * from './messages'
-export * from './roomMessages'
-export * from './tokens'
-export * from './invitation'
-export * from './trash'
-export * from './draws'
-export * from './images'
-export * from './background'
+export default store;
+export * from './user';
+export * from './rooms';
+export * from './onlineUsers';
+export * from './messages';
+export * from './roomMessages';
+export * from './tokens';
+export * from './invitation';
+export * from './trash';
+export * from './draws';
+export * from './images';
+export * from './background';

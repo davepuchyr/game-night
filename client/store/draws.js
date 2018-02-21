@@ -1,17 +1,17 @@
 /**
  * ACTION TYPES
  */
-const ADD_DRAWS = 'ADD_DRAWS'
+const ADD_DRAWS = 'ADD_DRAWS';
 
 /**
  * INITIAL STATE
  */
-const initialDraws = []
+const initialDraws = [];
 
 /**
  * ACTION CREATORS
  */
-export const addDraws = draws => ({type: ADD_DRAWS, draws})
+export const addDraws = draws => ({type: ADD_DRAWS, draws});
 
 /**
  * REDUCER
@@ -19,8 +19,8 @@ export const addDraws = draws => ({type: ADD_DRAWS, draws})
 export default function (state = initialDraws, action) {
   switch (action.type) {
     case ADD_DRAWS:
-      return [...state, action.draws]
+      return [...state, action.draws];
     default:
-      return state
+      return state;
   }
 }

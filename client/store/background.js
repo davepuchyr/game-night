@@ -1,18 +1,18 @@
 /**
  * ACTION TYPES
  */
-const UPDATE_BACKGROUND  ='UPDATE_BACKGROUND'
+const UPDATE_BACKGROUND  ='UPDATE_BACKGROUND';
 
 /**
  * INITIAL STATE
  */
 
-const background = {url: 'http://i.imgur.com/uhhfaMZ.png'}
+const background = {url: 'http://i.imgur.com/uhhfaMZ.png'};
 
 /**
  * ACTION CREATORS
  */
-export const updateBackground = img => ({type: UPDATE_BACKGROUND, img})
+export const updateBackground = img => ({type: UPDATE_BACKGROUND, img});
 
 /**
  * REDUCER
@@ -20,8 +20,8 @@ export const updateBackground = img => ({type: UPDATE_BACKGROUND, img})
 export default function (state = background, action) {
   switch (action.type) {
     case UPDATE_BACKGROUND:
-      return action.img
+      return action.img;
     default:
-      return state
+      return state;
   }
 }
