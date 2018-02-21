@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 const InviteForm = (props) => {
 
 	// Render nothing if the "show" prop is false
-	const {children, onClose, invited, invitedNames, editInvites, sendInvites, onlineUsers, userId} = props
+	const {children, onClose, invited, invitedNames, editInvites, sendInvites, onlineUsers, userId} = props;
 	if(!props.show) {
 		return null;
 	}
@@ -57,8 +57,8 @@ const InviteForm = (props) => {
 					</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 InviteForm.propTypes = {
 	onClose: PropTypes.func.isRequired,
@@ -66,4 +66,4 @@ InviteForm.propTypes = {
 	children: PropTypes.node
 };
 
-export default InviteForm
+export default InviteForm;

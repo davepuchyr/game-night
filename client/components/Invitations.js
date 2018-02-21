@@ -1,12 +1,13 @@
-import React from 'react'
-import socket from '../socket'
+import React from 'react';
+import socket from '../socket';
 
 const removeInvitation = (userId, room) => {
-  socket.emit('removeInvite', userId, room)
+  socket.emit('removeInvite', userId, room);
 }
 
 const Invitations = (props) => {
-  const {roomInvites, userId , remove} = props
+  const {roomInvites, userId , remove} = props;
+
   return (
     <div className="container-main-lobby-bottom-comps-room-invitations">
       {
@@ -18,7 +19,7 @@ const Invitations = (props) => {
           </a>)
       }
     </div>
-  )
-}
+  );
+};
 
 export default Invitations
