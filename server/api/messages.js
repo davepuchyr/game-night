@@ -1,6 +1,6 @@
-const router = require('express').Router()
-const { Message, User} = require('../db/models')
-module.exports = router
+const router = require('express').Router();
+const { Message, User} = require('../db/models');
+module.exports = router;
 
 //get all the messages
 router.get('/', (req, res, next) => {
@@ -9,8 +9,8 @@ router.get('/', (req, res, next) => {
     attributes: ['nickname']
   }]})
     .then(messages => res.json(messages))
-    .catch(next)
-})
+    .catch(next);
+});
 
 //posting new messages
 router.post('/', (req, res, next) => {
@@ -19,13 +19,13 @@ router.post('/', (req, res, next) => {
         return Message.findOne({
           where: {id:posted.id},
           include: [{model: User, attributes: ['nickname']}]
-        })
+        });
     })
     .then(message => {
-      res.status(201)
-      res.json(message)
+      res.status(201);
+      res.json(message);
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 

@@ -1,10 +1,9 @@
 /* global describe beforeEach it */
-
-const {expect} = require('chai')
-const request = require('supertest')
-const db = require('../db')
-const app = require('../index')
-const Room = db.model('room')
+const {expect} = require('chai');
+const request = require('supertest');
+const db = require('../db');
+const app = require('../index');
+const Room = db.model('room');
 
 describe('Room routes', () => {
   beforeEach(() => {
