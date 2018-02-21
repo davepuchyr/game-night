@@ -1,28 +1,28 @@
-import React from 'react'
+import React from 'react';
 
-import chai, { expect } from 'chai'
-import { shallow, mount } from 'enzyme'
-import sinon from 'sinon'
+import chai, { expect } from 'chai';
+import { shallow, mount } from 'enzyme';
+import sinon from 'sinon';
 
-import Invitations from '../Invitations'
+import Invitations from '../Invitations';
 
 
 describe('Component: Invitations', () => {
-    let invites, invitationWrapper
-    beforeEach('Create Invitations component wrapper', () => {
+  let invites, invitationWrapper;
+  beforeEach('Create Invitations component wrapper', () => {
 
-      invites = ['/room/1', '/room/2']
-      invitationWrapper = shallow(<Invitations roomInvites={invites}/>)
-    })
+    invites = ['/room/1', '/room/2'];
+    invitationWrapper = shallow(<Invitations roomInvites={invites}/>);
+  });
 
-    describe('view check', () => {
+  describe('view check', () => {
 
-      it('invitations', () => {
-        expect(invitationWrapper.find('div')).to.have.length(1)
-      })
+    it('invitations', () => {
+      expect(invitationWrapper.find('div')).to.have.length(1);
+    });
 
-      it('list of people', () => {
-        expect(invitationWrapper.find('a')).to.have.length(2)
-      })
-    })
-})
+    it('list of people', () => {
+      expect(invitationWrapper.find('a')).to.have.length(2);
+    });
+  });
+});

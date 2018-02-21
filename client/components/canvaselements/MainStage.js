@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { Layer, Stage, Image } from 'react-konva'
-import { HexPiece, MyImage, GroupImage, Drawing } from '../index.js'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { Layer, Stage, Image } from 'react-konva';
+import { HexPiece, MyImage, GroupImage, Drawing } from '../index.js';
 
 
 export class MainStage extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-this.state = {
+    this.state = {
       imageUrl: 'http://i.imgur.com/uhhfaMZ.png',
       backgroundImage: null,
       shift: false,
@@ -21,86 +21,86 @@ this.state = {
       mode: 'brush',
       backgroundHeight: 1911,
       backgroundWidth: 2196
-    }
+    };
 
-    this.moveStageOnHover = this.moveStageOnHover.bind(this)
-    this.handleMouseOut = this.handleMouseOut.bind(this)
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.handleKeyUp = this.handleKeyUp.bind(this)
-    this.handleDragEnd = this.handleDragEnd.bind(this)
+    this.moveStageOnHover = this.moveStageOnHover.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleDragEnd = this.handleDragEnd.bind(this);
   }
   
   componentDidMount() {
-    const image = new window.Image()
-    image.src = this.props.background.url
+    const image = new window.Image();
+    image.src = this.props.background.url;
     image.onload = () => {
       this.setState({
         backgroundImage: image
-      })
-    }
+      });
+    };
     document.addEventListener('keydown', this.handleKeyDown);
     document.addEventListener('keyup', this.handleKeyUp);
   }
 
   componentDidUpdate() {
     if (this.props.background.url !== this.state.imageUrl){
-      const image = new window.Image()
-      const originalHeight = this.props.background.originalHeight
-      const originalWidth = this.props.background.originalWidth
-      const newSize = this.aspectRatio(originalHeight, originalWidth)
-      const width = newSize[0]
-      const height = newSize[1]
-      image.src = this.props.background.url
+      const image = new window.Image();
+      const originalHeight = this.props.background.originalHeight;
+      const originalWidth = this.props.background.originalWidth;
+      const newSize = this.aspectRatio(originalHeight, originalWidth);
+      const width = newSize[0];
+      const height = newSize[1];
+      image.src = this.props.background.url;
       image.onload = () => {
         this.setState({
           backgroundImage: image,
           imageUrl: this.props.background.url,
           backgroundWidth: width,
           backgroundHeight: height,
-        })
-      }
+        });
+      };
     }
   }
 
-  aspectRatio (originalHeight, originalWidth) {
-    const originalRatio = (originalHeight / originalWidth)
-    const windowWidth = 1680  
-    const windowHeight = 1050
-    let height = originalHeight
-    let width = originalWidth
-    if (originalHeight <= windowHeight) height = windowHeight
-    if (originalWidth <= windowWidth) width = windowWidth
-    const heightDifference =  height - originalHeight
-    const widthDifference =  width - originalWidth
+  aspectRatio(originalHeight, originalWidth) {
+    const originalRatio = (originalHeight / originalWidth);
+    const windowWidth = 1680;
+    const windowHeight = 1050;
+    let height = originalHeight;
+    let width = originalWidth;
+    if (originalHeight <= windowHeight) height = windowHeight;
+    if (originalWidth <= windowWidth) width = windowWidth;
+    const heightDifference =  height - originalHeight;
+    const widthDifference =  width - originalWidth;
     if (heightDifference > 0 || widthDifference > 0) {
       if (widthDifference > heightDifference) {
-        height = width * originalRatio
+        height = width * originalRatio;
       } else {
-        width = height / originalRatio
+        width = height / originalRatio;
       }
     } else {
-      const heightToWindowDifference = height - windowHeight
-      const widthToWindowDifference = width - windowHeight
+      const heightToWindowDifference = height - windowHeight;
+      const widthToWindowDifference = width - windowHeight;
       if (heightToWindowDifference < widthToWindowDifference) {
-        height = windowHeight
-        width = height / originalRatio
+        height = windowHeight;
+        width = height / originalRatio;
       } else {
-        width = windowWidth
-        height = width * originalRatio
+        width = windowWidth;
+        height = width * originalRatio;
       }
     }
-    return [width, height]
+    return [width, height];
   }
 
   handleKeyDown(e) {
-      if (e.key === 'Shift') this.setState({shift: true})
-      if (e.key === 'Alt') this.setState({alt: true})
+      if (e.key === 'Shift') this.setState({shift: true});
+      if (e.key === 'Alt') this.setState({alt: true});
       
   }
 
   handleKeyUp(e) {
-    if (e.key === 'Shift') this.setState({shift: false})
-    if (e.key === 'Alt') this.setState({alt: false})    
+    if (e.key === 'Shift') this.setState({shift: false});
+    if (e.key === 'Alt') this.setState({alt: false});
   }
 
   moveStageOnHover(e) {
@@ -108,21 +108,21 @@ this.state = {
   }
 
   handleMouseOut() {
-    document.body.style.cursor = 'default'
+    document.body.style.cursor = 'default';
   }
 
   handleDragEnd(e) {
-    let newX = 0 - e.evt.x
-    let newY = 0 - e.evt.y
-    this.setState({dragOffSet: [newX, newY]})
+    let newX = 0 - e.evt.x;
+    let newY = 0 - e.evt.y;
+    this.setState({dragOffSet: [newX, newY]});
   }
 
   
   render() {
     const { canvas } = this.state;
-    const { black, red, green, blue } = this.props.tokens
-    const { images } = this.props
-    const { rId } = this.props 
+    const { black, red, green, blue } = this.props.tokens;
+    const { images } = this.props;
+    const { rId } = this.props;
 
     return (
       <Stage
@@ -136,11 +136,11 @@ this.state = {
         onDragEnd={this.handleDragEnd}
         onDragStart={this.handleDragStart}
         onMouseDown={this.handleMouseDown}
-        >
+      >
         <Layer 
           width={this.state.backgroundWidth} 
           height={this.state.backgroundHeight}
-          >
+        >
           <Image 
             ref="image"
             className="dragImg" name="background" 
@@ -152,7 +152,7 @@ this.state = {
             onMouseDown={this.handleMouseDown}
             onMouseUp={this.handleMouseUp}
             onMouseMove={this.handleMouseMove}
-            />
+          />
           <Drawing
             shift={this.state.shift}
             alt={this.state.alt}
@@ -180,26 +180,26 @@ this.state = {
                 />
               }
               else return <GroupImage
-              trashFloat={this.props.trashFloat}
-              x={imgObj.x}
-              y={imgObj.y}
-              width={imgObj.width}
-              height={imgObj.height}
-              originalWidth={imgObj.originalWidth}
-              originalHeight={imgObj.originalHeight}                
-              imageUrl={imgObj.url}
-              key={idx}
-              personal={false}
-              user={imgObj.user}
-              entry={imgObj.entry}
-            />
-          })
+                trashFloat={this.props.trashFloat}
+                x={imgObj.x}
+                y={imgObj.y}
+                width={imgObj.width}
+                height={imgObj.height}
+                originalWidth={imgObj.originalWidth}
+                originalHeight={imgObj.originalHeight}                
+                imageUrl={imgObj.url}
+                key={idx}
+                personal={false}
+                user={imgObj.user}
+                entry={imgObj.entry}
+              />
+            })
           }
         </Layer>
       </Stage>
     );
   }
-}
+};
 
 
 const mapState = (state) => {
@@ -207,7 +207,7 @@ const mapState = (state) => {
     tokens: state.tokens,
     images: state.images,
     background: state.background
-  }
-}
+  };
+};
 
-export default connect(mapState)(MainStage)
+export default connect(mapState)(MainStage);

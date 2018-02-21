@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Room} = require('../db/models')
+const {Room} = require('../db/models');
 
 module.exports = router
 
@@ -11,26 +11,23 @@ router.get('/', (req, res, next) => {
     // attributes: ['id', 'email']
   })
     .then(allRooms => res.json(allRooms))
-    .catch(next)
-})
+    .catch(next);
+});
 
 //type , name
 router.post('/', (req, res, next) => {
-  let userId = req.body.adminId
+  let userId = req.body.adminId;
   Room.create(req.body)
     .then(addedRoom => {
       addedRoom.addPlayers(userId)
       res.status(201)
       res.json(addedRoom)
     })
-    .catch(error => console.log(error))
-})
+    .catch(error => console.log(error));
+});
 
 router.use((req, res, next) => {
-  const error = new Error('Not Found in SERVER/ROOM')
-  error.status = 404
-  next(error)
-})
-
-
-
+  const error = new Error('Not Found in SERVER/ROOM');
+  error.status = 404;
+  next(error);
+});

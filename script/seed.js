@@ -9,13 +9,13 @@
  *
  * Now that you've got the main idea, check it out in practice below!
  */
-const db = require('../server/db')
-const { User } = require('../server/db/models')
-const { Room } = require('../server/db/models')
+const db = require('../server/db');
+const { User } = require('../server/db/models');
+const { Room } = require('../server/db/models');
 
 async function seed () {
-  await db.sync({force: true})
-  console.log('db synced!')
+  await db.sync({force: true});
+  console.log('db synced!');
   // Whoa! Because we `await` the promise that db.sync returns, the next line will not be
   // executed until that promise resolves!
 
@@ -24,16 +24,16 @@ async function seed () {
     User.create({email: 'murphy@email.com', nickname: 'murphy', password: '123'}),
     User.create({email: 'josh@josh.com', nickname: 'retrofuturejosh', password: '123'}),
     User.create({email: 'matt@matt.com', nickname: 'MattyAmazing', password: '123'}),
-  ])
+  ]);
   const rooms = await Promise.all([
     Room.create({name: 'fun timez', game: 'DnD', adminId: '1'}),
     Room.create({name: 'more fun timez', game: 'Sorry', adminId: '2'}),
     Room.create({name: 'Matt is kool', game: 'Pictionary', adminId: '3'})
-  ])
+  ]);
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded successfully`)
+  console.log(`seeded ${users.length} users`);
+  console.log('seeded successfully');
 }
 
 
@@ -43,19 +43,19 @@ async function seed () {
 // that might occur inside of `seed`
 seed()
   .catch(err => {
-    console.error(err.message)
-    console.error(err.stack)
-    process.exitCode = 1
+    console.error(err.message);
+    console.error(err.stack);
+    process.exitCode = 1;
   })
   .then(() => {
-    console.log('closing db connection')
-    db.close()
-    console.log('db connection closed')
-  })
+    console.log('closing db connection');
+    db.close();
+    console.log('db connection closed');
+  });
 
 /*
  * note: everything outside of the async function is totally synchronous
  * The console.log below will occur before any of the logs that occur inside
  * of the async function
  */
-console.log('seeding...')
+console.log('seeding...');

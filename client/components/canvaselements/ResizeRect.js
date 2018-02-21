@@ -1,29 +1,31 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { Rect } from 'react-konva'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { Rect } from 'react-konva';
 
 class ResizeRect extends React.Component {
-    changeSizeUp() {
-      const rect = this.refs.rect;
+  changeSizeUp() {
+    const rect = this.refs.rect;
 
-      // to() is a method of `Konva.Node` instances
-      rect.to({
-        scaleX: 1.5,
-        scaleY: 1.5,
-        duration: 0.2
-      });
-    }
-    changeSizeDown() {
-      const rect = this.refs.rect;
+    // to() is a method of `Konva.Node` instances
+    rect.to({
+      scaleX: 1.5,
+      scaleY: 1.5,
+      duration: 0.2
+    });
+  }
 
-      // to() is a method of `Konva.Node` instances
-      rect.to({
-        scaleX: 1,
-        scaleY: 1,
-        duration: 0.2
-      });
-    }
-    render() {
+  changeSizeDown() {
+    const rect = this.refs.rect;
+
+    // to() is a method of `Konva.Node` instances
+    rect.to({
+      scaleX: 1,
+      scaleY: 1,
+      duration: 0.2
+    });
+  }
+
+  render() {
     return (
       <Group>
         <Rect
@@ -40,4 +42,4 @@ class ResizeRect extends React.Component {
       </Group>
     );
   }
-}
+};

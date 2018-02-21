@@ -1,24 +1,24 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { logout, getInvitations } from '../store'
-import socket from '../socket'
-import { RoomList, OnlineUsers, Messages, Invitations } from './index'
+import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logout, getInvitations } from '../store';
+import socket from '../socket';
+import { RoomList, OnlineUsers, Messages, Invitations } from './index';
 
 /**
  * COMPONENT
  */
-
 export class Lobby extends Component {
 
   componentDidMount(){
-    socket.emit('retrieveInvites')
+    socket.emit('retrieveInvites');
   }
 
   render(){
-    const { handleClick, isLoggedIn, invitations, user } = this.props
-    const listOfRoomInvites = Object.keys(invitations).filter(id => user.id === (+id)? id: null).map(each => invitations[each])
+    const { handleClick, isLoggedIn, invitations, user } = this.props;
+    const listOfRoomInvites = Object.keys(invitations).filter(id => user.id === (+id)? id: null).map(each => invitations[each]);
+
     return (
       <div className="container-main-lobby">
         <div className="container-main-lobby-bottom" >
@@ -48,9 +48,9 @@ export class Lobby extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
-}
+};
 
 
 const mapState = (state) => {
@@ -58,21 +58,21 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id,
     user: state.user,
     invitations: state.invitation
-  }
-}
+  };
+};
 
 const mapDispatch = (dispatch) => {
   return {
     handleClick () {
-      dispatch(logout())
+      dispatch(logout());
     }
-  }
-}
+  };
+};
 
-export default connect(mapState,mapDispatch)(Lobby)
+export default connect(mapState,mapDispatch)(Lobby);
 
 Lobby.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired,
   user: PropTypes.object
-}
+};

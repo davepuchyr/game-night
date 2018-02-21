@@ -1,8 +1,8 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React from 'react';
+import {connect} from 'react-redux';
 
 export const OnlineUsers = (props) => {
-  const { users } = props
+  const { users } = props;
   
   return (
     <div className="container-main-lobby-bottom-comps-players-onlineUsers">
@@ -16,9 +16,9 @@ export const OnlineUsers = (props) => {
         })
       }
     </div>
-  )
-}
+  );
+};
 
-const mapState = (state) => ({users: state.onlineUsers})
+const mapState = (state) => ({users: state.onlineUsers});
 
-export default connect(mapState)(OnlineUsers)
+export default connect(mapState)(OnlineUsers);
