@@ -1,11 +1,12 @@
-import axios from 'axios'
-import socket from '../socket'
-import history from '../history'
+import axios from 'axios';
+import socket from '../socket';
+import history from '../history';
+
 /**
  * ACTION TYPES
  */
-const GET_MESSAGES = 'GET_MESSAGES'
-const NEW_MESSAGE = 'NEW_MESSAGE'
+const GET_MESSAGES = 'GET_MESSAGES';
+const NEW_MESSAGE = 'NEW_MESSAGE';
 
 /**
  * INITIAL STATE
@@ -16,7 +17,6 @@ const allMessages = [];
  * ACTION CREATORS
  */
 export const getMessages = messages => ({type: GET_MESSAGES, messages});
-
 export const newMessage = message => ({type: NEW_MESSAGE, message});
 
 /**
@@ -31,7 +31,6 @@ export const fetchMessages = () => {
         })
   );
 }
-
 export const postMessage = (info) => {
   return (dispatch) => (
     axios.post('/api/messages', info)
@@ -42,6 +41,7 @@ export const postMessage = (info) => {
       })
   );
 }
+
 /**
  * REDUCER
  */
@@ -54,4 +54,4 @@ export default function (state = allMessages, action) {
     default:
       return state;
   }
-}
+};

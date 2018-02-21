@@ -15,7 +15,6 @@ const defaultState = '';
 export const getInvite = invite => ({type: GET_INVITE, invite});
 export const getInvitations = invitations => ({type: GET_INVITATIONS, invitations});
 
-
 /**
  * REDUCER
  */
@@ -28,4 +27,4 @@ export default function (state = defaultState, action) {
     default:
       return state;
   }
-}
+};

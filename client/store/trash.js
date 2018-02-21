@@ -15,11 +15,9 @@ const dragging = {bool: false, url: ''};
 export const startDragging = (url, personal) => ({type: START_DRAGGING, dragging: {bool: true, url, personal}});
 export const stopDragging = () => ({type: STOP_DRAGGING, dragging: {bool: false, url: ''}});
 
-
 /**
  * REDUCER
  */
-
 export default function (state = dragging, action) {
   switch (action.type) {
     case START_DRAGGING:
@@ -29,4 +27,4 @@ export default function (state = dragging, action) {
     default:
       return state;
   }
-}
+};

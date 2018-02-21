@@ -31,7 +31,6 @@ export const fetchRoomList = () =>
       .catch(error =>
         console.error(error));
 
-
 export const createRoom = (newName, newGame, user) =>
   dispatch =>
     axios.post('/api/rooms', {name: newName, game: newGame, adminId: user})
@@ -43,7 +42,9 @@ export const createRoom = (newName, newGame, user) =>
       .catch(error =>
         console.error(error));
 
-
+/**
+ * REDUCER
+ */
 export default function (state = rooms, action) {
   switch (action.type) {
     case GET_ALL_ROOMS:
@@ -53,4 +54,4 @@ export default function (state = rooms, action) {
     default:
       return state;
   }
-}
+};

@@ -24,4 +24,4 @@ export default function (state = background, action) {
     default:
       return state;
   }
-}
+};

@@ -23,5 +23,4 @@ export default function (state = onlineUsers, action) {
     default:
       return state;
   }
-}
-  
+};

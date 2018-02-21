@@ -2,6 +2,9 @@
  * ACTION TYPES
  */
 const ADD_IMAGE = 'ADD_IMAGE'
+/**
+ * ACTION TYPES
+ */
 const UPDATE_IMAGE = 'UPDATE_IMAGE';
 const DELETE_IMAGE = 'DELETE_IMAGE';
 
@@ -31,4 +34,4 @@ export default function (state = images, action) {
     default:
       return state;
   }
-}
+};

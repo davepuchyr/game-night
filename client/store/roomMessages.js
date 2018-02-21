@@ -23,4 +23,4 @@ export default function (state = allMessages, action) {
     default:
       return state;
   }
-}
+};

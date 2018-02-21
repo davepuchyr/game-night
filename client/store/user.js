@@ -1,6 +1,5 @@
 import axios from 'axios';
 import history from '../history';
-
 import socket from '../socket';
 
 /**
@@ -69,4 +68,4 @@ export default function (state = defaultUser, action) {
     default:
       return state;
   }
-}
+};

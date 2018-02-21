@@ -7,7 +7,6 @@ import history from './history';
 import { Main, Login, Signup, Room, Lobby, Messages, RoomMessages, Drop, SplashScreen } from './components';
 import {me} from './store';
 
-
 class Routes extends Component {
   componentDidMount(){
     this.props.loadInitialData();
@@ -40,7 +39,6 @@ class Routes extends Component {
     )
   }
 };
-
 
 const mapState = (state) => {
   return {

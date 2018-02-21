@@ -14,7 +14,7 @@ const token_positions = {
   'red': [550, 550],
   'green': [600, 600],
   'blue': [650, 650]
-}
+};
 
 /**
  * ACTION CREATORS
@@ -43,4 +43,4 @@ export default function (state = token_positions, action) {
     default:
       return state;
   }
-}
+};

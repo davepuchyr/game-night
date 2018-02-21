@@ -37,7 +37,6 @@ function colorDispatcher(coords, color){
 }
 
 socket.on('connect', () => {
-
   //updateOnlineUsers
   socket.on('updateOnlineUsers', onlineUsers => {
     store.dispatch(getOnlineUsers(onlineUsers));

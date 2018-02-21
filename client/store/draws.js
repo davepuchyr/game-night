@@ -23,4 +23,4 @@ export default function (state = initialDraws, action) {
     default:
       return state;
   }
-}
+};
